@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Diseñar y falsar la corrección mínima del acceptance authority anclada en BASE; no implementar, mergear ni configurar enforcement todavía.
-- Last updated: 2026-08-15T13:37:21Z
+- Authorized next step: Preparar el diseño exacto candidato del acceptance authority anclado en BASE y someterlo a revisión independiente antes de implementarlo; no modificar todavía workflow, checker, policy, task packets, main ni configuración GitHub.
+- Last updated: 2026-08-15T13:57:42Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -144,6 +144,34 @@
 - Historical R2-3 independence gap: UNCHANGED.
 - Enforcement action reviewed: BLOCKED; required check y branch protection permanecen NOT_CONFIGURED.
 - 2026-08-15T13:37:21Z: revisión independiente R2-4 canonicalizada; no autoriza merge ni mutación de GitHub settings.
+
+- 2026-08-15T13:57:42Z: falsificación scratch BASE-anchored PASS 12/12; evidence evidence/r2-4/base_anchored_scratch_falsification_01.json SHA-256 d0177234959a5d77f32c6d40c4cd578b35285ecc09aa69962c2c2e5decf75974; new false-green increment 0; EXP-01/DC-006 OPEN; GitHub event semantics DYNAMIC_NOT_EXECUTED; no implementation authority.
+
+## Falsificación scratch R2-4 - acceptance authority anclada en BASE
+- Evidence: evidence/r2-4/base_anchored_scratch_falsification_01.json
+- Evidence SHA-256: d0177234959a5d77f32c6d40c4cd578b35285ecc09aa69962c2c2e5decf75974
+- Source file: r2-4-base-anchored-falsification-20260815T135232Z.json
+- Scratch falsification: PASS 12/12.
+- Design disposition: SCRATCH_FALSIFICATION_PASS_NOT_IMPLEMENTATION_AUTHORITY.
+- Authority source: BASE.
+- Task authorization source: BASE.
+- Policy gate candidate checkout: false.
+- Policy gate candidate code executed: false.
+- Normal-flow acceptance-authority mutation from HEAD: FORBIDDEN in the prototype.
+- R2AA-001 design probe: PASS.
+- R2AA-002 design probe: PASS_BASE_WORKFLOW_UNCHANGED_BY_HEAD.
+- R2AA-003 design probe: PASS_NORMAL_FLOW_CANNOT_CHANGE_ACCEPTANCE_AUTHORITY.
+- R2AA-005 design probe: PASS_V4_PROTOTYPE_ACTIVATION.
+- R2AA-006 design probe: PASS_FUTURE_SRC_CHANGE_WITHOUT_WORKFLOW_EDIT.
+- R2AA-007 design probe: PASS_POST_POSITIVE_AND_NEGATIVE_PATHS.
+- External GitHub event semantics: DYNAMIC_NOT_EXECUTED; no claim of real-platform enforcement.
+- New real false-green increment: 0; metric remains 4.
+- EXP-01: OPEN; scratch evidence does not close it before exact implementation + GitHub proof.
+- DC-006: OPEN; scratch task-from-BASE prototype does not choose the production authorization mechanism.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Independent-review requirement: PENDING for the exact candidate design before implementation.
+- Existing independent-review blockers remain historical/current until an exact reviewed candidate resolves them; this scratch PASS does not relabel the prior BLOCKED disposition.
+- 2026-08-15T13:57:42Z: human-authorized canonicalization only; no workflow/checker/policy/task/GitHub-settings implementation in this commit.
 
 ## Blockers
 - R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
