@@ -1,0 +1,267 @@
+{
+  "binding_chain": {
+    "circular_bundle_hash_claim": "NOT_USED_BY_DESIGN",
+    "step_1": "candidate manifest lists exact candidate object SHA-256 and byte counts",
+    "step_2": "probe evidence contains candidate_manifest_sha256 and repeats the exact exercised object hashes",
+    "step_3_future": "review bundle manifest must list this probe-evidence SHA-256 and the same proposed object hashes"
+  },
+  "candidate_manifest_sha256": "424e7c1543cfbcb374a432fc099d45c262080a02794941f8f0208eb1e73b7ef6",
+  "candidate_manifest_type": "r2-4-r2aa-016-017-scratch-candidate-manifest",
+  "correction_design": {
+    "bad_fixture_floor": "D",
+    "dc_006": "OPEN",
+    "exp_01": "OPEN",
+    "gitattributes_floor": "D",
+    "gitmodules_floor": "D",
+    "good_fixture_floor": "D",
+    "implementation_authorized": false,
+    "r2aa_011_preserved": true,
+    "r2aa_014_preserved": true,
+    "src_prefix_floor": "B",
+    "tests_prefix_floor": "B",
+    "unknown_normal_floor": "C"
+  },
+  "created_at_utc": "2026-08-15T18:36:03Z",
+  "evidence_type": "r2-4-r2aa-016-017-open-b-radius-scratch-falsification",
+  "exercised_object_bytes": {
+    ".github/workflows/r2-ci.yml": 2085,
+    "policy/risk_floors.json": 9182,
+    "scripts/base_gate.py": 15382,
+    "scripts/risk_floor.py": 15266,
+    "scripts/run_functional.py": 27132,
+    "tests/fixtures/bad_splitter.py": 425,
+    "tests/fixtures/good_splitter.py": 465
+  },
+  "exercised_object_hashes": {
+    ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+    "policy/risk_floors.json": "4290e87c2e332838045c189fe6623004a505e07ec4f6d01877e53329b344a083",
+    "scripts/base_gate.py": "c01765964bb6d3ca413bfa9d0fcc2380693c6121ff643ee6849c77ed71251dc4",
+    "scripts/risk_floor.py": "e627c75f93d23571c12fcd14bed3578301a14de3b0bc4bc6eaf84811454ef080",
+    "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+    "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+    "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+  },
+  "real_repo": {
+    "branch": "r2-4/ci-bootstrap",
+    "github_mutated": false,
+    "head": "397748b7bb502118c5d83c9ab50a44a4aa5fd7fa",
+    "main": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "network_used": false,
+    "repo_mutated": false,
+    "review_03_sha256": "96bb0ae10811fa680d2b242ed5321dafd844c2f7868ae0322fda3f47d0665777"
+  },
+  "results": [
+    {
+      "gate_exit": 0,
+      "observed_floor": null,
+      "observed_reason": "TRUSTED_VERIFIERS_AND_INTEGRITY_PROVED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "SELF_TEST_UNTOUCHED_BASE"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "SRC_NORMAL_REMAINS_B"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "TESTS_NORMAL_REMAINS_B"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "A",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "README_EXACT_A_STILL_ALLOWED"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GITATTRIBUTES_ADD_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GITMODULES_ADD_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GOOD_FIXTURE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "BAD_FIXTURE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "RUNNER_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "CHECKER_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "POLICY_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GATE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "WORKFLOW_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_MAKEFILE_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_DOCKERFILE_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_CIRCLECI_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_DEPLOY_SCRIPT_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_GITIGNORE_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_OS_PY_BLOCKED_C"
+    },
+    {
+      "detail": "AUTHORITY_BASE_BLOB_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "observed_reason": "AUTHORITY_INTEGRITY_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "R2AA_011_TEMPORAL_BASE_CAPTURE_STILL_BLOCKED"
+    },
+    {
+      "detail": "AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "git_status_empty": true,
+      "observed_reason": "SELF_TEST_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "R2AA_011_ASSUME_UNCHANGED_STILL_BLOCKED"
+    },
+    {
+      "blob_has_crlf": false,
+      "detail": "AUTHORITY_GATE_DISK_DIFFERS_FROM_BASE_BLOB",
+      "disk_has_crlf": true,
+      "forced_bypass_required": true,
+      "gate_exit": 1,
+      "observed_reason": "SELF_TEST_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS"
+    },
+    {
+      "evaluate_marker": 1512,
+      "mode_evaluate": 1702,
+      "mode_self_test": 2013,
+      "probe_result": "PASS",
+      "scenario": "EXACT_WORKFLOW_EVALUATION_BEFORE_SELF_TEST_ORDER",
+      "self_test_marker": 1822,
+      "workflow_bytes": 2085,
+      "workflow_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830"
+    }
+  ],
+  "schema_version": 2,
+  "summary": {
+    "R2AA-011": "PRESERVED",
+    "R2AA-014": "PRESERVED",
+    "R2AA-016": "SCRATCH_CORRECTION_PASS_LOCKOUT_REPRODUCED_AND_B_ENTRY_BLOCKED",
+    "R2AA-017": "SCRATCH_EVIDENCE_BINDING_PASS",
+    "R2AA-018": "SCRATCH_UNKNOWN_NORMAL_C_OPEN_B_RADIUS_REMOVED",
+    "all_expected_results_observed": true,
+    "disposition": "SCRATCH_CORRECTION_PASS_NOT_IMPLEMENTATION_AUTHORITY",
+    "false_greens_total_remains": 5,
+    "github_mutated": false,
+    "network_used": false,
+    "new_real_false_green_increment": 0,
+    "real_repo_mutated": false,
+    "scenario_count": 23
+  },
+  "workflow_positions_from_exact_bytes": {
+    "evaluate_marker": 1512,
+    "mode_evaluate": 1702,
+    "mode_self_test": 2013,
+    "self_test_marker": 1822
+  }
+}

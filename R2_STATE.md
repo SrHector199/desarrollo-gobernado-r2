@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Diseñar y falsar en scratch una corrección mínima conjunta para R2AA-016/R2AA-017 y el radio B abierto: proteger `.gitattributes` y `.gitmodules` como D; cambiar `unknown_normal` de B a C o demostrar una alternativa mecánica equivalente; conservar `src/` y `tests/` normales como B y los fixtures ejecutados como D; ligar la evidencia de probes a los hashes exactos de todos los bytes ejercitados y al manifest; reproducir el lockout CRLF y demostrar que ya no puede entrar mediante un PR B; conservar las correcciones de R2AA-011 y R2AA-014; no implementar todavía control plane ni GitHub settings.
-- Last updated: 2026-08-15T18:30:27Z
+- Authorized next step: Preparar los bytes exactos del nuevo candidato R2-4, congelarlos antes de los probes, generar un manifest de esos bytes, ejecutar los probes sobre esos mismos bytes, ligar la evidencia al manifest y someter el paquete exacto a revisión independiente antes de implementar; no modificar todavía workflow, checker, policy, runner, fixtures, task packets, main ni configuración GitHub.
+- Last updated: 2026-08-15T18:42:35Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 5 detectados (R2AA-011 sigue siendo el último falso verde dinámicamente reproducido; la tercera revisión independiente no añadió falsos verdes; R2AA-016/R2AA-017 son bloqueos de disponibilidad/integridad de evidencia, no falsos verdes)
+- Falsos verdes: 5 detectados (sin incremento en la falsificación scratch R2AA-016/017; el último falso verde dinámicamente reproducido sigue siendo R2AA-011)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -274,16 +274,59 @@
 - This review grants no implementation, merge, protection, required-check, ruleset or GitHub-settings authority.
 - 2026-08-15T18:30:27Z: human-authorized canonicalization only; no workflow/checker/policy/runner/fixture/task/GitHub-settings implementation in this commit.
 
+- 2026-08-15T18:42:35Z: R2AA-016/017 joint scratch correction PASS 23/23; manifest evidence/r2-4/r2aa_016_017_scratch_candidate_manifest_01.json SHA-256 424e7c1543cfbcb374a432fc099d45c262080a02794941f8f0208eb1e73b7ef6; evidence evidence/r2-4/r2aa_016_017_correction_scratch_falsification_01.json SHA-256 0f31183ec4f6b133fd7426fe9a78675eb0d2b0debb8b0ae5f783b00d7aed55f2; exact hash/byte binding PASS; R2AA-016/017 remain blocking until exact-candidate independent review; R2AA-018 unknown_normal=C scratch PASS; false greens remain 5; EXP-01/DC-006 OPEN.
+
+## Falsificación scratch conjunta R2AA-016/R2AA-017
+- Candidate manifest: evidence/r2-4/r2aa_016_017_scratch_candidate_manifest_01.json
+- Candidate manifest SHA-256: 424e7c1543cfbcb374a432fc099d45c262080a02794941f8f0208eb1e73b7ef6
+- Candidate manifest bytes: 1846
+- Falsification evidence: evidence/r2-4/r2aa_016_017_correction_scratch_falsification_01.json
+- Falsification evidence SHA-256: 0f31183ec4f6b133fd7426fe9a78675eb0d2b0debb8b0ae5f783b00d7aed55f2
+- Falsification evidence bytes: 9186
+- Scratch falsification: PASS 23/23.
+- Manifest/evidence binding: PASS; evidence.candidate_manifest_sha256 equals the exact manifest SHA-256.
+- Exercised object hash binding: PASS; evidence hashes exactly equal manifest object hashes.
+- Exercised object byte-count binding: PASS; evidence byte counts exactly equal manifest byte counts.
+- Proposed workflow SHA-256: 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830
+- Proposed base_gate SHA-256: c01765964bb6d3ca413bfa9d0fcc2380693c6121ff643ee6849c77ed71251dc4
+- Proposed checker SHA-256: e627c75f93d23571c12fcd14bed3578301a14de3b0bc4bc6eaf84811454ef080
+- Proposed policy SHA-256: 4290e87c2e332838045c189fe6623004a505e07ec4f6d01877e53329b344a083
+- Proposed runner SHA-256: d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f
+- Proposed GOOD fixture SHA-256: 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827
+- Proposed BAD fixture SHA-256: b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce
+- Prototype floors: `.gitattributes=D`; `.gitmodules=D`; `unknown_normal=C`; `src/=B`; `tests/=B`; GOOD/BAD fixtures D.
+- R2AA-016: CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW.
+- R2AA-016 CRLF lockout: reproduced only after forced bypass; ordinary corrected B flow blocks `.gitattributes` before it can enter.
+- R2AA-017: CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW.
+- R2AA-017 binding chain: candidate manifest -> exact object hashes; probe evidence -> manifest SHA + same hashes; future review-bundle manifest must bind both proposed object hashes and this evidence hash.
+- R2AA-018: CORRECTION_SCRATCH_PASS_UNKNOWN_NORMAL_C; PENDING_EXACT_CANDIDATE_REVIEW.
+- R2AA-011 correction preserved in scratch; historical disposition remains PARTIAL.
+- R2AA-014 strict binding preserved in scratch; historical exact-candidate review remains RESOLVED for the previously reviewed bytes.
+- R2AA-012: OPEN.
+- R2AA-013: PARTIAL.
+- R2AA-015: OPEN.
+- R2AA-019: LOW NONBLOCKING.
+- R2AA-020: LOW NONBLOCKING.
+- R2AA-021: LOW NONBLOCKING.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Historical R2-3 independence gap: UNCHANGED.
+- New real false-green increment: 0; total remains 5.
+- Next exact candidate procedure: freeze exact candidate bytes first; generate manifest from those bytes; execute probes only against those same bytes; bind probe evidence to that manifest; only then construct the independent-review bundle.
+- This evidence grants no implementation, merge, protection, required-check, ruleset or GitHub-settings authority.
+- 2026-08-15T18:42:35Z: human-authorized canonicalization only; no control-plane implementation in this commit.
+
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
-- R2AA-011 PARTIAL: la revisión independiente de los bytes exactos volvió a falsar la cadena de captura temporal y el bypass `assume-unchanged`; no se marca RESOLVED porque R2AA-016 demuestra que un path B aún puede influir en la materialización de bytes de autoridad de forma fail-closed.
-- R2AA-016 HIGH BLOCKING: `.gitattributes` clasificado B puede introducir un lockout CRLF fail-closed e irrecuperable dentro del flujo gobernado.
-- R2AA-017 MEDIUM BLOCKING: `LOCAL_EXACT_CANDIDATE_PROBES.json` no estaba criptográficamente ligado a los bytes exactos ejercitados.
+- R2AA-011 PARTIAL: corrección de captura temporal y `assume-unchanged` preservada en la nueva falsificación scratch; no se reetiqueta históricamente.
+- R2AA-016 HIGH - CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW: `.gitattributes` y `.gitmodules` quedan D en el prototipo; el lockout CRLF fue reproducido solo tras bypass forzado y su entrada por flujo B corregido quedó bloqueada.
+- R2AA-017 MEDIUM - CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW: la evidencia scratch queda ligada al SHA-256 del candidate manifest y repite hashes/tamaños exactos de todos los objetos ejercitados.
 - R2AA-012 OPEN NONBLOCKING: binding real de `pull_request_target` al SHA del PR requiere prueba GitHub real antes de required-check configuration.
 - R2AA-013 PARTIAL NONBLOCKING: `default_branch=main` observado; distinción temporal workflow-source SHA vs PR_BASE_SHA permanece abierta.
-- R2AA-014 RESOLVED_BY_EXACT_CANDIDATE_REVIEW: presencia e igualdad estricta de BASE/HEAD verificadas independientemente para los bytes revisados.
+- R2AA-014 RESOLVED_BY_EXACT_CANDIDATE_REVIEW: binding BASE/HEAD estricto preservado en la nueva falsificación scratch; evidencia histórica sin reetiquetar.
 - R2AA-015 OPEN NONBLOCKING: deuda de liveness/fail-closed permanece explícita.
-- R2AA-018 MEDIUM NONBLOCKING: `unknown_normal=B` deja radio de impacto abierto y hace inseguras cero aprobaciones humanas mientras DC-006 siga OPEN.
+- R2AA-018 MEDIUM NONBLOCKING - CORRECTION_SCRATCH_PASS_UNKNOWN_NORMAL_C; PENDING_EXACT_CANDIDATE_REVIEW: `unknown_normal=C`, `src/=B`, `tests/=B` y fixtures GOOD/BAD=D en el prototipo.
 - R2AA-019 LOW NONBLOCKING: `WORKFLOW_SOURCE_SHA` se captura pero no se compara directamente con PR_BASE_SHA.
 - R2AA-020 LOW NONBLOCKING: aislamiento de módulos depende de versión de Python no pinneada.
 - R2AA-021 LOW NONBLOCKING: asserts contra tips de refs añaden liveness fail-closed ante avances de main/head.

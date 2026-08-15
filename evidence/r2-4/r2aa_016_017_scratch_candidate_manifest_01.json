@@ -1,0 +1,58 @@
+{
+  "candidate_design": {
+    "bad_fixture_floor": "D",
+    "evaluation_before_self_test": true,
+    "gitattributes_floor": "D",
+    "gitmodules_floor": "D",
+    "good_fixture_floor": "D",
+    "implementation_authorized": false,
+    "normal_pr_class": "B",
+    "src_prefix_floor": "B",
+    "strict_base_head_binding": true,
+    "tests_prefix_floor": "B",
+    "unknown_normal_floor": "C"
+  },
+  "manifest_type": "r2-4-r2aa-016-017-scratch-candidate-manifest",
+  "objects": {
+    ".github/workflows/r2-ci.yml": {
+      "bytes": 2085,
+      "sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830"
+    },
+    "policy/risk_floors.json": {
+      "bytes": 9182,
+      "sha256": "4290e87c2e332838045c189fe6623004a505e07ec4f6d01877e53329b344a083"
+    },
+    "scripts/base_gate.py": {
+      "bytes": 15382,
+      "sha256": "c01765964bb6d3ca413bfa9d0fcc2380693c6121ff643ee6849c77ed71251dc4"
+    },
+    "scripts/risk_floor.py": {
+      "bytes": 15266,
+      "sha256": "e627c75f93d23571c12fcd14bed3578301a14de3b0bc4bc6eaf84811454ef080"
+    },
+    "scripts/run_functional.py": {
+      "bytes": 27132,
+      "sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f"
+    },
+    "tests/fixtures/bad_splitter.py": {
+      "bytes": 425,
+      "sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce"
+    },
+    "tests/fixtures/good_splitter.py": {
+      "bytes": 465,
+      "sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    }
+  },
+  "schema_version": 1,
+  "source_real_repo": {
+    "branch": "r2-4/ci-bootstrap",
+    "head": "397748b7bb502118c5d83c9ab50a44a4aa5fd7fa",
+    "main": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7"
+  },
+  "workflow_positions": {
+    "evaluate_marker": 1512,
+    "mode_evaluate": 1702,
+    "mode_self_test": 2013,
+    "self_test_marker": 1822
+  }
+}
