@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Observar el resultado real de la PR y del job r2-governed-validation; no mergear ni configurar required check/protección todavía.
-- Last updated: 2026-08-15T12:25:36Z
+- Authorized next step: Diseñar y falsar la corrección mínima del acceptance authority anclada en BASE; no implementar, mergear ni configurar enforcement todavía.
+- Last updated: 2026-08-15T13:37:21Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 3 detectados
+- Falsos verdes: 4 detectados (R2AA-001 añadido; R2AA-002 no incrementa: documentado, no demostrado dinámicamente en esta revisión)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -119,12 +119,45 @@
 
 - 2026-08-15T12:25:36Z: GitHub bootstrap observado: repositorio público SrHector199/desarrollo-gobernado-r2, default branch main, remote main 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7, origin/main sincronizado, workflows 0, rulesets 0 y branch protection ausente antes del CI bootstrap.
 
+- 2026-08-15T13:37:21Z: revisión independiente R2-4 sobre acceptance authority: evidence evidence/r2-4/acceptance_authority_independent_review_01.json SHA-256 8f3de7fc6212d6bcab3721864098b5d26e7f9299b520f8d3eb19f76fec071eed; independence PASS, static FAIL, dynamic FAIL, enforcement BLOCKED; 6 findings bloqueantes, 4 no bloqueantes; falso verde R2AA-001 suma +1; EXP-01/DC-006 OPEN.
+
+## Revisión independiente R2-4 - acceptance authority
+- Evidence: evidence/r2-4/acceptance_authority_independent_review_01.json
+- Evidence SHA-256: 8f3de7fc6212d6bcab3721864098b5d26e7f9299b520f8d3eb19f76fec071eed
+- Bundle SHA-256 revisado: cb7e08d072408f6fb1321125d4d13676cb3e430360849bff6f064f2d4e4be977
+- Manifest SHA-256 revisado: 2f51ba07e292d2ac55a0b31eb91118410f066e7efdda2c98e99ce012821b86af
+- Reviewer: Claude (Anthropic) / Claude Opus 5 según identificador visible del revisor.
+- fresh_context: true
+- authored_current_change: false
+- prior_conclusions_used_as_authority: false
+- independence_satisfied: PASS
+- static_review: FAIL
+- dynamic_review: FAIL
+- enforcement_disposition: BLOCKED
+- strongest_justified_guarantee_if_applied: OBSERVADA
+- Blocking findings (6): R2AA-001 CRITICAL, R2AA-002 CRITICAL, R2AA-003 CRITICAL, R2AA-004 HIGH, R2AA-005 HIGH, R2AA-006 HIGH.
+- Nonblocking findings (4): R2AA-007 HIGH, R2AA-008 MEDIUM, R2AA-009 MEDIUM, R2AA-010 LOW.
+- R2AA-001: falso verde dinámicamente demostrado; incrementa la métrica de falsos verdes en +1.
+- R2AA-002: bypass documentado sobre estado skipped/success, pero no ejecutado dinámicamente por el revisor; no incrementa la métrica.
+- EXP-01: OPEN.
+- DC-006: OPEN.
+- Historical R2-3 independence gap: UNCHANGED.
+- Enforcement action reviewed: BLOCKED; required check y branch protection permanecen NOT_CONFIGURED.
+- 2026-08-15T13:37:21Z: revisión independiente R2-4 canonicalizada; no autoriza merge ni mutación de GitHub settings.
+
 ## Blockers
-- R2-4: CI bootstrap PR todavía no observada en GitHub Actions.
+- R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
+- R2AA-001 CRITICAL BLOCKING: verificadores inline sombreables desde el checkout del PR; falso verde dinámicamente demostrado.
+- R2AA-002 CRITICAL BLOCKING: un job saltado puede satisfacer el check nominal sin ejecutar validación.
+- R2AA-003 CRITICAL BLOCKING: cero autoridad independiente sobre acceptance authority mientras EXP-01 siga abierto.
+- R2AA-004 HIGH BLOCKING: la acción de enforcement propuesta excedía el Authorized next step vigente del objeto revisado.
+- R2AA-005 HIGH BLOCKING: DEC-CP V3 declara NOT_ENFORCED y NOT_MERGE_AUTHORITY.
+- R2AA-006 HIGH BLOCKING: el workflow actual codifica un diff de un solo uso y no sirve como gate permanente.
+- R2AA-007..010: deuda no bloqueante conservada en la evidencia canónica.
 - R2-4: required check todavía NOT_CONFIGURED.
-- R2-4: protección/no-bypass de main todavía NOT_CONFIGURED; no afirmar ENFORCED.
+- R2-4: branch protection/no-bypass todavía NOT_CONFIGURED; no afirmar ENFORCED.
 - MINOR-5: ACTIVE_R2-4 y NOT_EXECUTED.
-- Independent review round 3: NOT_SATISFIED; excepción humana ACCEPTED_RISK permanece visible.
+- Independent review round 3 de R2-3: NOT_SATISFIED; excepción humana ACCEPTED_RISK permanece visible.
 - IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; ampliar CASES antes de R2-5 funcional.
 - IR2-001 e IR2-003 permanecen deuda no bloqueante explícita.
 - DC-006 y EXP-01 permanecen OPEN.

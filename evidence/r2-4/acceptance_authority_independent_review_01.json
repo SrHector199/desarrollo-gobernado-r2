@@ -1,0 +1,323 @@
+{
+  "bundle_sha256": "cb7e08d072408f6fb1321125d4d13676cb3e430360849bff6f064f2d4e4be977",
+  "checks": [
+    {
+      "evidence": "sha256(ZIP)=cb7e08d0...be977 coincide con REQUEST. sha256(REVIEW_MANIFEST.json)=2f51ba07...b86af coincide con REQUEST. Verificados 13/13 objetos: 9 en manifest.files (sha256 + bytes + git_blob_oid recomputado como sha1('blob <len>\\0'+bytes)) y 4 en generated_review_inputs (sha256 + bytes). Sin ficheros no listados ni listados ausentes. Todos los files declaran source_commit=4a2d0564554c93f4508893c0813ae46be38a9b11.",
+      "id": "AA-01",
+      "status": "PASS"
+    },
+    {
+      "evidence": ".github/workflows/r2-ci.yml lineas 3-6: 'on: pull_request: branches: [main]'. Dispara para PRs cuya rama base es main con los tipos por defecto (opened/synchronize/reopened). No hay filtros 'paths'/'paths-ignore' que puedan dejar el check en Pending.",
+      "id": "AA-02",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Linea 23: 'ref: ${{ github.event.pull_request.head.sha }}' con fetch-depth: 0 y persist-credentials: false; linea 32 reafirma 'test \"$(git rev-parse HEAD)\" = \"$PR_HEAD_SHA\"'. Evidencia suministrada: OBSERVED_GITHUB_STATE.required_check_observed.head_sha=4a2d0564... = pr.headRefOid. Nota: se valida el HEAD del PR, no el merge de prueba; docs.github.com (Troubleshooting required status checks) indica que si el merge commit de prueba tiene estado, ese debe pasar, y si no, el del head commit; strict=true mitiga la brecha semantica.",
+      "id": "AA-03",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sonda dinamica reproducida en copia aislada (/home/claude/scratch): 'python3 -B -S scripts/run_functional.py --implementation tests/fixtures/good_splitter.py' -> exit 0, stderr 0 bytes, status=PASS, reason_code=ALL_FUNCTIONAL_CHECKS_PASSED. Coincide con las aserciones del workflow (lineas 39-49). La razon es la esperada: good_splitter reparte 1000/3 como [334,333,333] y rechaza los dos casos invalidos con ValueError.",
+      "id": "AA-04",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sonda dinamica: bad_splitter -> exit 1, stderr 0 bytes, status=FAIL, reason_code=TOTAL_NOT_CONSERVED. El workflow (lineas 51-67) usa 'set +e', captura bad_rc y exige 'test \"$bad_rc\" -eq 1', es decir trata el fallo del programa como resultado negativo esperado y no como error de CI, y discrimina el reason_code frente a otros EXIT_FAIL de protocolo. La semantica es correcta; la capa que verifica el JSON es subvertible por R2AA-001.",
+      "id": "AA-05",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sonda dinamica: 'risk_floor.py --mode pre --authorized-class B --path tests/fixtures/good_splitter.py' -> exit 0, status=PASS, reason_code=FLOOR_WITHIN_AUTHORIZED_CLASS, mechanical_path_floor=B, finding explicit=true por prefix_rule 'tests/' (policy/risk_floors.json lineas 199-204). Razon esperada.",
+      "id": "AA-06",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sonda dinamica: 'risk_floor.py --mode pre --authorized-class D --path scripts/r2_unknown_ci_probe.py' -> exit 3, status=FAIL, reason_code=UNKNOWN_HIGH_AUTHORITY_SUBJECT, blocks_unknown=true. Cierra en fallo por defaults.unknown_control_plane=D con 'scripts/' en control_plane_roots. Salvedad no bloqueante en R2AA-008: el path no existe en el repo y la clasificacion es puramente sintactica.",
+      "id": "AA-07",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Correcto: findings_from_post (risk_floor.py 327-385) valida ancestria con 'git merge-base --is-ancestor base head' antes de difear, usa 'git diff --name-status --find-renames -z base head' (NUL-safe), aplica action_floors.deletion=D en 'D' y clasifica ambos lados en 'R'/'C'. Defectuoso: el workflow linea 101 fija '--authorized-class D', y siendo D el maximo de class_order, la rama FLOOR_EXCEEDS_AUTHORIZED_CLASS es inalcanzable en CI; el unico fallo POST posible es UNKNOWN_HIGH_AUTHORITY_SUBJECT y no existe negativo POST conocido en CI (AGENTS.md linea 39). Ademas el workflow no comprueba que data['base']/data['head'] del payload igualen PR_BASE_SHA/PR_HEAD_SHA, y la unica restriccion real de forma del diff es la asercion codificada a mano de la linea 116, que es de un solo uso (R2AA-006) y subvertible (R2AA-001).",
+      "id": "AA-08",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "docs.github.com (About protected branches, 'Require status checks before merging'): cualquier persona o integracion con permiso de escritura puede fijar el estado de cualquier status check, y al anadir un check requerido se puede seleccionar la app esperada como fuente; si el estado lo fija otra persona o integracion, no se permite el merge. Por tanto el binding context='r2-governed-validation' + app_id=15368 impide suplantacion via commit-status API por terceros. Limite: el binding es a la app, no al fichero ni al cuerpo del workflow; cualquier workflow del repo ejecutado por Actions que publique ese nombre satisface el binding. La correspondencia app_id 15368 <-> app_slug 'github-actions' procede solo de OBSERVED_GITHUB_STATE.json (evidencia suministrada); docs.github.com no publica IDs numericos de app. Riesgo documentado adicional: docs.github.com advierte que reutilizar el mismo nombre de job en varios workflows produce resultados ambiguos de status check.",
+      "id": "AA-09",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs.github.com (About protected branches, tabla Strict/Loose): con 'Require branches to be up to date before merging' marcado, la rama DEBE estar al dia con la rama base antes del merge. strict=true produce por tanto el efecto pretendido y ademas cierra parcialmente la brecha de AA-03 al forzar que el HEAD validado contenga la base. Matiz documentado en Troubleshooting required status checks: un PR al dia y con los checks requeridos en verde puede mergearse localmente y empujarse a la rama protegida sin que los checks se ejecuten sobre el propio merge commit.",
+      "id": "AA-10",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs.github.com (Managing a branch protection rule, paso 6) documenta 'Require a pull request before merging' como ajuste padre y 'Require approvals' con su desplegable 'Required number of approvals before merging' como sub-ajuste opcional: exigir el camino PR y exigir aprobaciones son ajustes separables. La API de branch protection no expone un booleano independiente para el padre, por lo que la presencia del objeto required_pull_request_reviews es el mecanismo habitual para activarlo. No obstante, en la documentacion oficial vigente consultada no encontre una afirmacion explicita sobre el comportamiento de required_approving_review_count=0 en el cuerpo REST. Siguiendo la instruccion de no asumir, marco UNCERTAIN. La conclusion de gobierno no depende de esta incertidumbre: en cualquiera de las dos lecturas el numero de aprobaciones humanas exigidas es cero.",
+      "id": "AA-11",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "docs.github.com (About protected branches, 'Do not allow bypassing the above settings'): por defecto las restricciones de una regla no se aplican a quien tiene permisos de admin, y este ajuste (enforce_admins) las aplica tambien a admins; cubre por tanto los ajustes configurados aqui (PR requerida y status checks requeridos). Para este repositorio personal, 'Restrict who can push to matching branches' solo esta disponible en repositorios de organizacion y los actores solo pueden anadirse a listas de bypass cuando el repositorio pertenece a una organizacion; restrictions=null y explicit_pull_request_bypass_allowances=[] son por tanto los unicos valores posibles, no una eleccion debil. Bypass residual que permanece y que la propuesta ya no reclama resolver: el dueno conserva admin sobre la propia regla de proteccion y puede editarla o borrarla, cambiar la visibilidad del repositorio o desactivar Actions. ENFORCED no es AISLADA.",
+      "id": "AA-12",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROPOSED_BRANCH_PROTECTION.json body: allow_force_pushes=false y allow_deletions=false; lock_branch=false y block_creations=false no reabren esos caminos. docs.github.com confirma que por defecto GitHub bloquea force pushes en toda rama protegida y que una rama protegida no puede borrarse salvo que se habilite explicitamente. Coherente con intended_effect.force_push_allowed=false y branch_deletion_allowed=false.",
+      "id": "AA-13",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Caso 'contexto no producido' cierra en fallo: si el fichero de workflow se borra, el job se renombra, o el workflow se omite por filtro de rama/path/mensaje de commit, docs.github.com indica que los checks asociados permanecen en estado 'Pending' y el PR que los requiere queda bloqueado ('Waiting for status to be reported'). Igualmente, si risk_floor.py aborta (por ejemplo BASE no ancestro de HEAD) devuelve exit 2 y 'set -euo pipefail' hace fallar el paso. El caso adyacente peligroso NO es este sino el job saltado, que se evalua en AA-15 y se registra como R2AA-002.",
+      "id": "AA-14",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Que el cuerpo del workflow lo aporta el propio PR esta probado por la evidencia suministrada, no inferido: R2_STATE.md linea 120 registra 'workflows 0' en GitHub antes del bootstrap de CI, y OBSERVED_GITHUB_STATE.json registra el check 'r2-governed-validation' en success sobre head_sha=4a2d0564...; es decir, el workflow introducido por el PR se valido a si mismo. Sobre esa base: (1) docs.github.com establece que los estados de check que cuentan como satisfactorios son success, skipped y neutral, y que un job saltado por un condicional reporta 'Success' y no bloqueara el PR aunque sea un check requerido: un PR que conserve name='r2-governed-validation' y anada 'if: false' deja el check requerido en verde sin validar nada (R2AA-002); (2) sonda dinamica reproducible: un PR que solo anade /json.py deja el paso 'Run governed validation' en exit 0 pese a que el diff real es {json.py} (R2AA-001). Ambos caminos conservan nombre y app y producen verde sin verificacion.",
+      "id": "AA-15",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Sonda dinamica sobre repositorio reconstruido: un unico commit que modifica a la vez .github/workflows/r2-ci.yml + scripts/risk_floor.py + policy/risk_floors.json produce risk POST status=PASS, reason_code=FLOOR_WITHIN_AUTHORIZED_CLASS, mechanical_path_floor=D, porque el workflow fija '--authorized-class D' y D es el maximo. Lo que SI queda protegido tras la configuracion propuesta: escritura directa a main sin PR, force push, borrado de main, y el requisito de que exista un check con ese nombre emitido por esa app sobre el ultimo SHA, con la rama al dia. Lo que EXP-01 deja SIN proteger: la autoridad de politica/validador no esta anclada a BASE ni a una autoridad externa inmutable, de modo que el mismo PR que se juzga aporta el workflow, el checker y la policy con los que se juzga; con required_approving_review_count=0 no queda ninguna autoridad independiente, humana o anclada, sobre ese cambio de clase D (R2AA-003).",
+      "id": "AA-16",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Etiqueta mas fuerte justificable si se aplicara la configuracion propuesta: OBSERVADA, y solo despues de releer el estado real de GitHub tras la configuracion, lectura que aun no existe. No se justifica COMPROBADA para el enforcement porque no hay FAIL conocido del gate ya instalado. No se justifica ENFORCED porque los caminos R2AA-001 y R2AA-002 producen el check requerido en verde sin que se ejecute verificacion alguna. No se afirma AISLADA: el dueno conserva control de los ajustes de GitHub (AA-12).",
+      "id": "AA-17",
+      "status": "PASS"
+    },
+    {
+      "evidence": "DC-006 permanece OPEN: esta revision no lo cierra y advierte de lo contrario, que tratar este paquete como autorizacion para configurar seria exactamente la confusion propuesta-vs-autorizacion que DC-006 describe (ver R2AA-004). EXP-01 permanece OPEN y no se trata como resuelto por la proteccion propuesta; AA-16 detalla que deja sin proteger. El hueco historico de independencia de la ronda 3 de R2-3 permanece NOT_SATISFIED / WAIVED_BY_HUMAN_EXCEPTION y no se reetiqueta: esta revision solo se pronuncia sobre el objeto R2-4 actual y su propio veredicto no sustituye ni repara aquella ronda.",
+      "id": "AA-18",
+      "status": "PASS"
+    }
+  ],
+  "dynamic_review": "FAIL",
+  "enforcement_disposition": "BLOCKED",
+  "findings": [
+    {
+      "blocking": true,
+      "evidence": "Los cinco verificadores en linea usan la forma 'python3 - \"$out\" <<'PY' ... PY' (lineas 41-49, 59-67, 71-80, 90-98, 102-117). Cuando CPython lee el script de stdin, sys.path[0] es '' , es decir el directorio de trabajo, que aqui es el checkout del HEAD del PR (verificado: 'python3 - <<PY: print(repr(sys.path[0]))' -> ''). Un PR puede por tanto sombrear json/pathlib de la biblioteca estandar. Sonda reproducible en copia aislada: repositorio reconstruido, PR que anade UNICAMENTE /json.py con un 'loads' que despacha por sys.argv[1]; diff real 'A\\tjson.py'; risk_floor POST ejecutado fuera del cwd sombreado devuelve status=PASS floor=B changed=['json.py']; y el cuerpo exacto del paso extraido del YAML, ejecutado con PR_BASE_SHA/PR_HEAD_SHA reales, termina con STEP EXIT CODE = 0. La policy no lo frena: 'json.py' en raiz no coincide con exact_paths ni prefix_rules ni control_plane_roots, cae en defaults.unknown_normal=B y B<=D.",
+      "falsification_probe": "En una copia scratch, crear BASE y HEAD donde HEAD anada solo /json.py con un shim de 'loads'; ejecutar el bloque 'run' del job con PR_BASE_SHA/PR_HEAD_SHA y comprobar el exit code. Contraprueba de la correccion: repetir con los verificadores lanzados como 'python3 -I -S -c' y comprobar que el paso pasa a exit != 0.",
+      "id": "R2AA-001",
+      "impact": "Falso verde. Todas las aserciones de status/reason_code/floor y la unica restriccion real de forma del diff (linea 116) las decide codigo aportado por el PR bajo prueba, sin tocar ningun path de control plane y por tanto sin activar la regla D/STOP. El check requerido queda en verde con verificacion nula.",
+      "lines_or_field": ".github/workflows/r2-ci.yml lineas 41-49, 59-67, 71-80, 90-98, 102-117 (heredocs 'python3 - ... <<PY')",
+      "minimal_fix": "Ejecutar los verificadores aislados del checkout: sustituir 'python3 - \"$out\" <<PY' por 'python3 -I -S -c \"...\" \"$out\"'. Correccion preferible y mas robusta: trasladar las aserciones al propio verificador critico (flags --expect-status/--expect-reason/--expect-floor/--expect-changed-paths en run_functional.py y risk_floor.py) y que el workflow dependa unicamente de exit codes.",
+      "path": ".github/workflows/r2-ci.yml",
+      "severity": "CRITICAL",
+      "title": "Los verificadores en linea del job se ejecutan con sys.path[0]='' sobre el checkout del PR y son sombreables"
+    },
+    {
+      "blocking": true,
+      "evidence": "docs.github.com, About protected branches: 'Required status checks must have a successful, skipped, or neutral status before collaborators can make changes to a protected branch'. docs.github.com, Troubleshooting required status checks: si un job dentro de un workflow se salta por un condicional, reporta su estado como 'Success'; y About status checks: un job saltado reporta 'Success' y no impedira el merge aunque sea un check requerido. El cuerpo del workflow lo aporta el PR: R2_STATE.md linea 120 registra 'workflows 0' antes del bootstrap y OBSERVED_GITHUB_STATE.json registra el check en success sobre el propio head 4a2d0564..., de modo que el workflow del PR se valido a si mismo.",
+      "falsification_probe": "Sin mutar GitHub: en un repositorio de laboratorio equivalente, abrir un PR que conserve 'name: r2-governed-validation' y anada 'if: false' al job, y observar si el check requerido aparece como satisfecho. Contraprueba: repetir exigiendo required_approving_review_count>=1 y comprobar que el merge sigue bloqueado.",
+      "id": "R2AA-002",
+      "impact": "Bypass y falso verde. Un unico PR conserva nombre de contexto y app_id, no ejecuta nada, y satisface el check requerido. Contradice el requisito canonico 4 y AGENTS.md lineas 40-41: SKIP y NOT_EXECUTED no son PASS cuando el control es obligatorio.",
+      "lines_or_field": "body.required_status_checks.checks[0] (context + app_id) frente a .github/workflows/r2-ci.yml lineas 12-13",
+      "minimal_fix": "El binding nombre+app no puede distinguir ejecutado de saltado, asi que no basta por si solo. Minimo: fijar required_pull_request_reviews.required_approving_review_count >= 1 y require_last_push_approval=true, y anadir .github/CODEOWNERS (clasificado D en policy) que cubra .github/, policy/ y scripts/ con require_code_owner_reviews=true, de modo que debilitar el gate exija una aprobacion humana distinta de quien empujo.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "CRITICAL",
+      "title": "Un job saltado por condicional con el mismo nombre y app satisface el check requerido"
+    },
+    {
+      "blocking": true,
+      "evidence": "PROPOSED_BRANCH_PROTECTION.json: required_pull_request_reviews.required_approving_review_count=0, dismiss_stale_reviews=false, require_last_push_approval=false, require_code_owner_reviews=false; intended_effect.human_approvals_required=0. El objeto que decide la aceptacion (workflow + risk_floor.py + risk_floors.json) viaja dentro del PR juzgado, y el POST corre con '--authorized-class D' fijo (workflow linea 101), por lo que ningun cambio de control plane puede superar la clase autorizada: sonda dinamica con workflow+checker+policy modificados a la vez -> POST PASS floor D. El propio proyecto lo reconoce: PROPOSED_BRANCH_PROTECTION.important_nonclaims declara que un binding de nombre/app no prueba que el cuerpo del check no pueda debilitarse, y R2_REVIEW_CRITERIA punto 8 mantiene EXP-01 OPEN.",
+      "falsification_probe": "Enumerar caminos de merge hacia main bajo la configuracion propuesta y buscar alguno que exija una firma humana sobre un cambio de clase D. Contraprueba: con required_approving_review_count>=1 y CODEOWNERS sobre el control plane, comprobar que el mismo PR queda bloqueado hasta aprobacion.",
+      "id": "R2AA-003",
+      "impact": "Bypass estructural. La configuracion propuesta no interpone ninguna autoridad independiente sobre la acceptance authority: el agente que produce el cambio produce tambien el verificador que lo aprueba y puede mergear sin aprobacion humana. Es incompatible con AGENTS.md linea 50 (el humano decide gates criticos) y no entrega la garantia de enforcement externo que persigue MINOR-5.",
+      "lines_or_field": "body.required_pull_request_reviews.required_approving_review_count = 0",
+      "minimal_fix": "Elevar required_approving_review_count a >= 1 con require_last_push_approval=true y dismiss_stale_reviews=true, o bien declarar explicitamente que R2-4 solo persigue 'PR obligatoria + check presente' sin reclamar autoridad de aceptacion, y no registrar el resultado como enforcement de la acceptance authority.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "CRITICAL",
+      "title": "Cero aprobaciones humanas sobre una acceptance authority que el propio PR define (EXP-01 abierto)"
+    },
+    {
+      "blocking": true,
+      "evidence": "repo/R2_STATE.md linea 11: 'Authorized next step: Observar el resultado real de la PR y del job r2-governed-validation; no mergear ni configurar required check/proteccion todavia.' Lineas 116-118: 'Required check: NOT_CONFIGURED', 'Branch protection / no-bypass: NOT_CONFIGURED', 'ENFORCED: False'. Lineas 124-126 repiten esos blockers. AGENTS.md linea 20: 'Ejecuta solo su unico Authorized next step y el task autorizado aplicable'; linea 22: 'El builder no amplia permisos, capacidades o paths'. policy/risk_floors.json clasifica R2_STATE.md como exact_path floor D role=authorization_state. El propio REQUEST.md punto 10 y la regla de disposicion recuerdan que una revision favorable no autoriza la mutacion.",
+      "falsification_probe": "Releer R2_STATE.md en el commit exacto 4a2d0564... y comprobar si su 'Authorized next step' incluye configurar required check o proteccion de rama. Contraprueba de la correccion: tras una actualizacion autorizada del estado que fije ese paso como el siguiente, la objecion desaparece.",
+      "id": "R2AA-004",
+      "impact": "Violacion de alcance. Ejecutar el PUT ahora seria actuar fuera del unico paso autorizado vigente en el objeto de autoridad de clase D del propio repositorio, y convertiria una propuesta en autorizacion, que es precisamente el hueco que DC-006 mantiene OPEN.",
+      "lines_or_field": "endpoint + method de PROPOSED_BRANCH_PROTECTION.json frente a repo/R2_STATE.md linea 11 y lineas 124-125",
+      "minimal_fix": "Antes del PUT, que el dueno registre en R2_STATE.md la observacion ya realizada de la PR y del job y fije explicitamente como unico siguiente paso autorizado 'configurar required check y proteccion/no-bypass', con la evidencia y hashes correspondientes.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "HIGH",
+      "title": "La accion propuesta excede el unico Authorized next step vigente, que la difiere expresamente"
+    },
+    {
+      "blocking": true,
+      "evidence": "policy/risk_floors.json linea 34: activation_rule = 'LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY'; linea 9: decision_record.scope identico; linea 32 status='AUTHORIZED_LOCAL_EXPERIMENTAL'. scripts/risk_floor.py lineas 64-71 rechaza arrancar salvo que la policy declare exactamente ese status y esa activation_rule. R2_STATE.md linea 44 registra DEC-CP V3 como 'RESOLVED_V3_LOCAL_EXPERIMENTAL_PENDING_INDEPENDENT_REVIEW ... NOT_ENFORCED; NOT_MERGE_AUTHORITY'. La propuesta convierte precisamente ese checker en check requerido que condiciona el merge a main.",
+      "falsification_probe": "Ejecutar 'risk_floor.py' con una policy cuya activation_rule autorice enforcement y observar que el checker aborta con CHECKER_ERROR ('activation_rule no permite este uso local'), lo que demuestra que la cadena que la propuesta contradice es la unica bajo la que el checker acepta operar.",
+      "id": "R2AA-005",
+      "impact": "Mecanismo de fallo por contradiccion de autoridad. Se instala como autoridad de merge un verificador que solo funciona mientras su politica declara no ser autoridad de merge ni estar enforced. Cualquier lectura posterior del estado sera ambigua: o la policy miente sobre su alcance, o el enforcement carece de politica que lo respalde.",
+      "lines_or_field": "body.required_status_checks.checks[0] frente a policy/risk_floors.json lineas 9 y 34 y risk_floor.py lineas 64-71",
+      "minimal_fix": "Emitir y autorizar DEC-CP V4 cuyo scope/activation_rule contemplen explicitamente uso como enforcement y autoridad de merge, revisarla de forma independiente, y solo entonces proponer el binding del check requerido a ese checker.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "HIGH",
+      "title": "El checker que se propone como autoridad de merge opera bajo una policy que declara NOT_ENFORCED y NOT_MERGE_AUTHORITY"
+    },
+    {
+      "blocking": true,
+      "evidence": ".github/workflows/r2-ci.yml linea 116: 'assert changed == {\".github/workflows/r2-ci.yml\", \"R2_STATE.md\"}'. Sonda dinamica: un PR posterior que solo anade src/app.py produce risk POST status=PASS reason_code=FLOOR_WITHIN_AUTHORIZED_CLASS floor=B con changed=['src/app.py'], y la asercion de la linea 116 evalua False, por lo que el paso falla y el check requerido queda en rojo de forma permanente. La unica salida es que ese PR edite tambien el workflow.",
+      "falsification_probe": "Construir BASE=HEAD_actual y HEAD'=HEAD_actual+un fichero cualquiera fuera de ese conjunto y ejecutar el bloque 'run' del job; observar el AssertionError. Contraprueba: repetir tras parametrizar la forma esperada del diff y comprobar que el paso pasa a verde sin tocar la acceptance authority.",
+      "id": "R2AA-006",
+      "impact": "Mecanismo de fallo que degrada en bypass. Como gate permanente el check es de un solo uso: bloquea todo PR futuro salvo que cada PR modifique .github/workflows/r2-ci.yml. Eso convierte cualquier tarea funcional normal en un cambio de clase D, contra AGENTS.md linea 47 ('Una tarea funcional normal no modifica simultaneamente implementacion y acceptance-authority'), y maximiza la exposicion a EXP-01 al obligar a tocar el validador en cada iteracion.",
+      "lines_or_field": ".github/workflows/r2-ci.yml linea 116 (y '--authorized-class D' fijo en linea 101)",
+      "minimal_fix": "Sustituir el conjunto codificado a mano por la forma de diff declarada en un task packet autorizado anclado en BASE (tasks/authorized/, floor D en policy), y derivar '--authorized-class' de ese packet en lugar de fijar D en el workflow.",
+      "path": ".github/workflows/r2-ci.yml",
+      "severity": "HIGH",
+      "title": "Asercion de diff codificada a mano: gate de un solo uso que obliga a tocar la acceptance authority en cada PR"
+    },
+    {
+      "blocking": false,
+      "evidence": "Workflow linea 101: '--authorized-class D' fijo. En risk_floor.py, evaluate() compara policy.rank[floor] > policy.rank[authorized_class]; con class_order ['A','B','C','D'] y authorized_class='D' esa rama nunca se toma. En CI existe un PASS conocido para POST (sonda: PASS/D con el diff reconstruido del PR) pero ningun FAIL conocido para POST. Ademas el workflow no asegura que el payload POST refiera los SHAs correctos: 'base' y 'head' se emiten pero no se comparan con PR_BASE_SHA/PR_HEAD_SHA.",
+      "falsification_probe": "Anadir al job un caso POST negativo sobre un par BASE..HEAD de laboratorio con un path de control plane sin clasificar, exigiendo exit 3 y reason_code=UNKNOWN_HIGH_AUTHORITY_SUBJECT; y anadir 'assert data[\"base\"]==os.environ[\"PR_BASE_SHA\"]' y equivalente para head.",
+      "id": "R2AA-007",
+      "impact": "Cobertura insuficiente del verificador critico en su modo POST: AGENTS.md linea 39 exige PASS conocido y FAIL conocido por la razon esperada, y en POST solo se ejercita el PASS. La ausencia de comprobacion de base/head en el payload deja sin verificar que el veredicto POST corresponde al par exacto que el job creia estar validando.",
+      "lines_or_field": ".github/workflows/r2-ci.yml lineas 100-117",
+      "minimal_fix": "Anadir un caso POST negativo ejecutado en un repositorio temporal dentro del job y comprobar en el payload que base==PR_BASE_SHA y head==PR_HEAD_SHA.",
+      "path": ".github/workflows/r2-ci.yml",
+      "severity": "HIGH",
+      "title": "El POST en CI carece de FAIL conocido y no verifica que el veredicto corresponda a BASE/HEAD exactos"
+    },
+    {
+      "blocking": false,
+      "evidence": "Workflow linea 85 usa '--path scripts/r2_unknown_ci_probe.py'. Verificado que ese fichero no existe en el repo (solo risk_floor.py y run_functional.py bajo scripts/) y que Policy.classify_path no consulta el sistema de ficheros, por lo que la clasificacion es puramente sintactica. El FAIL obtenido es real (exit 3, UNKNOWN_HIGH_AUTHORITY_SUBJECT) pero solo ejercita la regla de cadena de path.",
+      "falsification_probe": "Anadir en el mismo PR una entrada exact_paths para 'scripts/r2_unknown_ci_probe.py' y comprobar que el negativo pasa a exit 0 y que 'test \"$risk_fail_rc\" -eq 3' hace fallar el paso (cierre en fallo, comportamiento aceptable pero fragil).",
+      "id": "R2AA-008",
+      "impact": "Fragilidad del FAIL conocido: depende de un nombre de fichero inexistente y no de contenido real, y puede neutralizarse anadiendo ese path a la policy en el mismo PR. El resultado es cierre en fallo, no falso verde, por lo que no bloquea.",
+      "lines_or_field": ".github/workflows/r2-ci.yml linea 85",
+      "minimal_fix": "Generar el sujeto desconocido dentro del job en un directorio temporal de control plane creado al vuelo, o reservar el path en la policy como caso de prueba explicito para que su significado no dependa de que nadie lo cree.",
+      "path": ".github/workflows/r2-ci.yml",
+      "severity": "MEDIUM",
+      "title": "El negativo de riesgo se apoya en un path inexistente y clasificacion puramente sintactica"
+    },
+    {
+      "blocking": false,
+      "evidence": "docs.github.com, About protected branches: 'If you use branch protection rules that require specific status checks, make sure that job names are unique across all workflows. Using the same job name in multiple workflows can cause ambiguous status check results and block pull requests from being merged.' El binding propuesto es por context+app_id, no por fichero de workflow, de modo que un PR puede anadir un segundo workflow con un job homonimo ejecutado por la misma app.",
+      "falsification_probe": "En un repositorio de laboratorio, anadir un segundo workflow con un job llamado 'r2-governed-validation' y observar como resuelve GitHub el check requerido cuando ambos reportan resultados distintos.",
+      "id": "R2AA-009",
+      "impact": "Ambiguedad del check requerido. La documentacion describe el efecto como resultados ambiguos que pueden bloquear el merge, no como falso verde, pero no permite afirmar con certeza cual de los dos resultados prevalece; no lo doy por resuelto en ninguna direccion.",
+      "lines_or_field": "body.required_status_checks.checks[0].context",
+      "minimal_fix": "Anadir al job una comprobacion de unicidad (por ejemplo, que solo exista un fichero de workflow que declare ese nombre de job) y documentar el nombre como reservado.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "MEDIUM",
+      "title": "El binding por nombre+app no impide un segundo job homonimo en otro workflow"
+    },
+    {
+      "blocking": false,
+      "evidence": "Workflow lineas 20-25: actions/checkout@v4 con 'ref: ${{ github.event.pull_request.head.sha }}' y fetch-depth 0. El repositorio es publico, por lo que son posibles PRs desde forks cuyo head no reside en refs/heads/* del repositorio base. No pude ejecutar esta sonda sin acceso a GitHub.",
+      "falsification_probe": "Abrir un PR desde un fork en un repositorio de laboratorio y observar si el paso de checkout resuelve el SHA y si el paso POST encuentra el commit BASE tras fetch-depth 0.",
+      "id": "R2AA-010",
+      "impact": "Si el checkout o el 'git merge-base --is-ancestor' no resolvieran el SHA en el caso fork, el paso fallaria y el check quedaria en rojo: cierre en fallo, no falso verde. Se registra como incertidumbre, no como bypass.",
+      "lines_or_field": ".github/workflows/r2-ci.yml lineas 20-25 y 101",
+      "minimal_fix": "Documentar el alcance del gate para PRs desde forks o anadir un fetch explicito de refs/pull/N/head y del BASE antes del modo POST.",
+      "path": ".github/workflows/r2-ci.yml",
+      "severity": "LOW",
+      "title": "Comportamiento no ejecutado para PRs desde fork con checkout por SHA"
+    }
+  ],
+  "independence_satisfied": "PASS",
+  "limitations": [
+    "No se muto GitHub, ni el ZIP, ni el repositorio del usuario. Todo el trabajo dinamico se realizo en copias aisladas bajo /home/claude/scratch. No se consulto ni se ejecuto ninguna llamada a la API de GitHub.",
+    "No se suministro el repositorio Git real, por lo que no pude verificar el diff verdadero 4a2d0564..72a9c0c1: la afirmacion implicita de que BASE..HEAD equivale a {.github/workflows/r2-ci.yml, R2_STATE.md} queda SIN verificar. El comportamiento PRE/POST se valido sobre un repositorio reconstruido con los mismos bytes de los objetos suministrados.",
+    "OBSERVED_GITHUB_STATE.json se trato exclusivamente como evidencia pre-enforcement. No prueba que la configuracion propuesta vaya a tener la semantica pretendida, ni que este aplicada.",
+    "La correspondencia app_id 15368 <-> app_slug 'github-actions' procede unicamente de OBSERVED_GITHUB_STATE.json; docs.github.com no publica identificadores numericos de GitHub Apps y no pude confirmarlo por fuente oficial externa.",
+    "AA-11 queda UNCERTAIN: la documentacion oficial vigente consultada separa 'Require a pull request before merging' de 'Require approvals' en la interfaz, pero no documenta explicitamente el comportamiento de required_approving_review_count=0 en el cuerpo REST. Siguiendo la instruccion del REQUEST, no lo asumo.",
+    "Semantica de GitHub para AA-09 a AA-15 tomada de docs.github.com (About protected branches, Managing a branch protection rule, Troubleshooting required status checks, About status checks), no de observacion sobre el repositorio: es investigacion externa, distinta de la evidencia suministrada.",
+    "Entorno de sondas: Python 3.12.3 y Git 2.43.0. El runner objetivo es ubuntu-latest y R2_STATE.md registra Python 3.14.4 y Git 2.53.0 en el entorno del usuario. La sonda de sombreado de modulos depende de sys.path[0]='' para scripts leidos de stdin, comportamiento estable de CPython, pero no fue reproducida sobre esas versiones exactas.",
+    "Los tres PDFs canonicos de R2 v3.3 no se suministraron; los requisitos canonicos se tomaron del resumen de R2_REVIEW_CRITERIA.md junto con repo/R2_STATE.md y repo/AGENTS.md.",
+    "R2AA-010 (PR desde fork) permanece NOT_EXECUTED: no dispongo de un GitHub de laboratorio para ejecutarlo.",
+    "Esta revision no autoriza el merge ni la mutacion de GitHub, y su propio veredicto no debe usarse como autoridad para ejecutar la accion critica."
+  ],
+  "manifest_sha256": "2f51ba07e292d2ac55a0b31eb91118410f066e7efdda2c98e99ce012821b86af",
+  "open_residuals": {
+    "DC-006": "OPEN",
+    "EXP-01": "OPEN",
+    "historical_R2_3_independence_gap": "UNCHANGED"
+  },
+  "review_protocol": "r2-independent-review-v1",
+  "review_scope": "R2-4-acceptance-authority-enforcement",
+  "reviewed_objects": [
+    {
+      "path": "REVIEW_MANIFEST.json",
+      "sha256": "2f51ba07e292d2ac55a0b31eb91118410f066e7efdda2c98e99ce012821b86af",
+      "status": "PASS"
+    },
+    {
+      "path": "R2_REVIEW_CRITERIA.md",
+      "sha256": "1baaa87537f87aff20ff82998311ec32a92cd7ad170e951d1f45c84b496d9305",
+      "status": "PASS"
+    },
+    {
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "sha256": "ceb6aad39e42b2dfe690202e38b9c8cdc37b42584c0940584bb008ccf170caf3",
+      "status": "FAIL"
+    },
+    {
+      "path": "OBSERVED_GITHUB_STATE.json",
+      "sha256": "10f9c694be081ba9debf7845c70bae64d4d736b533daabd7308d86d3392779ac",
+      "status": "PASS"
+    },
+    {
+      "path": "REVIEW_RESULT_TEMPLATE.json",
+      "sha256": "ced22628708bc63d240ca347bbf753a37b3022f47a28ad62e07cc651ff01fb1e",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/.github/workflows/r2-ci.yml",
+      "sha256": "c5645e36392c5f28305ac1cae93147eb406e5b25d33ff0f36a048966a8691b5a",
+      "status": "FAIL"
+    },
+    {
+      "path": "repo/scripts/risk_floor.py",
+      "sha256": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/scripts/run_functional.py",
+      "sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/policy/risk_floors.json",
+      "sha256": "8c078b056d9a6a278cdac2e3a20afb1c37084e6b6d598671091a22337d476ad9",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/R2_STATE.md",
+      "sha256": "a166f63893ee0e7a178091798352196be0b60a336916c069ce554c55277b9184",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/AGENTS.md",
+      "sha256": "c4f997bd24b6fe1764389ca648a13049978a89925c8233c2e131ebf14789ecab",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/docs/FEATURE_BRIEF.md",
+      "sha256": "26088a93747ac7e72160e22331818c5a1125cc3c229d6f5affc63dd352c04908",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/tests/fixtures/good_splitter.py",
+      "sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+      "status": "PASS"
+    },
+    {
+      "path": "repo/tests/fixtures/bad_splitter.py",
+      "sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "status": "PASS"
+    }
+  ],
+  "reviewer": {
+    "authored_current_change": false,
+    "fresh_context": true,
+    "independence_statement": "No participe en el diseno o implementacion del acceptance authority objeto de esta revision y evalue el paquete desde los objetos y criterios suministrados. Esta sesion comenzo con la subida del ZIP, sin memoria habilitada y sin contexto previo de R2, por lo que fresh_context=true es factual. Lei las referencias a rondas de revision anteriores que aparecen en R2_STATE.md y en policy/risk_floors.json unicamente como hechos historicos del expediente, nunca como autoridad para un veredicto: todas las conclusiones proceden de los hashes verificados, de la lectura de los objetos exactos y de sondas dinamicas reproducibles en copia aislada, mas documentacion oficial de docs.github.com para la semantica de GitHub. No mute GitHub, el ZIP ni el repositorio del usuario, y esta revision no ejecuta ni autoriza por si misma la accion critica.",
+    "model": "Claude Opus 5 (unico identificador de modelo visible en mi contexto de sistema; no puedo verificar de forma independiente el enrutado real de la peticion)",
+    "prior_conclusions_used_as_authority": false,
+    "system": "Claude (Anthropic)"
+  },
+  "static_review": "FAIL",
+  "strongest_justified_guarantee_if_applied": "OBSERVADA",
+  "summary": "Integridad del paquete: correcta. El SHA-256 del ZIP y del REVIEW_MANIFEST.json coinciden con los declarados en REQUEST.md, y los 13 objetos verifican sha256 y bytes, con los 9 objetos de repositorio verificando ademas su git_blob_oid recomputado; no hay ficheros extra ni ausentes. El nucleo tecnico tambien es solido en varias piezas: el workflow dispara para PRs contra main, hace checkout del head exacto del PR y lo reafirma con git rev-parse; el runner funcional reproduce PASS conocido (ALL_FUNCTIONAL_CHECKS_PASSED) y FAIL conocido (TOTAL_NOT_CONSERVED) tratando el fallo del programa como resultado negativo y no como error de CI; el risk checker reproduce PASS en B y FAIL cerrado en UNKNOWN_HIGH_AUTHORITY_SUBJECT, valida ancestria BASE..HEAD e incluye borrados y ambos lados de renames con datos NUL-safe; y en la propuesta, strict=true, allow_force_pushes=false, allow_deletions=false y enforce_admins=true son correctos, siendo restrictions=null el unico valor posible en un repositorio personal. Aun asi la disposicion es BLOCKED, por seis hallazgos bloqueantes. Dos son falsos verdes demostrados o documentados: los cinco verificadores en linea del job se ejecutan leyendo el script de stdin, con sys.path[0]='' apuntando al checkout controlado por el PR, y una sonda reproducible muestra que un PR que solo anade /json.py en la raiz deja el paso en exit 0 pese a que el diff real no es el esperado, sin tocar ningun path de control plane y por tanto sin activar la regla D/STOP; y, segun docs.github.com, los estados success, skipped y neutral satisfacen un check requerido y un job saltado por condicional reporta Success, de modo que un PR que conserve nombre y app y anada 'if: false' deja el gate en verde sin ejecutar nada, en contra del requisito canonico de que SKIP y NOT_EXECUTED no se conviertan en PASS. Los otros cuatro son estructurales: required_approving_review_count=0 deja sin ninguna autoridad humana o anclada un objeto de aceptacion que el propio PR aporta, con EXP-01 abierto y '--authorized-class D' fijo en el POST, lo que hace inalcanzable FLOOR_EXCEEDS_AUTHORIZED_CLASS; la accion excede el unico Authorized next step vigente, que en R2_STATE.md linea 11 prohibe expresamente configurar required check o proteccion todavia; el checker que se propone como autoridad de merge solo opera bajo una policy que se declara NOT_ENFORCED y NOT_MERGE_AUTHORITY, contradiccion de autoridad que risk_floor.py exige para arrancar; y la asercion de diff codificada a mano en la linea 116 convierte el gate en un mecanismo de un solo uso que bloquea todo PR futuro salvo que cada uno modifique la acceptance authority, contra la regla de separacion de AGENTS.md. Se registran ademas cuatro hallazgos no bloqueantes: ausencia de FAIL conocido para el modo POST en CI y de comprobacion de que el veredicto POST corresponda a BASE/HEAD exactos, fragilidad del negativo de riesgo apoyado en un path inexistente, ambiguedad posible por jobs homonimos en otro workflow, y comportamiento no ejecutado para PRs desde fork. DC-006 y EXP-01 permanecen OPEN y el hueco historico de independencia de la ronda 3 de R2-3 permanece sin reetiquetar; esta revision no los cierra ni los repara. Si la configuracion se aplicara tal cual, la etiqueta mas fuerte justificable seria OBSERVADA y solo tras releer el estado real de GitHub, nunca ENFORCED ni AISLADA, dado que el check requerido puede ponerse en verde sin ejecutar verificacion alguna y el dueno conserva control sobre los propios ajustes de proteccion."
+}
