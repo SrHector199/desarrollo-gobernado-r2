@@ -61,14 +61,17 @@ class Policy:
 
         if self.data.get("decision_id") != "DEC-CP":
             raise ValueError("La política no declara decision_id=DEC-CP")
-        if self.data.get("status") != "AUTHORIZED_LOCAL_EXPERIMENTAL":
+        if self.data.get("status") != "BASE_ANCHORED_ENFORCEMENT_CAPABLE":
             raise ValueError(
-                "La política no está autorizada para el experimento local R2"
+                "La política no declara capacidad BASE-anchored esperada"
             )
         if self.data.get("activation_rule") != (
-            "LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY"
+            "ACTIVE_ONLY_WHEN_LOADED_FROM_ACCEPTED_BASE_BY_R2_POLICY_GATE"
         ):
-            raise ValueError("activation_rule no permite este uso local")
+            raise ValueError("activation_rule BASE-anchored inesperada")
+
+        if self.data.get("decision_version") != 4:
+            raise ValueError("decision_version esperada: 4")
 
         order = self.data.get("class_order")
         if order != ["A", "B", "C", "D"]:
@@ -77,6 +80,10 @@ class Policy:
 
         self.exact_paths = {
             item["path"]: item for item in self.data.get("exact_paths", [])
+        }
+        self.basename_rules = {
+            item["basename"]: item
+            for item in self.data.get("basename_rules", [])
         }
         prefixes = self.data.get("prefix_rules", [])
         self.prefix_rules = sorted(
@@ -129,6 +136,18 @@ class Policy:
     def classify_path(self, raw: str) -> Finding:
         path = self.normalize_path(raw)
 
+        basename = PurePosixPath(path).name
+        basename_rule = self.basename_rules.get(basename)
+        if basename_rule is not None:
+            return Finding(
+                subject_type="path",
+                subject=path,
+                floor=basename_rule["floor"],
+                role=basename_rule.get("role", "unspecified"),
+                reason=basename_rule.get("reason", "basename_rule"),
+                explicit=True,
+            )
+
         exact = self.exact_paths.get(path)
         if exact is not None:
             return Finding(
@@ -170,7 +189,7 @@ class Policy:
             subject=path,
             floor=self.defaults.get("unknown_normal", "B"),
             role="unknown_normal",
-            reason="Path normal no clasificado: floor mínimo B.",
+            reason="Path normal no clasificado: floor según defaults.unknown_normal.",
             explicit=False,
         )
 
@@ -291,37 +310,91 @@ def evaluate(
     return EXIT_PASS
 
 
-def parse_name_status_z(raw: bytes) -> list[tuple[str, list[str]]]:
+def parse_raw_z(raw: bytes) -> list[dict[str, Any]]:
     tokens = raw.split(b"\0")
     if tokens and tokens[-1] == b"":
         tokens.pop()
 
-    records: list[tuple[str, list[str]]] = []
+    records: list[dict[str, Any]] = []
     index = 0
     while index < len(tokens):
         try:
-            status = tokens[index].decode("ascii")
+            header = tokens[index].decode("ascii")
         except UnicodeDecodeError as exc:
-            raise ValueError("Status Git no ASCII") from exc
+            raise ValueError("Cabecera raw Git no ASCII") from exc
         index += 1
 
+        if not header.startswith(":"):
+            raise ValueError(f"Cabecera raw Git inválida: {header!r}")
+
+        fields = header[1:].split()
+        if len(fields) != 5:
+            raise ValueError(f"Cabecera raw Git inesperada: {header!r}")
+
+        old_mode, new_mode, old_sha, new_sha, status = fields
+        if (
+            len(old_mode) != 6
+            or len(new_mode) != 6
+            or any(ch not in "01234567" for ch in old_mode + new_mode)
+        ):
+            raise ValueError(f"Modo Git inválido: {old_mode!r}->{new_mode!r}")
+
         code = status[:1]
-        path_count = 2 if code in {"R", "C"} else 1
         if code not in {"A", "M", "D", "R", "C", "T"}:
             raise ValueError(f"Status Git no soportado: {status!r}")
+
+        path_count = 2 if code in {"R", "C"} else 1
         if index + path_count > len(tokens):
-            raise ValueError("Salida NUL de Git truncada")
+            raise ValueError("Salida raw NUL de Git truncada")
 
         paths: list[str] = []
         for token in tokens[index : index + path_count]:
-            try:
-                paths.append(token.decode("utf-8", errors="surrogateescape"))
-            except UnicodeDecodeError as exc:
-                raise ValueError("Path Git no decodificable") from exc
+            paths.append(token.decode("utf-8", errors="surrogateescape"))
         index += path_count
-        records.append((status, paths))
+
+        records.append(
+            {
+                "status": status,
+                "code": code,
+                "old_mode": old_mode,
+                "new_mode": new_mode,
+                "old_sha": old_sha,
+                "new_sha": new_sha,
+                "paths": paths,
+            }
+        )
 
     return records
+
+
+def mode_findings(
+    policy: Policy,
+    *,
+    code: str,
+    old_mode: str,
+    new_mode: str,
+) -> list[Finding]:
+    findings: list[Finding] = []
+
+    if old_mode == "120000" or new_mode == "120000":
+        findings.append(policy.classify_action("symlink_entry"))
+    if old_mode == "160000" or new_mode == "160000":
+        findings.append(policy.classify_action("gitlink_entry"))
+
+    if code == "T":
+        findings.append(policy.classify_action("type_change"))
+
+    regular_modes = {"100644", "100755"}
+    if code in {"A", "C"} and new_mode == "100755":
+        findings.append(policy.classify_action("new_executable"))
+    if (
+        old_mode != new_mode
+        and old_mode in regular_modes
+        and new_mode in regular_modes
+    ):
+        findings.append(policy.classify_action("executable_mode_change"))
+
+    return findings
 
 
 def findings_from_post(
@@ -341,7 +414,8 @@ def findings_from_post(
     diff = git(
         repo,
         "diff",
-        "--name-status",
+        "--raw",
+        "--no-abbrev",
         "--find-renames",
         "-z",
         base,
@@ -349,41 +423,54 @@ def findings_from_post(
     )
     if diff.returncode != 0:
         raise ValueError(
-            "git diff falló: "
+            "git diff raw falló: "
             + diff.stderr.decode("utf-8", errors="replace").strip()
         )
 
     findings: list[Finding] = []
     changes: list[dict[str, Any]] = []
 
-    for status, paths in parse_name_status_z(diff.stdout):
-        code = status[:1]
-        record: dict[str, Any] = {"status": status, "paths": paths}
+    for raw_record in parse_raw_z(diff.stdout):
+        code = raw_record["code"]
+        paths = raw_record["paths"]
+        old_mode = raw_record["old_mode"]
+        new_mode = raw_record["new_mode"]
+
+        record: dict[str, Any] = {
+            "status": raw_record["status"],
+            "paths": paths,
+            "old_mode": old_mode,
+            "new_mode": new_mode,
+        }
+        record_findings: list[Finding] = []
 
         if code in {"A", "M", "T"}:
-            path_finding = policy.classify_path(paths[0])
-            findings.append(path_finding)
-            record["floors"] = [path_finding.floor]
+            record_findings.append(policy.classify_path(paths[0]))
 
         elif code == "D":
-            path_finding = policy.classify_path(paths[0])
-            action_finding = policy.classify_action("deletion")
-            findings.extend([path_finding, action_finding])
-            record["floors"] = [path_finding.floor, action_finding.floor]
+            record_findings.append(policy.classify_path(paths[0]))
+            record_findings.append(policy.classify_action("deletion"))
 
         elif code in {"R", "C"}:
-            source_finding = policy.classify_path(paths[0])
-            destination_finding = policy.classify_path(paths[1])
-            findings.extend([source_finding, destination_finding])
-            record["floors"] = [
-                source_finding.floor,
-                destination_finding.floor,
-            ]
+            record_findings.append(policy.classify_path(paths[0]))
+            record_findings.append(policy.classify_path(paths[1]))
 
+        record_findings.extend(
+            mode_findings(
+                policy,
+                code=code,
+                old_mode=old_mode,
+                new_mode=new_mode,
+            )
+        )
+
+        findings.extend(record_findings)
+        record["floors"] = [item.floor for item in record_findings]
+        record["finding_subjects"] = [item.subject for item in record_findings]
+        record["finding_roles"] = [item.role for item in record_findings]
         changes.append(record)
 
     return findings, changes
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(

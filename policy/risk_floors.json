@@ -1,16 +1,75 @@
 {
-  "schema_version": 1,
+  "action_floors": {
+    "deletion": "D",
+    "executable_mode_change": "C",
+    "gitlink_entry": "D",
+    "new_executable": "C",
+    "symlink_entry": "D",
+    "type_change": "D"
+  },
+  "activation_rule": "ACTIVE_ONLY_WHEN_LOADED_FROM_ACCEPTED_BASE_BY_R2_POLICY_GATE",
+  "basename_rules": [
+    {
+      "basename": ".gitattributes",
+      "floor": "D",
+      "reason": "Git honors .gitattributes at any directory depth; it can alter materialized bytes of acceptance authority.",
+      "role": "checkout_semantics_authority"
+    },
+    {
+      "basename": ".gitmodules",
+      "floor": "D",
+      "reason": "Repository/submodule materialization metadata is high authority regardless of directory depth.",
+      "role": "repository_materialization_authority"
+    }
+  ],
+  "capability_floors": {
+    "commit": "D",
+    "dependency_installation": "D",
+    "github_settings_change": "D",
+    "merge": "D",
+    "network": "D",
+    "publication": "D",
+    "pull_request_create": "D",
+    "push": "D",
+    "remote_create": "D",
+    "secret_access": "D",
+    "staging": "D"
+  },
+  "class_order": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "constraints": {
+    "post_check": "mechanical_path_floor(actual_diff_paths) <= authorized_class",
+    "pre_check": "mechanical_path_floor(planned_paths) <= authorized_class",
+    "semantic_escalation": "MAY_ONLY_RAISE",
+    "unknown_control_plane_action": "D_AND_STOP_UNTIL_EXPLICIT_CLASSIFICATION"
+  },
+  "control_plane_roots": [
+    ".github/",
+    "policy/",
+    "scripts/",
+    "tasks/",
+    "evidence/",
+    "docs/",
+    "AGENTS.md",
+    "R2_STATE.md"
+  ],
   "decision_id": "DEC-CP",
-  "decision_version": 3,
   "decision_record": {
-    "label": "DEC-CP-V3",
+    "R2AA-011": "PRESERVE",
+    "R2AA-014": "PRESERVE",
+    "R2AA-016": "BLOCKING_SUPERSEDED_BY_R2AA_022_CORRECTION_SCRATCH",
+    "R2AA-017": "PARTIAL_BINDING_PRESERVED_FREEZE_ORDER_PROCEDURAL",
+    "R2AA-018": "PARTIAL_UNKNOWN_NORMAL_C_PRESERVED",
+    "R2AA-022": "UNDER_SCRATCH_FALSIFICATION",
+    "R2AA-023": "UNDER_SCRATCH_FALSIFICATION",
+    "R2AA-024": "UNDER_SCRATCH_FALSIFICATION",
+    "R2AA-025": "OPEN_NOT_IN_SCOPE_OF_THIS_SCRATCH_FIX",
+    "authorization": "SCRATCH_ONLY_NOT_IMPLEMENTATION_AUTHORITY",
     "authorized_at_utc": "2026-08-15T00:05:39Z",
-    "authorization": "HUMAN_GATE_CAPABILITY_FLOORS_PRE_BASELINE",
-    "scope": "LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY",
-    "supersedes_policy_sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550",
-    "independent_review_round_2": "EXECUTED_PASS",
-    "independent_review_round_2_sha256": "9da3383b0a2b88f6a428dd7203cac7e51a192641cfde7dd1e5bed04d4584c7db",
-    "capability_floor_semantics": "CLASSIFICATION_ONLY_NOT_EXECUTION_AUTHORIZATION",
     "capabilities_added": [
       "staging",
       "commit",
@@ -24,193 +83,214 @@
       "secret_access",
       "publication"
     ],
-    "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
-    "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+    "capability_floor_semantics": "CLASSIFICATION_ONLY_NOT_EXECUTION_AUTHORIZATION",
+    "dc_006": "OPEN_NOT_DECIDED_IN_R2_4",
+    "historical_policy_pre_post": "NOT_EXECUTED",
     "hostile_process_internal_tampering": "OUT_OF_SCOPE",
-    "historical_policy_pre_post": "NOT_EXECUTED"
+    "independent_review_round_2": "EXECUTED_PASS",
+    "independent_review_round_2_sha256": "9da3383b0a2b88f6a428dd7203cac7e51a192641cfde7dd1e5bed04d4584c7db",
+    "label": "DEC-CP-V4-R2AA-022-MATERIALIZATION-SCRATCH",
+    "normal_pr_mechanical_ceiling": "B",
+    "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+    "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+    "scope": "ACTIVE_ONLY_WHEN_LOADED_FROM_ACCEPTED_BASE_BY_R2_POLICY_GATE",
+    "supersedes_policy_sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550"
   },
-  "status": "AUTHORIZED_LOCAL_EXPERIMENTAL",
-  "purpose": "Mapear el floor mecánico mínimo por path sin sustituir el escalado semántico.",
-  "activation_rule": "LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY",
-  "class_order": [
-    "A",
-    "B",
-    "C",
-    "D"
+  "decision_version": 4,
+  "defaults": {
+    "unknown_control_plane": "D",
+    "unknown_normal": "C"
+  },
+  "exact_paths": [
+    {
+      "floor": "D",
+      "path": "policy/risk_floors.json",
+      "reason": "Define el mínimo mecánico que usará el risk-floor checker.",
+      "role": "acceptance_authority"
+    },
+    {
+      "floor": "D",
+      "path": "R2_STATE.md",
+      "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+      "role": "authorization_state"
+    },
+    {
+      "floor": "D",
+      "path": "docs/FEATURE_BRIEF.md",
+      "reason": "Fija el resultado y la demo que el dueño debe aceptar.",
+      "role": "product_acceptance_authority"
+    },
+    {
+      "floor": "C",
+      "path": "AGENTS.md",
+      "reason": "Instruye a los agentes, pero no debe constituir por sí solo una autoridad de aceptación.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "D",
+      "path": ".github/CODEOWNERS",
+      "reason": "Puede condicionar revisiones y protección.",
+      "role": "review_authority"
+    },
+    {
+      "floor": "C",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "reason": "Ayuda a documentar la revisión sin bloquear el merge por sí solo.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "A",
+      "path": "README.md",
+      "reason": "Documentación explícitamente reversible y sin autoridad de aceptación.",
+      "role": "documentation"
+    },
+    {
+      "floor": "D",
+      "path": "scripts/run_functional.py",
+      "reason": "Runner funcional crítico usado para decidir si la demo técnica pasa.",
+      "role": "acceptance_authority"
+    },
+    {
+      "floor": "D",
+      "path": "scripts/risk_floor.py",
+      "reason": "Checker crítico que calcula y bloquea el floor mecánico PRE/POST.",
+      "role": "acceptance_authority"
+    },
+    {
+      "floor": "D",
+      "path": "scripts/base_gate.py",
+      "reason": "BASE-anchored policy gate.",
+      "role": "acceptance_authority"
+    },
+    {
+      "floor": "D",
+      "path": "tests/fixtures/good_splitter.py",
+      "reason": "Executed by critical gate self-test; must not be B-mutable.",
+      "role": "acceptance_authority_fixture"
+    },
+    {
+      "floor": "D",
+      "path": "tests/fixtures/bad_splitter.py",
+      "reason": "Executed by critical gate self-test; must not be B-mutable.",
+      "role": "acceptance_authority_fixture"
+    }
   ],
   "matching": {
+    "aggregate": "max_all_changed_paths",
+    "deletion": "max_action_and_deleted_path",
+    "git_mode_semantics": {
+      "100644_to_100755": "executable_mode_change_C",
+      "100755_to_100644": "executable_mode_change_C",
+      "120000": "symlink_entry_D",
+      "160000": "gitlink_entry_D",
+      "T": "type_change_D",
+      "new_100755": "new_executable_C"
+    },
     "path_format": "repo-relative-posix",
+    "post_diff": "git_diff_raw_z_with_modes",
     "precedence": [
+      "basename_rule",
       "exact_path",
       "longest_prefix",
       "default"
     ],
-    "rename": "max_source_destination",
-    "deletion": "max_action_and_deleted_path",
-    "aggregate": "max_all_changed_paths"
+    "rename": "max_source_destination"
   },
-  "action_floors": {
-    "deletion": "D"
-  },
-  "capability_floors": {
-    "staging": "D",
-    "commit": "D",
-    "network": "D",
-    "dependency_installation": "D",
-    "remote_create": "D",
-    "push": "D",
-    "pull_request_create": "D",
-    "merge": "D",
-    "github_settings_change": "D",
-    "secret_access": "D",
-    "publication": "D"
-  },
-  "defaults": {
-    "unknown_control_plane": "D",
-    "unknown_normal": "B"
-  },
-  "control_plane_roots": [
-    ".github/",
-    "policy/",
-    "scripts/",
-    "tasks/",
-    "evidence/",
-    "docs/",
-    "AGENTS.md",
-    "R2_STATE.md"
-  ],
-  "exact_paths": [
-    {
-      "path": "policy/risk_floors.json",
-      "floor": "D",
-      "role": "acceptance_authority",
-      "reason": "Define el mínimo mecánico que usará el risk-floor checker."
+  "materialization_semantics": {
+    "basename_floors": {
+      ".gitattributes": "D",
+      ".gitmodules": "D"
     },
-    {
-      "path": "R2_STATE.md",
-      "floor": "D",
-      "role": "authorization_state",
-      "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado."
+    "dc_006": "OPEN",
+    "freeze_before_probes": "PROCEDURAL_DISCIPLINE_NOT_CRYPTOGRAPHIC_GUARANTEE",
+    "git_mode_floors": {
+      "executable_mode_change": "C",
+      "gitlink_160000": "D",
+      "new_executable_100755": "C",
+      "symlink_120000": "D",
+      "type_change_T": "D"
     },
-    {
-      "path": "docs/FEATURE_BRIEF.md",
-      "floor": "D",
-      "role": "product_acceptance_authority",
-      "reason": "Fija el resultado y la demo que el dueño debe aceptar."
-    },
-    {
-      "path": "AGENTS.md",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Instruye a los agentes, pero no debe constituir por sí solo una autoridad de aceptación."
-    },
-    {
-      "path": ".github/CODEOWNERS",
-      "floor": "D",
-      "role": "review_authority",
-      "reason": "Puede condicionar revisiones y protección."
-    },
-    {
-      "path": ".github/PULL_REQUEST_TEMPLATE.md",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Ayuda a documentar la revisión sin bloquear el merge por sí solo."
-    },
-    {
-      "path": "README.md",
-      "floor": "A",
-      "role": "documentation",
-      "reason": "Documentación explícitamente reversible y sin autoridad de aceptación."
-    },
-    {
-      "path": "scripts/run_functional.py",
-      "floor": "D",
-      "role": "acceptance_authority",
-      "reason": "Runner funcional crítico usado para decidir si la demo técnica pasa."
-    },
-    {
-      "path": "scripts/risk_floor.py",
-      "floor": "D",
-      "role": "acceptance_authority",
-      "reason": "Checker crítico que calcula y bloquea el floor mecánico PRE/POST."
-    }
-  ],
-  "prefix_rules": [
-    {
-      "prefix": ".github/workflows/",
-      "floor": "D",
-      "role": "acceptance_authority",
-      "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación."
-    },
-    {
-      "prefix": ".github/ISSUE_TEMPLATE/",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Plantillas auxiliares sin autoridad de merge."
-    },
-    {
-      "prefix": "policy/auxiliary/",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Política auxiliar explícita sin autoridad de aceptación."
-    },
-    {
-      "prefix": "scripts/auxiliary/",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Reporting o utilidades explícitamente no requeridas."
-    },
-    {
-      "prefix": "tasks/authorized/",
-      "floor": "D",
-      "role": "task_authorization",
-      "reason": "Los packets autorizados pueden conceder alcance y clase."
-    },
-    {
-      "prefix": "tasks/proposals/",
-      "floor": "C",
-      "role": "task_proposal",
-      "reason": "Una propuesta no equivale a autorización; DC-006 permanece abierto."
-    },
-    {
-      "prefix": "evidence/",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Conserva hechos para revisión, pero no autoriza por sí sola."
-    },
-    {
-      "prefix": "docs/governance/",
-      "floor": "C",
-      "role": "control_plane_auxiliary",
-      "reason": "Documentación de gobierno sin enforcement directo."
-    },
-    {
-      "prefix": "docs/reference/",
-      "floor": "A",
-      "role": "documentation",
-      "reason": "Referencia explícitamente clasificada como reversible y sin autoridad."
-    },
-    {
-      "prefix": "src/",
-      "floor": "B",
-      "role": "functional_implementation",
-      "reason": "Implementación funcional limitada."
-    },
-    {
-      "prefix": "tests/",
-      "floor": "B",
-      "role": "functional_tests",
-      "reason": "Tests funcionales del mini-proyecto."
-    }
-  ],
-  "constraints": {
-    "semantic_escalation": "MAY_ONLY_RAISE",
-    "pre_check": "mechanical_path_floor(planned_paths) <= authorized_class",
-    "post_check": "mechanical_path_floor(actual_diff_paths) <= authorized_class",
-    "unknown_control_plane_action": "D_AND_STOP_UNTIL_EXPLICIT_CLASSIFICATION"
+    "normal_B_prefixes": [
+      "src/",
+      "tests/"
+    ],
+    "temporary_approval_status": "PROPOSAL_ONLY_NOT_CONFIGURED",
+    "temporary_required_approving_review_count": 1,
+    "unknown_normal_floor": "C"
   },
   "open_controls": {
     "DC-006": "OPEN",
     "EXP-01": "OPEN"
-  }
+  },
+  "prefix_rules": [
+    {
+      "floor": "D",
+      "prefix": ".github/workflows/",
+      "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación.",
+      "role": "acceptance_authority"
+    },
+    {
+      "floor": "C",
+      "prefix": ".github/ISSUE_TEMPLATE/",
+      "reason": "Plantillas auxiliares sin autoridad de merge.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "C",
+      "prefix": "policy/auxiliary/",
+      "reason": "Política auxiliar explícita sin autoridad de aceptación.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "C",
+      "prefix": "scripts/auxiliary/",
+      "reason": "Reporting o utilidades explícitamente no requeridas.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "D",
+      "prefix": "tasks/authorized/",
+      "reason": "Los packets autorizados pueden conceder alcance y clase.",
+      "role": "task_authorization"
+    },
+    {
+      "floor": "C",
+      "prefix": "tasks/proposals/",
+      "reason": "Una propuesta no equivale a autorización; DC-006 permanece abierto.",
+      "role": "task_proposal"
+    },
+    {
+      "floor": "C",
+      "prefix": "evidence/",
+      "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "C",
+      "prefix": "docs/governance/",
+      "reason": "Documentación de gobierno sin enforcement directo.",
+      "role": "control_plane_auxiliary"
+    },
+    {
+      "floor": "A",
+      "prefix": "docs/reference/",
+      "reason": "Referencia explícitamente clasificada como reversible y sin autoridad.",
+      "role": "documentation"
+    },
+    {
+      "floor": "B",
+      "prefix": "src/",
+      "reason": "Implementación funcional limitada.",
+      "role": "functional_implementation"
+    },
+    {
+      "floor": "B",
+      "prefix": "tests/",
+      "reason": "Tests funcionales del mini-proyecto.",
+      "role": "functional_tests"
+    }
+  ],
+  "purpose": "Scratch materialization-semantics prototype: BASE-anchored mechanical risk floor with basename authority and Git-mode-aware POST classification.",
+  "schema_version": 1,
+  "status": "BASE_ANCHORED_ENFORCEMENT_CAPABLE"
 }
