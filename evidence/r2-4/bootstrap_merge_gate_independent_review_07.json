@@ -1,0 +1,672 @@
+{
+ "admin_tail_verified": {
+  "actions": {
+   "R2_STATE.md": "M",
+   "evidence/r2-4/materialization_v2_exact_implementation_06.json": "A"
+  },
+  "no_control_plane_or_executable_bytes_in_tail": true,
+  "paths": [
+   "R2_STATE.md",
+   "evidence/r2-4/materialization_v2_exact_implementation_06.json"
+  ],
+  "status": "PASS",
+  "tail_commit_count_in_real_history": 1,
+  "tail_records": 2
+ },
+ "authority": {
+  "branch_protection_authorized": false,
+  "github_settings_mutation_authorized": false,
+  "merge_authorized": false,
+  "only_justifies": "A separate Human Gate D decision on whether to merge the bootstrap PR. Nothing else.",
+  "phase_change_authorized": false,
+  "r2_5_authorized": false,
+  "required_checks_authorized": false,
+  "ruleset_authorized": false
+ },
+ "blocking_findings": [],
+ "commit_ledger_verified": {
+  "anchor_position_in_ledger": "index 11 of 13 (12 commits main..anchor, 1 commit anchor..HEAD)",
+  "chain_terminates_at_pr_head": true,
+  "commits_main_to_head": 13,
+  "historical_union_equals_final_inventory": true,
+  "merge_commits": 0,
+  "oid_chain_continuity_across_commits": "NO_BREAKS",
+  "paths_touched_outside_bootstrap_inventory": "NONE",
+  "per_commit_replay_reproduces_full_records_exactly": true,
+  "status": "PASS",
+  "strictly_linear_single_parent_chain": true
+ },
+ "created_at_utc": "2026-08-15T21:37:00Z",
+ "dynamic_review": "PASS",
+ "evidence_ledger_verified": {
+  "all_evidence_mode_100644": true,
+  "all_introduced_exactly_once_as_add": true,
+  "all_linked_from_r2_state_by_exact_sha256": true,
+  "all_linked_from_r2_state_by_path": true,
+  "all_valid_json": true,
+  "any_modified_after_introduction": false,
+  "inventory_evidence_paths_unreferenced_by_state": "NONE",
+  "ledger_blob_oid_equals_full_record_new_oid": "12/12",
+  "ledger_sha256_equals_recomputed_bytes": "12/12",
+  "objects": 12,
+  "path_and_sha_colocated_in_state": true,
+  "state_referenced_evidence_paths_outside_inventory": "NONE",
+  "status": "PASS"
+ },
+ "evidence_type": "r2-4-bootstrap-merge-gate-independent-adversarial-review",
+ "exact_refs_verified": {
+  "bootstrap_evidence_sha256_verified": true,
+  "bundle_sha256_verified": true,
+  "gate_source_sha256_verified": true,
+  "implementation_anchor": "b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82",
+  "main": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+  "manifest_entries_verified": "26/26 path + sha256 + byte-count; zero unlisted files in ZIP",
+  "note": "Inner REQUEST.md (9ae66d00...) differs from outer REQUEST.md (466390a6...) only by the appended self-referential BUNDLE/MANIFEST hash block; the 20 numbered requirements are byte-identical. Benign.",
+  "pr_head": "a41da96f16567717de0c1299adab626c2b31089e",
+  "refs_consistent_across": [
+   "REVIEW_MANIFEST.json",
+   "BOOTSTRAP_MERGE_GATE_EVIDENCE.json.real_state",
+   "GATE_SOURCE.py constants",
+   "implementation evidence 06"
+  ],
+  "review_manifest_sha256_verified": true,
+  "status": "PASS"
+ },
+ "full_diff_verified": {
+  "actions_observed": [
+   "A",
+   "M"
+  ],
+  "blob_oids_recomputed_from_bytes": "17/17 HEAD blobs, 5/5 anchor blobs and main R2_STATE.md reproduce the recorded old/new OIDs exactly (SHA-1 over 'blob <len>\\0'+content)",
+  "composition_anchor_then_tail_equals_full": true,
+  "delete_rename_copy_symlink_gitlink_typechange_execdrift": "NONE",
+  "executable_mode_drift": false,
+  "executable_paths_at_head": [
+   "scripts/risk_floor.py"
+  ],
+  "final_inventory_equals_full_record_paths": true,
+  "modes_observed": [
+   "000000",
+   "100644",
+   "100755"
+  ],
+  "records_main_to_head": 17,
+  "risk_classification_independently_reproduced": {
+   "mechanical_path_floor": "D",
+   "method": "Reconstructed the 17-record diff in a synthetic Git repository and executed the reviewed checker (SHA-256 e3be85d4...) with the reviewed policy (SHA-256 d68240ee...) directly.",
+   "per_path_floors_identical_to_recorded": true,
+   "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+   "status": "PASS"
+  },
+  "status": "PASS"
+ },
+ "implementation_anchor_verified": {
+  "anchor_records": 16,
+  "canonical_review_05": {
+   "blocking_findings_in_05": 0,
+   "bootstrap_disposition": "BLOCKED",
+   "candidate_disposition": "PASS",
+   "checks": 57,
+   "dynamic_review": "PASS",
+   "ids_contiguous_C5_01_to_C5_57": true,
+   "independence_satisfied": "PASS",
+   "pass": 57,
+   "sha256_verified": "05e349ba35d0d630ebaddd34bdc3f30f89a8b5f482e327e43f7aca6de4084e1b",
+   "static_review": "PASS",
+   "workflow_byte_offsets_independently_recomputed": {
+    "evaluate_precedes_self_test": true,
+    "evaluate_step": 1512,
+    "matches_c5_42_and_frozen_manifest": true,
+    "mode_evaluate": 1702,
+    "mode_self_test": 2013,
+    "self_test_step": 1822
+   }
+  },
+  "control_object_hashes_recomputed": {
+   ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+   "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+   "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+   "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283"
+  },
+  "four_control_objects_byte_identical_anchor_and_head": true,
+  "implementation_evidence_06": {
+   "fixtures_modified": false,
+   "github_settings_changed": false,
+   "merge_performed": false,
+   "phase_changed": false,
+   "r2_state_modified": false,
+   "runner_modified": false,
+   "sha256_verified": "8bc03c50e0fbdc5abb6b70380f2b5f66bfab94e2c1304601caa9acc73b2386ba",
+   "stage1_post": "PASS/D",
+   "stage1_pre": "PASS/D",
+   "stage2_post": "PASS/D",
+   "stage2_pre": "PASS/D",
+   "stages_map_onto_commit_ledger": "stage1 candidate 416c45c34c and stage2 candidate b9abfe0d9e are ledger entries 10 and 11 with matching parents and path sets",
+   "total_changed_paths_match_ledger": true
+  },
+  "match_materialization_v2_reviewed_bytes": true,
+  "status": "PASS"
+ },
+ "independence_satisfied": "PASS",
+ "limitations": [
+  "A PASS here is evidence over the exact bytes in this bundle only. It authorizes nothing.",
+  "The complete repository tree at HEAD is not in the bundle, so the HEAD tree object identifier and therefore the merge-tree equality could be established only by deduction from verified linearity plus replica confirmation.",
+  "Three of the seven reviewed control objects have no bytes here; their invariance was proven from the diff, and their hashes cross-checked across four documents, but not recomputed from bytes.",
+  "real_state, including PR state, mergeability, branch protection, rulesets and workflow-run counts, was read as a supplied claim.",
+  "Dynamic evidence was produced against reconstructed repositories in an ephemeral container, not against GitHub Actions; pull_request_target runtime semantics and check-run binding remain unverified.",
+  "The reviewer's re-implementation of the acceptance predicate is a faithful port of GATE_SOURCE.py, not the deployed gate; it was validated against the clean baseline before use and pinned the three absent objects to replica hashes while preserving the unchanged-versus-main check."
+ ],
+ "merge_gate_disposition": "PASS_EVIDENCE_ONLY_PENDING_SEPARATE_HUMAN_GATE_D",
+ "merge_prediction_verified": {
+  "main_is_ancestor_of_head": "ENTAILED by the independently verified strictly linear single-parent chain from main to HEAD",
+  "predicted_tree_equals_head_tree": "ENTAILED: for a linear history where main is an ancestor, merge-tree(main, HEAD) is HEAD's tree. The invariant was confirmed empirically on an independently rebuilt linear replica.",
+  "reason": "The bundle ships only the 17 paths touched by the diff, not the complete repository tree, so the tree object identifier cannot be recomputed.",
+  "recorded_head_tree": "405ac89929a3314e865eb52f36b124a5d83b75d0",
+  "recorded_head_tree_recomputable_from_bundle": false,
+  "status": "PASS_BY_DEDUCTION_NOT_BY_RECOMPUTATION"
+ },
+ "negative_probe_summary": {
+  "attack_classes_covered": [
+   "extra normal path",
+   "extra control-plane path",
+   "control-byte drift at anchor",
+   "post-anchor control drift",
+   "evidence tamper (length-preserving)",
+   "evidence tamper with ledger repaired to stay self-consistent",
+   "review 05 disposition downgrade",
+   "review 05 check-count downgrade",
+   "implementation 06 stage downgrade",
+   "extra tail path",
+   "symlink entry",
+   "gitlink entry",
+   "type change",
+   "rename of control path",
+   "deletion of evidence",
+   "executable-bit drift on control object",
+   "nested .gitattributes CRLF lockout",
+   "Unicode homoglyph evidence path",
+   "non-UTF-8 path injection",
+   "workflow extension twin",
+   "runner tamper",
+   "fixture tamper",
+   "evidence late modification",
+   "evidence touched three times with net-zero effect",
+   "non-linear merge commit",
+   "commit order permutation",
+   "R2_STATE marker removal",
+   "R2_STATE evidence-hash desync",
+   "tail split granularity"
+  ],
+  "false_greens_found": 0,
+  "reviewer_designed_accepted_benign_equivalent": 1,
+  "reviewer_designed_probes": 32,
+  "reviewer_designed_rejected": 31,
+  "supplied_probes_rejected": 6,
+  "supplied_probes_reproduced": 6,
+  "total_scenarios_exercised": 38
+ },
+ "negative_probes": [
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['src/unreviewed.txt']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A01_EXTRA_NORMAL_PATH"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/link.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A02_SYMLINK_ENTRY_IN_TAIL"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['vendor/sub']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A03_GITLINK_ENTRY"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "new mode inesperado: scripts/base_gate.py 100755",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A04_EXEC_BIT_ON_CONTROL_OBJECT"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['scripts/base_gate.py', 'scripts/base_gate2.py']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A05_RENAME_CONTROL_PATH"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/r2aa_016_017_scratch_candidate_manifest_01.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A06_DELETE_EVIDENCE_OBJECT"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "new mode inesperado: evidence/r2-4/base_anchored_scratch_falsification_01.json 120000",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A07_TYPE_CHANGE_EVIDENCE_TO_SYMLINK"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/.gitattributes']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A08_NESTED_GITATTRIBUTES_CRLF"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/bаse_anchored_scratch_falsification_01.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A09_HOMOGLYPH_EVIDENCE_PATH"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "implementation06 SHA drift",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A10_LENGTH_PRESERVING_EVIDENCE_TAMPER"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "R2_STATE marker ausente: - Siguiente fase permitida: NO",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A11_R2_STATE_MARKER_REMOVAL"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "R2_STATE no referencia SHA evidence/r2-4/materialization_v2_exact_implementation_06.json",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A12_R2_STATE_HASH_DESYNC"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/r2aa_016_017_scratch_candidate_manifest_01.json', 'evidence/r2-4/r2aa_022_024_materialization_scratch_candidate_manifest_01.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A13_EVIDENCE_CONTENT_SWAP"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/we\\udcffird.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A14_NON_UTF8_PATH_INJECTION"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['.github/workflows/r2-ci.yaml']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A15_WORKFLOW_EXTENSION_TWIN"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['scripts/run_functional.py']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A16_RUNNER_TAMPER"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['tests/fixtures/good_splitter.py']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A17_FIXTURE_TAMPER"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "implementation06 SHA drift",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A18_EVIDENCE_LATE_MODIFICATION"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['src/side.txt']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A19_MERGE_COMMIT_NONLINEAR"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "implementation06 SHA drift",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A20_CONSISTENT_EVIDENCE_TAMPER_LEDGER_REPAIRED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/materialization_v2_frozen_candidate_independent_review_05.json']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A21_REVIEW05_DISPOSITION_DOWNGRADE"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['scripts/base_gate.py']",
+   "result": "REJECTED",
+   "round": 1,
+   "scenario": "A22_POST_ANCHOR_CONTROL_BYTE_DRIFT"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "implementation06 SHA drift",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D01_IMPL06_TAMPER_AT_INTRODUCTION"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "review05 SHA drift",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D02_REVIEW05_DISPOSITION_TAMPER_AT_INTRODUCTION"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "review05 SHA drift",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D03_REVIEW05_CHECK_COUNT_56_OF_57"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "reviewed object hash drift scripts/base_gate.py",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D04_CONTROL_BYTE_DRIFT_AT_ANCHOR"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "R2_STATE marker ausente: - Gate de salida de R2-4: NOT_EXECUTED",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D05_R2_STATE_EXIT_GATE_MARKER_FLIP"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "R2_STATE no referencia SHA evidence/r2-4/materialization_v2_exact_implementation_06.json",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D06_R2_STATE_EVIDENCE_HASH_DROPPED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/materialization_v2_exact_implementation_06.json']",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D08_EVIDENCE06_MOVED_BEFORE_ANCHOR"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "evidence evidence/r2-4/materialization_v2_exact_implementation_06.json tocada 3 veces",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D07b_EVIDENCE_TOUCHED_THRICE_NET_ZERO"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "diff paths inesperados: ['evidence/r2-4/acceptance_authority_independent_review_01.json', 'evidence/r2-4/base_anchored_candidate_independent_review_02.json', 'evidence/r2-4/base_an",
+   "result": "REJECTED",
+   "round": 2,
+   "scenario": "D10b_COMMIT_ORDER_PERMUTED_ANCHOR_PINNED"
+  },
+  {
+   "gate": "ACCEPT",
+   "origin": "reviewer_designed",
+   "rejecting_check": "Accepted. Not a false green: final tree, cumulative anchor..HEAD diff, all pinned SHAs, evidence add-once and floor D are byte-identical to the honest history. Records the fact that tail COMMIT GRANULARITY is not pinned; REQUEST item 11 constrains cumulative tail content, which is verified.",
+   "result": "ACCEPTED_BENIGN_EQUIVALENT",
+   "round": 2,
+   "scenario": "D11_TAIL_SPLIT_TWO_COMMITS_IDENTICAL_CUMULATIVE_DIFF"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: diff paths inesperados: ['R2_STATE.md', 'evidence/r2-4/materialization_v2_exact_implementation_06.json', 'src/unreviewed.txt']",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "EXTRA_NORMAL_PATH_REJECTED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: diff paths inesperados: ['.github/evil.yml', 'R2_STATE.md', 'evidence/r2-4/materialization_v2_exact_implementation_06.json']",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "EXTRA_CONTROL_PLANE_PATH_REJECTED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: diff paths inesperados: ['.github/workflows/r2-ci.yml', 'R2_STATE.md', 'evidence/r2-4/materialization_v2_exact_implementation_06.json']",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "REVIEWED_WORKFLOW_DRIFT_REJECTED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: implementation06 SHA drift",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "CANONICAL_EVIDENCE_TAMPER_REJECTED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: diff paths inesperados: ['R2_STATE.md', 'README.md', 'evidence/r2-4/materialization_v2_exact_implementation_06.json']",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "ADMIN_TAIL_EXTRA_PATH_REJECTED"
+  },
+  {
+   "gate": "REJECT",
+   "origin": "supplied_in_package_reproduced",
+   "rejecting_check": "STOP: new mode inesperado: {'status': 'A', 'code': 'A', 'old_mode': '000000', 'new_mode': '100755', 'old_oid': '0000000000000000000000000000000000000000', 'new_oid': 'e0b7125f2a7da",
+   "result": "REJECTED",
+   "round": 0,
+   "scenario": "EVIDENCE_MODE_DRIFT_REJECTED"
+  }
+ ],
+ "nonblocking_findings": [
+  {
+   "blocking": false,
+   "detail": "gate.reviewed_control_hashes names seven objects, but scripts/run_functional.py, tests/fixtures/good_splitter.py and tests/fixtures/bad_splitter.py have no bytes in the ZIP. Their being unchanged from main is nevertheless proven, because the complete main..HEAD diff was independently reconstructed and contains none of them; and their hashes are consistent across four independent documents. What cannot be done from this bundle is recomputing those hashes from bytes.",
+   "id": "NB-01",
+   "remediation": "Ship the three objects' bytes in any bundle that asserts the seven-object reviewed set.",
+   "severity": "MEDIUM",
+   "title": "Three of the seven reviewed control objects ship no bytes in this bundle"
+  },
+  {
+   "blocking": false,
+   "detail": "merge_prediction.head_tree (405ac899...) cannot be recomputed because the bundle contains only the 17 touched paths, not the full repository tree. The claim is nonetheless sound: it follows from the independently verified strictly linear ancestry, and the invariant was confirmed on a rebuilt replica.",
+   "id": "NB-02",
+   "remediation": "Include the full tree listing (git ls-tree -r HEAD) so the tree object can be recomputed.",
+   "severity": "MEDIUM",
+   "title": "Predicted merge tree equality is deduced, not recomputed"
+  },
+  {
+   "blocking": false,
+   "detail": "real_state (pr_state OPEN, pr_merged false, branch_protection false, ruleset_count 0, workflow_runs 0 at both anchor and HEAD) was read as an assertion. This reviewer had no access to SrHector199/desarrollo-gobernado-r2 and did not attempt any. Every conclusion here is over bundle bytes only.",
+   "id": "NB-03",
+   "remediation": "Independent confirmation of repository state must occur at the Human Gate D step.",
+   "severity": "MEDIUM",
+   "title": "Real repository and GitHub state are supplied claims, not independently confirmed"
+  },
+  {
+   "blocking": false,
+   "detail": "The gate's floor-D classification is produced by the very checker and policy this PR installs. Correctly declared, correctly mitigated, and correctly resolved by requiring a separate human decision rather than by any self-assertion inside the package.",
+   "id": "NB-04",
+   "remediation": "None available within a bootstrap; retire when a previously merged, independently reviewed gate exists.",
+   "severity": "LOW",
+   "title": "Bootstrap circularity is inherent and remains declared"
+  },
+  {
+   "blocking": false,
+   "detail": "The tail is constrained by its cumulative anchor..HEAD diff, not by commit count. A two-commit tail producing a byte-identical final tree and identical cumulative diff is accepted. This is not a bypass: every pinned hash, the evidence add-once rule and floor D all still hold, and REQUEST item 11 constrains cumulative tail content, which is verified. The real history has a one-commit tail.",
+   "id": "NB-05",
+   "remediation": "Pin tail commit count explicitly only if commit-level granularity is intended to be part of the contract.",
+   "severity": "LOW",
+   "title": "Admin tail commit granularity is not pinned"
+  },
+  {
+   "blocking": false,
+   "detail": "Review 05 finding NEW-01 records that a path containing non-UTF-8 bytes is classified correctly by the checker but crashes base_gate's text capture layer, yielding an unstructured failure with no JSON verdict. Fail-closed. The bootstrap gate's own parser reads raw diff output as bytes and handled the same injection cleanly in this reviewer's testing.",
+   "id": "NB-06",
+   "remediation": "Carry NEW-01 forward; it does not affect this merge decision.",
+   "severity": "LOW",
+   "title": "Non-UTF-8 path handling in base_gate remains a known inherited residual"
+  },
+  {
+   "blocking": false,
+   "detail": "head/R2_STATE.md contains 51 distinct 64-hex digests; 19 correspond to the R2-4 evidence set, reviewed control objects and current state. The remaining 32 are R2-1/R2-2/R2-3 bundle, manifest, superseded-policy and observation references. None is an unaccounted R2-4 admin or evidence object.",
+   "id": "NB-07",
+   "remediation": "None.",
+   "severity": "INFO",
+   "title": "Historical SHA-256 references in R2_STATE are prior-round audit trail"
+  }
+ ],
+ "requirements_matrix": {
+  "01_bundle_and_manifest_hashes": "PASS",
+  "02_exact_refs": "PASS",
+  "03_raw_nul_delimited_inventories_three_objects": "PASS",
+  "04_paths_modes_actions_final_blob_hashes": "PASS",
+  "05_exact_reviewed_bytes_workflow_base_gate_checker_policy": "PASS",
+  "06_runner_and_fixtures_unchanged_and_in_reviewed_set": "PASS_WITH_SCOPE_LIMIT (NB-01)",
+  "07_canonical_review_05_exact": "PASS",
+  "08_implementation_evidence_06_and_both_stages": "PASS",
+  "09_evidence_valid_once_unmodified_linked": "PASS",
+  "10_history_linear_no_path_outside_inventory": "PASS",
+  "11_admin_tail_exactly_state_plus_evidence_06": "PASS",
+  "12_no_delete_rename_copy_symlink_gitlink_typechange_execdrift": "PASS",
+  "13_checker_factual_not_self_authorizing": "PASS",
+  "14_main_ancestor_and_predicted_tree_equals_head_tree": "PASS_BY_DEDUCTION (NB-02)",
+  "15_adversarial_negatives": "PASS (38 scenarios: 6 supplied reproduced + 32 reviewer-designed; 0 false greens)",
+  "16_executable_control_bytes_without_independent_review": "NONE_CHANGED; 3 unchanged reviewed objects lack bytes in bundle (NB-01)",
+  "17_admin_evidence_bytes_unaccounted_by_canonical_state": "NONE",
+  "18_r2aa_012_kept_open": "PASS",
+  "19_dc_006_open_and_ir2_002_blocking": "PASS",
+  "20_pass_justifies_only_separate_human_gate_d": "ACKNOWLEDGED_AND_ENFORCED"
+ },
+ "residuals": {
+  "DC-006": "OPEN — unchanged by this review.",
+  "EXP-01": "OPEN (carried)",
+  "IR2-002": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK — preserved. This gate is byte-level materialization and merge-readiness evidence, not functional acceptance.",
+  "MINOR-5": "ACTIVE_R2-4_NOT_EXECUTED — not executed by this review.",
+  "R2AA-011": "PARTIAL (carried)",
+  "R2AA-012": "OPEN — no real GitHub check-run binding evidence exists in this bundle. real_state reports branch_protection false, ruleset_count 0 and zero workflow runs at both the implementation anchor and current HEAD, so no check run has ever bound to any SHA. Not closable here.",
+  "R2AA-013": "PARTIAL (carried)",
+  "R2AA-015": "OPEN (carried)",
+  "R2AA-016": "PARTIAL (carried)",
+  "R2AA-017": "PARTIAL (carried)",
+  "R2AA-018": "PARTIAL (carried)",
+  "R2AA-019": "OPEN (carried)",
+  "R2AA-020": "OPEN (carried)",
+  "R2AA-021": "OPEN (carried)",
+  "R2AA-024": "PARTIAL (carried)",
+  "R2AA-025": "OPEN (carried)",
+  "R2AA-026": "LOW_NONBLOCKING (carried)",
+  "bundle_scope": "All conclusions are over ZIP bytes. No repository, remote, working tree or GitHub setting was read for mutation or modified by this review.",
+  "hostile_runner": "Out of scope per the policy's own declaration (COOPERATIVE_OR_BUGGY_IMPLEMENTATION, NOT_A_SECURITY_SANDBOX).",
+  "platform_conditionality": "Materialization containment evidence inherited from review 05 was produced on a case-sensitive Linux filesystem; case-folding and NFD-normalizing filesystems remain excluded (OBS-02)."
+ },
+ "review_scope": "R2-4-bootstrap-merge-gate-full-diff",
+ "reviewed_control_bytes_verified": {
+  "absent_object_hashes_corroborated_by": [
+   "gate.reviewed_control_hashes",
+   "review 05 check C5-04",
+   "implementation 06 preflight.initial_hashes",
+   "implementation 06 final.final_hashes"
+  ],
+  "absent_objects_unchanged_from_main": "PROVEN_BY_ABSENCE_FROM_COMPLETE_MAIN_TO_HEAD_DIFF",
+  "bytes_absent_from_bundle": [
+   "scripts/run_functional.py",
+   "tests/fixtures/bad_splitter.py",
+   "tests/fixtures/good_splitter.py"
+  ],
+  "bytes_present_in_bundle_and_recomputed": 4,
+  "corroboration_consistent": true,
+  "reviewed_seven_object_set": 7,
+  "runner_and_fixtures_identical_preflight_and_final": true,
+  "status": "PASS_WITH_SCOPE_LIMIT",
+  "workflow_safety_properties_independently_audited": {
+   "attacker_refs_via_env_not_template_interpolation": true,
+   "base_only_detached_checkout": true,
+   "both_fetched_tips_pinned_to_event_shas": true,
+   "cross_repo_pr_rejected": true,
+   "permissions_empty": true,
+   "pr_head_never_checked_out": true,
+   "python_isolated_I_B_S": true,
+   "secrets_referenced": false,
+   "set_euo_pipefail_blocks": 4,
+   "trigger": "pull_request_target"
+  }
+ },
+ "reviewer": {
+  "authored_current_change": false,
+  "fresh_context": true,
+  "independence_statement": "Fresh context. Every PASS contained in the package (BOOTSTRAP_MERGE_GATE_EVIDENCE.json summary flags, review 05 dispositions, implementation 06 stage results and the six supplied negative probes) was treated as a non-authoritative claim and independently recomputed from bundle bytes. All Git object identifiers, SHA-256 digests, diff records, commit replay, evidence linkage and risk classification were reproduced from first principles. The reviewed risk checker was executed directly by this reviewer against an independently reconstructed diff rather than trusting recorded output. No repository, remote or GitHub setting was read for mutation or modified.",
+  "model": "Claude Opus 5",
+  "prior_conclusions_used_as_authority": false,
+  "system": "Anthropic"
+ },
+ "schema_version": 1,
+ "self_authorization_check": {
+  "decisive_test": "Executed the reviewed checker over the reconstructed full diff at every authorization class. Class A, B and C each returned FAIL / FLOOR_EXCEEDS_AUTHORIZED_CLASS with exit 3; only class D returned PASS / FLOOR_WITHIN_AUTHORIZED_CLASS with exit 0.",
+  "declared_residual_circularity": "The checker performing the classification is the same artifact this PR introduces. Mitigated but not eliminated by: exact-byte independent PASS in review 05 (57/57), this reviewer's independent re-execution from those bytes, and the externally supplied authorization class. This residual is inherent to bootstrap and is precisely why a separate Human Gate D is required.",
+  "interpretation": "The authorized class is an input the checker is measured against, not a value it derives or grants. The checker reports the mechanical floor as a fact; the D authorization must be supplied externally by a human.",
+  "requirement": "reviewed checker classifies full diff floor D as a factual check, not self-authorization",
+  "status": "PASS",
+  "supporting_declarations": {
+   "gate.disposition": "PASS_PENDING_INDEPENDENT_BOOTSTRAP_REVIEW_AND_HUMAN_GATE_D",
+   "risk_facts.authority_source": "EXACT_INDEPENDENTLY_REVIEWED_IMPLEMENTATION_ANCHOR_BYTES",
+   "risk_facts.authorization_claim": false
+  },
+  "verdict": "SATISFIED"
+ },
+ "static_review": "PASS",
+ "summary": "Independent adversarial re-review of the R2-4 bootstrap merge gate, performed on a fresh context over bundle bytes only, treating every supplied PASS as an unverified claim. Integrity is fully reproduced: the bundle SHA-256 (24e35ecf...), REVIEW_MANIFEST (5aae77da...), BOOTSTRAP_MERGE_GATE_EVIDENCE (7dd8186e...) and GATE_SOURCE (8c9da499...) all match, all 26 manifest entries verify on path, digest and byte count, and the ZIP contains no unlisted file. All three diff objects were rebuilt independently: main..anchor is 16 records, anchor..HEAD is exactly 2, main..HEAD is 17, and anchor composed with tail reproduces the full record set exactly on every path, action, mode and object identifier. Every Git blob identifier was recomputed from bytes and matched: 17 of 17 at HEAD, 5 of 5 at the anchor, plus main's R2_STATE.md. Actions are confined to add and modify; there is no delete, rename, copy, symlink, gitlink, type change or executable-mode drift, and the single executable path was already executable at main. The four changed control objects are byte-identical at the anchor and at HEAD and equal the exact bytes that received an independent PASS in Materialization V2; the runner and both fixtures are unchanged from main, proven by their absence from the complete reconstructed diff, though their bytes are not shipped here. Review 05 is exact at 57 of 57 C5 checks with independence, static and dynamic all PASS, candidate PASS and bootstrap BLOCKED; implementation evidence 06 is exact with all four stage phases at floor D and PASS, and its two stages map precisely onto ledger commits 10 and 11. All twelve evidence objects are valid JSON, introduced exactly once as adds, never subsequently modified, and linked from R2_STATE by both path and exact digest. The commit history is a strictly linear thirteen-commit single-parent chain from main to HEAD with no merge commits, no path touched outside the bootstrap inventory, and a per-commit replay that reproduces the full record set exactly. The admin tail is exactly R2_STATE.md modified plus implementation evidence 06 added. The floor-D classification was reproduced from first principles by executing the reviewed checker against an independently reconstructed diff, matching the recorded result per path; running it at classes A, B and C returned FAIL with exit 3 and only class D passed, which establishes that the authorized class is an external input rather than something the gate grants itself, so the classification is factual and not self-authorization. Thirty-eight adversarial scenarios were exercised, the six supplied probes plus thirty-two designed independently by this reviewer, including length-preserving evidence tampering, tampering with the R2_STATE ledger repaired to stay internally self-consistent, review 05 disposition and check-count downgrades, control-byte drift at and after the anchor, symlink, gitlink, type-change, rename, delete and executable-bit entries, nested .gitattributes CRLF lockout, Unicode homoglyph and non-UTF-8 path injection, workflow extension twinning, runner and fixture tampering, evidence touched three times with net-zero effect, non-linear merge commits and commit-order permutation. Every one was rejected. The single acceptance was a two-commit tail producing a byte-identical final tree and identical cumulative diff, which is an equivalence rather than a false green and is recorded as NB-05. No false green was found. There are no blocking findings and seven non-blocking ones, the most substantive being that three of the seven reviewed objects ship no bytes, that merge-tree equality is established by deduction rather than recomputation because the full tree is absent, and that real repository state is a supplied claim. R2AA-012 stays OPEN, with zero workflow runs recorded at both the anchor and HEAD confirming no check run has ever bound to any SHA; DC-006 stays OPEN and IR2-002 stays blocking before the first functional task. Disposition is PASS as evidence only. It justifies opening a separate Human Gate D on the bootstrap merge and nothing more: it does not authorize the merge itself, branch protection, required checks, rulesets, any GitHub settings change, or entry into R2-5."
+}

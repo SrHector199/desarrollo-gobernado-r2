@@ -1,0 +1,129 @@
+{
+  "corroboration": {
+    "bootstrap_branch_unmodified": "LIVE_GITHUB_CONFIRMED",
+    "branch_protection_false": "LIVE_GITHUB_CONFIRMED",
+    "main_tree_after": "LIVE_GITHUB_AND_LOCAL_GIT_CONFIRMED",
+    "merge_commit_sha_equals_reviewed_head": "LIVE_GITHUB_CONFIRMED",
+    "no_new_merge_object_used": "LIVE_GITHUB_CONFIRMED_BY_merge_commit_sha_equals_reviewed_head; specific execution method FAST_FORWARD_EXACT remains additionally transcript-derived",
+    "pr_closed_merged": "LIVE_GITHUB_CONFIRMED",
+    "remote_main_after": "LIVE_GITHUB_CONFIRMED",
+    "required_checks_not_configured": "LIVE_GITHUB_CONFIRMED",
+    "rulesets_zero": "LIVE_GITHUB_CONFIRMED",
+    "workflow_runs_for_reviewed_head_zero": "LIVE_GITHUB_CONFIRMED"
+  },
+  "disposition": "BOOTSTRAP_FAST_FORWARD_OBSERVED_PASS_NOT_ENFORCED",
+  "enforced": false,
+  "evidence_type": "r2-4-bootstrap-fast-forward-post-merge-observation",
+  "limitations": [
+    "No claim of ENFORCED is made.",
+    "R2AA-012 remains OPEN because no real check-run binding to a PR HEAD has yet been demonstrated.",
+    "Transcript-derived execution-method claims are not silently promoted to live-observed facts.",
+    "Branch protection and required checks remain unconfigured.",
+    "R2-4 exit gate remains NOT_EXECUTED and R2-5 remains unauthorized."
+  ],
+  "observed_at_utc": "2026-08-15T22:00:01Z",
+  "observed_or_recomputed_facts": {
+    "bootstrap_branch_rewritten": false,
+    "bootstrap_branch_sha": "a41da96f16567717de0c1299adab626c2b31089e",
+    "branch_protection": false,
+    "control_object_hashes": {
+      ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+      "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "current_functional_accepted_sha": "5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a",
+    "current_phase": "R2-4",
+    "dc_006": "OPEN",
+    "exp_01": "OPEN",
+    "false_greens": 6,
+    "ir2_002": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK",
+    "local_reviewed_object_tree": "405ac89929a3314e865eb52f36b124a5d83b75d0",
+    "merge_commit_sha_equals_reviewed_head": true,
+    "minor_5": "ACTIVE_R2-4_NOT_EXECUTED",
+    "pr_head_ref": "r2-4/ci-bootstrap",
+    "pr_head_sha": "a41da96f16567717de0c1299adab626c2b31089e",
+    "pr_merge_commit_sha": "a41da96f16567717de0c1299adab626c2b31089e",
+    "pr_merged": true,
+    "pr_merged_at": "2026-08-15T21:50:02Z",
+    "pr_number": 1,
+    "pr_state": "closed",
+    "r2_state_sha256": "e9133fbb745ea3cebe52ee4a2d1a91a8e3ec62b0fe73bc4a85d6b51e4168e1ec",
+    "r2aa_012": "OPEN",
+    "remote_main_sha": "a41da96f16567717de0c1299adab626c2b31089e",
+    "remote_main_tree": "405ac89929a3314e865eb52f36b124a5d83b75d0",
+    "required_check_contexts": [],
+    "required_check_entries": [],
+    "ruleset_count": 0,
+    "workflow_runs_for_bootstrap_head": 0
+  },
+  "review_followups": {
+    "NB-01": "PRESERVED_HISTORICALLY_NO_RELABEL",
+    "NB-02": {
+      "historical_status": "PRESERVED_HISTORICALLY_NO_RELABEL",
+      "post_merge_note": "Exact live main tree observed as 405ac89929a3314e865eb52f36b124a5d83b75d0."
+    },
+    "NB-03": {
+      "historical_status": "PRESERVED_HISTORICALLY_NO_RELABEL",
+      "post_merge_live_github_state_checked": true
+    },
+    "NB-04": "PRESERVED_HISTORICALLY_NO_RELABEL",
+    "NB-05": "PRESERVED_HISTORICALLY_NO_RELABEL",
+    "NB-06": "PRESERVED_HISTORICALLY_NO_RELABEL",
+    "NB-07": "PRESERVED_HISTORICALLY_NO_RELABEL"
+  },
+  "schema_version": 1,
+  "scope": "POST_MERGE_OBSERVATION_ONLY_NOT_ENFORCEMENT",
+  "sources": {
+    "bootstrap_merge_gate": {
+      "bytes": 70413,
+      "path_external": "/mnt/c/Users/Hecto/Downloads/r2-4-bootstrap-merge-gate-falsification-20260815T211902Z.json",
+      "sha256": "7dd8186e23faf4ba66987d8f62970e6f1f898b4a188dcdc9b55f0651dc329023",
+      "validation": "EXACT_HASH_AND_SCHEMA_PASS"
+    },
+    "execution_transcript": {
+      "limitation": "Transcript-derived claims below are explicitly labeled and are not treated as independent live observations. Live Git/GitHub facts are recorded separately.",
+      "persisted_as_separate_input_file": false,
+      "source_type": "HUMAN_SUPPLIED_CHAT_TRANSCRIPT"
+    },
+    "independent_review": {
+      "bytes": 33936,
+      "path_external": "/mnt/c/Users/Hecto/Downloads/r2-4-bootstrap-merge-gate-independent-review.json",
+      "sha256": "b377cc51164901fd642b505dc6b9855e9c6c7cec10e87f9300054e9990ce648c",
+      "validation": "EXACT_HASH_AND_SEMANTIC_GATES_PASS"
+    }
+  },
+  "transcript_derived_facts": {
+    "bootstrap_branch_modified": false,
+    "bootstrap_fast_forward": "PASS",
+    "branch_protection_after": false,
+    "commits_rewritten": false,
+    "entered_r2_5": false,
+    "fast_forward_exact": true,
+    "files_modified": false,
+    "github_settings_mutation_performed": false,
+    "main_tree_after": "405ac89929a3314e865eb52f36b124a5d83b75d0",
+    "main_tree_equals_reviewed_head_tree": true,
+    "new_merge_commit_created": false,
+    "pr_merged_after": true,
+    "pr_merged_at": "2026-08-15T21:50:02Z",
+    "pr_state_after": "CLOSED",
+    "preflight": "PASS",
+    "r2_state_modified": false,
+    "rebase_performed": false,
+    "remote_bootstrap_branch_after": "a41da96f16567717de0c1299adab626c2b31089e",
+    "remote_main_after": "a41da96f16567717de0c1299adab626c2b31089e",
+    "required_check_after": "NOT_CONFIGURED",
+    "risk_post_D": "PASS",
+    "risk_post_mechanical_floor": "D",
+    "risk_pre_D": "PASS",
+    "risk_pre_mechanical_floor": "D",
+    "ruleset_count_after": 0,
+    "script_sha256": "95bae40bcb97ba4adef58642f7a7366ba8c98413b06782231251dec3b9339928",
+    "squash_commit_created": false,
+    "workflow_runs_for_head_after": 0
+  }
+}

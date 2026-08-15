@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar y falsar el bootstrap merge gate con ancla exacta de implementación `main` 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7 -> `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82`, inventariando todos los paths, modos y bytes de ese diff y verificando que el control plane coincide exactamente con los bytes independientemente revisados; además, como esta canonicalización administrativa avanzará la PR más allá de `b9abfe0d...`, el gate debe inventariar separadamente el tail `b9abfe0d...` -> HEAD real de la PR y exigir que contenga únicamente canonicalizaciones explícitamente autorizadas. Antes de cualquier merge debe quedar contabilizado también el diff completo `main` -> HEAD real. No hacer merge, branch protection, required check, rulesets, cambios de settings GitHub ni transición a R2-5 en ese paso; un merge posterior requerirá Human Gate D separado.
-- Last updated: 2026-08-15T21:04:56Z
+- Authorized next step: Preparar y ejecutar un PR B1 same-repository deliberadamente inocuo y limitado a un path mecánicamente B para observar en GitHub real el PR base SHA, PR head SHA, workflow run, workflow source / `github.sha` cuando sea observable, job `r2-governed-validation`, check name/context, check-run app_id y check-run head_sha, y producir una conclusión explícita sobre binding exacto. No mergear automáticamente B1 y no cerrar R2AA-012 todavía. B2 same-repo para no-herencia de verde, el probe D/control-plane que debe fallar y cualquier evaluación de branch protection/required check quedan para bloques posteriores.
+- Last updated: 2026-08-15T22:00:01Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -544,6 +544,69 @@
 - Bootstrap merge gate exact-object rule: `72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7` -> `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82` is the implementation diff anchor. Because this canonicalization adds an administrative commit after that anchor, any later merge gate must also inventory `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82` -> actual PR HEAD and finally prove the complete `72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7` -> actual PR HEAD diff before merge.
 - No merge/settings authority is granted by this record.
 - 2026-08-15T21:04:56Z: human-authorized canonicalization only.
+
+- 2026-08-15T22:00:01Z: R2-4 bootstrap fast-forward canonicalized as PASS; main 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7 -> a41da96f16567717de0c1299adab626c2b31089e, tree 405ac89929a3314e865eb52f36b124a5d83b75d0; PR #1 merged/closed; independent review evidence/r2-4/bootstrap_merge_gate_independent_review_07.json SHA-256 b377cc51164901fd642b505dc6b9855e9c6c7cec10e87f9300054e9990ce648c, 0 blocking / 7 nonblocking, 38 adversarial scenarios / 0 new false greens; observation evidence/r2-4/bootstrap_fast_forward_observation_08.json SHA-256 9a1414fd2609023f7392c96caf7cd09e0cac198a9beb8a0974a50da8f14058f1; ENFORCED remains False; R2AA-012/DC-006/EXP-01 remain OPEN; IR2-002 remains blocking; MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED.
+
+## Bootstrap R2-4 integrado en main
+- BOOTSTRAP_FAST_FORWARD: PASS.
+- OLD main: 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7
+- BOOTSTRAP main: a41da96f16567717de0c1299adab626c2b31089e
+- BOOTSTRAP tree: 405ac89929a3314e865eb52f36b124a5d83b75d0
+- PR #1: CLOSED / MERGED=True.
+- PR #1 merged_at: 2026-08-15T21:50:02Z
+- merge_commit_sha: a41da96f16567717de0c1299adab626c2b31089e
+- merge_commit_sha == reviewed HEAD: True.
+- NEW_MERGE_COMMIT_CREATED: False (live GitHub corroborates no new merge object; exact fast-forward method also recorded from the execution transcript).
+- SQUASH: False (execution transcript; resulting live SHA remains the reviewed HEAD).
+- REBASE: False (execution transcript; resulting live SHA remains the reviewed HEAD).
+- COMMITS_REWRITTEN: False (execution transcript; bootstrap branch remains at the reviewed HEAD).
+- Independent bootstrap review: PASS.
+- Independent review evidence: evidence/r2-4/bootstrap_merge_gate_independent_review_07.json
+- Independent review SHA-256: b377cc51164901fd642b505dc6b9855e9c6c7cec10e87f9300054e9990ce648c
+- Independent review bytes: 33936
+- blocking_findings: 0.
+- nonblocking_findings: 7.
+- adversarial_scenarios: 38.
+- new_false_greens: 0.
+- FALSE_GREENS: 6.
+- Bootstrap merge gate source SHA-256: 7dd8186e23faf4ba66987d8f62970e6f1f898b4a188dcdc9b55f0651dc329023
+- Fast-forward observation: evidence/r2-4/bootstrap_fast_forward_observation_08.json
+- Fast-forward observation SHA-256: 9a1414fd2609023f7392c96caf7cd09e0cac198a9beb8a0974a50da8f14058f1
+- NB-01..NB-07 are preserved historically exactly as recorded in review 07; this state does not rewrite or relabel the original review.
+- NB-03 follow-up: real GitHub state was subsequently checked live after the bootstrap merge and recorded in observation 08.
+- NB-02 historical finding is NOT relabeled; post-merge observation separately confirms live `main` tree `405ac89929a3314e865eb52f36b124a5d83b75d0`.
+- Branch protection: False.
+- Required check: NOT_CONFIGURED.
+- Rulesets: 0.
+- Workflow runs observed for reviewed bootstrap HEAD `a41da96f16567717de0c1299adab626c2b31089e` at canonicalization preflight: 0.
+- ENFORCED: False.
+- R2AA-012: OPEN; no real check-run binding to a B1 PR HEAD has yet been demonstrated.
+- Current phase: R2-4.
+- Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a; do not confuse it with the control-plane SHA integrated into `main`.
+- R2AA-011: PARTIAL.
+- R2AA-012: OPEN.
+- R2AA-013: PARTIAL.
+- R2AA-014: RESOLVED.
+- R2AA-015: OPEN.
+- R2AA-016: PARTIAL.
+- R2AA-017: PARTIAL.
+- R2AA-018: PARTIAL.
+- R2AA-019: OPEN.
+- R2AA-020: OPEN.
+- R2AA-021: OPEN.
+- R2AA-022: RESOLVED.
+- R2AA-023: RESOLVED.
+- R2AA-024: PARTIAL.
+- R2AA-025: OPEN.
+- R2AA-026: LOW_NONBLOCKING.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- R2-4 exit gate: NOT_EXECUTED.
+- R2-5: NOT_AUTHORIZED.
+- Next sequence after B1 is deliberately deferred: B2 same-repo no-green-inheritance; then D/control-plane negative probe; then evaluation of branch protection / required check.
+- 2026-08-15T22:00:01Z: human-authorized post-bootstrap canonicalization only; B1 is not executed in this commit.
 
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
