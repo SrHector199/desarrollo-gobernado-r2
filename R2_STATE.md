@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 6 detectados (el candidato Materialization V2 obtuvo revisión independiente PASS 57/57; NEW-01 es fail-closed y no añade falso verde)
+- Falsos verdes: 7 detectados (el candidato Materialization V2 obtuvo revisión independiente PASS 57/57; NEW-01 es fail-closed y no añade falso verde)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -805,39 +805,39 @@
 - 2026-08-15T22:54:02Z: Human Gate D authorized closing PR #4 without merge and this two-path administrative canonicalization only.
 
 ## Blockers
-- R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
-- R2AA-011 PARTIAL: captura temporal de BASE y `assume-unchanged` preservados en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
-- R2AA-016 PARTIAL: su causa bloqueante R2AA-022 quedó resuelta para los bytes exactos revisados; permanecen dependencias fuera de este bundle como R2AA-012/DC-006/IR2-002.
-- R2AA-017 PARTIAL: ligadura de bytes exactos verificada; freeze-before-probes permanece correctamente como garantía procedural, no criptográfica.
-- R2AA-012 OPEN NONBLOCKING: binding real de `pull_request_target` al SHA del PR requiere prueba GitHub real antes de required-check configuration.
-- R2AA-013 PARTIAL NONBLOCKING: `default_branch=main` observado; distinción temporal workflow-source SHA vs PR_BASE_SHA permanece abierta.
-- R2AA-014 RESOLVED: binding BASE/HEAD estricto preservado en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
-- R2AA-015 OPEN NONBLOCKING: deuda de liveness/fail-closed permanece explícita.
-- R2AA-018 PARTIAL: `unknown_normal=C` y contención Git-mode-aware en `src/`/`tests/` verificadas; queda deuda estructural de precedencia basename-first (OBS-01).
-- R2AA-019 OPEN LOW NONBLOCKING: `WORKFLOW_SOURCE_SHA` se captura pero no se compara directamente con PR_BASE_SHA.
-- R2AA-020 OPEN LOW NONBLOCKING: aislamiento de módulos depende de versión Python no pinneada.
-- R2AA-021 OPEN LOW NONBLOCKING: asserts contra tips de refs mantienen deuda de liveness fail-closed.
-- R2AA-022 RESOLVED: `.gitattributes` por basename a cualquier profundidad quedó independientemente contenido en D para los bytes exactos revisados.
-- R2AA-023 RESOLVED: symlink 120000, type-change y semántica Git-mode asociada quedaron independientemente contenidas para los bytes exactos revisados.
-- R2AA-024 PARTIAL: parser raw-diff sólido, pero NEW-01 muestra que la captura text=True de `base_gate.py` no es byte-safe de extremo a extremo.
-- R2AA-025 OPEN LOW NONBLOCKING: diagnóstico checker/liveness sigue enmascarado y no fue corregido.
-- R2AA-026 OPEN LOW NONBLOCKING - NON_UTF8_CHECKER_OUTPUT_CAPTURE: un path con bytes no UTF-8 puede provocar UnicodeDecodeError en `base_gate.py` al capturar stdout del checker con text=True; es fail-closed, no produce PASS, no es falso verde y no bloquea el candidato aprobado.
-- R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
-- R2AA-001 CRITICAL BLOCKING: verificadores inline sombreables desde el checkout del PR; falso verde dinámicamente demostrado.
-- R2AA-002 CRITICAL BLOCKING: un job saltado puede satisfacer el check nominal sin ejecutar validación.
-- R2AA-003 CRITICAL BLOCKING: cero autoridad independiente sobre acceptance authority mientras EXP-01 siga abierto.
-- R2AA-004 HIGH BLOCKING: la acción de enforcement propuesta excedía el Authorized next step vigente del objeto revisado.
-- R2AA-005 HIGH BLOCKING: DEC-CP V3 declara NOT_ENFORCED y NOT_MERGE_AUTHORITY.
-- R2AA-006 HIGH BLOCKING: el workflow actual codifica un diff de un solo uso y no sirve como gate permanente.
-- R2AA-007..010: deuda no bloqueante conservada en la evidencia canónica.
-- R2-4: required check todavía NOT_CONFIGURED.
-- R2-4: branch protection/no-bypass todavía NOT_CONFIGURED; no afirmar ENFORCED.
-- MINOR-5: ACTIVE_R2-4 y NOT_EXECUTED.
-- Independent review round 3 de R2-3: NOT_SATISFIED; excepción humana ACCEPTED_RISK permanece visible.
-- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; ampliar CASES antes de R2-5 funcional.
-- IR2-001 e IR2-003 permanecen deuda no bloqueante explícita.
-- DC-006 y EXP-01 permanecen OPEN.
-- La demo funcional del Feature Brief sigue NOT_EXECUTED.
+- FALSE_GREEN_7: CANONICAL_STATE_BLOCKERS_SCOPE_FALSE_GREEN.
+- FALSE_GREEN_7 cause: el validator de canonicalización declaró PASS sin verificar que `R2AA-012=RESOLVED` estuviera aplicado dentro de la sección canónica actual `## Blockers`; la búsqueda global sustituyó una aparición histórica y dejó el blocker actual contradictorio.
+- FALSE_GREENS: 7 total.
+- R2AA-011: PARTIAL.
+- R2AA-012: RESOLVED; B1+B2 demostraron binding por HEAD exacto y no-herencia de verde.
+- R2AA-013: PARTIAL.
+- R2AA-014: RESOLVED.
+- R2AA-015: OPEN.
+- R2AA-016: PARTIAL.
+- R2AA-017: PARTIAL.
+- R2AA-018: PARTIAL.
+- R2AA-019: OPEN.
+- R2AA-020: OPEN.
+- R2AA-021: OPEN.
+- R2AA-022: RESOLVED.
+- R2AA-023: RESOLVED.
+- R2AA-024: PARTIAL.
+- R2AA-025: OPEN.
+- R2AA-026: LOW_NONBLOCKING.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- REQUIRED_CHECK: NOT_CONFIGURED.
+- BRANCH_PROTECTION/NO-BYPASS: NOT_CONFIGURED.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- ENFORCED: False.
+- R2-4 exit gate: NOT_EXECUTED.
+- R2-5: NOT_AUTHORIZED.
+- Historical R2AA-001..R2AA-010 findings remain preserved in their earlier review sections; they are historical evidence and are not restated here as current blockers.
+- Historical review dispositions remain historical and are not relabeled by this repair.
+- Current phase remains R2-4.
+- Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
+- Authorized next step remains preparation/preflight only for exact required-check + branch-protection settings; no settings mutation is authorized by this repair.
 
 ## Gate de fase
 - R2-0 gate: PASS
