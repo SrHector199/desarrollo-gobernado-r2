@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar y congelar los bytes exactos del nuevo candidato R2-4, generar su manifest, ejecutar sobre esos mismos bytes los probes de materialización y autoridad, ligar la evidencia al manifest y someter el paquete exacto a revisión independiente antes de implementar; no modificar todavía workflow, checker, policy, runner, fixtures, task packets, main ni configuración GitHub.
-- Last updated: 2026-08-15T19:52:49Z
+- Authorized next step: Someter a Human Gate D una autorización separada para implementar exclusivamente los bytes exactos del candidato R2-4 independientemente revisado y aprobado; sin cambiar ningún byte del candidato, sin merge, sin branch protection, sin required check, sin rulesets, sin cambios de configuración GitHub y sin entrar todavía en R2-5.
+- Last updated: 2026-08-15T20:41:13Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 6 detectados (FALSE_GREEN_6=EVIDENCE_VERIFIER_FALSE_GREEN permanece canónico; la falsificación scratch de semántica de materialización 27/27 no añadió un nuevo falso verde)
+- Falsos verdes: 6 detectados (el candidato Materialization V2 obtuvo revisión independiente PASS 57/57; NEW-01 es fail-closed y no añade falso verde)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -420,19 +420,82 @@
 - This evidence grants no implementation, merge, protection, required-check, ruleset or GitHub-settings authority.
 - 2026-08-15T19:52:49Z: human-authorized canonicalization only; no control-plane implementation in this commit.
 
+- 2026-08-15T20:41:13Z: Materialization V2 independent review PASS; evidence evidence/r2-4/materialization_v2_frozen_candidate_independent_review_05.json SHA-256 05e349ba35d0d630ebaddd34bdc3f30f89a8b5f482e327e43f7aca6de4084e1b; C5 57/57 PASS; candidate PASS, bootstrap BLOCKED; R2AA-022/023 RESOLVED, R2AA-024 PARTIAL, R2AA-026 LOW NONBLOCKING; false greens remain 6; implementation/merge/settings authority remain false.
+
+## Revisión independiente PASS del candidato Materialization V2
+- Evidence: evidence/r2-4/materialization_v2_frozen_candidate_independent_review_05.json
+- Evidence SHA-256: 05e349ba35d0d630ebaddd34bdc3f30f89a8b5f482e327e43f7aca6de4084e1b
+- Evidence bytes: 38814
+- review_protocol: r2-independent-materialization-v2-frozen-candidate-v1.
+- Reviewed bundle SHA-256: 749705e7a8ecbadfbcbd435f18eebf470a49a0fa43f65f9b87fc7752852c5002
+- Reviewed manifest SHA-256: e6828ee2b95f6953ac4cc86c730a47fd918bd40be352fb2fd60a3c1a6a72874e
+- independence_satisfied: PASS.
+- static_review: PASS.
+- dynamic_review: PASS.
+- candidate_disposition: PASS.
+- bootstrap_disposition: BLOCKED.
+- C5 checks: 57 PASS / 0 FAIL / 0 UNCERTAIN / 0 NOT_EXECUTED.
+- Exact PASS bytes:
+  - workflow: 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830
+  - base_gate: f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11
+  - checker: e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283
+  - policy: d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b
+  - runner: d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f
+  - GOOD fixture: 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827
+  - BAD fixture: b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce
+- R2AA-011: PARTIAL.
+- R2AA-012: OPEN.
+- R2AA-013: PARTIAL.
+- R2AA-014: RESOLVED.
+- R2AA-015: OPEN.
+- R2AA-016: PARTIAL.
+- R2AA-017: PARTIAL.
+- R2AA-018: PARTIAL.
+- R2AA-019: OPEN.
+- R2AA-020: OPEN.
+- R2AA-021: OPEN.
+- R2AA-022: RESOLVED.
+- R2AA-023: RESOLVED.
+- R2AA-024: PARTIAL.
+- R2AA-025: OPEN.
+- R2AA-026 LOW NONBLOCKING - NON_UTF8_CHECKER_OUTPUT_CAPTURE: `base_gate.py` can raise UnicodeDecodeError on checker stdout for a Git path containing non-UTF-8 bytes because capture uses `text=True`; failure remains non-zero/fail-closed, emits no PASS, is not a false green and does not block these exact candidate bytes.
+- OBS-01 LOW: basename_rule > exact_path > prefix_rule is safe for these exact bytes because both current basename rules are D; future lower-floor basename rules would need an invariant before use.
+- OBS-02 LOW: basename containment is evidenced on the case-sensitive/non-normalizing Linux environment used by `ubuntu-latest`; other filesystem semantics are outside this PASS.
+- OBS-03 LOW: `required_approving_review_count=1` is ACCEPTABLE_TEMPORARY while DC-006 remains OPEN, but `dismiss_stale_reviews=false` plus `require_last_push_approval=false` must be reconsidered before any real configuration.
+- Temporary human gate proposal: `required_approving_review_count=1`; status `PROPOSAL_ONLY_NOT_CONFIGURED`.
+- One approval is not task-specific scope authorization; DC-006 remains OPEN.
+- FALSE_GREENS: 6.
+- NEW_FALSE_GREEN_INCREMENT: 0.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Historical R2-3 independence gap: UNCHANGED.
+- IMPLEMENTATION_AUTHORIZED: False.
+- MERGE_AUTHORIZED: False.
+- GITHUB_SETTINGS_MUTATION_AUTHORIZED: False.
+- Bootstrap remains BLOCKED; candidate PASS is evidence over the exact seven bytes above only.
+- Next gate: separate Human Gate D authorization to implement exactly the independently reviewed bytes, without byte changes and without merge/settings actions.
+- 2026-08-15T20:41:13Z: human-authorized canonicalization only; no candidate implementation in this commit.
+
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
 - R2AA-011 PARTIAL: captura temporal de BASE y `assume-unchanged` preservados en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
-- R2AA-016 BLOCKING: la corrección por exact root path fue insuficiente; R2AA-022 demuestra `.gitattributes` anidado bajo prefijo B y lockout CRLF sin bypass forzado.
-- R2AA-017 PARTIAL: la ligadura manifest/probes/bytes exactos es válida, pero freeze-before-probes queda como disciplina procedural y la evidencia ligada transportó una escena falsificada.
+- R2AA-016 PARTIAL: su causa bloqueante R2AA-022 quedó resuelta para los bytes exactos revisados; permanecen dependencias fuera de este bundle como R2AA-012/DC-006/IR2-002.
+- R2AA-017 PARTIAL: ligadura de bytes exactos verificada; freeze-before-probes permanece correctamente como garantía procedural, no criptográfica.
 - R2AA-012 OPEN NONBLOCKING: binding real de `pull_request_target` al SHA del PR requiere prueba GitHub real antes de required-check configuration.
 - R2AA-013 PARTIAL NONBLOCKING: `default_branch=main` observado; distinción temporal workflow-source SHA vs PR_BASE_SHA permanece abierta.
 - R2AA-014 RESOLVED: binding BASE/HEAD estricto preservado en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
 - R2AA-015 OPEN NONBLOCKING: deuda de liveness/fail-closed permanece explícita.
-- R2AA-018 PARTIAL: `unknown_normal=C` funciona fuera de reglas explícitas, pero no contiene bypasses que viven dentro de `src/`/`tests/` B.
+- R2AA-018 PARTIAL: `unknown_normal=C` y contención Git-mode-aware en `src/`/`tests/` verificadas; queda deuda estructural de precedencia basename-first (OBS-01).
 - R2AA-019 OPEN LOW NONBLOCKING: `WORKFLOW_SOURCE_SHA` se captura pero no se compara directamente con PR_BASE_SHA.
 - R2AA-020 OPEN LOW NONBLOCKING: aislamiento de módulos depende de versión Python no pinneada.
 - R2AA-021 OPEN LOW NONBLOCKING: asserts contra tips de refs mantienen deuda de liveness fail-closed.
+- R2AA-022 RESOLVED: `.gitattributes` por basename a cualquier profundidad quedó independientemente contenido en D para los bytes exactos revisados.
+- R2AA-023 RESOLVED: symlink 120000, type-change y semántica Git-mode asociada quedaron independientemente contenidas para los bytes exactos revisados.
+- R2AA-024 PARTIAL: parser raw-diff sólido, pero NEW-01 muestra que la captura text=True de `base_gate.py` no es byte-safe de extremo a extremo.
+- R2AA-025 OPEN LOW NONBLOCKING: diagnóstico checker/liveness sigue enmascarado y no fue corregido.
+- R2AA-026 OPEN LOW NONBLOCKING - NON_UTF8_CHECKER_OUTPUT_CAPTURE: un path con bytes no UTF-8 puede provocar UnicodeDecodeError en `base_gate.py` al capturar stdout del checker con text=True; es fail-closed, no produce PASS, no es falso verde y no bloquea el candidato aprobado.
 - R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
 - R2AA-001 CRITICAL BLOCKING: verificadores inline sombreables desde el checkout del PR; falso verde dinámicamente demostrado.
 - R2AA-002 CRITICAL BLOCKING: un job saltado puede satisfacer el check nominal sin ejecutar validación.

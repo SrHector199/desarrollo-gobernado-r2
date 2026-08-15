@@ -1,0 +1,395 @@
+{
+  "bootstrap_disposition": "BLOCKED",
+  "bundle_sha256": "749705e7a8ecbadfbcbd435f18eebf470a49a0fa43f65f9b87fc7752852c5002",
+  "candidate_disposition": "PASS",
+  "checks": [
+    {
+      "evidence": "ZIP SHA256 recomputed = 749705e7a8ecbadfbcbd435f18eebf470a49a0fa43f65f9b87fc7752852c5002 (match). REQUEST.md SHA256 = 9fd7cf39723a0bfc66a451dd3d8606748467b8cd4c350f62bc75024eef769121 (match). SHA256SUMS.txt lists 5 hashes, none self-referential; all 5 verified.",
+      "id": "C5-01",
+      "status": "PASS"
+    },
+    {
+      "evidence": "34/34 REVIEW_MANIFEST entries verified on path + sha256 + byte count; zero mismatches. ZIP has 35 entries, 35 unique, 0 duplicates, 0 traversal/absolute paths, 0 symlink entries. Only extra file on disk is REVIEW_MANIFEST.json itself.",
+      "id": "C5-02",
+      "status": "PASS"
+    },
+    {
+      "evidence": "proposed/ contains exactly 7 files; set equality with FROZEN_CANDIDATE_MANIFEST.objects verified in both directions (no extras, no absences).",
+      "id": "C5-03",
+      "status": "PASS"
+    },
+    {
+      "evidence": "All 7 proposed object sha256 and byte counts recomputed independently and equal the frozen manifest: r2-ci.yml 2085/76baea48, risk_floors.json 9265/d68240ee, base_gate.py 15382/f359b8c1, risk_floor.py 17761/e3be85d4, run_functional.py 27132/d08fe9bd, bad_splitter.py 425/b9989b0e, good_splitter.py 465/1c86e684.",
+      "id": "C5-04",
+      "status": "PASS"
+    },
+    {
+      "evidence": "All 7 object hashes equal those recorded in the canonical scratch manifest r2aa_022_024_materialization_scratch_candidate_manifest_01.json, whose own sha256 ec76d56cc9722073e94ce8a0c48a7c836e36e122fe71307db1910a20f211ad28 equals the exporter's SCRATCH_MANIFEST_SHA constant. Exporter EXPECTED_PROPOSED_* constants also match.",
+      "id": "C5-05",
+      "status": "PASS"
+    },
+    {
+      "evidence": "LOCAL_EXACT_CANDIDATE_PROBES.candidate_manifest_sha256 = 7294eefd6d1db29238cfc4352ce918afd88281a349c357265df558e52997220e = independently recomputed sha256 of FROZEN_CANDIDATE_MANIFEST.json. workflow_positions identical across both documents.",
+      "id": "C5-06",
+      "status": "PASS"
+    },
+    {
+      "evidence": "probes.exercised_object_hashes and probes.exercised_object_bytes are exactly equal to the frozen manifest object hash/size maps (dict equality, all 7 keys).",
+      "id": "C5-07",
+      "status": "PASS"
+    },
+    {
+      "evidence": "REVIEW_MANIFEST binds all four: proposed_object_hashes/bytes = frozen manifest objects; frozen_candidate_manifest_sha256, local_exact_candidate_probes_sha256 and exporter_source_sha256 each recomputed from bundle bytes and matched; probe_binding.candidate_manifest_sha256 also matches.",
+      "id": "C5-08",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Binding chain is one-way and acyclic: probes reference the frozen manifest SHA; the frozen manifest references neither the probes SHA nor the REVIEW_MANIFEST SHA; REVIEW_MANIFEST references all downstream artifacts. Verified by substring search for each SHA in each document.",
+      "id": "C5-09",
+      "status": "PASS"
+    },
+    {
+      "evidence": "EXPORTER_SOURCE.py (1753 lines) inspected. Order: candidate bytes finalized -> asserted against EXPECTED_PROPOSED_* scratch constants -> workflow order asserted -> frozen manifest built -> pre-probe hash/size re-verification -> probes executed -> post-probe hash/size re-verification. Static analysis confirms zero rebinding or item assignment of `proposed` after manifest construction; values are immutable Python bytes so in-place mutation is impossible. CLASSIFIED AS PROCEDURAL AUDIT EVIDENCE, NOT CRYPTOGRAPHIC PROOF OF WALL-CLOCK ORDER: source ordering is verifiable, but nothing cryptographically attests that this source is the program that produced these artifacts.",
+      "id": "C5-10",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Independent git BASE rebuilt from exact proposed/ bytes (BASE d04401dd). All 7 committed BASE blobs recomputed equal to the frozen manifest. base_gate.py --mode self-test returned exit 0, PASS/TRUSTED_VERIFIERS_AND_INTEGRITY_PROVED, binding_contract all true, risk B/D/unknown sub-tests correct, runner GOOD PASS + BAD FAIL/TOTAL_NOT_CONSERVED, integrity_before == integrity_after.",
+      "id": "C5-11",
+      "status": "PASS"
+    },
+    {
+      "evidence": "src/app.py content modification: mechanical_path_floor B, gate PASS/BASE_ANCHORED_RISK_GATE_PASSED, exit 0.",
+      "id": "C5-12",
+      "status": "PASS"
+    },
+    {
+      "evidence": "tests/test_new.py addition: mechanical_path_floor B, gate PASS, exit 0.",
+      "id": "C5-13",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Root .gitattributes -> D. Nested verified at tests/fixtures/, tests/a/b/c/, src/a/b/c/d/e/ (depth 6) -> all D, role checkout_semantics_authority, gate FAIL/RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS exit 1. Basename matching is depth-independent via PurePosixPath.name.",
+      "id": "C5-14",
+      "status": "PASS"
+    },
+    {
+      "evidence": "tests/fixtures/.gitattributes containing '* text eol=crlf' evaluated under ordinary B authorization: floor D, status FAIL, reason RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS, exit 1. Blocked at D as required.",
+      "id": "C5-15",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Mechanism existence and B-entry containment separated. Forcing tests/fixtures/.gitattributes into a later BASE outside the B gate and re-materializing the worktree changed the pinned fixture bytes: good_splitter 1c86e684 -> 79cfe417, bad_splitter b9989b0e -> e6500d31; scripts/ and policy/ unaffected because nested attributes scope to their subtree. The gate then failed closed with SELF_TEST_FAILED / AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py, exit 1. So the CRLF lockout mechanism is real, but its consequence is denial of service, not a false green; entry via an ordinary B PR is independently blocked at D.",
+      "id": "C5-16",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Searched alternative .gitattributes path forms and depths: .GITATTRIBUTES, .Gitattributes, trailing dot, trailing space, zero-width space (U+200B), dotless-i homoglyph (U+0131), and bare 'gitattributes'. All are accepted into a Git tree and all classify below D (B under src/ or tests/). Empirically none is honored by Git for CRLF materialization on a case-sensitive filesystem; only the exact basename is honored, tested with and without core.ignorecase. Enforcement runner is pinned to ubuntu-latest, so basename containment and Git semantics coincide there. Platform-conditional residual recorded as OBS-02.",
+      "id": "C5-17",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Root .gitmodules -> D and tests/fixtures/.gitmodules -> D, role repository_materialization_authority, gate FAIL exit 1. Policy is conservative relative to Git, which only reads .gitmodules at the repository root.",
+      "id": "C5-18",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Searched for equivalent materialization metadata outside basename and Git-mode rules. .git/ path injection is rejected by Git itself before policy is reached ('Invalid path' for .git/hooks/post-checkout, .git/config, .GIT/config, .gIt/config). Tested .gitignore (root and nested), .mailmap, .git-blame-ignore-revs, .editorconfig, .gitkeep: none can alter materialized bytes of tracked acceptance-authority objects. Root-level unknowns land at C; nested tests/.gitignore and tests/.gitkeep land at B, which is correct because .gitignore does not affect checkout of tracked files. No uncovered materialization-influencing metadata found.",
+      "id": "C5-19",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Symlink creation under src/ produced raw mode 120000; symlink_entry action -> D, gate FAIL exit 1.",
+      "id": "C5-20",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Symlink creation under tests/ -> D, gate FAIL exit 1.",
+      "id": "C5-21",
+      "status": "PASS"
+    },
+    {
+      "evidence": "regular->symlink produced status T with type_change + symlink_entry -> D. symlink->regular likewise -> D. Both gate FAIL exit 1.",
+      "id": "C5-22",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Symlink renamed via git mv produced R100 with old_mode=new_mode=120000; both source and destination paths classified plus symlink_entry action -> D. Rename/copy cannot drop a symlink below D.",
+      "id": "C5-23",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Real gitlink created via update-index --cacheinfo 160000 under src/: raw record ':000000 160000 ... A src/vendor' -> gitlink_entry -> D, gate FAIL exit 1. An initial harness attempt showed floor A because 'git add --all' silently dropped the phantom gitlink entry; corrected by committing without re-add and asserting mode 160000 is present in the raw diff before scoring.",
+      "id": "C5-24",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Gitlink creation under tests/ -> D. Additionally verified under docs/reference/, an explicit floor-A prefix, which still yields D, confirming the action floor dominates the path floor.",
+      "id": "C5-25",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Gitlink modification (':160000 160000 ... M') -> D and gitlink rename (':160000 160000 ... R100') -> D; both gate FAIL exit 1.",
+      "id": "C5-26",
+      "status": "PASS"
+    },
+    {
+      "evidence": "100644->100755 and 100755->100644 on an existing src/ file both yield executable_mode_change -> C (not B), gate FAIL under B authorization, exit 1.",
+      "id": "C5-27",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Newly added 100755 file under src/ and under tests/ both yield new_executable -> C, gate FAIL under B, exit 1.",
+      "id": "C5-28",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Probed for modes/type transitions that parse_raw_z or mode_findings could mishandle. Crafted raw tree objects (hash-object -t tree --literally) carrying 100664, 100775, 100640, 100600, 100444, 101644, 100777, 120644, 120755, 160644, 160755. Git canonicalizes on read; the reported mode set is closed to {100644, 100755, 120000, 160000} plus 000000. An end-to-end crafted 100664 -> 100755 flip still surfaced to the checker as 100644 -> 100755 and was correctly scored C. The regular_modes = {100644, 100755} assumption in mode_findings is therefore sound and not bypassable via non-canonical tree modes.",
+      "id": "C5-29",
+      "status": "PASS"
+    },
+    {
+      "evidence": "30 fuzz cases executed directly against parse_raw_z. Rejected fail-closed: missing leading colon, 4 fields, 6 fields, 5-char mode, non-octal mode, octal-invalid digit 9, status U (unmerged), status X, lowercase status, truncated rename with one path, non-ASCII header, trailing garbage token, bare NUL stream. Correctly parsed: paths containing spaces, tabs, newlines, UTF-8, non-UTF-8 bytes via surrogateescape, and a filename crafted to mimic a raw header (structural path consumption prevents header confusion); rename/copy scores R, R000, R100, C75; multi-record streams; 000000 add and delete modes. Zero fail-open outcomes. Tab/newline-separated headers parse only because str.split() treats all whitespace as a separator, and still validate all 5 fields and the correct path; Git never emits that form.",
+      "id": "C5-30",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Deletion of src/app.py yields path floor plus deletion action -> D, gate FAIL exit 1.",
+      "id": "C5-31",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Rename src/app.py -> scripts/app.py = D (exact_path acceptance_authority on destination). Rename src/app.py -> policy/app.py = D via unknown_control_plane with blocks_unknown=true, reason UNKNOWN_HIGH_AUTHORITY_SUBJECT. Control B->B rename src/ -> tests/ correctly stays B/PASS, confirming the D is caused by the control-plane destination and not by renames in general.",
+      "id": "C5-32",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Precedence order confirmed as basename -> exact_path -> longest_prefix -> default, matching declared matching.precedence. classify_path returns on first basename match, ahead of exact and prefix. For these exact bytes this cannot lower any exact/prefix D because both basename rules (.gitattributes, .gitmodules) are floor D, the maximum class. The safety is a property of the current rule values rather than an enforced invariant; recorded as OBS-01.",
+      "id": "C5-33",
+      "status": "PASS"
+    },
+    {
+      "evidence": "unknown_normal=C effective outside explicit prefixes: randomfile.txt, newdir/sub/file.py, Makefile and os.py all -> C, all blocked under B authorization with exit 1.",
+      "id": "C5-34",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Case variants and homoglyphs classify at B but carry no equivalent Git semantics on the case-sensitive enforcement platform, so they do not in effect pass lower than intended. Case-collision attempts against pinned objects (Tests/fixtures/good_splitter.py, SRC/app.py) -> C and are blocked under B. A Unicode NFD variant of a pinned fixture -> B/PASS, but on ext4 it is a genuinely distinct file that cannot shadow the pinned object; were it ever to collide on a normalizing filesystem, the disk == BASE blob == pinned SHA check fails closed independently. Platform conditionality recorded as OBS-02.",
+      "id": "C5-35",
+      "status": "PASS"
+    },
+    {
+      "evidence": "tests/fixtures/good_splitter.py and tests/fixtures/bad_splitter.py both remain exact D despite the tests/ B prefix, because exact_paths is evaluated before prefix_rules. Mutation of either yields D and gate FAIL exit 1.",
+      "id": "C5-36",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Temporal BASE capture re-tested. The workflow pins PR_BASE_SHA from the event, asserts the fetched ref tip equals it, checks that SHA out detached, and re-asserts rev-parse HEAD. Simulated an advanced main: the tip assertion evaluates False and the job aborts under set -euo pipefail. Invoking the gate with base=advanced while the worktree is at the original BASE returns AUTHORITY_CHECKOUT_NOT_EXACT_BASE, exit 1.",
+      "id": "C5-37",
+      "status": "PASS"
+    },
+    {
+      "evidence": "assume-unchanged tamper of scripts/risk_floor.py leaves 'git status --porcelain' completely empty, yet both self-test and evaluate fail with AUTHORITY_DISK_HASH_MISMATCH:scripts/risk_floor.py, exit 1. Additionally probed skip-worktree tamper of scripts/base_gate.py itself: AUTHORITY_GATE_DISK_DIFFERS_FROM_BASE_BLOB, exit 1. Index-state deception does not defeat byte comparison.",
+      "id": "C5-38",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PINNED_SHA256 contains 5 entries, each recomputed equal to the frozen manifest. Disk tamper of policy/risk_floors.json, tests/fixtures/good_splitter.py and scripts/run_functional.py each produce AUTHORITY_DISK_HASH_MISMATCH:<rel>, exit 1. Verification is triple: disk bytes == BASE blob bytes, disk sha == pinned sha, and BASE blob sha == pinned sha.",
+      "id": "C5-39",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Passing a copied repository as --repo yields AUTHORITY_ROOT_REPO_MISMATCH; a worktree not checked out at exact BASE yields AUTHORITY_CHECKOUT_NOT_EXACT_BASE; both exit 1. base_gate.py is necessarily not self-pinned and is instead compared disk == BASE blob, which is the correct available anchor for the gate itself.",
+      "id": "C5-40",
+      "status": "PASS"
+    },
+    {
+      "evidence": "strict_binding verified over 8 cases: exact match true; missing base, missing head, wrong base, wrong head, empty payload and explicit None all rejected; extra keys tolerated. An unrelated non-descendant HEAD is refused (merge-base --is-ancestor fails, checker errors, gate returns FAIL exit 1). A nonexistent HEAD yields CANDIDATE_COMMIT_MISSING exit 1.",
+      "id": "C5-41",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Workflow byte offsets recomputed from exact bytes: evaluate step marker 1512 and '--mode evaluate' 1702 both precede self-test marker 1822 and '--mode self-test' 2013; these equal workflow_positions in both the frozen manifest and the probe evidence. self_test calls verify_authority_integrity before AND after risk_self_test and runner_self_test; integrity_before == integrity_after observed in live output, so fixture and runner execution cannot silently alter authority bytes.",
+      "id": "C5-42",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Candidate HEAD is fetched and read but never checked out or executed. Full audit of every use of `head` in base_gate.py: the only candidate-repo operations are 'git cat-file -e head^{commit}' (existence) and passing head to the checker, which runs read-only 'git diff --raw'. The single 'git checkout -B' at line 269 operates on a synthetic TemporaryDirectory repo inside risk_self_test, never the candidate. Live output confirms candidate_worktree_checked_out=false and candidate_code_executed=false.",
+      "id": "C5-43",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Anchored correctly: the proposed workflow is byte-identical (76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830) to the workflow in the previously reviewed 016/017 scratch candidate manifest, so fork/permissions/secrets/head-repo defenses are unchanged across the materialization V2 correction; only policy/risk_floors.json, scripts/base_gate.py and scripts/risk_floor.py changed. Defenses independently re-read and confirmed fail-closed: permissions: {} empty, no secrets referenced, cross-repo PRs rejected by 'test \"$PR_HEAD_REPO\" = \"$GITHUB_REPOSITORY\"' under set -euo pipefail, attacker-controlled refs passed through the env: mapping and consumed as shell variables rather than ${{ }} interpolation (no script injection), both fetched ref tips asserted against pinned SHAs, BASE-only detached checkout, python3 -I -B -S. Note for context: the workflow currently in repo/ is the older pull_request variant that checks out and executes PR HEAD code and hardcodes an expected changed-path set; the candidate replaces it.",
+      "id": "C5-44",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-012 preserved OPEN. No real GitHub check-run binding evidence exists anywhere in this bundle; OBSERVED_STATE reports branch_protection=false and ruleset_count=0. Local execution cannot establish pull_request_target check-run binding to the exact PR HEAD SHA, and no closure was inferred from local tests.",
+      "id": "C5-45",
+      "status": "PASS"
+    },
+    {
+      "evidence": "No exact new evidence bearing on R2AA-013 or R2AA-019 is present in this bundle. R2AA-013 preserved PARTIAL and R2AA-019 preserved OPEN as distinct items; neither is closed by this review.",
+      "id": "C5-46",
+      "status": "PASS"
+    },
+    {
+      "evidence": "required_approving_review_count=1 assessed as a reasonable TEMPORARY safety control while DC-006 remains OPEN: it is strictly better than zero human approvals and enforce_admins=true plus required_status_checks.strict=true are appropriate. It does not implement task-specific scope authorization and must not be described as doing so. Weakest aspect: dismiss_stale_reviews=false together with require_last_push_approval=false allows one approval to survive subsequent pushes to the same PR, which materially weakens it as a stand-in for scope authorization; recorded as OBS-03.",
+      "id": "C5-47",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROPOSED_BRANCH_PROTECTION.json declares status NOT_CONFIGURED_REVIEW_ONLY with 5 preconditions and 6 explicit nonclaims. OBSERVED_STATE independently reports branch_protection=false, ruleset_count=0, github_mutated_by_export=false. Review-only confirmed; nothing was configured by this review.",
+      "id": "C5-48",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-025 preserved OPEN. Its diagnostic branch ordering is unchanged by this candidate, as expected: strict_binding is still evaluated before exit-code interpretation in evaluate(), so an ancestry/liveness error from the checker surfaces as RISK_PAYLOAD_OBJECT_MISMATCH rather than a precise diagnostic. Reproduced directly with an unrelated non-descendant HEAD.",
+      "id": "C5-49",
+      "status": "PASS"
+    },
+    {
+      "evidence": "IR2-002 preserved as BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK. This gate produces byte-level materialization evidence only and is explicitly not functional acceptance; nothing in this review advances functional acceptance.",
+      "id": "C5-50",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-022 decided RESOLVED for these exact bytes. Nested .gitattributes containment independently reproduced at D at root and depths 1 through 6, across tests/fixtures/, tests/ and src/, and in directory names containing spaces, newlines, Unicode and non-UTF-8 bytes, plus with core.quotepath=true. The underlying CRLF mechanism could be reproduced only by forcing the file into a BASE outside the B gate, where the gate fails closed.",
+      "id": "C5-51",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-023 decided RESOLVED for these exact bytes. Git-mode semantics independently confirmed across all four canonical modes and all transitions: symlink 120000 D, gitlink 160000 D, type change T D, 100644<->100755 C, new 100755 C, deletion D, rename max(source, destination). Mode space empirically shown closed, so no untested transition remains.",
+      "id": "C5-52",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-024 decided PARTIAL for these exact bytes. parse_raw_z itself is sound: 30 fuzz cases, zero fail-open, correct handling of adversarial paths, rename/copy scores and multi-record streams. However finding NEW-01 shows the raw-diff data path is not byte-safe end to end: a path containing non-UTF-8 bytes is classified correctly by the checker (D, exit 3) but crashes base_gate's text=True capture layer, producing an unstructured failure with no JSON verdict. Fail-closed, non-blocking, but sufficient to withhold RESOLVED.",
+      "id": "C5-53",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-016 reassessed BLOCKING -> PARTIAL. Its blocking cause was R2AA-022 HIGH BLOCKING from the prior frozen-candidate review; that specific materialization gap now has independently evidenced containment over these exact bytes. It is not RESOLVED because closure still depends on items outside this bundle, notably R2AA-012 real GitHub check-run binding, DC-006 and IR2-002. This review supplies evidence only and does not itself clear a disposition.",
+      "id": "C5-54",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-017 remains PARTIAL. Exact-byte binding is fully verified across the whole chain (proposed objects, frozen manifest, probe evidence, exporter source, review manifest). The temporal freeze-before-probes claim remains a procedural assertion and is correctly labelled PROCEDURAL_ASSERTION_NOT_CRYPTOGRAPHIC_GUARANTEE in the frozen manifest, the probe evidence, REVIEW_MANIFEST and the policy. No document overstates it.",
+      "id": "C5-55",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2AA-018 remains PARTIAL. unknown_normal=C is effective outside explicit prefixes (verified on 4 distinct unknown paths) and Git-mode-aware containment holds inside the src/ and tests/ B prefixes (symlink, gitlink, type change, exec-bit all escape B). The residual is structural rather than behavioural: no invariant prevents a future basename rule with a floor below D from lowering an exact or prefix D (OBS-01).",
+      "id": "C5-56",
+      "status": "PASS"
+    },
+    {
+      "evidence": "No implementation, merge, push, bootstrap or GitHub-settings authority is granted or implied by this review. No user repository, working tree, remote or GitHub setting was read for mutation or modified. All work was performed on bundle bytes inside an ephemeral local container.",
+      "id": "C5-57",
+      "status": "PASS"
+    }
+  ],
+  "dynamic_review": "PASS",
+  "findings": [
+    {
+      "blocking": false,
+      "evidence": "Git paths may contain arbitrary bytes except NUL and '/'. A commit adding src/we\\xffird/.gitattributes is classified correctly by scripts/risk_floor.py, which decodes paths with errors='surrogateescape', assigns floor D via the basename rule and exits 3. base_gate.run() (line 36) captures that stdout with text=True, i.e. strict UTF-8 decoding, and run_risk is invoked at line 195 outside any try/except. Observed end to end: unhandled UnicodeDecodeError ('utf-8' codec can't decode byte 0xff in position 170), process exit 1, stdout completely empty, traceback on stderr. Reproduced from a clean BASE checkout. Paths that are valid non-ASCII UTF-8 (for example src/n-tilde/.gitattributes) are unaffected and score D normally.",
+      "falsification_probe": "On an exact BASE built from proposed/ bytes: os.makedirs(REPO/'src'/b'we\\xffird'.decode('utf-8','surrogateescape')); write '.gitattributes' inside it; git add --all; git commit; then git checkout --detach BASE and run python3 -I -B -S scripts/base_gate.py --mode evaluate --repo . --base $BASE --head $HEAD with binary (not text) capture. Observe exit 1, empty stdout, UnicodeDecodeError traceback. Control: run scripts/risk_floor.py directly with binary capture and observe exit 3 with a correct floor-D payload, proving the defect is in the gate's capture layer and not in classification.",
+      "id": "NEW-01",
+      "impact": "Fail-closed, so this is NOT a false green: the step exits non-zero under set -euo pipefail and the job fails. The damage is to the evidence contract that the rest of the design depends on. A genuine D-classified policy block becomes indistinguishable from infrastructure flakiness because no structured JSON verdict is emitted, and the failure is attributable only by reading a stderr traceback. This compounds R2AA-025, which already tracks masked checker diagnostics. Reachable by any ordinary contributor PR that adds a file with a non-UTF-8 byte in its path.",
+      "minimal_fix": "In base_gate.run(), capture bytes instead of text and decode explicitly with errors='surrogateescape' before JSON parsing; and wrap the run_risk call in evaluate() with the existing failure-emission path so a structured FAIL payload is always emitted rather than an unhandled traceback. NOT AUTHORIZED BY THIS REVIEW; recorded as a proposal only.",
+      "path": "proposed/scripts/base_gate.py",
+      "severity": "LOW",
+      "title": "Non-UTF-8 path bytes crash base_gate's checker-output capture, producing an unstructured failure with no JSON verdict"
+    },
+    {
+      "blocking": false,
+      "evidence": "Policy.classify_path checks basename_rules first and returns immediately, ahead of exact_paths and prefix_rules, matching the declared matching.precedence. The only two basename rules are .gitattributes and .gitmodules, both floor D, the maximum class, so no basename match can currently lower an exact or prefix D.",
+      "falsification_probe": "Add a hypothetical basename rule {basename: 'risk_floors.json', floor: 'B'} to a scratch copy of the policy and classify policy/risk_floors.json: the basename rule wins and the exact_path D is lowered to B. Confirms precedence direction. Not present in these bytes.",
+      "id": "OBS-01",
+      "impact": "No exploitable path for these exact bytes; verified across all probes. The risk is structural and latent: any future basename rule added with a floor below D would silently take precedence over, and lower, a colliding exact_path or prefix_rule D. The current safety is a property of the rule values, not an enforced invariant.",
+      "minimal_fix": "Add a Policy.__init__ assertion that no basename rule floor ranks lower than any exact_path or prefix_rule floor it could shadow, so the current correctness becomes intentional and enforced. NOT AUTHORIZED BY THIS REVIEW.",
+      "path": "proposed/scripts/risk_floor.py, proposed/policy/risk_floors.json",
+      "severity": "LOW",
+      "title": "Basename-first precedence is safe only because both current basename rules are floor D"
+    },
+    {
+      "blocking": false,
+      "evidence": "Policy basename matching is exact-string. Git's attribute lookup opens the literal name '.gitattributes' per directory, which is also exact-string on ext4, so the two coincide and all tested variants are inert: .GITATTRIBUTES, .Gitattributes, trailing dot, trailing space, U+200B, U+0131 were each committed and none produced CRLF materialization, with core.ignorecase both false and true. A Unicode NFD variant of a pinned fixture classifies B but is a distinct file on ext4.",
+      "falsification_probe": "Commit tests/.GITATTRIBUTES containing '* text eol=crlf' plus a payload file; read-tree --reset -u on a case-sensitive filesystem and observe LF preserved (inert), then classify the path and observe floor B. The bypass requires a case-folding filesystem to become live, which the pinned runner excludes.",
+      "id": "OBS-02",
+      "impact": "Containment is platform-conditional rather than intrinsic. On a case-folding or NFD-normalizing filesystem (macOS, Windows) a committed .GITATTRIBUTES could be opened when Git asks for .gitattributes while classifying only B. It currently holds because the workflow pins runs-on: ubuntu-latest, and the disk == BASE blob == pinned SHA check is an independent second fail-closed layer that would catch any resulting byte change.",
+      "minimal_fix": "State the case-sensitive-runner assumption explicitly in the policy's materialization_semantics block so the dependency is auditable rather than implicit, and keep runs-on pinned. NOT AUTHORIZED BY THIS REVIEW.",
+      "path": "proposed/policy/risk_floors.json, proposed/.github/workflows/r2-ci.yml",
+      "severity": "LOW",
+      "title": "Basename containment coincides with Git semantics only on a case-sensitive, non-normalizing filesystem"
+    },
+    {
+      "blocking": false,
+      "evidence": "required_pull_request_reviews sets required_approving_review_count=1 with dismiss_stale_reviews=false, require_last_push_approval=false and require_code_owner_reviews=false. enforce_admins=true and required_status_checks.strict=true are appropriate.",
+      "falsification_probe": "Not executable locally; requires real GitHub configuration, which is outside this review's authority. Assessed by reading the proposed API body against GitHub branch-protection semantics.",
+      "id": "OBS-03",
+      "impact": "As a temporary human gate standing in for unresolved DC-006 scope authorization, an approval granted on one revision can carry across later pushes to the same PR, weakening the control precisely where it substitutes for scope authorization. Review-only, not configured, so there is no current exposure.",
+      "minimal_fix": "Before any future configuration, reconsider dismiss_stale_reviews=true and require_last_push_approval=true. NOT AUTHORIZED BY THIS REVIEW; branch protection remains NOT_CONFIGURED.",
+      "path": "PROPOSED_BRANCH_PROTECTION.json",
+      "severity": "LOW",
+      "title": "Branch-protection proposal lets a single approval survive subsequent pushes"
+    }
+  ],
+  "independence_satisfied": "PASS",
+  "limitations": [
+    "A PASS here is evidence over the exact seven candidate objects only. It authorizes nothing: no implementation, no merge, no push, no bootstrap, no GitHub-settings change.",
+    "Byte hashes prove exact byte equality and binding only. They do not attest that EXPORTER_SOURCE.py is the program that produced these artifacts.",
+    "The freeze-before-probes ordering is procedural audit evidence. Source-level ordering and absence of post-freeze rebinding are verifiable; historical wall-clock order is not cryptographically provable from this bundle.",
+    "All dynamic evidence was produced on a locally rebuilt BASE (git 2.43.0, Python 3.12.3, ext4, case-sensitive). GitHub Actions runtime behaviour, pull_request_target event semantics and check-run binding were NOT executed and cannot be closed here.",
+    "R2AA-012 cannot be closed without real GitHub check-run binding evidence; no such evidence exists in this bundle and none was inferred from local tests.",
+    "Materialization containment is verified on a case-sensitive Linux filesystem only. Case-folding and NFD-normalizing filesystems were not tested and are excluded from the PASS (OBS-02).",
+    "IR2-002 remains blocking before the first functional task; this gate is byte-level materialization evidence, not functional acceptance.",
+    "required_approving_review_count=1 is a temporary human control, is not task-specific scope authorization, and is not configured.",
+    "The hostile-runner threat model remains out of scope per the policy's own declaration (runner_scope COOPERATIVE_OR_BUGGY_IMPLEMENTATION, NOT_A_SECURITY_SANDBOX); this review did not attempt to falsify it.",
+    "MINOR-5 remains NOT_EXECUTED and was not executed by this review.",
+    "The reviewer cannot verify the real repository state at SrHector199/desarrollo-gobernado-r2; OBSERVED_STATE.json was read as a supplied claim, not independently confirmed."
+  ],
+  "manifest_sha256": "e6828ee2b95f6953ac4cc86c730a47fd918bd40be352fb2fd60a3c1a6a72874e",
+  "open_residuals": {
+    "DC-006": "OPEN",
+    "EXP-01": "OPEN",
+    "IR2-002": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK",
+    "R2AA-025": "OPEN",
+    "historical_R2_3_independence_gap": "UNCHANGED"
+  },
+  "r2aa_dispositions": {
+    "R2AA-011": "PARTIAL",
+    "R2AA-012": "OPEN",
+    "R2AA-013": "PARTIAL",
+    "R2AA-014": "RESOLVED",
+    "R2AA-015": "OPEN",
+    "R2AA-016": "PARTIAL",
+    "R2AA-017": "PARTIAL",
+    "R2AA-018": "PARTIAL",
+    "R2AA-019": "OPEN",
+    "R2AA-020": "OPEN",
+    "R2AA-021": "OPEN",
+    "R2AA-022": "RESOLVED",
+    "R2AA-023": "RESOLVED",
+    "R2AA-024": "PARTIAL",
+    "R2AA-025": "OPEN"
+  },
+  "review_protocol": "r2-independent-materialization-v2-frozen-candidate-v1",
+  "review_scope": "R2-4-materialization-v2-frozen-exact-candidate",
+  "reviewer": {
+    "authored_current_change": false,
+    "fresh_context": true,
+    "independence_statement": "Fresh context. All prior PASS/FAIL conclusions, including the supplied 27/27 LOCAL_EXACT_CANDIDATE_PROBES results, were treated as non-authoritative claims and independently re-derived. A git BASE was rebuilt from the exact proposed/ bytes and 46 adversarial scenarios were executed live against base_gate.py and risk_floor.py: all 27 supplied scenarios were reproduced with zero contradictions, and 19 additional scenarios were designed by this reviewer, including merge-commit change hiding, hand-crafted trees with non-canonical Git modes, .git/ path injection, case and Unicode collisions against pinned objects, aggregation across 61 records, and 30 parse_raw_z fuzz cases. This reviewer did not author, propose or modify the candidate, and holds no stake in a PASS outcome; a PASS was not assumed. No repository or GitHub state was mutated.",
+    "model": "Claude Opus 5",
+    "prior_conclusions_used_as_authority": false,
+    "system": "Anthropic"
+  },
+  "static_review": "PASS",
+  "summary": "Independent re-review of the R2-4 materialization V2 frozen candidate over exact bytes. Integrity fully verified: BUNDLE_SHA256 and MANIFEST_SHA256 match, 34/34 REVIEW_MANIFEST entries match on path, sha256 and byte count, the ZIP contains no duplicate, traversal or symlink entries, all 7 proposed object hashes match the frozen manifest and the canonical 27/27 scratch manifest, and the probe evidence is bound to the exact frozen manifest SHA with an acyclic one-way binding chain. All 57 C5 checks executed, 57 PASS, 0 FAIL, 0 UNCERTAIN, 0 NOT_EXECUTED. Materialization containment held under every adversarial probe: .gitattributes and .gitmodules are D at arbitrary depth including in directory names containing spaces, newlines, Unicode and non-UTF-8 bytes; symlink 120000, gitlink 160000, type changes and deletions are D; executable-bit changes and new executables are C; renames into the control plane are D; the Git mode space is empirically closed to four canonical values so non-canonical crafted tree modes cannot evade mode_findings; parse_raw_z showed zero fail-open across 30 fuzz cases; merge commits cannot hide a D change; and .git/ path injection is rejected by Git itself. C5-16 was answered by separating mechanism from containment: the nested-CRLF lockout is real and was reproduced by forcing the file into a BASE outside the B gate, where it altered both pinned fixtures and the gate then failed closed with AUTHORITY_DISK_HASH_MISMATCH, while ordinary B entry is blocked at D. R2AA-011 and R2AA-014 were re-tested and hold, including assume-unchanged tamper that leaves git status clean, skip-worktree tamper of the gate itself, authority-root and non-BASE-checkout rejection, and the full strict BASE/HEAD binding contract. One new defect was found: NEW-01, in which a non-UTF-8 path byte crashes base_gate's text=True capture of the checker's stdout, yielding exit 1 with no structured JSON verdict. It is fail-closed and therefore not a false green, but it degrades the structured-evidence contract and compounds R2AA-025, so R2AA-024 is held at PARTIAL rather than RESOLVED. R2AA-022 and R2AA-023 are RESOLVED for these exact bytes and R2AA-016 is reassessed from BLOCKING to PARTIAL because its blocking cause is addressed, while R2AA-017 and R2AA-018 remain PARTIAL. The freeze-before-probes claim is correctly labelled procedural throughout and was not mislabelled as cryptographic in any document. New false-green increment is 0; the total remains 6. Candidate disposition PASS over exact bytes only; bootstrap disposition BLOCKED because IR2-002 blocks the first functional task, DC-006, EXP-01 and R2AA-012 remain OPEN, and branch protection is not configured. This review grants no implementation, merge or GitHub-settings authority and mutated nothing.",
+  "temporary_human_gate_assessment": {
+    "dc_006_still_open": true,
+    "reason": "One required approval is a defensible interim human gate while DC-006 remains OPEN and is strictly better than zero approvals; enforce_admins=true and required_status_checks.strict=true are appropriate. It must not be described as implementing task-specific scope authorization: it binds no approval to a scope packet and imposes no per-task class ceiling. Its weakest aspect is that dismiss_stale_reviews=false together with require_last_push_approval=false allows a single approval to survive later pushes to the same PR (OBS-03), which should be reconsidered before any configuration. It remains PROPOSAL_ONLY_NOT_CONFIGURED and this review authorizes no configuration.",
+    "required_approving_review_count_1": "ACCEPTABLE_TEMPORARY"
+  }
+}
