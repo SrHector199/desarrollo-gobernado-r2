@@ -3,13 +3,13 @@
 > Mantener este archivo corto; enlazar evidencia primaria en lugar de pegar logs extensos.
 
 ## Estado
-- Current phase: R2-3
-- Current accepted SHA: none
+- Current phase: R2-4
+- Current accepted SHA: 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Someter a gate humano el commit raíz del staging exacto actual; no ejecutar commit antes de autorización explícita.
-- Last updated: 2026-08-15T01:14:07Z
+- Authorized next step: Ejecutar preflight local R2-4 de solo lectura sobre herramientas/configuración GitHub; no usar red ni crear remoto todavía.
+- Last updated: 2026-08-15T11:59:25Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -45,7 +45,7 @@
 
 ## Controles diferidos heredados
 - MINOR-4 - PASS: índice verificado con 100755 para scripts/risk_floor.py y scripts/run_functional.py, y 100644 para los otros 17 archivos.
-- MINOR-5 - Convertir la integridad de aceptación en enforcement externo mediante PR, CI y protección: DEFERRED_TO_R2-4
+- MINOR-5 - ACTIVE_R2-4: convertir integridad de aceptación en enforcement externo mediante remoto, CI, required check y protección/no-bypass; todavía NOT_EXECUTED.
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
@@ -90,13 +90,28 @@
 
 - 2026-08-15T01:14:07Z: R2-3 staging/index gate PASS sobre 19 entradas: risk PRE D para staging PASS; bytes staged coinciden con el candidato autorizado previo; MINOR-4 PASS (scripts 100755, resto 100644); git diff --cached --check PASS; sin cambios unstaged ni commit.
 
+## Baseline Git R2-3
+- Baseline root SHA: 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a
+- Baseline tree SHA: b992e2c79ccb91225ef5a09c5dd34191325ed378
+- Root commit subject: chore: establish R2 governed baseline
+- Identity: SrHector199 <221430316+SrHector199@users.noreply.github.com>
+- Root parent count: 0
+- Root committed paths: 19
+- MINOR-4 index modes: PASS (scripts 100755; resto 100644)
+- git diff --cached --check antes del root commit: PASS
+- Root working tree after commit: CLEAN
+- Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER; no se reetiqueta como PASS.
+
+- 2026-08-15T11:59:25Z: baseline raíz R2-3 observado en 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a, tree b992e2c79ccb91225ef5a09c5dd34191325ed378; root sin padres, identidad noreply, 19 paths, working tree limpio. MINOR-4 PASS y git diff --cached --check PASS. Excepción humana de independencia permanece ACCEPTED_RISK sin elevar garantías.
+
 ## Blockers
-- Baseline staging: PASS para el candidato exacto actual.
-- MINOR-4 index modes: PASS.
-- git diff --cached --check: PASS.
-- Baseline commit: AWAITING_EXPLICIT_HUMAN_GATE.
-- Independent review round 3: NOT_SATISFIED; excepción humana de riesgo aceptado permanece activa y no se reetiqueta como PASS.
-- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; ampliar CASES antes de la primera tarea funcional.
+- R2-4: remoto GitHub todavía NO_EXISTE.
+- R2-4: CI mínimo todavía NOT_EXECUTED.
+- R2-4: required check todavía NOT_EXECUTED.
+- R2-4: protección/no-bypass de main todavía NOT_EXECUTED; no afirmar ENFORCED.
+- MINOR-5: ACTIVE_R2-4 y NOT_EXECUTED.
+- Independent review round 3: NOT_SATISFIED; excepción humana ACCEPTED_RISK permanece visible.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; ampliar CASES antes de R2-5 funcional.
 - IR2-001 e IR2-003 permanecen deuda no bloqueante explícita.
 - DC-006 y EXP-01 permanecen OPEN.
 - La demo funcional del Feature Brief sigue NOT_EXECUTED.
@@ -106,5 +121,7 @@
 - R2-1 gate: PASS
 - R2-2 gate: PASS
 - Evidencia del gate R2-2: runner GOOD/BAD y risk checker PRE/POST; evidence SHA-256 fd7b4f65fe20034ab357f1837a077f64428c2ee35eeba21f3dfb12753ad6277b.
-- Gate de salida de R2-3: NOT_EXECUTED
+- R2-3 gate: PASS
+- Evidencia del gate R2-3: baseline root 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a; tree b992e2c79ccb91225ef5a09c5dd34191325ed378; MINOR-4 PASS; root working tree CLEAN; cierre administrativo condicionado a PRE/POST D PASS.
+- Gate de salida de R2-4: NOT_EXECUTED
 - Siguiente fase permitida: NO
