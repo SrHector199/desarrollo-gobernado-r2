@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar el bloque exacto de required check + branch protection sobre `main`. Este siguiente paso es solo preparación y preflight: no autoriza todavía ninguna mutación de settings. Antes de cualquier cambio de branch protection, required checks, rulesets o settings se requiere un nuevo Human Gate D con los settings exactos.
-- Last updated: 2026-08-15T22:54:02Z
+- Authorized next step: Preparar únicamente el diseño exacto de los probes adversariales BP-B-02 (colisión de check homónimo) y BP-B-03 (`skipped`/`neutral`), y conservar los requisitos de corrección BP-B-01/BP-B-04 para un futuro candidato de branch protection. Esta autorización es solo de preparación/preflight: no autoriza ejecutar probes, publicar ramas/PRs ni mutar required checks, branch protection, rulesets o settings. Toda ejecución D posterior requiere un nuevo Human Gate D.
+- Last updated: 2026-08-15T23:41:44Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -804,7 +804,48 @@
 - Next authorized step is preparation/preflight only for exact required-check + branch-protection settings; settings mutation requires a separate new Human Gate D.
 - 2026-08-15T22:54:02Z: Human Gate D authorized closing PR #4 without merge and this two-path administrative canonicalization only.
 
+## Revisión independiente BLOCKED del candidato de branch protection V1
+- Review evidence: evidence/r2-4/branch_protection_candidate_independent_review_12.json
+- Review evidence SHA-256: f95dffd3804af024318aa2efe7adbc628ef8b83c25ef8f80911ea6deabf59f86
+- Review evidence bytes: 12063
+- Source: user_pasted_claude_review; raw review SHA-256 2bb1212d27483d415c679fb7d3be664beed9842c8adf3a043f1c33d0679497fe; raw review bytes 10768.
+- Reviewed candidate: r2_4_branch_protection_candidate_review.json; SHA-256 7868cd6aaa726f116dc53e7411571b63eb1a33a6e1b6f89e79de490cf5bc96e9; bytes 639.
+- Reviewed main: acbd7e122e53fa8e924eebdd14f196893a9251b7; tree 5fb7dc8a58f35619d925aa11390ccf674d0ab08e.
+- independence_satisfied: PASS.
+- static_review: FAIL.
+- candidate_disposition: BLOCKED.
+- Blocking findings preserved from reviewer: B-01, B-02, B-03, B-04.
+- Nonblocking findings preserved from reviewer: N-01..N-08.
+- REQUIRED_APPROVING_REVIEW_COUNT: MUST_BE_1, conditioned by the reviewer on `dismiss_stale_reviews=true` and `require_last_push_approval=true`.
+- B-01: count=0 removes the compensating human gate while DC-006 remains OPEN.
+- B-02: reviewer identifies possible same-name check spoofing under GitHub Actions app_id=15368. Canonical nonclaim: BYPASS_NOT_DEMONSTRATED; treat as BLOCKING_UNCERTAINTY until a dedicated real collision probe.
+- B-03: reviewer identifies `skipped`/`neutral` required-check semantics as blocking for the current assurance target; dedicated R2 probe NOT_EXECUTED.
+- B-04: changing only count to 1 is insufficient under the reviewed false/false review freshness flags.
+- Candidate V1 settings were NOT applied.
+- REQUIRED_CHECK remains NOT_CONFIGURED.
+- BRANCH_PROTECTION/NO-BYPASS remains NOT_CONFIGURED.
+- RULESET_COUNT remains 0.
+- ENFORCED remains False.
+- FALSE_GREENS remains 7; this review adds NEW_FALSE_GREEN=0.
+- DC-006 remains OPEN.
+- EXP-01 remains OPEN.
+- IR2-002 remains BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED.
+- Current phase remains R2-4.
+- R2-4 exit gate remains NOT_EXECUTED.
+- R2-5 remains NOT_AUTHORIZED.
+- This canonicalization grants no settings mutation, no branch-protection mutation, no required-check configuration and no probe execution.
+- Next authorized work is preparation/design only for BP-B-02/BP-B-03 probes and preservation of BP-B-01/BP-B-04 correction requirements; execution requires a new Human Gate D.
+- 2026-08-15T23:41:44Z: Human Gate D authorized canonicalization of this BLOCKED review only.
+
 ## Blockers
+- Branch-protection candidate V1 independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; static_review=FAIL; candidate_disposition=BLOCKED.
+- Branch-protection candidate V1 SHA-256: 7868cd6aaa726f116dc53e7411571b63eb1a33a6e1b6f89e79de490cf5bc96e9; review evidence: evidence/r2-4/branch_protection_candidate_independent_review_12.json SHA-256 f95dffd3804af024318aa2efe7adbc628ef8b83c25ef8f80911ea6deabf59f86.
+- BP-B-01 BLOCKING: `required_approving_review_count=0` elimina el gate humano compensatorio mientras DC-006 permanece OPEN; el revisor exige count=1 para el siguiente candidato, condicionado a controles de aprobación posteriores al último push.
+- BP-B-02 BLOCKING_UNCERTAINTY: un workflow de rama podría emitir un check homónimo `r2-governed-validation` bajo el mismo GitHub Actions app_id=15368; la review lo trata como bloqueante. BYPASS_NOT_DEMONSTRATED; requiere probe real de colisión antes de configurar enforcement.
+- BP-B-03 BLOCKING: `skipped`/`neutral` pueden ser conclusiones satisfactorias para required checks; no existe probe dedicado R2 para esta semántica.
+- BP-B-04 BLOCKING: count=1 con `dismiss_stale_reviews=false` y `require_last_push_approval=false` no cierra BP-B-01; el siguiente candidato debe reconsiderar ambos flags junto al count.
+- Branch-protection candidate V1 is NOT execution authority; REQUIRED_CHECK remains NOT_CONFIGURED; BRANCH_PROTECTION/NO-BYPASS remains NOT_CONFIGURED; ENFORCED remains False.
 - FALSE_GREEN_7: CANONICAL_STATE_BLOCKERS_SCOPE_FALSE_GREEN.
 - FALSE_GREEN_7 cause: el validator de canonicalización declaró PASS sin verificar que `R2AA-012=RESOLVED` estuviera aplicado dentro de la sección canónica actual `## Blockers`; la búsqueda global sustituyó una aparición histórica y dejó el blocker actual contradictorio.
 - FALSE_GREENS: 7 total.
