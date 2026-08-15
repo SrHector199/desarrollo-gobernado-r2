@@ -1,0 +1,2 @@
+R2-4 B1 same-repository binding probe.
+Mechanically B. No runtime code. Do not merge automatically.
