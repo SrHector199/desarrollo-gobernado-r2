@@ -1,0 +1,117 @@
+name: R2 Governed Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  r2-governed-validation:
+    name: r2-governed-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Run governed validation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(git rev-parse HEAD)" = "$PR_HEAD_SHA"
+
+          tmpdir="$(mktemp -d)"
+          trap 'rm -rf "$tmpdir"' EXIT
+
+          good_out="$tmpdir/good.json"
+          good_err="$tmpdir/good.err"
+          python3 -B -S scripts/run_functional.py             --implementation tests/fixtures/good_splitter.py             >"$good_out" 2>"$good_err"
+          test ! -s "$good_err"
+          python3 - "$good_out" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert data["status"] == "PASS"
+          assert data["reason_code"] == "ALL_FUNCTIONAL_CHECKS_PASSED"
+          PY
+
+          bad_out="$tmpdir/bad.json"
+          bad_err="$tmpdir/bad.err"
+          set +e
+          python3 -B -S scripts/run_functional.py             --implementation tests/fixtures/bad_splitter.py             >"$bad_out" 2>"$bad_err"
+          bad_rc=$?
+          set -e
+          test "$bad_rc" -eq 1
+          test ! -s "$bad_err"
+          python3 - "$bad_out" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert data["status"] == "FAIL"
+          assert data["reason_code"] == "TOTAL_NOT_CONSERVED"
+          PY
+
+          risk_pass_out="$tmpdir/risk-pass.json"
+          python3 -B -S scripts/risk_floor.py             --policy policy/risk_floors.json             --mode pre             --authorized-class B             --path tests/fixtures/good_splitter.py             >"$risk_pass_out"
+          python3 - "$risk_pass_out" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert data["status"] == "PASS"
+          assert data["reason_code"] == "FLOOR_WITHIN_AUTHORIZED_CLASS"
+          assert data["mechanical_path_floor"] == "B"
+          PY
+
+          risk_fail_out="$tmpdir/risk-fail.json"
+          risk_fail_err="$tmpdir/risk-fail.err"
+          set +e
+          python3 -B -S scripts/risk_floor.py             --policy policy/risk_floors.json             --mode pre             --authorized-class D             --path scripts/r2_unknown_ci_probe.py             >"$risk_fail_out" 2>"$risk_fail_err"
+          risk_fail_rc=$?
+          set -e
+          test "$risk_fail_rc" -eq 3
+          test ! -s "$risk_fail_err"
+          python3 - "$risk_fail_out" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert data["status"] == "FAIL"
+          assert data["reason_code"] == "UNKNOWN_HIGH_AUTHORITY_SUBJECT"
+          PY
+
+          post_out="$tmpdir/risk-post.json"
+          python3 -B -S scripts/risk_floor.py             --policy policy/risk_floors.json             --mode post             --authorized-class D             --repo .             --base "$PR_BASE_SHA"             --head "$PR_HEAD_SHA"             >"$post_out"
+          python3 - "$post_out" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert data["status"] == "PASS"
+          assert data["reason_code"] == "FLOOR_WITHIN_AUTHORIZED_CLASS"
+          assert data["mechanical_path_floor"] == "D"
+          changed = {
+              path
+              for change in data.get("changes", [])
+              for path in change.get("paths", [])
+          }
+          assert changed == {".github/workflows/r2-ci.yml", "R2_STATE.md"}
+          PY

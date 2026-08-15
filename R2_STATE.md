@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Ejecutar preflight local R2-4 de solo lectura sobre herramientas/configuración GitHub; no usar red ni crear remoto todavía.
-- Last updated: 2026-08-15T11:59:25Z
+- Authorized next step: Observar el resultado real de la PR y del job r2-governed-validation; no mergear ni configurar required check/protección todavía.
+- Last updated: 2026-08-15T12:25:36Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -104,11 +104,25 @@
 
 - 2026-08-15T11:59:25Z: baseline raíz R2-3 observado en 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a, tree b992e2c79ccb91225ef5a09c5dd34191325ed378; root sin padres, identidad noreply, 19 paths, working tree limpio. MINOR-4 PASS y git diff --cached --check PASS. Excepción humana de independencia permanece ACCEPTED_RISK sin elevar garantías.
 
+## GitHub R2-4
+- Repository: SrHector199/desarrollo-gobernado-r2
+- Visibility: PUBLIC
+- Default branch: main
+- Bootstrap main SHA: 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7
+- Local upstream before CI bootstrap: main -> origin/main
+- Remote bootstrap: PASS
+- CI bootstrap branch: r2-4/ci-bootstrap
+- Expected CI job: r2-governed-validation
+- Required check: NOT_CONFIGURED
+- Branch protection / no-bypass: NOT_CONFIGURED
+- ENFORCED: False
+
+- 2026-08-15T12:25:36Z: GitHub bootstrap observado: repositorio público SrHector199/desarrollo-gobernado-r2, default branch main, remote main 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7, origin/main sincronizado, workflows 0, rulesets 0 y branch protection ausente antes del CI bootstrap.
+
 ## Blockers
-- R2-4: remoto GitHub todavía NO_EXISTE.
-- R2-4: CI mínimo todavía NOT_EXECUTED.
-- R2-4: required check todavía NOT_EXECUTED.
-- R2-4: protección/no-bypass de main todavía NOT_EXECUTED; no afirmar ENFORCED.
+- R2-4: CI bootstrap PR todavía no observada en GitHub Actions.
+- R2-4: required check todavía NOT_CONFIGURED.
+- R2-4: protección/no-bypass de main todavía NOT_CONFIGURED; no afirmar ENFORCED.
 - MINOR-5: ACTIVE_R2-4 y NOT_EXECUTED.
 - Independent review round 3: NOT_SATISFIED; excepción humana ACCEPTED_RISK permanece visible.
 - IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; ampliar CASES antes de R2-5 funcional.
