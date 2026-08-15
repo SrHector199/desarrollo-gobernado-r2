@@ -1,0 +1,2 @@
+R2-4 B2 same-repository no-green-inheritance probe.
+Mechanically B. New HEAD; previous B1 green must not be inherited.
