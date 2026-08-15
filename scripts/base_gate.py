@@ -466,3 +466,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# R2-4 D NEGATIVE PROBE ONLY: candidate-side acceptance-authority edit; must be rejected and never merged.
