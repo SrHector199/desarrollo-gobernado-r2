@@ -1,0 +1,160 @@
+{
+  "correction_design": {
+    "all_executed_authority_bytes_protected_d": true,
+    "base_gate_integrity": "disk bytes == exact BASE git blob",
+    "dc_006": "OPEN",
+    "evaluation_before_self_test": true,
+    "exp_01": "OPEN",
+    "fixtures_good_bad_floor": "D",
+    "implementation_authorized": false,
+    "missing_base_head_rejected": true,
+    "normal_pr_class": "B",
+    "pinned_objects_integrity": "disk sha == BASE blob sha == reviewed pin",
+    "pinned_sha256": {
+      "policy/risk_floors.json": "0224d2137d5601ebffd013b3c8783765d1786c4fa5e313c08cdf44c71a979d4c",
+      "scripts/risk_floor.py": "184bc31c2b875f91b625a6beea7f2161226a8144750b1c4aab583d436a7c6172",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "self_test_rechecks_integrity_after_runner": true,
+    "strict_base_head_binding": true
+  },
+  "created_at_utc": "2026-08-15T14:51:20Z",
+  "evidence_type": "r2-4-r2aa-011-correction-scratch-falsification",
+  "proposed_scratch_hashes": {
+    "bad_fixture_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+    "base_gate_sha256": "30acba9230374de6cfc18c98778f192cab4b41630575f693c9a0570ceef935fc",
+    "checker_sha256": "184bc31c2b875f91b625a6beea7f2161226a8144750b1c4aab583d436a7c6172",
+    "good_fixture_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+    "policy_sha256": "0224d2137d5601ebffd013b3c8783765d1786c4fa5e313c08cdf44c71a979d4c",
+    "runner_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+    "workflow_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830"
+  },
+  "real_repo": {
+    "branch": "r2-4/ci-bootstrap",
+    "github_mutated": false,
+    "head": "0747d7a613dcdf08cb6908276c89407810d0a4c6",
+    "main": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "repo_mutated": false,
+    "review_02_sha256": "84b2bc79bd644711cd55da8ebc4b0104042205cd6286f718058ba5c3ee5e025a",
+    "working_tree_clean_before": true
+  },
+  "results": [
+    {
+      "gate_exit": 0,
+      "observed_floor": null,
+      "observed_reason": "TRUSTED_VERIFIERS_AND_INTEGRITY_PROVED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "SELF_TEST_UNTOUCHED_BASE"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "NORMAL_B_PASS"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "JSON_SHADOW_B_PASS_WITHOUT_SHADOW"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GOOD_FIXTURE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "BAD_FIXTURE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "RUNNER_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "CHECKER_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "POLICY_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GATE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "WORKFLOW_MUTATION_BLOCKED_D"
+    },
+    {
+      "detail": "AUTHORITY_BASE_BLOB_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "observed_reason": "AUTHORITY_INTEGRITY_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "TEMPORAL_BASE_CAPTURE_BLOCKED_BY_PINNED_BLOB"
+    },
+    {
+      "detail": "AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "git_status_empty": true,
+      "observed_reason": "SELF_TEST_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "ASSUME_UNCHANGED_DISK_TAMPER_BLOCKED"
+    },
+    {
+      "evaluate_position": 1512,
+      "probe_result": "PASS",
+      "scenario": "EVALUATION_BEFORE_SELF_TEST_ORDER",
+      "self_test_position": 1822
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "R2AA-011_correction_scratch": "PASS",
+    "all_expected_results_observed": true,
+    "disposition": "SCRATCH_CORRECTION_FALSIFICATION_PASS_NOT_IMPLEMENTATION_AUTHORITY",
+    "false_greens_total_remains": 5,
+    "github_mutated": false,
+    "network_used": false,
+    "new_real_false_green_increment": 0,
+    "real_repo_mutated": false,
+    "scenario_count": 13
+  }
+}

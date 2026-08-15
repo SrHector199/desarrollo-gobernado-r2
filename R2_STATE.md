@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Diseñar y falsar en scratch la corrección mínima de R2AA-011, incluyendo protección D de los bytes ejecutados por el gate, integridad contra blobs exactos de BASE, vinculación BASE/HEAD estricta y evaluación antes del self-test; no modificar todavía workflow, checker, policy, fixtures, task packets, main ni configuración GitHub.
-- Last updated: 2026-08-15T14:45:16Z
+- Authorized next step: Preparar el candidato exacto corregido de R2AA-011 y someter sus bytes exactos a revisión independiente antes de implementarlos; no modificar todavía workflow, checker, policy, runner, fixtures, task packets, main ni configuración GitHub.
+- Last updated: 2026-08-15T15:01:28Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -207,9 +207,38 @@
 - Esta revisión no autoriza implementación, merge, branch protection, required check ni GitHub settings.
 - 2026-08-15T14:45:16Z: segunda revisión independiente del candidato canonicalizada como BLOCKED.
 
+- 2026-08-15T15:01:28Z: R2AA-011 correction scratch PASS 13/13; evidence evidence/r2-4/r2aa_011_correction_scratch_falsification_01.json SHA-256 637b4f1555d4040d386723586b1df1ebdf4f52c5b55d32eda93526681a069a47; R2AA-011 remains BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW; new false-green increment 0; false greens remain 5; R2AA-012..015 explicit nonblocking debt; EXP-01/DC-006 OPEN.
+
+## Falsificación scratch de la corrección R2AA-011
+- Evidence: evidence/r2-4/r2aa_011_correction_scratch_falsification_01.json
+- Evidence SHA-256: 637b4f1555d4040d386723586b1df1ebdf4f52c5b55d32eda93526681a069a47
+- Source file: r2-4-r2aa-011-correction-falsification-20260815T145120Z.json
+- Scratch falsification: PASS 13/13.
+- Disposition: SCRATCH_CORRECTION_FALSIFICATION_PASS_NOT_IMPLEMENTATION_AUTHORITY.
+- R2AA-011: CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW.
+- Ejecuted authority bytes: fixtures GOOD/BAD, runner, checker, policy, gate y workflow protegidos como D en el prototipo.
+- Integridad: objetos pinneados por SHA-256 y contrastados con blobs exactos de BASE; gate contrastado byte a byte con su blob BASE.
+- Temporal BASE capture probe: PASS/BLOCKED_BY_PINNED_BLOB.
+- `git update-index --assume-unchanged` bypass probe: PASS/BLOCKED_BY_HASH despite empty git status.
+- BASE/HEAD binding: STRICT; missing or mismatched object identity is rejected in the prototype.
+- Evaluation order: PR evaluation before trusted fixture self-test.
+- Self-test post-runner integrity recheck: PASS.
+- New real false-green increment: 0; metric remains 5.
+- R2AA-012 HIGH NONBLOCKING: remains explicit; real GitHub check-run binding probe still required later.
+- R2AA-013 MEDIUM NONBLOCKING: `default_branch=main` observed read-only; temporal workflow/default-branch vs PR_BASE_SHA deviation remains OPEN.
+- R2AA-014 MEDIUM NONBLOCKING: strict BASE/HEAD correction passed scratch; remains debt until exact candidate independent review.
+- R2AA-015 LOW NONBLOCKING: liveness/fail-closed documentation debt remains explicit.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Historical R2-3 independence gap: UNCHANGED.
+- Independent review of exact corrected candidate: PENDING.
+- Implementation/merge/protection/settings authority: NOT_GRANTED_BY_THIS_EVIDENCE.
+- 2026-08-15T15:01:28Z: human-authorized canonicalization only; no workflow/checker/policy/runner/fixture/task/GitHub-settings implementation in this commit.
+
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
-- R2AA-011 CRITICAL BLOCKING: fixtures ejecutados por el gate eran B y permiten captura temporal de acceptance authority; falso verde reproducido.
+- R2AA-011 CRITICAL - CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW: la corrección scratch 13/13 bloqueó la captura temporal reproducida, pero los bytes exactos candidatos aún no han pasado revisión independiente ni están implementados.
 - R2AA-012 HIGH NONBLOCKING, R2AA-013 MEDIUM NONBLOCKING, R2AA-014 MEDIUM NONBLOCKING, R2AA-015 LOW NONBLOCKING: conservar como deuda explícita; no elevan la métrica de falsos verdes.
 - R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
 - R2AA-001 CRITICAL BLOCKING: verificadores inline sombreables desde el checkout del PR; falso verde dinámicamente demostrado.
