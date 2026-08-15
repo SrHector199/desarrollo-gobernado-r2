@@ -1,0 +1,354 @@
+{
+  "authorization": {
+    "bootstrap_disposition": "BLOCKED",
+    "bundle_sha256": "749705e7a8ecbadfbcbd435f18eebf470a49a0fa43f65f9b87fc7752852c5002",
+    "candidate_disposition": "PASS",
+    "canonical_review_sha256": "05e349ba35d0d630ebaddd34bdc3f30f89a8b5f482e327e43f7aca6de4084e1b",
+    "class": "D",
+    "github_settings_mutation_authorized": false,
+    "initial_head": "412080f46d60b6ce7c85e27f476b3f1a4cf96858",
+    "main_sha": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "merge_authorized": false,
+    "phase_change_authorized": false,
+    "scope": "EXACT_REVIEWED_BYTES_ONLY"
+  },
+  "evidence_type": "r2-4-materialization-v2-exact-two-stage-implementation",
+  "final": {
+    "bootstrap_disposition": "BLOCKED",
+    "branch_head": "b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82",
+    "branch_protection": false,
+    "candidate_disposition": "PASS",
+    "completed_at_utc": "2026-08-15T20:58:12Z",
+    "false_greens": 6,
+    "final_hashes": {
+      ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+      "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "fixtures_modified": false,
+    "github_settings_changed": false,
+    "main_sha": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "merge_performed": false,
+    "next_admin_action": "Record implementation evidence and then obtain separate authorization for later bootstrap/real GitHub binding steps; no merge/settings yet.",
+    "phase_changed": false,
+    "pr_merged": false,
+    "pr_state": "open",
+    "r2_state_modified": false,
+    "ruleset_count": 0,
+    "runner_modified": false,
+    "total_changed_paths": [
+      ".github/workflows/r2-ci.yml",
+      "policy/risk_floors.json",
+      "scripts/base_gate.py",
+      "scripts/risk_floor.py"
+    ],
+    "worktree_clean": true
+  },
+  "preflight": {
+    "branch_protection": false,
+    "initial_hashes": {
+      ".github/workflows/r2-ci.yml": "c5645e36392c5f28305ac1cae93147eb406e5b25d33ff0f36a048966a8691b5a",
+      "policy/risk_floors.json": "8c078b056d9a6a278cdac2e3a20afb1c37084e6b6d598671091a22337d476ad9",
+      "scripts/risk_floor.py": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "initial_head": "412080f46d60b6ce7c85e27f476b3f1a4cf96858",
+    "main_sha": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "pr_open_unmerged": true,
+    "ruleset_count": 0
+  },
+  "schema_version": 1,
+  "source": {
+    "bundle_path": "/mnt/c/Users/Hecto/Downloads/r2-4-materialization-v2-frozen-candidate-review-20260815T200137Z.zip",
+    "bundle_sha256": "749705e7a8ecbadfbcbd435f18eebf470a49a0fa43f65f9b87fc7752852c5002",
+    "c5_pass": 57,
+    "canonical_review_path": "evidence/r2-4/materialization_v2_frozen_candidate_independent_review_05.json",
+    "canonical_review_sha256": "05e349ba35d0d630ebaddd34bdc3f30f89a8b5f482e327e43f7aca6de4084e1b",
+    "frozen_manifest_type": "r2-4-materialization-v2-frozen-exact-candidate",
+    "review_protocol": "r2-independent-materialization-v2-frozen-candidate-v1"
+  },
+  "stage1": {
+    "authority_commit": "412080f46d60b6ce7c85e27f476b3f1a4cf96858",
+    "candidate_commit": "416c45c34cec2fcd6f959d60bffe2491d895be71",
+    "checker_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+    "policy_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+    "post": {
+      "authorized_class": "D",
+      "base": "412080f46d60b6ce7c85e27f476b3f1a4cf96858",
+      "changes": [
+        {
+          "floors": [
+            "D"
+          ],
+          "paths": [
+            "policy/risk_floors.json"
+          ],
+          "status": "M"
+        },
+        {
+          "floors": [
+            "D"
+          ],
+          "paths": [
+            "scripts/risk_floor.py"
+          ],
+          "status": "M"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Define el mínimo mecánico que usará el risk-floor checker.",
+          "role": "acceptance_authority",
+          "subject": "policy/risk_floors.json",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Checker crítico que calcula y bloquea el floor mecánico PRE/POST.",
+          "role": "acceptance_authority",
+          "subject": "scripts/risk_floor.py",
+          "subject_type": "path"
+        }
+      ],
+      "head": "416c45c34cec2fcd6f959d60bffe2491d895be71",
+      "mechanical_path_floor": "D",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "pre": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Define el mínimo mecánico que usará el risk-floor checker.",
+          "role": "acceptance_authority",
+          "subject": "policy/risk_floors.json",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Checker crítico que calcula y bloquea el floor mecánico PRE/POST.",
+          "role": "acceptance_authority",
+          "subject": "scripts/risk_floor.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "published": true,
+    "remote_head": "416c45c34cec2fcd6f959d60bffe2491d895be71",
+    "tree": "701399fcb0c9049f0f078caf0272680e8a52ac19"
+  },
+  "stage2": {
+    "authority_commit": "416c45c34cec2fcd6f959d60bffe2491d895be71",
+    "base_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "candidate_commit": "b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82",
+    "post": {
+      "authorized_class": "D",
+      "base": "416c45c34cec2fcd6f959d60bffe2491d895be71",
+      "changes": [
+        {
+          "finding_roles": [
+            "acceptance_authority"
+          ],
+          "finding_subjects": [
+            ".github/workflows/r2-ci.yml"
+          ],
+          "floors": [
+            "D"
+          ],
+          "new_mode": "100644",
+          "old_mode": "100644",
+          "paths": [
+            ".github/workflows/r2-ci.yml"
+          ],
+          "status": "M"
+        },
+        {
+          "finding_roles": [
+            "acceptance_authority"
+          ],
+          "finding_subjects": [
+            "scripts/base_gate.py"
+          ],
+          "floors": [
+            "D"
+          ],
+          "new_mode": "100644",
+          "old_mode": "000000",
+          "paths": [
+            "scripts/base_gate.py"
+          ],
+          "status": "A"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación.",
+          "role": "acceptance_authority",
+          "subject": ".github/workflows/r2-ci.yml",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "BASE-anchored policy gate.",
+          "role": "acceptance_authority",
+          "subject": "scripts/base_gate.py",
+          "subject_type": "path"
+        }
+      ],
+      "head": "b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82",
+      "mechanical_path_floor": "D",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "pre": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "BASE-anchored policy gate.",
+          "role": "acceptance_authority",
+          "subject": "scripts/base_gate.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación.",
+          "role": "acceptance_authority",
+          "subject": ".github/workflows/r2-ci.yml",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "published": true,
+    "remote_head": "b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82",
+    "tree": "05db25cf6b171591fed569436f986f3f89a8aef2",
+    "workflow_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830"
+  },
+  "started_at_utc": "2026-08-15T20:57:58Z",
+  "status": "PASS"
+}

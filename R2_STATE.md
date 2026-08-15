@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Someter a Human Gate D una autorización separada para implementar exclusivamente los bytes exactos del candidato R2-4 independientemente revisado y aprobado; sin cambiar ningún byte del candidato, sin merge, sin branch protection, sin required check, sin rulesets, sin cambios de configuración GitHub y sin entrar todavía en R2-5.
-- Last updated: 2026-08-15T20:41:13Z
+- Authorized next step: Preparar y falsar el bootstrap merge gate con ancla exacta de implementación `main` 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7 -> `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82`, inventariando todos los paths, modos y bytes de ese diff y verificando que el control plane coincide exactamente con los bytes independientemente revisados; además, como esta canonicalización administrativa avanzará la PR más allá de `b9abfe0d...`, el gate debe inventariar separadamente el tail `b9abfe0d...` -> HEAD real de la PR y exigir que contenga únicamente canonicalizaciones explícitamente autorizadas. Antes de cualquier merge debe quedar contabilizado también el diff completo `main` -> HEAD real. No hacer merge, branch protection, required check, rulesets, cambios de settings GitHub ni transición a R2-5 en ese paso; un merge posterior requerirá Human Gate D separado.
+- Last updated: 2026-08-15T21:04:56Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -477,6 +477,73 @@
 - Bootstrap remains BLOCKED; candidate PASS is evidence over the exact seven bytes above only.
 - Next gate: separate Human Gate D authorization to implement exactly the independently reviewed bytes, without byte changes and without merge/settings actions.
 - 2026-08-15T20:41:13Z: human-authorized canonicalization only; no candidate implementation in this commit.
+
+- 2026-08-15T21:04:56Z: exact Materialization V2 implementation PASS recorded; evidence evidence/r2-4/materialization_v2_exact_implementation_06.json SHA-256 8bc03c50e0fbdc5abb6b70380f2b5f66bfab94e2c1304601caa9acc73b2386ba; stage1 416c45c34cec2fcd6f959d60bffe2491d895be71; stage2/implementation anchor b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82; all four PRE/POST D PASS; exact seven-object hashes PASS; no merge/settings/phase change; workflow-run count for implementation anchor observed 0; false greens remain 6. Bootstrap merge gate remains pending and must account for the post-implementation administrative tail before any merge.
+
+## Implementación exacta Materialization V2
+- Evidence: evidence/r2-4/materialization_v2_exact_implementation_06.json
+- Evidence SHA-256: 8bc03c50e0fbdc5abb6b70380f2b5f66bfab94e2c1304601caa9acc73b2386ba
+- Evidence bytes: 12417
+- IMPLEMENTATION_DISPOSITION: PASS.
+- Initial implementation HEAD: 412080f46d60b6ce7c85e27f476b3f1a4cf96858
+- Stage 1 commit: 416c45c34cec2fcd6f959d60bffe2491d895be71
+- Stage 2 / exact implementation anchor: b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82
+- Stage 1 PRE D: PASS.
+- Stage 1 POST D: PASS.
+- Stage 2 PRE D: PASS.
+- Stage 2 POST D: PASS.
+- Stage 1 installed exclusively:
+  - `policy/risk_floors.json` = d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b
+  - `scripts/risk_floor.py` = e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283
+- Stage 2 installed exclusively:
+  - `scripts/base_gate.py` = f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11
+  - `.github/workflows/r2-ci.yml` = 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830
+- Exact seven-object state at implementation anchor:
+  - workflow = 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830
+  - base_gate = f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11
+  - checker = e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283
+  - policy = d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b
+  - runner = d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f
+  - GOOD fixture = 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827
+  - BAD fixture = b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce
+- PR #1 observed OPEN and unmerged at implementation anchor.
+- `main` remained 72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7.
+- R2_STATE_MODIFIED_BY_IMPLEMENTATION: False.
+- RUNNER_MODIFIED: False.
+- FIXTURES_MODIFIED: False.
+- MERGE_PERFORMED: False.
+- BRANCH_PROTECTION_CHANGED: False.
+- REQUIRED_CHECK_CONFIGURED: False.
+- RULESET_CREATED: False.
+- GITHUB_SETTINGS_CHANGED: False.
+- PHASE_CHANGED: False.
+- No workflow run was observed for exact implementation HEAD `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82` at canonicalization preflight; this is NOT a false green and is NOT evidence of enforcement.
+- Current phase remains R2-4.
+- FALSE_GREENS: 6.
+- R2AA-011: PARTIAL.
+- R2AA-012: OPEN.
+- R2AA-013: PARTIAL.
+- R2AA-014: RESOLVED.
+- R2AA-015: OPEN.
+- R2AA-016: PARTIAL.
+- R2AA-017: PARTIAL.
+- R2AA-018: PARTIAL.
+- R2AA-019: OPEN.
+- R2AA-020: OPEN.
+- R2AA-021: OPEN.
+- R2AA-022: RESOLVED.
+- R2AA-023: RESOLVED.
+- R2AA-024: PARTIAL.
+- R2AA-025: OPEN.
+- R2AA-026: LOW_NONBLOCKING.
+- OBS-01/OBS-02/OBS-03: not corrected in this implementation.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Bootstrap merge gate exact-object rule: `72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7` -> `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82` is the implementation diff anchor. Because this canonicalization adds an administrative commit after that anchor, any later merge gate must also inventory `b9abfe0d9e80f41c9a9699e5e59827a82ffe4f82` -> actual PR HEAD and finally prove the complete `72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7` -> actual PR HEAD diff before merge.
+- No merge/settings authority is granted by this record.
+- 2026-08-15T21:04:56Z: human-authorized canonicalization only.
 
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
