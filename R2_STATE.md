@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar y ejecutar un probe D/control-plane negativo en un PR separado. El probe debe tocar exclusivamente un objeto de control-plane clasificado D y demostrar en GitHub real que `r2-governed-validation` queda ligado al SHA exacto del PR y termina FAILURE por el motivo esperado; el PR no se mergea, ningún byte del probe entra en `main` y no se modifican branch protection, required checks, rulesets ni settings. La configuración de enforcement sigue prohibida hasta canonicalizar y evaluar ese probe.
-- Last updated: 2026-08-15T22:35:25Z
+- Authorized next step: Preparar el bloque exacto de required check + branch protection sobre `main`. Este siguiente paso es solo preparación y preflight: no autoriza todavía ninguna mutación de settings. Antes de cualquier cambio de branch protection, required checks, rulesets o settings se requiere un nuevo Human Gate D con los settings exactos.
+- Last updated: 2026-08-15T22:54:02Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -725,6 +725,84 @@
 - R2-5: NOT_AUTHORIZED.
 - Next authorized experiment: a D/control-plane negative PR that must produce a failure check bound to its exact PR HEAD; it must remain unmerged and must not change GitHub settings.
 - 2026-08-15T22:35:25Z: Human Gate D authorized closing PR #3 without merge and this two-path administrative canonicalization only.
+
+- 2026-08-15T22:54:02Z: D/control-plane negative probe PASS canonicalized; PR #4 closed without merge; base d2e619d7db370369fcb2f7e902b10ede2a3768f4, head 27b0291f907e9f99a80b8d99d1495cab88ebb57f; workflow run 31912976540 failure; check-run 95080708232 / app_id 15368 / head_sha 27b0291f907e9f99a80b8d99d1495cab88ebb57f; D_CONTROL_PLANE_REJECTION=OBSERVED_TRUE; failure reason RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS; trusted BASE gate f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11 executed while candidate gate was not executed; evidence evidence/r2-4/d_control_plane_negative_observation_11.json SHA-256 6faf6cf7442bb7530e42f723327d645a5fcfa2f7793ba16723fd8d153da31636; NEW_FALSE_GREEN=0; FALSE_GREENS=6; WORKFLOW_SOURCE_SHA observed equal to PR_BASE_SHA but R2AA-013/R2AA-019 remain unchanged; ENFORCED=False; MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED.
+
+## D control-plane negative probe
+- D_CONTROL_PLANE_PROBE_DISPOSITION: PASS.
+- D evidence: evidence/r2-4/d_control_plane_negative_observation_11.json
+- D evidence SHA-256: 6faf6cf7442bb7530e42f723327d645a5fcfa2f7793ba16723fd8d153da31636
+- D evidence bytes: 22922
+- D_CONTROL_PLANE_REJECTION: OBSERVED_TRUE.
+- D_PR_NUMBER: 4.
+- D_BASE_SHA: d2e619d7db370369fcb2f7e902b10ede2a3768f4.
+- D_HEAD_SHA: 27b0291f907e9f99a80b8d99d1495cab88ebb57f.
+- D_HEAD_TREE: 01d17408e540980946267706ba08deae7d698070.
+- D_BRANCH: `r2-4/d-control-plane-negative`.
+- D path: `scripts/base_gate.py`.
+- D BASE gate SHA-256: f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11.
+- D candidate gate SHA-256: 2d6b6b8c69a92af60f1ee5874e3b9780c49df55f908d1e0bb3a80f65155d93a1.
+- D suffix SHA-256: 670c05ef7eeb2e00dbc497bd7393963744b17d28b897bec080fb777f43ac7b53.
+- D suffix bytes: 107.
+- D mode before/after: 100644 -> 100644.
+- D diff path count: 1.
+- D PRE D: PASS.
+- D POST D: PASS.
+- D POST D floor: D.
+- D local BASE-gate-under-B: exit 1 / FAIL / RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS; risk exit 3 / FAIL / FLOOR_EXCEEDS_AUTHORIZED_CLASS / floor D.
+- D_WORKFLOW_RUN_ID: 31912976540.
+- D_WORKFLOW_EVENT: pull_request_target.
+- D_WORKFLOW_NAME: R2 Governed Validation.
+- D_WORKFLOW_PATH: .github/workflows/r2-ci.yml.
+- D_WORKFLOW_HEAD_SHA: 27b0291f907e9f99a80b8d99d1495cab88ebb57f.
+- D_WORKFLOW_CONCLUSION: failure.
+- D_JOB_ID: 95080708232.
+- D_JOB_NAME: r2-governed-validation.
+- D_JOB_CONCLUSION: failure.
+- D_CHECK_RUN_ID: 95080708232.
+- D_CHECK_NAME: r2-governed-validation.
+- D_CHECK_RUN_APP_ID: 15368.
+- D_CHECK_RUN_APP_SLUG: github-actions.
+- D_CHECK_RUN_HEAD_SHA: 27b0291f907e9f99a80b8d99d1495cab88ebb57f.
+- D_CHECK_CONCLUSION: failure.
+- D_EVALUATE_STEP: failure.
+- D_SELF_TEST_STEP: skipped.
+- D_FAILURE_REASON: RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS.
+- D_RISK_CHECKER_EXIT: 3.
+- D_RISK_STATUS: FAIL.
+- D_RISK_REASON: FLOOR_EXCEEDS_AUTHORIZED_CLASS.
+- D_RISK_FLOOR: D.
+- D_RISK_PAYLOAD_BASE: d2e619d7db370369fcb2f7e902b10ede2a3768f4.
+- D_RISK_PAYLOAD_HEAD: 27b0291f907e9f99a80b8d99d1495cab88ebb57f.
+- D_TRUSTED_BASE_GATE_EXECUTED: True.
+- D_GITHUB_EXECUTED_BASE_GATE_SHA256: f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11.
+- D_CANDIDATE_GATE_EXECUTED: False.
+- D_CANDIDATE_WORKTREE_CHECKED_OUT: False.
+- D_PR_FINAL_STATE: CLOSED_UNMERGED.
+- D branch preserved at 27b0291f907e9f99a80b8d99d1495cab88ebb57f; B1 and B2 branches also preserved.
+- D_NEW_FALSE_GREENS: 0.
+- FALSE_GREENS: 6.
+- WORKFLOW_SOURCE_SHA_OBSERVED_EQUAL_TO_PR_BASE: True; logs exposed both values as d2e619d7db370369fcb2f7e902b10ede2a3768f4. This is observation only and does NOT resolve R2AA-013 or R2AA-019 because the workflow does not mechanically compare them.
+- R2AA-012 remains RESOLVED.
+- R2AA-013 remains PARTIAL.
+- R2AA-015 remains OPEN.
+- R2AA-019 remains OPEN.
+- R2AA-020 remains OPEN.
+- R2AA-021 remains OPEN.
+- R2AA-024 remains PARTIAL.
+- R2AA-025 remains OPEN.
+- R2AA-026 remains LOW_NONBLOCKING.
+- DC-006 remains OPEN.
+- EXP-01 remains OPEN.
+- IR2-002 remains BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- ENFORCED: False.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Current phase remains R2-4.
+- Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
+- R2-4 exit gate: NOT_EXECUTED.
+- R2-5: NOT_AUTHORIZED.
+- Next authorized step is preparation/preflight only for exact required-check + branch-protection settings; settings mutation requires a separate new Human Gate D.
+- 2026-08-15T22:54:02Z: Human Gate D authorized closing PR #4 without merge and this two-path administrative canonicalization only.
 
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.

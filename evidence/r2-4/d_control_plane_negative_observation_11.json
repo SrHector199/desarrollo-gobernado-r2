@@ -1,0 +1,500 @@
+{
+  "authorization": {
+    "base_branch": "main",
+    "base_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "base_sha": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+    "base_tree": "d2b5f691605ee80fb5da82d3055c5d141447eb5c",
+    "branch_protection_authorized": false,
+    "class": "D",
+    "force_push_authorized": false,
+    "github_settings_change_authorized": false,
+    "merge_authorized": false,
+    "modified_path": "scripts/base_gate.py",
+    "probe_branch": "r2-4/d-control-plane-negative",
+    "r2_5_authorized": false,
+    "required_check_configuration_authorized": false,
+    "ruleset_authorized": false,
+    "suffix_bytes": 107,
+    "suffix_sha256": "670c05ef7eeb2e00dbc497bd7393963744b17d28b897bec080fb777f43ac7b53"
+  },
+  "candidate": {
+    "base_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "candidate_gate_bytes": 15489,
+    "candidate_gate_executed": false,
+    "candidate_gate_sha256": "2d6b6b8c69a92af60f1ee5874e3b9780c49df55f908d1e0bb3a80f65155d93a1",
+    "commit_message": "test: add R2-4 D control-plane negative probe",
+    "commit_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+    "git_blob_oid": "3e215e4d2ca6940f147d95dd84c6663a3fa6ce68",
+    "git_status": "M",
+    "local_base_gate_under_normal_B": {
+      "candidate_gate_executed": false,
+      "executed_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "exit": 1,
+      "payload": {
+        "authority_root": "/tmp/r2-d-probe-base-worktree-h7xgq0_r/wt",
+        "base": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+        "candidate_code_executed": false,
+        "candidate_worktree_checked_out": false,
+        "dc_006": "OPEN",
+        "evaluation_before_self_test": true,
+        "exp_01": "OPEN",
+        "head": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+        "integrity": {
+          "policy/risk_floors.json": {
+            "base_blob_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "expected_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "pinned": true
+          },
+          "scripts/base_gate.py": {
+            "base_blob_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "pinned": false
+          },
+          "scripts/risk_floor.py": {
+            "base_blob_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "expected_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "pinned": true
+          },
+          "scripts/run_functional.py": {
+            "base_blob_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "expected_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "pinned": true
+          },
+          "tests/fixtures/bad_splitter.py": {
+            "base_blob_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "expected_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "pinned": true
+          },
+          "tests/fixtures/good_splitter.py": {
+            "base_blob_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "expected_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "pinned": true
+          }
+        },
+        "integrity_model": "PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS",
+        "normal_pr_authorized_class": "B",
+        "reason_code": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_checker_exit": 3,
+        "risk_floor": "D",
+        "risk_payload_base": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+        "risk_payload_head": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+        "risk_reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_status": "FAIL",
+        "status": "FAIL"
+      },
+      "stderr": "",
+      "stdout": "{\"authority_root\": \"/tmp/r2-d-probe-base-worktree-h7xgq0_r/wt\", \"base\": \"d2e619d7db370369fcb2f7e902b10ede2a3768f4\", \"candidate_code_executed\": false, \"candidate_worktree_checked_out\": false, \"dc_006\": \"OPEN\", \"evaluation_before_self_test\": true, \"exp_01\": \"OPEN\", \"head\": \"27b0291f907e9f99a80b8d99d1495cab88ebb57f\", \"integrity\": {\"policy/risk_floors.json\": {\"base_blob_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"expected_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"pinned\": true}, \"scripts/base_gate.py\": {\"base_blob_sha256\": \"f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11\", \"pinned\": false}, \"scripts/risk_floor.py\": {\"base_blob_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"expected_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"pinned\": true}, \"scripts/run_functional.py\": {\"base_blob_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"expected_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"pinned\": true}, \"tests/fixtures/bad_splitter.py\": {\"base_blob_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"expected_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"pinned\": true}, \"tests/fixtures/good_splitter.py\": {\"base_blob_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"expected_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"pinned\": true}}, \"integrity_model\": \"PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS\", \"normal_pr_authorized_class\": \"B\", \"reason_code\": \"RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"risk_checker_exit\": 3, \"risk_floor\": \"D\", \"risk_payload_base\": \"d2e619d7db370369fcb2f7e902b10ede2a3768f4\", \"risk_payload_head\": \"27b0291f907e9f99a80b8d99d1495cab88ebb57f\", \"risk_reason_code\": \"FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"risk_status\": \"FAIL\", \"status\": \"FAIL\"}\n"
+    },
+    "mode_after": "100644",
+    "mode_before": "100644",
+    "parent_sha": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+    "path": "scripts/base_gate.py",
+    "python_syntax": "PASS",
+    "risk_post_D": {
+      "authorized_class": "D",
+      "base": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+      "changes": [
+        {
+          "finding_roles": [
+            "acceptance_authority"
+          ],
+          "finding_subjects": [
+            "scripts/base_gate.py"
+          ],
+          "floors": [
+            "D"
+          ],
+          "new_mode": "100644",
+          "old_mode": "100644",
+          "paths": [
+            "scripts/base_gate.py"
+          ],
+          "status": "M"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "BASE-anchored policy gate.",
+          "role": "acceptance_authority",
+          "subject": "scripts/base_gate.py",
+          "subject_type": "path"
+        }
+      ],
+      "head": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+      "mechanical_path_floor": "D",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "suffix_bytes": 107,
+    "suffix_sha256": "670c05ef7eeb2e00dbc497bd7393963744b17d28b897bec080fb777f43ac7b53",
+    "tree_sha": "01d17408e540980946267706ba08deae7d698070"
+  },
+  "completed_at_utc": "2026-08-15T22:46:01Z",
+  "d_control_plane_rejection": "OBSERVED_TRUE",
+  "evidence_type": "r2-4-d-control-plane-negative-probe",
+  "false_greens_after": 6,
+  "new_false_green": 0,
+  "observation": {
+    "b1_branch_unchanged": true,
+    "b2_branch_unchanged": true,
+    "base_sha_check_runs": [],
+    "branch_protection": false,
+    "candidate_gate_executed": false,
+    "candidate_gate_sha256": "2d6b6b8c69a92af60f1ee5874e3b9780c49df55f908d1e0bb3a80f65155d93a1",
+    "check_run": {
+      "app_id": 15368,
+      "app_slug": "github-actions",
+      "check_suite_id": 86552955380,
+      "conclusion": "failure",
+      "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912976540/job/95080708232",
+      "head_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+      "id": 95080708232,
+      "name": "r2-governed-validation",
+      "present_before_pr": false,
+      "present_on_base_sha": false,
+      "present_on_pr_head": true,
+      "status": "completed"
+    },
+    "current_phase": "R2-4",
+    "d_control_plane_rejection": "OBSERVED_TRUE",
+    "d_pr_open_unmerged": true,
+    "enforced": false,
+    "evaluate_step_failed": true,
+    "failure_reason_exact": true,
+    "github_sha_directly_observed": false,
+    "job": {
+      "conclusion": "failure",
+      "head_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+      "id": 95080708232,
+      "name": "r2-governed-validation",
+      "status": "completed",
+      "steps": {
+        "Complete job": {
+          "completed_at": "2026-08-15T22:45:48Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 6,
+          "started_at": "2026-08-15T22:45:48Z",
+          "status": "completed"
+        },
+        "Evaluate exact BASE to HEAD diff before executing trusted fixtures": {
+          "completed_at": "2026-08-15T22:45:48Z",
+          "conclusion": "failure",
+          "name": "Evaluate exact BASE to HEAD diff before executing trusted fixtures",
+          "number": 4,
+          "started_at": "2026-08-15T22:45:48Z",
+          "status": "completed"
+        },
+        "Materialize exact trusted BASE and candidate object": {
+          "completed_at": "2026-08-15T22:45:48Z",
+          "conclusion": "success",
+          "name": "Materialize exact trusted BASE and candidate object",
+          "number": 3,
+          "started_at": "2026-08-15T22:45:47Z",
+          "status": "completed"
+        },
+        "Prove trusted verifier positive and negative paths after evaluation": {
+          "completed_at": "2026-08-15T22:45:48Z",
+          "conclusion": "skipped",
+          "name": "Prove trusted verifier positive and negative paths after evaluation",
+          "number": 5,
+          "started_at": "2026-08-15T22:45:48Z",
+          "status": "completed"
+        },
+        "Reject cross-repository PRs": {
+          "completed_at": "2026-08-15T22:45:47Z",
+          "conclusion": "success",
+          "name": "Reject cross-repository PRs",
+          "number": 2,
+          "started_at": "2026-08-15T22:45:47Z",
+          "status": "completed"
+        },
+        "Set up job": {
+          "completed_at": "2026-08-15T22:45:47Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "started_at": "2026-08-15T22:45:47Z",
+          "status": "completed"
+        }
+      }
+    },
+    "logs": {
+      "available": true,
+      "bytes_utf8": 15401,
+      "exact_gate_payload": {
+        "authority_root": "/home/runner/work/desarrollo-gobernado-r2/desarrollo-gobernado-r2",
+        "base": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+        "candidate_code_executed": false,
+        "candidate_worktree_checked_out": false,
+        "dc_006": "OPEN",
+        "evaluation_before_self_test": true,
+        "exp_01": "OPEN",
+        "head": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+        "integrity": {
+          "policy/risk_floors.json": {
+            "base_blob_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "expected_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "pinned": true
+          },
+          "scripts/base_gate.py": {
+            "base_blob_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "pinned": false
+          },
+          "scripts/risk_floor.py": {
+            "base_blob_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "expected_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "pinned": true
+          },
+          "scripts/run_functional.py": {
+            "base_blob_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "expected_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "pinned": true
+          },
+          "tests/fixtures/bad_splitter.py": {
+            "base_blob_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "expected_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "pinned": true
+          },
+          "tests/fixtures/good_splitter.py": {
+            "base_blob_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "expected_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "pinned": true
+          }
+        },
+        "integrity_model": "PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS",
+        "normal_pr_authorized_class": "B",
+        "reason_code": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_checker_exit": 3,
+        "risk_floor": "D",
+        "risk_payload_base": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+        "risk_payload_head": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+        "risk_reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_status": "FAIL",
+        "status": "FAIL"
+      },
+      "exact_gate_payload_found": true,
+      "sha256": "ce43419f8ce471debae6fbb56716154c41e6c44994c7e69dfd481e350970f824",
+      "source": "GH_RUN_VIEW"
+    },
+    "main_unchanged": true,
+    "minor_5": "ACTIVE_R2-4_NOT_EXECUTED",
+    "pr_head_check_runs": [
+      {
+        "app_id": 15368,
+        "app_slug": "github-actions",
+        "check_suite_id": 86552955380,
+        "conclusion": "failure",
+        "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912976540/job/95080708232",
+        "head_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+        "id": 95080708232,
+        "name": "r2-governed-validation",
+        "status": "completed"
+      }
+    ],
+    "r2aa_012": "RESOLVED",
+    "required_check": "NOT_CONFIGURED",
+    "ruleset_count": 0,
+    "self_test_step_skipped_after_evaluation_failure": true,
+    "trusted_base_gate_executed": true,
+    "trusted_base_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "workflow_run": {
+      "association_basis": "PR_NUMBER_OR_DISPLAY_TITLE",
+      "conclusion": "failure",
+      "created_at": "2026-08-15T22:45:44Z",
+      "display_title": "R2-4 D: control-plane negative probe",
+      "event": "pull_request_target",
+      "head_branch": "r2-4/d-control-plane-negative",
+      "head_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+      "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912976540",
+      "id": 31912976540,
+      "name": "R2 Governed Validation",
+      "new_run_vs_baseline": true,
+      "path": ".github/workflows/r2-ci.yml",
+      "pull_requests": [
+        {
+          "base": {
+            "ref": "main",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "d2e619d7db370369fcb2f7e902b10ede2a3768f4"
+          },
+          "head": {
+            "ref": "r2-4/d-control-plane-negative",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f"
+          },
+          "id": 4287999051,
+          "number": 4,
+          "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/pulls/4"
+        }
+      ],
+      "run_attempt": 1,
+      "run_number": 14,
+      "status": "completed",
+      "updated_at": "2026-08-15T22:45:51Z",
+      "workflow_id": 335007029
+    },
+    "workflow_run_head_sha_observed": "27b0291f907e9f99a80b8d99d1495cab88ebb57f"
+  },
+  "pr": {
+    "base_ref": "main",
+    "base_sha": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+    "created_at": "2026-08-15T22:45:40Z",
+    "draft": false,
+    "head_ref": "r2-4/d-control-plane-negative",
+    "head_repo": "SrHector199/desarrollo-gobernado-r2",
+    "head_sha": "27b0291f907e9f99a80b8d99d1495cab88ebb57f",
+    "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/pull/4",
+    "merged": false,
+    "number": 4,
+    "state": "open"
+  },
+  "pre_pr_observation": {
+    "baseline_base_check_run_ids": [],
+    "baseline_workflow_run_ids": [
+      31884688190,
+      31887704257,
+      31888617104,
+      31890792757,
+      31891550340,
+      31901316525,
+      31901871256,
+      31903405124,
+      31905159111,
+      31907364372,
+      31908128281,
+      31911406085,
+      31912096187
+    ],
+    "probe_head_check_run_ids": [],
+    "probe_head_check_runs": []
+  },
+  "preflight": {
+    "branch_protection": false,
+    "control_hashes": {
+      ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+      "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "main_tree": "d2b5f691605ee80fb5da82d3055c5d141447eb5c",
+    "remote_main": "d2e619d7db370369fcb2f7e902b10ede2a3768f4",
+    "required_check": "NOT_CONFIGURED",
+    "risk_pre_D": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "BASE-anchored policy gate.",
+          "role": "acceptance_authority",
+          "subject": "scripts/base_gate.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad pull_request_create.",
+          "role": "capability",
+          "subject": "pull_request_create",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "ruleset_count": 0,
+    "suffix_bytes": 107,
+    "suffix_sha256": "670c05ef7eeb2e00dbc497bd7393963744b17d28b897bec080fb777f43ac7b53"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-08-15T22:45:26Z",
+  "status": "PASS"
+}
