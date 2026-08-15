@@ -1,0 +1,328 @@
+{
+  "bootstrap_disposition": "BLOCKED",
+  "bundle_sha256": "9cef50a5eee6e0cc78ad88ef8e1a18356e6587bb0ac91f1a45bd0b72583177b1",
+  "candidate_disposition": "BLOCKED",
+  "checks": [
+    {
+      "evidence": "Recomputado localmente: sha256(ZIP)=9cef50a5...77b1 == BUNDLE_SHA256 del REQUEST; sha256(REQUEST.md)=27120110...f2bd == SHA256SUMS; sha256(REVIEW_MANIFEST.json)=6dc5d495...2cf7 == MANIFEST_SHA256; sha256(FROZEN_CANDIDATE_MANIFEST.json)=0b99ee0e...1d86a y sha256(LOCAL_EXACT_CANDIDATE_PROBES.json)=660d7730...2e825 coinciden con SHA256SUMS.txt. 4/4 hashes declarados verificados.",
+      "id": "C4-01",
+      "status": "PASS"
+    },
+    {
+      "evidence": "29/29 entradas de REVIEW_MANIFEST.files verificadas path+sha256+bytes contra disco: 0 mismatches, 0 ausentes. ZIP: 30 entradas, 30 unicas, 0 duplicados, 0 rutas absolutas o con '..', 0 symlinks. Conjunto en disco menos manifest == {REVIEW_MANIFEST.json} (auto-no-listado por diseno, cubierto por SHA256SUMS externo). Sin ficheros extra.",
+      "id": "C4-02",
+      "status": "PASS"
+    },
+    {
+      "evidence": "FROZEN_CANDIDATE_MANIFEST.objects contiene exactamente 7 claves; walk de proposed/ devuelve exactamente los mismos 7 paths. Diferencia simetrica vacia en ambos sentidos (only-on-disk=[], only-in-manifest=[]).",
+      "id": "C4-03",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Recomputo independiente de sha256 y byte count de los 7 objetos en proposed/: r2-ci.yml 2085/76baea48..., risk_floors.json 9474/edfc9f19..., base_gate.py 15382/35bd673a..., risk_floor.py 15266/e627c75f..., run_functional.py 27132/d08fe9bd..., bad_splitter.py 425/b9989b0e..., good_splitter.py 465/1c86e684.... 7/7 identicos al manifiesto congelado.",
+      "id": "C4-04",
+      "status": "PASS"
+    },
+    {
+      "evidence": "LOCAL_EXACT_CANDIDATE_PROBES.candidate_manifest_sha256 = 0b99ee0e0d41007a3e454458c605047b1152c970b428c9e84270e382fc41d86a == sha256 recomputado del fichero FROZEN_CANDIDATE_MANIFEST.json presente en el bundle. candidate_manifest_type coincide con manifest_type ('r2-4-frozen-r2aa-016-017-candidate-manifest').",
+      "id": "C4-05",
+      "status": "PASS"
+    },
+    {
+      "evidence": "exercised_object_hashes y exercised_object_bytes de la evidencia de probes son conjuntos identicos (mismas 7 claves) y valores identicos a FROZEN_CANDIDATE_MANIFEST.objects. workflow_positions_from_exact_bytes == FROZEN_CANDIDATE_MANIFEST.workflow_positions.",
+      "id": "C4-06",
+      "status": "PASS"
+    },
+    {
+      "evidence": "REVIEW_MANIFEST.candidate.frozen_candidate_manifest_sha256 y probe_binding.candidate_manifest_sha256 == sha256 real del manifiesto congelado; candidate.local_exact_candidate_probes_sha256 == sha256 real de la evidencia de probes; proposed_object_hashes/bytes y probe_binding.exercised_object_* == manifiesto congelado y == evidencia de probes. Triple binding verificado.",
+      "id": "C4-07",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Cadena no circular verificada: FROZEN no referencia el sha de la evidencia de probes ni el del ZIP (comprobado por busqueda de substring: ambos False); PROBES referencia hacia atras solo el sha del FROZEN; REVIEW_MANIFEST referencia ambos. La direccion es estrictamente proposed/ -> FROZEN -> PROBES -> REVIEW_MANIFEST -> ZIP, y cada eslabon fija hashes de objeto reproducibles que yo mismo he recomputado desde los bytes.",
+      "id": "C4-08",
+      "status": "PASS"
+    },
+    {
+      "evidence": "La sustancia de freeze_proof es re-derivable: los 4 campos equivalen a 'hashes de proposed/ == manifiesto congelado', que he verificado (7/7). Pero el bundle NO incluye ningun artefacto ejecutable que produzca freeze_proof, y el ordenamiento temporal (freeze ANTES de probes, pre_probe vs post_probe) no es criptograficamente falsable desde el paquete: post-hoc, un freeze posterior a los probes produciria bytes identicos. REVIEW_MANIFEST.candidate.freeze_completed_before_probes=true queda como asercion no verificable. No decorativo pero tampoco probado.",
+      "id": "C4-09",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "Re-ejecucion independiente en entorno limpio (git 2.43.0, Python 3.12.3) sobre un repo BASE construido con los bytes exactos de proposed/ (sha256 de base_gate/risk_floor/risk_floors confirmados en el checkout). 18/18 escenarios de clasificacion reproducidos con status, reason_code y floor identicos a los declarados; self-test reproducido PASS/TRUSTED_VERIFIERS_AND_INTEGRITY_PROVED con integrity_before==integrity_after y candidate_worktree_checked_out=false, candidate_code_executed=false. No se acepto ninguna afirmacion PASS suministrada como autoridad.",
+      "id": "C4-10",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El '.gitattributes' RAIZ es exact_path floor D y bloquea correctamente (reproducido: exit=1, floor=D). Pero Git honra .gitattributes en CUALQUIER directorio. Probes propios: 'tests/fixtures/.gitattributes' -> PASS floor=B; 'tests/.gitattributes' -> PASS floor=B; 'src/.gitattributes' -> PASS floor=B; 'tests/a/b/c/.gitattributes' -> PASS floor=B. Es decir, autoridad de semantica de checkout SI entra por B normal. Ver R2AA-022.",
+      "id": "C4-11",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "'.gitmodules' raiz es exact_path floor D y bloquea (reproducido: exit=1, floor=D). Git solo lee .gitmodules en la raiz del worktree, por lo que 'src/.gitmodules' (que entra a B, verificado) es inerte para materializacion. La afirmacion sustantiva de C4-12 se sostiene. Residual no bloqueante: una entrada gitlink mode 160000 si entra a B sin tocar .gitmodules (ver R2AA-024).",
+      "id": "C4-12",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Reproduje el lockout CRLF de R2AA-016 SIN bypass forzado. (1) PR que anade 'tests/fixtures/.gitattributes' con '* text eol=crlf': gate evaluate -> exit=0 PASS floor=B. (2) Tras merge fast-forward a main, materializacion estilo CI (git init + fetch + checkout --detach BASE'): good_splitter.py y bad_splitter.py se escriben con terminadores CRLF, sha256 observados 79cfe417...44eb y e6500d31...4ef5 frente a los pinneados 1c86e684... y b9989b0e...; 'git status --porcelain' vacio (indetectable por limpieza de worktree). (3) gate --mode self-test sobre BASE' -> exit=1 SELF_TEST_FAILED AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py; gate --mode evaluate de un PR inocuo en src/ -> exit=1 AUTHORITY_INTEGRITY_FAILED. Falsifica la escena suministrada 'R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS' con forced_bypass_required=true.",
+      "id": "C4-13",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Busqueda de influenciadores equivalentes de checkout/materializacion. BYPASS confirmado: .gitattributes anidado bajo cualquier prefijo B (src/, tests/, tests/fixtures/, profundidad arbitraria) -> floor B. Adicionales que entran a B: symlinks nuevos en src/ (a rutas absolutas y a ../scripts), type-change fichero->symlink (status T) en src/, entrada gitlink 160000 en src/vendor, cambio de modo 100644->100755 en src/. Contenidos correctamente: .gitignore raiz -> C, .gitmodules raiz -> D, .gitattributes raiz -> D.",
+      "id": "C4-14",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "policy.defaults.unknown_normal='C' en los bytes congelados y efectivo dinamicamente: 6/6 escenarios unknown normal bloquean con floor=C (Makefile, Dockerfile, .circleci/config.yml, deploy/deploy.sh, .gitignore, os.py raiz). Ademas variantes de caja ('Scripts/risk_floor.py', 'SRC/app.py', '.GITATTRIBUTES') y homoglifo unicode ('.gitattributes' con i sin punto) caen a C y quedan bloqueadas: el default C es la defensa real contra evasion por caja/normalizacion.",
+      "id": "C4-15",
+      "status": "PASS"
+    },
+    {
+      "evidence": "prefix_rule 'src/' floor B presente en los bytes congelados; reproducido: modificacion de src/app.py -> exit=0 PASS floor=B reason=BASE_ANCHORED_RISK_GATE_PASSED.",
+      "id": "C4-16",
+      "status": "PASS"
+    },
+    {
+      "evidence": "prefix_rule 'tests/' floor B presente; reproducido: alta de tests/test_x.py -> exit=0 PASS floor=B reason=BASE_ANCHORED_RISK_GATE_PASSED.",
+      "id": "C4-17",
+      "status": "PASS"
+    },
+    {
+      "evidence": "exact_paths tests/fixtures/good_splitter.py y tests/fixtures/bad_splitter.py con floor D; la precedencia exact_path > longest_prefix se confirma dinamicamente: mutacion de cada fixture -> exit=1 FAIL floor=D RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS pese a estar bajo el prefijo B 'tests/'.",
+      "id": "C4-18",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Reproducidos 6/6 con floor=C y exit=1: Makefile, Dockerfile, .circleci/config.yml, deploy/deploy.sh, .gitignore raiz y shadow de stdlib os.py en raiz. Ninguno pasa ya como B (la politica desplegada actual en repo/policy/risk_floors.json tiene unknown_normal='B'; el candidato lo eleva a 'C').",
+      "id": "C4-19",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Rutas probadas. Contenidas: caja (Scripts/, SRC/, .GITATTRIBUTES) -> C; homoglifo unicode -> C; directorio con espacio final ('src /x.py') -> C; backslash en nombre -> ValueError del checker -> gate FAIL fail-closed; rename src/->scripts/ -> D UNKNOWN_HIGH_AUTHORITY_SUBJECT; rename fixture->src/ -> D; borrado de fixture y borrado de src/app.py -> D via action_floors.deletion. NO contenidas: .gitattributes anidado (R2AA-022), symlink nuevo y type-change T bajo src/ (R2AA-023), gitlink 160000 bajo src/ (R2AA-024).",
+      "id": "C4-20",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Reproducido: BASE con good_splitter.py alterado (disco == blob de BASE, pero != pin) -> gate evaluate exit=1 status=FAIL reason=AUTHORITY_INTEGRITY_FAILED error=AUTHORITY_BASE_BLOB_HASH_MISMATCH:tests/fixtures/good_splitter.py. La captura temporal de BASE sigue bloqueada por el pin SHA-256 independiente del contenido de BASE.",
+      "id": "C4-21",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Reproducido: 'git update-index --assume-unchanged tests/fixtures/good_splitter.py' + mutacion en disco -> 'git status --porcelain' vacio, pero gate --mode self-test exit=1 status=FAIL reason=SELF_TEST_FAILED error=AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py. El gate lee bytes de disco y no confia en el indice.",
+      "id": "C4-22",
+      "status": "PASS"
+    },
+    {
+      "evidence": "verify_authority_integrity exige simultaneamente, para checker/policy/runner/ambos fixtures: sha256(disco)==pin, sha256(blob de BASE)==pin y disco==blob byte a byte. Verificado en codigo (bucle sobre PINNED_SHA256 con tres comparaciones y errores distintos) y dinamicamente por C4-21/C4-22, que disparan las ramas BASE_BLOB_HASH_MISMATCH y DISK_HASH_MISMATCH por separado.",
+      "id": "C4-23",
+      "status": "PASS"
+    },
+    {
+      "evidence": "base_gate.py se valida con disco==blob exacto de BASE (AUTHORITY_GATE_DISK_DIFFERS_FROM_BASE_BLOB) y ademas exige repo.resolve()==authority_root() y rev-parse HEAD==base (AUTHORITY_ROOT_REPO_MISMATCH / AUTHORITY_CHECKOUT_NOT_EXACT_BASE). Limitacion inherente y explicita: base_gate NO esta en PINNED_SHA256, por lo que se autovalida contra el propio BASE y no puede detectar un BASE comprometido; eso es exactamente la circularidad de bootstrap de C4-37, no un defecto nuevo.",
+      "id": "C4-24",
+      "status": "PASS"
+    },
+    {
+      "evidence": "strict_binding exige presencia e igualdad exacta de 'base' y 'head'. binding_contract del self-test reproducido con los 5 sub-casos en true (exact, missing_base_rejected, missing_head_rejected, wrong_base_rejected, wrong_head_rejected). Dinamico: head no descendiente de base -> exit=1 FAIL; head inexistente -> exit=1 CANDIDATE_COMMIT_MISSING; base==head -> PASS con diff vacio (correcto).",
+      "id": "C4-25",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Offsets recomputados sobre los 2085 bytes exactos del workflow: evaluate_marker=1512, mode_evaluate=1702, self_test_marker=1822, mode_self_test=2013, identicos a los declarados en el manifiesto congelado y en la evidencia. Orden 1512<1702<1822<2013: el paso de evaluacion del diff BASE->HEAD precede al paso que ejecuta los fixtures de confianza.",
+      "id": "C4-26",
+      "status": "PASS"
+    },
+    {
+      "evidence": "self_test ejecuta verify_authority_integrity ANTES (before) y DESPUES (after) de risk_self_test y runner_self_test, y ambos resultados se emiten. Reproducido: integrity_before == integrity_after en el BASE congelado intacto. Un fallo en el 'after' cae por la misma clausula except -> SELF_TEST_FAILED, exit 1.",
+      "id": "C4-27",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El workflow hace fetch del HEAD a refs/remotes/origin/r2-head pero solo 'git checkout --detach $PR_BASE_SHA', con assert posterior rev-parse HEAD == PR_BASE_SHA. base_gate solo usa el HEAD via 'git cat-file -e' y 'git diff' (lectura de objetos, sin materializacion ni ejecucion). Payload reproducido: candidate_worktree_checked_out=false, candidate_code_executed=false en los 19 escenarios ejecutados.",
+      "id": "C4-28",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Probe adversarial propio: con 'tests/fixtures/os.py', 'tests/fixtures/importlib.py' y 'sitecustomize.py' hostiles presentes EN BASE (todos alcanzables a floor B), el self-test da exit=0 PASS y runner good/bad devuelve PASS/FAIL correctos; ningun marcador de shadow aparecio en stderr y stderr quedo vacio. El aislamiento 'python3 -I -B -S' mas spec_from_file_location por ruta absoluta mantiene las defensas R2AA-001 fail-closed.",
+      "id": "C4-29",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Doble contencion verificada. (1) Politica: prefix_rule '.github/workflows/' floor D; mutacion del workflow -> exit=1 floor=D. (2) Plataforma: con pull_request_target el fichero de workflow se toma de la rama por defecto, no del PR. No hay filtros paths/paths-ignore que puedan producir 'skipped' (estado que la documentacion de GitHub cuenta como exito). El unico filtro es 'branches: [main]', coherente con proteger main.",
+      "id": "C4-30",
+      "status": "PASS"
+    },
+    {
+      "evidence": "'permissions: {}' a nivel de workflow (todos los scopes a none). No hay 'secrets.*', ni 'actions/checkout', ni acciones de terceros, ni uso de GITHUB_TOKEN; el fetch es HTTPS anonimo al repo publico. Todas las entradas controladas por el PR se pasan por 'env:' y se consumen como variables entrecomilladas dentro de 'run:', evitando inyeccion de plantilla ${{ }} en shell.",
+      "id": "C4-31",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Primer paso: 'test \"$PR_HEAD_REPO\" = \"$GITHUB_REPOSITORY\"' bajo 'set -euo pipefail'. PR de fork o head.repo nulo -> cadena distinta o vacia -> paso falla -> job falla. Fail-closed y ejecutado antes de cualquier fetch.",
+      "id": "C4-32",
+      "status": "PASS"
+    },
+    {
+      "evidence": "La materializacion ref->SHA es fail-closed: se hace fetch de refs/heads/$PR_BASE_REF y refs/heads/$PR_HEAD_REF y se exige 'rev-parse == PR_BASE_SHA' y 'rev-parse == PR_HEAD_SHA'. Si el atacante empuja despues del evento, o si main avanza, la punta del ref deja de coincidir con el SHA del evento y el job falla; nunca se evalua un objeto distinto del anunciado. Coste asociado: liveness (ver R2AA-015/021).",
+      "id": "C4-33",
+      "status": "PASS"
+    },
+    {
+      "evidence": "No hay acceso a la plataforma y no se mutan repo ni settings, por lo que no puedo aportar evidencia real de GitHub. La documentacion consultada es insuficiente y ademas aumenta la incertidumbre: GitHub relaciona checks y statuses con un commit, no con el pull request; los checks requeridos deben pasar sobre el ultimo SHA del commit y los de commits anteriores no cuentan; y el changelog de pull_request_target vigente desde 12/8/2025 fija GITHUB_REF/GITHUB_SHA a la rama por defecto. La ligadura exacta del check-run al head del PR bajo pull_request_target no queda probada. R2AA-012 se PRESERVA OPEN.",
+      "id": "C4-34",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "No hay conflacion. El workflow expone WORKFLOW_SOURCE_SHA=${{ github.sha }} y PR_BASE_SHA=${{ github.event.pull_request.base.sha }} como variables distintas, y toda la logica de gate usa exclusivamente PR_BASE_SHA/PR_HEAD_SHA; github.sha no se usa en ninguna comparacion. Bajo pull_request_target github.sha apunta a la punta de la rama por defecto, que es un objeto temporalmente distinto de PR_BASE_SHA. La distincion se mantiene, pero WORKFLOW_SOURCE_SHA no se asevera contra nada: R2AA-013 sigue PARTIAL y R2AA-019 sigue abierto.",
+      "id": "C4-35",
+      "status": "PASS"
+    },
+    {
+      "evidence": "required_approving_review_count=0 NO es seguro en R2-4 con DC-006 OPEN. unknown_normal=C reduce la superficie B a src/, tests/ (menos fixtures exactos D), README.md (A) y docs/reference/ (A), lo que es una mejora real y verificada. Pero DC-006 abierto significa que no existe autorizacion por tarea con allowlist de rutas: cualquier actor con permiso de escritura puede fusionar cualquier cambio dentro de toda la superficie B sin ningun humano en el bucle. Combinado con R2AA-022, eso permite fusionar sin revision un cambio a floor B que inutiliza permanentemente el propio required check. Con cero aprobaciones el gate mecanico es el unico control, y he demostrado que tiene un agujero en su propia superficie autorizada.",
+      "id": "C4-36",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md mantiene la circularidad explicita: el paso 4 prohibe afirmar que el workflow pull_request_target protegio su propia instalacion porque aun no esta en main; el paso 5 exige que el merge de bootstrap sea una accion D unica con puerta humana separada; el paso 2 exige autorizacion humana D previa para implementar. Consistente con PROPOSED_BRANCH_PROTECTION.preconditions, que enumera puerta humana D de implementacion y puerta humana D de merge como requisitos separados.",
+      "id": "C4-37",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROPOSED_BRANCH_PROTECTION.json declara status=NOT_CONFIGURED_REVIEW_ONLY y es un documento inerte; no he ejecutado ninguna llamada a la API ni he tocado el repositorio o sus settings. Semanticas preservadas en el cuerpo propuesto: strict=true, checks=[{app_id:15368, context:'r2-governed-validation'}] (app_id de GitHub Actions, contexto igual al nombre del job del workflow congelado), enforce_admins=true, restrictions=null, allow_force_pushes=false, allow_deletions=false, block_creations=false, lock_branch=false.",
+      "id": "C4-38",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Permanecen explicitos y no resueltos silenciosamente. R2AA-015: confirmado y ampliado por mi probe de liveness (un PR honesto cuyo BASE avanzo entre tanto falla cerrado). R2AA-019: confirmado, WORKFLOW_SOURCE_SHA se captura pero nunca se asevera. R2AA-020: confirmado, no hay actions/setup-python ni pin de version; se usa el python3 del runner (mi entorno: 3.12.3). R2AA-021: confirmado, la igualdad punta-de-ref/SHA del evento es exactamente la deuda de liveness. Ninguno aparece como cerrado en la evidencia suministrada.",
+      "id": "C4-39",
+      "status": "PASS"
+    },
+    {
+      "evidence": "DC-006 y EXP-01 aparecen OPEN de forma consistente en los cinco sitios: policy/risk_floors.json (open_controls y decision_record.dc_006='OPEN_NOT_DECIDED_IN_R2_4'), payload en tiempo de ejecucion de base_gate.common() (dc_006/exp_01 'OPEN', reproducido en todas mis ejecuciones), OBSERVED_STATE.json, REVIEW_MANIFEST.candidate y las nonclaims/preconditions de la propuesta de proteccion. Se mantienen OPEN en este dictamen.",
+      "id": "C4-40",
+      "status": "PASS"
+    },
+    {
+      "evidence": "IR2-002 se mantiene BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK. Verificado en los bytes: scripts/run_functional.py define CASES = (valid_1000_3 1000/3, zero_people 1000/0, negative_amount -1/2), es decir tres casos, de los cuales el primero admite la salida constante [334,333,333]; la cobertura funcional no se ha ampliado. El gate R2-4 solo demuestra contencion de clase mecanica y autoprueba de verificadores; en ningun punto del paquete se presenta como aceptacion funcional, y BOOTSTRAP_PLAN paso 20 lo niega explicitamente.",
+      "id": "C4-41",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Decision emitida: NO SUFICIENTE. El gate R2-4 por si solo no basta para configurar proteccion de rama en esta fase, por dos razones independientes: (a) R2AA-022 demuestra que su propia superficie autorizada B contiene una via a un lockout permanente del check requerido, sin bypass forzado y sin humano en el bucle; (b) R2AA-012 sigue OPEN, luego no esta probado que el check-run quede ligado al head exacto del PR bajo pull_request_target, que es la premisa misma de 'required check'. Lo que este gate NO prueba, aunque se corrijan ambos: nada sobre la correccion funcional de features futuras. Solo prueba que un diff BASE->HEAD respeta un techo de clase mecanica y que dos fixtures pinneados producen PASS/FAIL esperados; con DC-006 OPEN ni siquiera prueba autorizacion por tarea.",
+      "id": "C4-42",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Decision emitida para estos bytes exactos: R2AA-016 = BLOCKING. Ver C4-13 y R2AA-022: el lockout CRLF se reproduce integramente sin bypass forzado, entrando por un PR clase B ordinario mediante .gitattributes anidado. La correccion congelada solo cubre la ruta raiz.",
+      "id": "C4-43",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Decision emitida para estos bytes exactos: R2AA-017 = PARTIAL. El mecanismo de ligadura es solido y no circular y lo he re-derivado entero (C4-03 a C4-08): la evidencia esta atada criptograficamente a los objetos realmente ejercitados. Se queda en PARTIAL por dos motivos: el orden temporal freeze-antes-de-probes no es falsable desde el paquete (C4-09), y una de las escenas atadas contiene una afirmacion falsificada (forced_bypass_required=true), de modo que la ligadura correcta transporta contenido incorrecto.",
+      "id": "C4-44",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Decision emitida para estos bytes exactos: R2AA-018 = PARTIAL. defaults.unknown_normal='C' esta presente y es efectivo: bloquea 6/6 escenarios unknown declarados y, adicionalmente, variantes de caja y homoglifos unicode que de otro modo evadirian la clasificacion. No lo elevo a RESOLVED porque el default C solo actua donde no hay regla explicita: dentro de los prefijos B 'src/' y 'tests/' no aporta contencion alguna, y es precisamente ahi donde vive el bypass bloqueante R2AA-022. Declararlo RESOLVED sobreestimaria la contencion real.",
+      "id": "C4-45",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Esta revision no otorga ninguna autoridad. No he mutado el repositorio del usuario ni sus settings de GitHub, no he emitido llamadas a la API de proteccion de ramas y todo el trabajo dinamico se hizo en repositorios git desechables creados en /home/claude/lab a partir de copias de los bytes congelados. REVIEW_MANIFEST.candidate declara implementation_authorized=false, merge_authorized=false, github_settings_change_authorized=false y este dictamen los preserva. Ademas el dictamen es BLOCKED, luego ni siquiera se cumple la precondicion 1 de BOOTSTRAP_PLAN.",
+      "id": "C4-46",
+      "status": "PASS"
+    }
+  ],
+  "dynamic_review": "FAIL",
+  "findings": [
+    {
+      "blocking": true,
+      "evidence": "Reproducido en repo git limpio construido con los 7 objetos congelados. Entrada: PR con unico cambio 'tests/fixtures/.gitattributes'='* text eol=crlf' -> base_gate --mode evaluate exit=0 status=PASS risk_floor=B reason=BASE_ANCHORED_RISK_GATE_PASSED. Consecuencia tras merge ff-only y checkout limpio de BASE': 'file' reporta CRLF line terminators; sha256 observados 79cfe4171b7ac796f3156bfb32d5ca9607ca3521dd9f7db6b0617cad1e9b44eb (good) y e6500d31ded1f24ad1f5f419e78401f0bf10ab4429fb541ad0cf6e64f10b4ef5 (bad) frente a los pins 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827 y b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce; 'git status --porcelain' vacio; --mode self-test exit=1 SELF_TEST_FAILED AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py; --mode evaluate de un PR que solo toca src/app.py exit=1 AUTHORITY_INTEGRITY_FAILED. Variantes tambien a floor B: 'tests/.gitattributes', 'src/.gitattributes', 'tests/a/b/c/.gitattributes'. Contraste: '.gitattributes' raiz exit=1 floor=D. Origen en los bytes: policy/risk_floors.json declara '.gitattributes' solo en exact_paths, y risk_floor.py resuelve por exact_path -> longest_prefix -> default, sin regla de nombre base.",
+      "falsification_probe": "1) Repo BASE construido con los 7 objetos congelados (sha256 confirmados en el checkout). 2) rama con unico cambio 'tests/fixtures/.gitattributes' = '* text eol=crlf'; 'python3 -I -B -S scripts/base_gate.py --mode evaluate --repo . --base $BASE --head $HEAD' -> exit=0, status=PASS, risk_floor=B, reason=BASE_ANCHORED_RISK_GATE_PASSED. 3) merge --ff-only a main -> BASE'. 4) materializacion estilo CI: 'git init; git remote add origin ...; git fetch --no-tags origin refs/heads/main:refs/remotes/origin/r2-base; git checkout --detach BASE''. 5) 'file tests/fixtures/good_splitter.py' -> 'with CRLF line terminators'; sha256 observados 79cfe4171b7ac796f3156bfb32d5ca9607ca3521dd9f7db6b0617cad1e9b44eb y e6500d31ded1f24ad1f5f419e78401f0bf10ab4429fb541ad0cf6e64f10b4ef5 frente a los pins 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827 y b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce; 'git status --porcelain' vacio. 6) '--mode self-test' -> exit=1 SELF_TEST_FAILED AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py; '--mode evaluate' de un PR que solo toca src/app.py -> exit=1 AUTHORITY_INTEGRITY_FAILED. Variantes tambien PASS a floor B: 'tests/.gitattributes', 'src/.gitattributes', 'tests/a/b/c/.gitattributes'. Entorno: git 2.43.0, Linux, core.autocrlf por defecto (false); 'eol=crlf' fuerza CRLF con independencia de autocrlf, igual que en ubuntu-latest.",
+      "id": "R2AA-022",
+      "impact": "La correccion de R2AA-016 clasifica como D unicamente el '.gitattributes' de la raiz, pero Git honra .gitattributes en cualquier directorio, aplicandolo a ese directorio y a todo su subarbol. Un PR clase B ordinario puede anadir 'tests/fixtures/.gitattributes' con '* text eol=crlf' y el gate lo aprueba (exit=0, floor=B). Como la proteccion propuesta exige cero aprobaciones humanas, ese PR se fusiona sin revision. A partir del siguiente evento, cualquier checkout limpio de BASE materializa good_splitter.py y bad_splitter.py con terminadores CRLF, sus sha256 dejan de coincidir con PINNED_SHA256 y verify_authority_integrity falla de forma permanente, tanto en --mode evaluate como en --mode self-test. El required check queda inutilizado para todos los PR posteriores, incluidos los inocuos, y 'git status' permanece limpio, por lo que ninguna comprobacion de worktree sucio lo detecta. La recuperacion exige borrar o modificar ese fichero, accion que a su vez es floor D (action_floors.deletion=D y .gitattributes anidado no es reclasificable a B), de modo que el repositorio no puede autorrepararse por la via B normal. Es fail-closed, no un falso verde de codigo, pero es un ladrillado permanente del control de aceptacion alcanzable sin humano en el bucle. Ademas falsifica la escena suministrada 'R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS' (forced_bypass_required=true), que estaba criptograficamente atada al manifiesto congelado; esa asercion PASS es en si misma un falso verde.",
+      "minimal_fix": "Tratar el nombre base '.gitattributes' como floor D en cualquier profundidad, no solo como exact_path de la raiz. Minimo suficiente: anadir en risk_floor.py, antes de la consulta de exact_paths y de prefix_rules, una regla de nombre base sobre la ruta normalizada (p. ej. si PurePosixPath(path).name esta en un conjunto basename_floors {'.gitattributes': 'D', '.gitmodules': 'D'} devolver ese floor como Finding explicit=True), y declarar ese conjunto en policy/risk_floors.json con su propia entrada de precedencia en 'matching'. Como el cambio toca checker y politica, requiere regenerar el manifiesto congelado y re-ejecutar el conjunto completo de probes sobre los bytes nuevos.",
+      "path": "policy/risk_floors.json (exact_paths ['.gitattributes'] + prefix_rules 'src/','tests/')",
+      "severity": "HIGH",
+      "title": "'.gitattributes' anidado bajo prefijos B reproduce el lockout CRLF de R2AA-016 sin bypass forzado"
+    },
+    {
+      "blocking": false,
+      "evidence": "Sobre el repo BASE congelado: symlink nuevo 'src/link'->/etc/passwd exit=0 PASS floor=B; symlink de directorio 'src/esc'->../scripts exit=0 PASS floor=B; type-change de src/app.py a symlink (git status T) exit=0 PASS floor=B; 'git update-index --chmod=+x src/app.py' exit=0 PASS floor=B. En risk_floor.py findings_from_post, los codigos A, M y T comparten la misma rama y clasifican unicamente paths[0], sin consultar el modo del indice. Contraste que si contiene: rename src/app.py->scripts/moved.py exit=1 D UNKNOWN_HIGH_AUTHORITY_SUBJECT; rename fixture->src/ exit=1 D; borrado de src/app.py exit=1 D via action_floors.deletion.",
+      "falsification_probe": "Sobre el repo BASE congelado: 'src/link' -> /etc/passwd, exit=0 PASS floor=B; 'src/esc' -> ../scripts, exit=0 PASS floor=B; type-change de src/app.py a symlink (git reporta T), exit=0 PASS floor=B; 'git update-index --chmod=+x src/app.py', exit=0 PASS floor=B. Contraste que si contiene: rename de src/app.py a scripts/moved.py -> exit=1 D UNKNOWN_HIGH_AUTHORITY_SUBJECT; rename de fixture a src/ -> exit=1 D; borrado de src/app.py -> exit=1 D.",
+      "id": "R2AA-023",
+      "impact": "La clasificacion es puramente por ruta y no considera el modo de entrada del indice. Un PR clase B puede crear symlinks nuevos dentro de src/ o tests/, incluidos enlaces a rutas absolutas fuera del repo y enlaces de directorio hacia el propio plano de control (p. ej. src/esc -> ../scripts), y puede convertir un fichero regular en symlink mediante un cambio de tipo, que git reporta como status T y que el checker trata igual que una modificacion normal. No compromete el gate actual, porque el gate nunca materializa ni ejecuta el HEAD y los ficheros de autoridad estan pinneados por contenido, pero cambia la semantica de materializacion del worktree en toda la superficie autorizada sin revision humana y es la misma familia de riesgo que C4-14 pretende contener. El cambio de modo 100644->100755 sobre src/ tambien pasa a B por la misma razon.",
+      "minimal_fix": "Incluir el modo del indice en la clasificacion: en findings_from_post usar 'git diff --raw -z' (que expone los modos origen y destino) en lugar de solo --name-status, y anadir en la politica floors por capacidad de materializacion, p. ej. symlink_creation y type_change a D o al menos a C, y mode_change a C. Alternativa mas conservadora coherente con el diseno actual: tratar el status T y la aparicion de modo 120000 como acciones sin clasificar, que ya caen a D por classify_action.",
+      "path": "scripts/risk_floor.py (findings_from_post: A/M/T clasifican solo la ruta) + prefix_rules 'src/','tests/'",
+      "severity": "MEDIUM",
+      "title": "Symlinks nuevos y cambios de tipo (status T) entran a floor B dentro de src/ y tests/"
+    },
+    {
+      "blocking": false,
+      "evidence": "'git update-index --add --cacheinfo 160000,<commit-sha-valido>,src/vendor' + commit; 'git ls-tree gl src/' devuelve '160000 commit <sha> src/vendor', confirmando que la entrada gitlink existe realmente en el arbol; base_gate --mode evaluate exit=0 status=PASS risk_floor=B. Contraste: '.gitmodules' raiz exit=1 floor=D. Un primer intento con SHA de ceros no llego a crear la entrada (git ls-tree sin resultado) y se descarto por inconcluyente antes de repetir la prueba con un objeto commit real.",
+      "falsification_probe": "Sobre el repo BASE congelado: 'git update-index --add --cacheinfo 160000,<commit-sha-valido>,src/vendor' seguido de commit; 'git ls-tree gl src/' muestra '160000 commit <sha> src/vendor'; 'base_gate.py --mode evaluate' -> exit=0 status=PASS risk_floor=B. (Un primer intento con SHA de ceros no llego a crear la entrada y fue descartado por inconcluyente; la prueba valida es la que usa un objeto commit real.)",
+      "id": "R2AA-024",
+      "impact": "'.gitmodules' esta correctamente fijado a D, pero una entrada de submodulo en el arbol (modo 160000) no requiere '.gitmodules' para existir. Un PR clase B puede introducir 'src/vendor' como gitlink y el gate lo aprueba a floor B. En solitario es inerte para la materializacion, porque sin '.gitmodules' git crea un directorio vacio y no clona nada, por lo que no rompe la afirmacion sustantiva de C4-12; pero deja preposicionada la mitad de una via de materializacion de repositorio dentro de la superficie autorizada, de modo que solo faltaria una accion D para activarla. Debe quedar registrado y no absorbido por el PASS de C4-12.",
+      "minimal_fix": "Detectar el modo 160000 en el diff (via 'git diff --raw -z') y clasificar la creacion o modificacion de gitlinks como capacidad no clasificada, con lo que classify_action/classify_capability ya la llevaria a D, o declararla explicitamente como submodule_gitlink floor D en policy/risk_floors.json.",
+      "path": "scripts/risk_floor.py + policy exact_paths ['.gitmodules']",
+      "severity": "MEDIUM",
+      "title": "Entrada gitlink (modo 160000) admitida a floor B sin tocar '.gitmodules'"
+    },
+    {
+      "blocking": false,
+      "evidence": "Fichero 'a\\\\b.py': normalize_path rechaza el backslash con ValueError, risk_floor.py emite CHECKER_ERROR exit 2, y base_gate devuelve exit=1 reason=RISK_PAYLOAD_OBJECT_MISMATCH con risk_floor=None, sin propagar el mensaje del checker. PR honesto sobre src/app.py cuyo BASE avanzo con un commit no relacionado: 'merge-base --is-ancestor' falla y el gate emite igualmente exit=1 reason=RISK_PAYLOAD_OBJECT_MISMATCH. Causa en los bytes: en base_gate.evaluate la comprobacion 'if not strict_binding(risk, base, head)' precede a las ramas por result.returncode, y los payloads de error del checker no incluyen 'base'/'head'.",
+      "falsification_probe": "1) Fichero con backslash en el nombre ('a\\\\b.py'): normalize_path lanza ValueError -> checker CHECKER_ERROR exit 2 -> gate exit=1 reason=RISK_PAYLOAD_OBJECT_MISMATCH, sin el mensaje del checker. 2) PR honesto sobre src/app.py cuyo BASE avanzo con un commit no relacionado: 'merge-base --is-ancestor' falla, el checker devuelve CHECKER_ERROR y el gate emite de nuevo exit=1 reason=RISK_PAYLOAD_OBJECT_MISMATCH en vez de un codigo de liveness distinguible.",
+      "id": "R2AA-025",
+      "impact": "Cuando risk_floor.py termina en ERROR (exit 2) su payload no incluye 'base' ni 'head', de modo que strict_binding falla primero y el gate emite RISK_PAYLOAD_OBJECT_MISMATCH en lugar de RISK_CHECKER_ERROR, descartando el mensaje de error real. El comportamiento es fail-closed y no permite pasar nada, pero confunde tres situaciones muy distintas bajo un mismo codigo: un ataque real contra la ligadura BASE/HEAD, un fallo o crash del checker, y el caso operativo mas frecuente de todos, un PR honesto cuya rama ya no desciende de la punta actual de BASE. Degrada el diagnostico justo en el escenario que mas se repetira y dificulta distinguir deuda de liveness de riesgo, que es precisamente lo que R2AA-015 pide documentar.",
+      "minimal_fix": "En evaluate, ramificar primero por result.returncode: tratar returncode==2 como RISK_CHECKER_ERROR propagando risk.get('message'), y aplicar la comprobacion strict_binding solo a los payloads de exit 0 y exit 3, que son los unicos que deben declarar base/head. Anadir ademas un codigo especifico para HEAD no descendiente de BASE.",
+      "path": "proposed/scripts/base_gate.py (funcion evaluate: strict_binding se evalua antes de ramificar por result.returncode)",
+      "severity": "LOW",
+      "title": "El codigo de razon RISK_PAYLOAD_OBJECT_MISMATCH enmascara errores del checker y el caso normal de HEAD desactualizado"
+    }
+  ],
+  "independence_satisfied": "PASS",
+  "limitations": [
+    "Sin acceso a la plataforma GitHub: no se ejecuto ningun probe real de check-run, required check, proteccion de rama ni no-bypass, y no se leyo ni modifico el repositorio SrHector199/desarrollo-gobernado-r2. R2AA-012 y EXP-01 no pueden cerrarse desde este paquete.",
+    "No se mutaron el repositorio del usuario ni sus settings; todo el trabajo dinamico se realizo en repositorios git desechables bajo /home/claude/lab creados desde copias de los bytes congelados.",
+    "El orden temporal freeze-antes-de-probes no es falsable desde el paquete: bytes identicos son compatibles con un freeze posterior a los probes. freeze_completed_before_probes y freeze_proof.pre/post quedan como aserciones no verificadas (C4-09).",
+    "Entorno de reproduccion: Linux, git 2.43.0, Python 3.12.3, core.autocrlf por defecto. El candidato no fija version de Python ni de git (R2AA-020), por lo que el comportamiento en ubuntu-latest podria diferir en detalles no observados aqui; el atributo 'eol=crlf' usado en R2AA-022 es independiente de core.autocrlf.",
+    "El lockout de R2AA-022 se demostro sobre un merge fast-forward local que simula la fusion a main; no se observo el comportamiento real de merge ni de required checks en GitHub.",
+    "Los probes de simultaneidad y carrera (C4-33) se evaluaron por lectura de los asserts rev-parse del workflow y por construccion local de puntas divergentes, no ejecutando eventos reales concurrentes en la plataforma.",
+    "No se evaluo la correccion funcional de ninguna feature futura; IR2-002 sigue bloqueando antes de la primera tarea funcional y este dictamen no aporta evidencia funcional.",
+    "El modelo de amenaza excluye, igual que el candidato, la manipulacion interna de un proceso hostil en el runner (runner NOT_A_SECURITY_SANDBOX); no se probaron escapes del propio runner de GitHub.",
+    "Metrica de falsos verdes: cuento +1 sobre los 5 canonicos, total 6, por la escena suministrada 'R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS' con forced_bypass_required=true, cuya propiedad he falsificado. Es un juicio de este revisor sobre la definicion de falso verde y deberia confirmarse contra el criterio historico del proyecto."
+  ],
+  "manifest_sha256": "6dc5d4950c09f31ddeaeb064576b3c40e937aaeb0c3df4fb2fcd2957af162cf7",
+  "open_residuals": {
+    "DC-006": "OPEN",
+    "EXP-01": "OPEN",
+    "IR2-002": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK",
+    "historical_R2_3_independence_gap": "UNCHANGED"
+  },
+  "r2aa_dispositions": {
+    "R2AA-011": "PARTIAL",
+    "R2AA-012": "OPEN",
+    "R2AA-013": "PARTIAL",
+    "R2AA-014": "RESOLVED",
+    "R2AA-015": "OPEN",
+    "R2AA-016": "BLOCKING",
+    "R2AA-017": "PARTIAL",
+    "R2AA-018": "PARTIAL",
+    "R2AA-019": "OPEN",
+    "R2AA-020": "OPEN",
+    "R2AA-021": "OPEN"
+  },
+  "review_protocol": "r2-independent-frozen-r2aa016017-candidate-v1",
+  "review_scope": "R2-4-frozen-base-anchored-candidate-r2aa016017",
+  "reviewer": {
+    "authored_current_change": false,
+    "fresh_context": true,
+    "independence_statement": "Revision desde contexto fresco. No participe en la autoria de estos bytes candidatos ni de ninguna evidencia previa del proyecto. Trate todas las conclusiones previas, incluidos LOCAL_EXACT_CANDIDATE_PROBES.json, OBSERVED_STATE.json y las revisiones en repo/evidence/r2-4/, como afirmaciones no autoritativas. Recompute de forma independiente los 4 hashes declarados, las 29 entradas del manifiesto de revision, los 7 objetos congelados y los 4 offsets del workflow, y re-ejecute los probes en repositorios git propios construidos desde los bytes congelados en lugar de aceptar los PASS suministrados. Ejecute ademas probes adversariales no presentes en el conjunto suministrado, uno de los cuales falsifico una escena PASS suministrada. No asumi que se esperara PASS y el dictamen resultante es BLOCKED.",
+    "model": "Claude Opus 5",
+    "prior_conclusions_used_as_authority": false,
+    "system": "Anthropic Claude (interfaz de chat claude.ai)"
+  },
+  "static_review": "FAIL",
+  "summary": "Cadena de integridad INTACTA y dictamen del candidato BLOCKED. Verificacion criptografica: 4/4 hashes declarados, 29/29 entradas de REVIEW_MANIFEST, 7/7 objetos de proposed/ contra FROZEN_CANDIDATE_MANIFEST, ligadura probes->manifiesto congelado y REVIEW_MANIFEST->ambos, sin circularidad, sin entradas extra en el ZIP y sin symlinks ni traversal. Reproduccion independiente: 18/18 escenarios de clasificacion suministrados y el self-test reproducen exactamente los valores declarados, y los 4 offsets del workflow confirman que la evaluacion del diff precede a la ejecucion de fixtures. Se preservan intactas R2AA-011 (captura temporal de BASE y assume-unchanged siguen bloqueadas) y R2AA-014 (ligadura estricta BASE/HEAD correcta en los 5 sub-casos mas los casos dinamicos). Las defensas de module-shadow R2AA-001 resisten incluso con os.py, importlib.py y sitecustomize.py hostiles ya presentes en BASE, y unknown_normal=C bloquea no solo los 6 casos declarados sino tambien variantes de caja y homoglifos unicode. Sin embargo, el hallazgo bloqueante R2AA-022 falsifica la correccion de R2AA-016 para estos bytes exactos: '.gitattributes' esta fijado a D solo en la raiz, pero Git lo honra en cualquier directorio, de modo que un PR clase B ordinario que anada 'tests/fixtures/.gitattributes' con '* text eol=crlf' pasa el gate (exit=0, floor=B), se fusiona sin aprobacion humana y, tras el merge, todo checkout limpio de BASE materializa los fixtures pinneados con CRLF, dejando el required check en fallo permanente e irrecuperable por la via B. Esto reproduce integramente el lockout de R2AA-016 SIN el bypass forzado que la escena suministrada declaraba necesario, por lo que esa asercion PASS atada al manifiesto congelado es en si misma un falso verde (+1 sobre los 5 canonicos). Se registran ademas tres hallazgos no bloqueantes en la misma familia de materializacion y diagnostico: symlinks y cambios de tipo a floor B, gitlink 160000 a floor B y enmascaramiento de codigos de razon del checker. Dispositions: R2AA-016 BLOCKING, R2AA-017 PARTIAL, R2AA-018 PARTIAL, R2AA-011 PARTIAL, R2AA-014 RESOLVED, R2AA-012/013/015/019/020/021 sin cerrar. DC-006, EXP-01 e IR2-002 se preservan abiertos y el gap historico de independencia de R2-3 permanece UNCHANGED. Cero aprobaciones humanas se juzga NO seguro en R2-4 con DC-006 abierto, dado que el unico control es un gate mecanico con un agujero demostrado en su propia superficie autorizada. El bootstrap queda BLOCKED porque su precondicion 1 (PASS independiente sobre los bytes exactos) no se cumple. Este documento es evidencia advisory sobre bytes exactos y no autoriza implementacion, merge, required checks, proteccion de rama, rulesets ni cambios de configuracion en GitHub; no se mutaron el repositorio ni sus settings."
+}
