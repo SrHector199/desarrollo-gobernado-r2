@@ -1,0 +1,257 @@
+{
+  "bootstrap_disposition": "BLOCKED",
+  "bundle_sha256": "1f2b42fadef243e78b08c2255bf6f5b2ed65e5cb2af4d78dac9af76bf9a12d03",
+  "candidate_disposition": "BLOCKED",
+  "checks": [
+    {
+      "evidence": "sha256(ZIP)=1f2b42fadef243e78b08c2255bf6f5b2ed65e5cb2af4d78dac9af76bf9a12d03 coincide con BUNDLE_SHA256 de REQUEST.md y con SHA256SUMS.txt. sha256(REVIEW_MANIFEST.json)=7ffa6164274873b0bf799bb23189dcdbcded51fc80e8f829005b3f77486aa5d1 coincide con MANIFEST_SHA256. sha256(REQUEST.md)=6d30da21147cae61b5ea1c2feb50878c8cf045e8b5e775d2f4174c33e42ecc20 coincide con SHA256SUMS.txt. Recomputados los 23 objetos de manifest.files: 23/23 OK en sha256 y en bytes, 0 discrepancias, 0 ausentes, 0 ficheros extra fuera del manifest. Corroboracion independiente de solo lectura (git ls-remote, sin mutacion): refs/heads/main=72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7 y refs/heads/r2-4/ci-bootstrap=a9dbc1adb096e9810cce5e5ac3fa0de4c099ce18, identicos a source_repository.main y source_repository.head del manifest.",
+      "id": "C2-01",
+      "status": "PASS"
+    },
+    {
+      "evidence": "policy/risk_floors.json open_controls={\"DC-006\":\"OPEN\",\"EXP-01\":\"OPEN\"}; enforcement_conditions.task_specific_scope_enforcement=NOT_IMPLEMENTED_DC_006_OPEN; decision_record.dc_006=OPEN_NOT_DECIDED_IN_R2_4; REVIEW_MANIFEST.candidate.dc_006=OPEN y exp_01=OPEN_PENDING_IMPLEMENTATION_AND_REAL_GITHUB_PROOF; base_gate.py linea 135 emite dc_006_scope_enforcement=OPEN_NOT_IMPLEMENTED_BY_THIS_GATE en toda evidencia; BOOTSTRAP_PLAN.md puntos 11-12. Ningun objeto del paquete cierra DC-006 ni EXP-01. Esta revision los mantiene OPEN.",
+      "id": "C2-02",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Verificado contra docs.github.com (Events that trigger workflows) y el changelog oficial de 2025-11-07 vigente desde 2025-12-08: el evento se ejecuta en el contexto de la rama por defecto del repositorio base y no del merge commit, el fichero de workflow y el commit de checkout se toman siempre de la rama por defecto con independencia de la rama base del PR, y GITHUB_REF/GITHUB_SHA resuelven a la rama por defecto y a su ultimo commit. Esto sostiene la premisa del candidato de que HEAD no puede alterar el workflow ejecutado. El candidato usa el patron seguro documentado: las expresiones ${{ }} aparecen solo en el bloque env (lineas 16-20) y los scripts las consumen como $VAR, sin interpolacion en run. Sonda de superficie de inyeccion de refspec: git check-ref-format rechaza ':', ' ', '*', '..' y '\\\\' en nombres de rama, y el valor se interpola dentro de la cadena entrecomillada \"refs/heads/${PR_HEAD_REF}:refs/remotes/origin/r2-head\", por lo que un nombre que empiece por '-' (aceptado por git) tampoco puede convertirse en opcion. Ver R2AA-013 por la desviacion rama-por-defecto frente a rama-base.",
+      "id": "C2-03",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Escaneo estatico de proposed/.github/workflows/r2-ci.yml: 1 unico job ('r2-governed-validation'), 4 steps, y cero ocurrencias de 'if:', 'paths:', 'paths-ignore:', 'branches-ignore:', 'continue-on-error', 'needs:' y 'concurrency'. No hay ninguna via de conversion de ejecucion obligatoria en exito saltado dentro del propio fichero. docs.github.com (Troubleshooting required status checks) confirma que los estados success, skipped y neutral satisfacen un check requerido y que un job saltado por condicional reporta Success; el candidato no contiene condicionales. Un workflow saltado por filtro de rama o path queda en Pending y bloquea el merge, lo que seria fail-closed. Ademas HEAD no puede introducir 'if: false' porque el workflow se toma de la rama por defecto y '.github/workflows/' es floor D.",
+      "id": "C2-04",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Linea 8: 'permissions: {}' a nivel workflow, sin override por job. No se usa ningun secret, ninguna expresion secrets.*, ningun 'uses:' de accion de terceros y ningun actions/checkout. El fetch es anonimo a https://github.com/${GITHUB_REPOSITORY}.git. Sonda de solo lectura sin mutacion (git ls-remote) confirma que el repositorio es publico y anonimamente clonable, por lo que permissions:{} es viable. Nota de dependencia registrada en limitations: si la visibilidad pasara a privada, el fetch fallaria y el step quedaria en rojo (fail-closed, pero perdida total de liveness).",
+      "id": "C2-05",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Primer step (lineas 23-27), antes de cualquier fetch: 'set -euo pipefail' y 'test \"$PR_HEAD_REPO\" = \"$GITHUB_REPOSITORY\"'. Un PR desde fork produce head.repo.full_name distinto y el test falla, abortando el job con exit distinto de cero: el check requerido reporta failure, no skipped ni neutral. Si el fork fue borrado, head.repo es null, la variable de entorno queda vacia y el test tambien falla. En ambos casos cierra en fallo y no en salto. Verificacion estatica; la ejecucion real sobre GitHub sigue pendiente (R2AA-010, EXP-01).",
+      "id": "C2-06",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Step 2 (lineas 29-43) hace fetch de refs/heads/${PR_BASE_REF} y refs/heads/${PR_HEAD_REF} a refs remotos dedicados y a continuacion exige 'test \"$(git rev-parse refs/remotes/origin/r2-base)\" = \"$PR_BASE_SHA\"' y lo equivalente para r2-head frente a $PR_HEAD_SHA. Ambos refs quedan atados a los SHA exactos del evento. Cierre TOCTOU correcto: si el autor empuja entre el evento y el fetch, la punta del ref difiere del SHA del evento y el test falla en rojo, y el evento synchronize genera una ejecucion nueva sobre el SHA nuevo. Tras el checkout se reafirma 'test \"$(git rev-parse HEAD)\" = \"$PR_BASE_SHA\"' y arbol limpio con 'git status --porcelain=v1 --untracked-files=all'.",
+      "id": "C2-07",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El workflow nunca ejecuta checkout de HEAD: solo 'git checkout --detach \"$PR_BASE_SHA\"' (linea 41). base_gate.py evaluate solo comprueba la existencia del objeto candidato con 'git cat-file -e {head}^{commit}' (linea 409) y pasa el SHA a risk_floor.py, que hace 'git merge-base --is-ancestor' y 'git diff --name-status --find-renames -z base head' sobre objetos, sin materializar el arbol de HEAD. Sonda: tras replicar los cuatro steps, el arbol de trabajo permanece en BASE y ningun byte de HEAD llega al disco. Para el candidato en curso la propiedad se cumple. Advertencia cruzada: R2AA-011 demuestra que codigo de candidato YA FUSIONADO si es ejecutado por el gate, por lo que la propiedad no es transitiva en el tiempo.",
+      "id": "C2-08",
+      "status": "PASS"
+    },
+    {
+      "evidence": "base_gate.py evaluate lineas 397-407: 'git rev-parse HEAD' y comparacion estricta con el argumento --base; si difiere emite AUTHORITY_CHECKOUT_NOT_EXACT_BASE y devuelve EXIT_FAIL=1. Sonda ejecutada con el arbol posicionado en un commit distinto del --base declarado: EXIT=1, status=FAIL, reason_code=AUTHORITY_CHECKOUT_NOT_EXACT_BASE. Ademas lineas 348-357 y 393-395 exigen que el --repo resuelto sea identico a Path(__file__).resolve().parent.parent; sonda con --repo /tmp: EXIT=2, status=ERROR, reason_code=AUTHORITY_ROOT_REPO_MISMATCH.",
+      "id": "C2-09",
+      "status": "PASS"
+    },
+    {
+      "evidence": "base_gate.py deriva authority_root de Path(__file__).resolve().parent.parent (lineas 52-53, 348, 386) y construye checker=authority_root/'scripts/risk_floor.py' y policy=authority_root/'policy/risk_floors.json' (lineas 89-90), invocandolos con rutas absolutas y cwd=authority_root (lineas 91-112). Como el gate se ejecuta desde el checkout exacto de BASE y ese checkout se verifica en C2-09, checker y policy proceden de BASE. La evidencia emitida incluye policy_sha256, checker_sha256, runner_sha256 y gate_sha256 observados. Salvedad material: esos hashes se recomputan del disco en cada invocacion y no se comparan contra ningun valor fijado, lo que es precisamente la brecha explotada en R2AA-011.",
+      "id": "C2-10",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sondas dinamicas sobre BASE exacto reconstruido con los bytes propuestos (BASE=469dedd6b45dd19174b9811fa4652512e9e43a0a), modo evaluate con techo B: R2_STATE.md -> EXIT=1 FAIL RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS floor D; .github/workflows/r2-ci.yml -> EXIT=1 FAIL floor D; scripts/base_gate.py -> EXIT=1 FAIL floor D; alta de scripts/newthing.py (control plane no clasificado) -> EXIT=1 FAIL RISK_UNKNOWN_HIGH_AUTHORITY_SUBJECT floor D; borrado de README.md -> EXIT=1 FAIL floor D por action_floors.deletion=D; alta de .github/workflows/dup.yml -> EXIT=1 FAIL floor D. Positivos: src/app.py -> EXIT=0 PASS floor B; alta de /json.py en raiz -> EXIT=0 PASS floor B. Todos los reason_code son los esperados.",
+      "id": "C2-11",
+      "status": "PASS"
+    },
+    {
+      "evidence": "No existe en el candidato ningun mecanismo de allowed_paths por task ni lectura de tasks/authorized/. NORMAL_PR_AUTHORIZED_CLASS es la constante 'B' en base_gate.py linea 16, identica para todo PR normal, sin derivacion desde packet alguno. La evidencia de cada ejecucion declara dc_006_scope_enforcement=OPEN_NOT_IMPLEMENTED_BY_THIS_GATE. El paquete no afirma alcance especifico por tarea en ningun objeto. DC-006 permanece OPEN.",
+      "id": "C2-12",
+      "status": "PASS"
+    },
+    {
+      "evidence": "FALLA. El self-test ejecuta tests/fixtures/good_splitter.py y tests/fixtures/bad_splitter.py mediante run_functional.py, que los carga con importlib.util.spec_from_file_location y spec.loader.exec_module (run_functional.py lineas 129-137) en un worker con cwd = raiz del repositorio (linea 740) y sin aislamiento de sistema de ficheros. Esos dos ficheros NO son bytes de confianza: policy/risk_floors.json los clasifica con prefix_rule 'tests/' floor B, y 'tests/' no figura en control_plane_roots. Sonda: un PR normal que solo modifica tests/fixtures/good_splitter.py obtiene EXIT=0, status=PASS, floor B, es decir es fusionable bajo el techo B con cero aprobaciones. Los bytes ejecutados por el verificador de confianza estan por tanto gobernados por el mismo techo que juzgan. Cadena completa en R2AA-011.",
+      "id": "C2-13",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "assert_risk_selftest (base_gate.py lineas 265-344) construye un repositorio git temporal real y exige tres resultados con reason_code y floor exactos: B PASS con FLOOR_WITHIN_AUTHORIZED_CLASS y floor B, D-bajo-B con exit 3, FAIL, FLOOR_EXCEEDS_AUTHORIZED_CLASS y floor D, y desconocido-en-D con exit 3, FAIL, UNKNOWN_HIGH_AUTHORITY_SUBJECT y floor D; ademas verifica base y head del payload en los tres casos. Sonda ejecutada sobre BASE exacto: EXIT=0, reason_code=TRUSTED_VERIFIERS_POSITIVE_AND_NEGATIVE_PROVED, con risk.post_b_pass exit 0 floor B, risk.post_d_under_b exit 3 floor D y risk.post_unknown_at_d exit 3 floor D. Coincide con LOCAL_CANDIDATE_PROBES.json.",
+      "id": "C2-14",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Vinculacion presente pero incompleta. risk_floor.py evaluate incluye base y head en el payload POST solo cuando no son None (lineas 254-257) y la sonda confirma que la ruta PASS real siempre los emite. base_gate.py linea 437 comprueba 'if risk.get(\"base\") not in (None, base) or risk.get(\"head\") not in (None, head)', de modo que un payload SIN las claves base/head satisface la comprobacion en lugar de rechazarla: la ausencia se trata como aceptable. Con el checker exacto de BASE no es explotable, pero elimina la capa de defensa en profundidad justo en el escenario donde mas se necesita, que es un checker manipulado. Ver R2AA-014.",
+      "id": "C2-15",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "Doble cierre verificado. Primero, HEAD nunca se materializa en disco, de modo que un json.py candidato no llega a existir durante la ejecucion del gate. Segundo, todas las invocaciones usan python3 -I -B -S (workflow lineas 49 y 57; base_gate.py lineas 93-95 y 151-153; run_functional.py lineas 722-724). Sonda directa en el entorno de ejecucion: con /tmp/shadowtest/json.py presente, 'python3 sub/probe.py' da sys.path[0]='/tmp/shadowtest/sub' mientras que 'python3 -I -B -S sub/probe.py' da sys.path[0]='/usr/lib/python312.zip'; en ambos casos json resuelve a /usr/lib/python3.12/json/__init__.py. Sonda de extremo a extremo: PR que anade /json.py en raiz -> EXIT=0 PASS con json_module_file=/usr/lib/python3.12/json/__init__.py. Dependencia registrada: -I implica -P solo desde Python 3.11; en runners anteriores sys.path[0] seria scripts/, que es control plane D.",
+      "id": "C2-16",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Directamente bloqueados, transitivamente eludibles. Sondas con techo B: cambio en .github/workflows/r2-ci.yml, en scripts/risk_floor.py, en scripts/base_gate.py y en policy/risk_floors.json producen todos EXIT=1 FAIL RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS con floor D. Sin embargo la cadena de R2AA-011 alcanza el mismo efecto sin tocar ninguno de esos paths en el PR juzgado: un PR de clase B modifica tests/fixtures/good_splitter.py, se fusiona, y en la ejecucion siguiente ese fichero, ya en BASE, es ejecutado por el step 3 y reescribe scripts/base_gate.py en disco antes de que el step 4 lo cargue. Resultado observado del step 4 sobre un PR que modifica scripts/risk_floor.py y R2_STATE.md: EXIT=0, status=PASS, reason_code=BASE_ANCHORED_RISK_GATE_PASSED. El invariante prometido no se sostiene en el tiempo.",
+      "id": "C2-17",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Confirmado eliminado. El workflow actual del repositorio (repo/.github/workflows/r2-ci.yml linea 116) contenia 'assert changed == {\".github/workflows/r2-ci.yml\", \"R2_STATE.md\"}'. El workflow propuesto no contiene ninguna asercion de conjunto de paths, ninguna comparacion de diff fija y ningun heredoc de Python en linea; toda la decision POST se delega en risk_floor.py, que clasifica el diff generico BASE..HEAD. Grep del candidato: cero ocurrencias de 'assert', 'changed ==' o '<<PY'.",
+      "id": "C2-18",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Sonda: PR que crea dos rutas nuevas que no existian en BASE, src/newmod/thing.py y tests/new/test_thing.py, sin tocar ningun objeto de acceptance authority -> EXIT=0, status=PASS, reason_code=BASE_ANCHORED_RISK_GATE_PASSED, floor B. Tambien PASS la modificacion ordinaria de src/app.py. El gate es reutilizable y no exige que cada PR toque la autoridad, a diferencia del mecanismo de un solo uso previo (R2AA-006).",
+      "id": "C2-19",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Redaccion correcta y no sobreafirmativa. status=BASE_ANCHORED_ENFORCEMENT_CAPABLE declara capacidad, no vigencia; activation_rule=ACTIVE_ONLY_WHEN_LOADED_FROM_ACCEPTED_BASE_BY_R2_POLICY_GATE condiciona la activacion; enforcement_conditions.real_github_proof_required_before_enforced=true; decision_record.authorization=REQUIRES_INDEPENDENT_REVIEW_AND_HUMAN_GATE_BEFORE_BOOTSTRAP_MERGE; decision_record.independent_review_r2_4_exact_candidate=PENDING; label=DEC-CP-V4-CANDIDATE; owner_settings_control_means_not_isolated=true distingue ENFORCED de AISLADA. Ningun objeto afirma que bytes no fusionados esten ya en vigor. Salvedad no bloqueante: activation_rule es una declaracion que risk_floor.py solo comprueba como cadena (lineas 68-71); el anclaje real lo aporta el workflow mas el gate, no la propia policy.",
+      "id": "C2-20",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Insegura bajo este diseno exacto. El argumento del candidato es que el anclaje en BASE sustituye a la autoridad humana porque HEAD no puede alterar el juez. Ese argumento se sostiene para los paths D, pero no para el conjunto completo de bytes que el juez ejecuta: tests/fixtures/good_splitter.py y bad_splitter.py son floor B, entran en BASE con cero aprobaciones y despues son ejecutados por el propio gate. Con required_approving_review_count=0 no existe ningun punto de control humano ni anclado entre la fusion de esos bytes y su ejecucion como parte de la autoridad. Demostrado end-to-end en R2AA-011: step 3 self-test EXIT=0 PASS y step 4 evaluate EXIT=0 PASS sobre un diff de clase D. Con las dos correcciones de R2AA-011 aplicadas, cero aprobaciones vuelve a ser defendible, pero no antes.",
+      "id": "C2-21",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "docs.github.com (Troubleshooting required status checks) establece que si un check y un commit status comparten nombre, ambos deben pasar cuando ese nombre es requerido, y que los estados success, skipped y neutral satisfacen el requisito. Bajo el candidato, un PR normal no puede introducir un job homonimo: sonda de alta de .github/workflows/dup.yml con job 'r2-governed-validation' -> EXIT=1 FAIL floor D. El workflow ejecutado se toma ademas de la rama por defecto, no de HEAD. Residual no bloqueante registrado en R2AA-009: la vinculacion sigue siendo nombre mas app, no fichero ni cuerpo del workflow, por lo que un cambio D futuramente autorizado podria reintroducir la ambiguedad; el workflow propuesto deberia considerarse el unico productor autorizado de ese contexto.",
+      "id": "C2-22",
+      "status": "PASS"
+    },
+    {
+      "evidence": "No establecido por documentacion. docs.github.com (Troubleshooting required status checks) exige que los checks requeridos pasen sobre el ultimo SHA del PR y que los checks disparados con un SHA anterior no cuenten; el changelog oficial de 2025-11-07 fija que para pull_request_target GITHUB_SHA apunta al ultimo commit de la rama por defecto. La documentacion oficial NO documenta a que SHA queda vinculado el check run resultante de un workflow pull_request_target, que es exactamente la pregunta que decide si el check requerido puede satisfacerse. La evidencia suministrada en OBSERVED_STATE.json (app_id 15368, context r2-governed-validation, conclusion failure) se observo bajo el workflow actual, que usa 'on: pull_request', no pull_request_target, por lo que no cubre el caso propuesto. En cuanto a la vinculacion context mas app_id y strict=true, docs.github.com confirma que puede seleccionarse la app esperada como fuente y que strict exige rama al dia. Debe resolverse con la sonda real del BOOTSTRAP_PLAN paso 6 antes de configurar el required check. Ver R2AA-012.",
+      "id": "C2-23",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "PROPOSED_BRANCH_PROTECTION.json body: enforce_admins=true (aplica a administradores), restrictions=null (unico valor posible en repositorio personal, no constituye bypass), allow_force_pushes=false, allow_deletions=false, allow_fork_syncing=false, block_creations=false, lock_branch=false, required_status_checks.strict=true con checks=[{app_id:15368, context:'r2-governed-validation'}]. No hay bypass_actors, ni allowances, ni excepciones configuradas. Metodo PUT sobre /repos/SrHector199/desarrollo-gobernado-r2/branches/main/protection. El paquete declara explicitamente 'Not configured by this package'. Residual documentado por GitHub y ya recogido: un PR al dia y en verde puede fusionarse localmente y empujarse sin que los checks corran sobre el propio merge commit.",
+      "id": "C2-24",
+      "status": "PASS"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md punto 4: 'Do NOT claim that the new pull_request_target gate protected its own bootstrap PR. It cannot: the trusted workflow is not yet present in BASE/main.' El punto 5 califica la fusion de bootstrap como accion de clase D de un solo uso. La circularidad esta enunciada de forma explicita y correcta: el gate se toma de la rama por defecto, y hasta que los bytes esten en main no existe gate que ejecutar. Verificado tambien contra OBSERVED_STATE.json: branch_protection_before=false y ruleset_count_before=0.",
+      "id": "C2-25",
+      "status": "PASS"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md puntos 1-2-5 exigen revision independiente de los bytes exactos, un gate humano de clase D nuevo y explicito posterior a esa revision, y una autorizacion de merge separada, listando como evidencia de aceptacion los bytes revisados, las sondas locales, el PASS independiente y el gate humano, sin pretender en ningun momento que el gate nuevo ya se haya ejecutado. La estructura es adecuada. Se registra que la precondicion del punto 2 no se cumple: esta revision es BLOCKED, de modo que el bootstrap no puede proceder con los bytes actuales.",
+      "id": "C2-26",
+      "status": "PASS"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md punto 6 exige, antes de configurar la proteccion, un PR de sonda B en el mismo repositorio sobre el BASE post-bootstrap, observando r2-governed-validation sobre el SHA exacto de la sonda y verificando app y context esperados; el punto 7 anade una sonda adversarial D que debe fallar por la razon esperada y no debe fusionarse. PROPOSED_BRANCH_PROTECTION.preconditions_before_configuration replica ambas. Esta sonda es ademas el unico medio de resolver C2-23.",
+      "id": "C2-27",
+      "status": "PASS"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md punto 9 exige GET del estado real de proteccion tras configurarla y el punto 10 exige una sonda negativa de no-bypass autorizada por separado antes de reclamar ENFORCED, manteniendo ENFORCED distinto de AISLADA porque el dueno conserva control sobre los ajustes de GitHub. Consistente con enforcement_conditions.real_github_proof_required_before_enforced=true y owner_settings_control_means_not_isolated=true. EXP-01 permanece OPEN hasta esas ejecuciones reales.",
+      "id": "C2-28",
+      "status": "PASS"
+    },
+    {
+      "evidence": "BOOTSTRAP_PLAN.md punto 12 y PROPOSED_BRANCH_PROTECTION.important_nonclaims declaran que el mantenimiento de control plane C/D queda fuera del gate normal y requiere un procedimiento futuro autorizado por separado. R2_CANDIDATE_REVIEW_CRITERIA.md lo enuncia como estrechez intencionada del techo B. Confirmado mecanicamente por sondas: cualquier borrado (action_floors.deletion=D), cualquier cambio bajo evidence/ (floor C), docs/ no clasificado (control plane D) y cualquier path desconocido bajo .github/, policy/, scripts/, tasks/, docs/ quedan bloqueados en flujo normal. La limitacion es real, explicita y coherente.",
+      "id": "C2-29",
+      "status": "PASS"
+    },
+    {
+      "evidence": "REQUEST.md punto 11 y BOOTSTRAP_PLAN.md punto 1 lo establecen y esta revision lo respeta: no se ha implementado nada, no se ha fusionado nada, no se ha configurado proteccion de rama ni ningun ajuste de GitHub. La unica interaccion de red con el repositorio fue un 'git ls-remote' de solo lectura, que no muta estado. Ademas la disposicion de esta revision es BLOCKED, por lo que no habilita el gate humano del punto 2 del plan de bootstrap.",
+      "id": "C2-30",
+      "status": "PASS"
+    }
+  ],
+  "dynamic_review": "FAIL",
+  "findings": [
+    {
+      "blocking": true,
+      "evidence": "policy/risk_floors.json prefix_rules asigna floor B al prefijo 'tests/' y control_plane_roots no incluye 'tests/'. base_gate.py --mode self-test ejecuta obligatoriamente tests/fixtures/good_splitter.py y tests/fixtures/bad_splitter.py a traves de run_functional.py, que los carga con importlib.util.spec_from_file_location mas spec.loader.exec_module (run_functional.py 129-137) en un worker con cwd = raiz del repositorio (740) y sin aislamiento de ficheros; el propio runner declara RUNNER_LIMITATION=NOT_A_SECURITY_SANDBOX. Cadena reproducida sobre BASE exacto reconstruido con los bytes propuestos: (1) PR normal que solo modifica tests/fixtures/good_splitter.py -> git diff 'M tests/fixtures/good_splitter.py', gate EXIT=0, status=PASS, floor B: fusionable con cero aprobaciones; (2) fusionado, ese fichero pasa a ser BASE de confianza; (3) step 3 del workflow ejecuta el fixture, que reescribe scripts/base_gate.py en disco, y el self-test sigue devolviendo EXIT=0, status=PASS, reason_code=TRUSTED_VERIFIERS_POSITIVE_AND_NEGATIVE_PROVED porque el gate en curso ya esta cargado en memoria; hash de scripts/base_gate.py antes a213dfdbb483a518, despues eb3ccc57c7320bd0; (4) step 4 carga el gate manipulado desde disco y sobre un PR que modifica scripts/risk_floor.py y R2_STATE.md devuelve EXIT=0 con status=PASS, reason_code=BASE_ANCHORED_RISK_GATE_PASSED, risk_floor=B, y ademas sigue declarando candidate_code_executed=false y candidate_worktree_checked_out=false. El check requerido reportaria success sobre un cambio de clase D.",
+      "falsification_probe": "Reconstruccion del BASE exacto desde proposed/ (BASE=469dedd6b45dd19174b9811fa4652512e9e43a0a) y replica verbatim de los cuatro steps del workflow. Sonda A: gate evaluate sobre PR que solo toca tests/fixtures/good_splitter.py -> EXIT=0 PASS floor B. Sonda B: tras fusionar ese fixture, self-test -> EXIT=0 PASS, y evaluate sobre HEAD con 'M R2_STATE.md' y 'M scripts/risk_floor.py' -> EXIT=0 PASS floor B. Sonda C (suficiencia de la correccion): una variante que manipula policy/risk_floors.json SI es detectada, porque assert_risk_selftest se ejecuta despues del runner y sus negativos dejan de cumplirse (SELFTEST_EXIT=1); esa misma variante demuestra en cambio que una reafirmacion de limpieza posterior al self-test NO basta, porque 'git update-index --assume-unchanged policy/risk_floors.json' deja 'git status --porcelain=v1 --untracked-files=all' completamente vacio con el fichero ya manipulado.",
+      "id": "R2AA-011",
+      "impact": "Falso verde completo y autoautorizacion diferida en un paso. El techo mecanico B no acota la superficie de la acceptance authority, porque los bytes que el gate de confianza EJECUTA estan clasificados con el mismo techo que el gate impone. Basta un unico PR de clase B, fusionable sin ninguna aprobacion humana bajo required_approving_review_count=0, para que la ejecucion siguiente del required check quede bajo control del autor de ese PR y devuelva success para cambios de clase D, incluidos el propio checker, la policy, el workflow y R2_STATE.md. Invalida en la practica I-07, C2-13, C2-17 y la premisa central de que anclar en BASE elimina el problema de autojuicio; el anclaje protege el eje HEAD frente a BASE, pero no el eje temporal BASE(t) frente a BASE(t+1). Nota: el diseno declara hostile_process_internal_tampering=OUT_OF_SCOPE, pero ese alcance se establecio para juzgar una implementacion candidata, no para bytes que forman parte de la base de computo confiable del propio juez.",
+      "minimal_fix": "Dos cambios, ambos necesarios. (1) Clasificacion: anadir tests/fixtures/good_splitter.py y tests/fixtures/bad_splitter.py a exact_paths con floor D, o mover 'tests/fixtures/' a control_plane_roots con prefix_rule D, de modo que ningun PR de clase B pueda alterar bytes que el gate ejecuta; el resto de 'tests/' puede seguir en B. (2) Fijacion e integridad: pinar en base_gate.py los sha256 esperados de ambos fixtures, de run_functional.py, de risk_floor.py y de policy/risk_floors.json, y abortar con FAIL si no coinciden, comparando ademas contra los blobs de git del commit BASE en lugar de contra el disco. Refuerzo recomendado: ejecutar el self-test sobre una copia efimera de solo lectura de la autoridad, o reordenar de modo que la evaluacion POST se realice antes de ejecutar cualquier fixture, para que el codigo ejecutado no pueda influir en el veredicto de la misma ejecucion. NO es suficiente anadir solo una reafirmacion de arbol limpio entre los steps 3 y 4: la sonda C demuestra su elusion con git update-index --assume-unchanged, y un fixture tambien puede escribir fuera del repositorio.",
+      "path": "policy/risk_floors.json (prefix_rules 'tests/'), proposed/scripts/base_gate.py (assert_runner_selftest, lineas 144-210), proposed/scripts/run_functional.py (lineas 129-137, 707-746), proposed/tests/fixtures/good_splitter.py, proposed/tests/fixtures/bad_splitter.py, proposed/.github/workflows/r2-ci.yml (steps 3 y 4, lineas 45-61)",
+      "severity": "CRITICAL",
+      "title": "Los fixtures que el gate de confianza ejecuta estan clasificados en clase B: un PR normal fusionado captura la acceptance authority y produce un falso verde en la ejecucion siguiente"
+    },
+    {
+      "blocking": false,
+      "evidence": "docs.github.com (Troubleshooting required status checks) establece que los checks requeridos deben pasar sobre el ultimo SHA del PR y que los disparados con un SHA anterior no cuentan. El changelog oficial de 2025-11-07, vigente desde 2025-12-08, establece que para pull_request_target GITHUB_REF resuelve a la rama por defecto y GITHUB_SHA apunta al ultimo commit de esa rama. La documentacion oficial consultada no documenta a que SHA queda vinculado el check run producido por un workflow pull_request_target. OBSERVED_STATE.json aporta app_id 15368 y context r2-governed-validation con conclusion failure, pero observados bajo repo/.github/workflows/r2-ci.yml, que usa 'on: pull_request', no pull_request_target.",
+      "falsification_probe": "No falsificable localmente: es semantica de plataforma. Sonda requerida antes de configurar nada: tras el bootstrap, abrir un PR de sonda B en el mismo repositorio y consultar en solo lectura los check runs asociados al SHA de cabeza exacto del PR, verificando que existe uno con context r2-governed-validation, app_id 15368 y conclusion success ligado a ese SHA y no unicamente al commit de la rama por defecto. Es exactamente el paso 6 del BOOTSTRAP_PLAN.",
+      "id": "R2AA-012",
+      "impact": "Si el check run quedara vinculado al commit de la rama por defecto y no al SHA de cabeza del PR, el required check no podria satisfacerse nunca y todo PR quedaria bloqueado de forma permanente. Ese modo de fallo es cerrado y no produce falso verde, pero invalidaria la viabilidad del diseno. El riesgo inverso es mas grave: si el check quedara ligado al SHA de la rama por defecto, una unica ejecucion en verde podria interpretarse como satisfactoria para PRs distintos que comparten esa misma base, lo que introduciria ambiguedad entre PRs. Ninguna de las dos hipotesis puede resolverse con la documentacion actual.",
+      "minimal_fix": "Mantener C2-23 como UNCERTAIN y tratar el paso 6 del BOOTSTRAP_PLAN como bloqueante duro: no configurar branch protection ni declarar el required check hasta observar, sobre GitHub real, un check run con context r2-governed-validation y app_id 15368 vinculado al SHA de cabeza exacto del PR de sonda, y hasta comprobar que un segundo PR abierto contra la misma base no hereda ese estado. Registrar la observacion como evidencia de objeto exacto.",
+      "path": "proposed/.github/workflows/r2-ci.yml (linea 4), PROPOSED_BRANCH_PROTECTION.json (required_status_checks.checks), BOOTSTRAP_PLAN.md paso 6",
+      "severity": "HIGH",
+      "title": "La vinculacion del check run de pull_request_target al SHA de cabeza del PR no esta establecida por la documentacion oficial y no esta cubierta por la evidencia observada"
+    },
+    {
+      "blocking": false,
+      "evidence": "El changelog oficial de 2025-11-07 establece que, para pull_request_target, el fichero de workflow y el commit de checkout se toman siempre de la rama por defecto del repositorio, con independencia de la rama base del pull request, y que GITHUB_REF y GITHUB_SHA resuelven a esa rama por defecto. El candidato razona en todo momento en terminos de BASE: 'on: pull_request_target: branches: [main]' y checkout de github.event.pull_request.base.sha. Ambas nociones coinciden unicamente si main es la rama por defecto del repositorio, extremo que ningun objeto del paquete declara: OBSERVED_STATE.json aporta main_sha pero no default_branch. Ademas el YAML ejecutado procede de la rama por defecto en el instante de la ejecucion, mientras que los scripts y la policy proceden de pull_request.base.sha, que es el instante del evento; si main avanza entre ambos momentos, workflow y autoridad provienen de commits distintos.",
+      "falsification_probe": "Consulta de solo lectura del campo default_branch del repositorio antes del bootstrap, y comparacion en la sonda del paso 6 entre github.sha observado en la ejecucion y el PR_BASE_SHA utilizado por el gate, para cuantificar la desviacion.",
+      "id": "R2AA-013",
+      "impact": "Desviacion documental y potencial desviacion temporal de autoridad. Si main no fuese la rama por defecto, el workflow ejecutado no seria el que el candidato cree estar anclando, y el modelo de amenaza descrito en el paquete seria incorrecto. Aun siendo main la rama por defecto, la evidencia emitida atribuye a un unico 'BASE' dos objetos que pueden diferir, lo que contradice I-04 en su exigencia de certificar objetos exactos. No constituye por si mismo un falso verde, porque ambas versiones de main han pasado por el gate.",
+      "minimal_fix": "Declarar y verificar explicitamente que main es la rama por defecto, e incorporarlo a OBSERVED_STATE como precondicion del bootstrap. Anadir a la evidencia del gate el valor de GITHUB_SHA junto a PR_BASE_SHA y hacer explicito en la documentacion del candidato que la fuente del workflow es la rama por defecto y no la rama base, alineando el vocabulario del paquete con la semantica vigente desde 2025-12-08.",
+      "path": "proposed/.github/workflows/r2-ci.yml (lineas 3-6), OBSERVED_STATE.json, BOOTSTRAP_PLAN.md",
+      "severity": "MEDIUM",
+      "title": "El candidato razona sobre la rama base mientras la semantica vigente de pull_request_target toma workflow y referencia de la rama por defecto"
+    },
+    {
+      "blocking": false,
+      "evidence": "base_gate.py linea 437: 'if risk.get(\"base\") not in (None, base) or risk.get(\"head\") not in (None, head): ... RISK_PAYLOAD_OBJECT_MISMATCH'. La pertenencia a la tupla (None, base) hace que un payload que no emita la clave 'base' supere la comprobacion en lugar de fallarla. Verificado que el checker exacto de BASE si emite ambas claves en la ruta PASS: sonda POST con techo B sobre un diff de src/ -> claves base y head presentes, status PASS. Verificado tambien que las rutas de error del checker emiten unicamente status, reason_code y message, sin base ni head, y son capturadas antes por el codigo de salida 2.",
+      "falsification_probe": "Comparacion directa del payload POST emitido por risk_floor.py en las rutas PASS, FAIL y ERROR frente a la condicion de la linea 437; construccion del caso en el que un checker que omitiese las claves atravesaria la comprobacion de vinculacion sin ser detectado.",
+      "id": "R2AA-014",
+      "impact": "Debilita C2-15. La vinculacion del veredicto a los objetos BASE y HEAD exactos deja de ser obligatoria y pasa a ser condicional a que el checker coopere emitiendo las claves. Con el checker de BASE intacto no es explotable, pero elimina precisamente la capa que deberia detectar un checker sustituido, que es el escenario materializado por R2AA-011. Es defensa en profundidad perdida, no un falso verde independiente.",
+      "minimal_fix": "Exigir presencia y coincidencia estrictas: fallar con RISK_PAYLOAD_OBJECT_MISMATCH si 'base' o 'head' no estan presentes en el payload, o si no son exactamente iguales a los argumentos, sustituyendo la comprobacion de pertenencia por 'risk.get(\"base\") != base or risk.get(\"head\") != head'.",
+      "path": "proposed/scripts/base_gate.py linea 437",
+      "severity": "MEDIUM",
+      "title": "La comprobacion de vinculacion BASE/HEAD del payload acepta claves ausentes como coincidencia valida"
+    },
+    {
+      "blocking": false,
+      "evidence": "risk_floor.py findings_from_post lineas 336-342 exige 'git merge-base --is-ancestor base head' y lanza ValueError si falla, que base_gate traduce a RISK_CHECKER_ERROR con codigo de salida 2. Sonda: base y head divergentes -> EXIT=2, status=ERROR, reason_code=RISK_CHECKER_ERROR. Como github.event.pull_request.base.sha es la punta de la rama base en el instante del evento y no la merge-base, cualquier avance de main deja de ser ancestro del HEAD del PR y el check pasa a rojo hasta que el autor actualice su rama. Adicionalmente: docs.github.com advierte que ramas con nombres que se parecen a SHAs pueden no disparar workflows de pull_request_target; el changelog de 2026-07-28 introduce retencion automatica de ejecuciones potencialmente maliciosas a la espera de aprobacion en repositorios publicos, y el repositorio verificado es publico. Por politica, action_floors.deletion=D impide todo borrado en flujo normal y el prefijo 'evidence/' es floor C, de modo que un PR normal no puede registrar evidencia.",
+      "falsification_probe": "Sonda de no-ancestria ejecutada localmente con resultado ERROR y codigo 2, confirmando cierre en fallo. Las condiciones de plataforma restantes solo son observables en GitHub real durante EXP-01.",
+      "id": "R2AA-015",
+      "impact": "Todos estos modos son fail-closed y ninguno produce falso verde, pero en conjunto describen un gate con liveness fragil: PRs correctos de clase B pueden quedar en rojo o en pendiente por causas ajenas a su contenido, y el flujo normal no puede borrar ficheros ni registrar evidencia. strict=true mitiga el caso de la rama desactualizada al forzar la actualizacion, a costa de reejecuciones en cada avance de main. Conviene documentarlo para que un rojo o un pendiente no se interpreten como deteccion de riesgo.",
+      "minimal_fix": "Distinguir en la evidencia el fallo por politica del fallo por condicion de carrera, emitiendo un reason_code especifico cuando el motivo sea no-ancestria de BASE, para no confundir bloqueo de riesgo con desactualizacion de rama. Documentar en el plan de bootstrap la retencion por aprobacion en repositorios publicos y la restriccion de nombres de rama similares a SHAs, y prever el procedimiento C/D separado para borrados y para el registro de evidencia.",
+      "path": "proposed/scripts/risk_floor.py lineas 336-342, proposed/policy/risk_floors.json (action_floors.deletion, prefix_rules 'evidence/'), BOOTSTRAP_PLAN.md",
+      "severity": "LOW",
+      "title": "Modos de fallo cerrado y limitaciones de liveness no documentados: BASE no ancestro, retencion por aprobacion, nombres de rama y bloqueo de borrados y de evidencia"
+    }
+  ],
+  "independence_satisfied": "PASS",
+  "limitations": [
+    "Revision realizada sobre los bytes exactos del paquete verificado por hash. No se ha ejecutado nada en el repositorio real de GitHub ni se ha mutado ningun objeto, rama, ajuste ni proteccion. La unica interaccion de red con el repositorio fue un 'git ls-remote' de solo lectura que corrobora main=72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7 y r2-4/ci-bootstrap=a9dbc1adb096e9810cce5e5ac3fa0de4c099ce18 y confirma visibilidad publica.",
+    "Las sondas dinamicas se ejecutaron sobre una reconstruccion local del BASE a partir de proposed/, con Git 2.43.0 y Python 3.12.3, no sobre ubuntu-latest de GitHub. La conclusion de R2AA-011 no depende de la version: depende de la clasificacion de 'tests/' y de que run_functional.py ejecute el fichero con exec_module sin aislamiento.",
+    "La semantica de plataforma de GitHub relativa al SHA al que se vincula un check run de pull_request_target no ha podido establecerse a partir de la documentacion oficial y no ha sido reproducida dinamicamente. C2-23 queda UNCERTAIN y R2AA-012 la deja como precondicion dura del paso 6 del bootstrap.",
+    "La correspondencia app_id 15368 con la app de GitHub Actions procede exclusivamente de OBSERVED_STATE.json, evidencia suministrada; docs.github.com no publica identificadores numericos de app. Ademas esa observacion se produjo bajo el workflow actual con 'on: pull_request', no bajo pull_request_target.",
+    "No se ha verificado que main sea la rama por defecto del repositorio; ningun objeto del paquete lo declara. Toda la argumentacion de anclaje del candidato depende de ello (R2AA-013).",
+    "El comportamiento ante PRs desde fork se ha verificado estaticamente por construccion del primer step, no ejecutandolo en GitHub real; R2AA-010 permanece PARTIAL.",
+    "La sonda de captura de autoridad de R2AA-011 se ejecuto en un repositorio de trabajo aislado bajo /home/claude/scratch. No se creo, modifico ni fusiono ninguna rama, PR ni fichero en el repositorio del usuario.",
+    "El aislamiento de python3 -I frente al sombreado de modulos depende de que -I implique -P, cierto desde Python 3.11 y verificado en 3.12.3. En runners con Python 3.10 o anterior sys.path[0] seria el directorio scripts/, que es control plane de clase D y por tanto sigue estando protegido, pero la propiedad dejaria de ser estructural.",
+    "Esta revision es evidencia consultiva. No autoriza implementacion, merge, configuracion de branch protection ni mutacion de ajustes de GitHub, y su disposicion BLOCKED impide expresamente el gate humano previsto en el paso 2 del BOOTSTRAP_PLAN."
+  ],
+  "manifest_sha256": "7ffa6164274873b0bf799bb23189dcdbcded51fc80e8f829005b3f77486aa5d1",
+  "open_residuals": {
+    "DC-006": "OPEN",
+    "EXP-01": "OPEN",
+    "historical_R2_3_independence_gap": "UNCHANGED"
+  },
+  "r2aa_resolution": {
+    "R2AA-001": "RESOLVED",
+    "R2AA-002": "RESOLVED",
+    "R2AA-003": "BLOCKING",
+    "R2AA-004": "RESOLVED",
+    "R2AA-005": "RESOLVED",
+    "R2AA-006": "RESOLVED",
+    "R2AA-007": "PARTIAL",
+    "R2AA-008": "RESOLVED",
+    "R2AA-009": "PARTIAL",
+    "R2AA-010": "PARTIAL"
+  },
+  "review_protocol": "r2-independent-base-anchored-candidate-v1",
+  "review_scope": "R2-4-exact-base-anchored-acceptance-authority-candidate",
+  "reviewer": {
+    "authored_current_change": false,
+    "fresh_context": true,
+    "independence_statement": "Revision iniciada desde contexto nuevo, sin participacion alguna en la autoria del candidato ni de las evidencias previas. Toda conclusion anterior, incluidos acceptance_authority_independent_review_01.json, base_anchored_scratch_falsification_01.json y LOCAL_CANDIDATE_PROBES.json, se ha tratado como no autoritativa y se ha reverificado o contrastado de forma independiente. Se leyo R2_CANDIDATE_REVIEW_CRITERIA.md antes de revisar los bytes propuestos. Los hallazgos se derivan de los bytes exactos verificados por hash, de sondas locales reproducibles ejecutadas sobre una reconstruccion aislada del BASE y de documentacion oficial vigente de GitHub. No se asumio ninguna disposicion esperada: la busqueda fue explicitamente adversarial y produjo un falso verde reproducible que ninguna evidencia previa del paquete habia cubierto.",
+    "model": "Claude Opus 5",
+    "prior_conclusions_used_as_authority": false,
+    "system": "Anthropic Claude (interfaz de chat claude.ai)"
+  },
+  "static_review": "FAIL",
+  "summary": "Integridad del paquete correcta: sha256 del ZIP y de REVIEW_MANIFEST.json coinciden con REQUEST.md y con SHA256SUMS.txt, los 23 objetos del manifest verifican sha256 y bytes sin ficheros extra ni ausentes, y una consulta de solo lectura corrobora de forma independiente que main y r2-4/ci-bootstrap del repositorio real coinciden con los SHA declarados. El candidato corrige de manera real y comprobable la mayor parte de los defectos previos: desaparecen los verificadores de Python en linea y con ellos el sombreado por CWD, sondado y confirmado con python3 -I -B -S; desaparece la asercion de diff de un solo uso y se sustituye por clasificacion generica del diff BASE..HEAD, con paths nuevos de clase B pasando sin tocar la acceptance authority; el negativo de riesgo deja de apoyarse en un path inexistente y pasa a construir un repositorio temporal real con PASS conocido en B y FAIL conocido para D-bajo-B y para control plane desconocido; la policy V4 deja de declararse NOT_ENFORCED y el checker exige esa declaracion para arrancar; permissions es {} sin secretos ni acciones de terceros; no hay condicionales, filtros de path ni continue-on-error que puedan convertir ejecucion obligatoria en exito saltado; los PRs entre repositorios cierran en fallo y no en salto; BASE y HEAD se atan a los SHA exactos del evento y el gate prueba que su checkout es el BASE exacto antes de juzgar; y la propuesta de proteccion aplica a administradores, con strict=true, sin bypass configurado, sin force push y sin borrado. Aun asi la disposicion es BLOCKED por un falso verde critico, nuevo y reproducible, que ninguna evidencia previa del paquete cubria. La policy clasifica el prefijo 'tests/' con floor B y no lo incluye en control_plane_roots, pero el step obligatorio de autoprueba del gate ejecuta tests/fixtures/good_splitter.py y tests/fixtures/bad_splitter.py mediante run_functional.py, que los carga con exec_module en un worker sin aislamiento y con la raiz del repositorio como directorio de trabajo. Los bytes que el juez ejecuta quedan por tanto gobernados por el mismo techo que el juez impone. La cadena se reprodujo completa: un PR normal que solo modifica el fixture obtiene PASS con floor B y es fusionable con cero aprobaciones; una vez en BASE, ese fixture se ejecuta en el step 3, reescribe scripts/base_gate.py en disco mientras la autoprueba en curso sigue devolviendo PASS porque el gate vigente ya esta en memoria, y el step 4 carga el gate manipulado y devuelve exit 0 con status PASS sobre un PR que modifica scripts/risk_floor.py y R2_STATE.md, declarando ademas candidate_code_executed=false. El anclaje en BASE protege el eje HEAD frente a BASE pero no el eje temporal BASE(t) frente a BASE(t+1), de modo que con required_approving_review_count=0 no queda ningun punto de control humano ni anclado entre la fusion de esos bytes y su ejecucion como autoridad: C2-13, C2-17 y C2-21 fallan y R2AA-003 permanece BLOCKING. La correccion minima es doble y ambas partes son necesarias: reclasificar a D los fixtures que el gate ejecuta y fijar en base_gate.py los sha256 esperados de fixtures, runner, checker y policy contrastados contra los blobs de git del commit BASE; se comprobo ademas que una simple reafirmacion de arbol limpio entre los steps 3 y 4 no basta, porque git update-index --assume-unchanged la elude por completo. Se registran cuatro hallazgos no bloqueantes: la vinculacion del check run de pull_request_target al SHA de cabeza del PR no esta establecida por la documentacion oficial ni cubierta por la evidencia observada, que se tomo bajo un workflow con 'on: pull_request', por lo que C2-23 queda UNCERTAIN y el paso 6 del bootstrap pasa a ser precondicion dura; la semantica vigente desde 2025-12-08 toma workflow y referencia de la rama por defecto y no de la rama base, extremo que el paquete no declara ni verifica; la comprobacion de vinculacion BASE/HEAD del payload acepta claves ausentes como coincidencia valida y pierde defensa en profundidad justo frente a un checker sustituido; y varios modos de fallo cerrado y limitaciones de liveness quedan sin documentar. El plan de bootstrap es estructuralmente adecuado y enuncia con correccion la circularidad, pero su propia precondicion de revision independiente PASS no se cumple, de modo que la disposicion de bootstrap tambien es BLOCKED. DC-006 y EXP-01 permanecen OPEN y el hueco historico de independencia de R2-3 permanece sin cambios. Esta revision es evidencia consultiva y no autoriza implementacion, merge, configuracion de proteccion ni mutacion de ajustes de GitHub."
+}

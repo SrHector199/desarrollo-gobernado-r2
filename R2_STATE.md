@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar el diseño exacto candidato del acceptance authority anclado en BASE y someterlo a revisión independiente antes de implementarlo; no modificar todavía workflow, checker, policy, task packets, main ni configuración GitHub.
-- Last updated: 2026-08-15T13:57:42Z
+- Authorized next step: Diseñar y falsar en scratch la corrección mínima de R2AA-011, incluyendo protección D de los bytes ejecutados por el gate, integridad contra blobs exactos de BASE, vinculación BASE/HEAD estricta y evaluación antes del self-test; no modificar todavía workflow, checker, policy, fixtures, task packets, main ni configuración GitHub.
+- Last updated: 2026-08-15T14:45:16Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 4 detectados (R2AA-001 añadido; R2AA-002 no incrementa: documentado, no demostrado dinámicamente en esta revisión)
+- Falsos verdes: 5 detectados (R2AA-011 añadido como falso verde dinámicamente reproducido; R2AA-012..015 no incrementan la métrica)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -173,7 +173,44 @@
 - Existing independent-review blockers remain historical/current until an exact reviewed candidate resolves them; this scratch PASS does not relabel the prior BLOCKED disposition.
 - 2026-08-15T13:57:42Z: human-authorized canonicalization only; no workflow/checker/policy/task/GitHub-settings implementation in this commit.
 
+- 2026-08-15T14:45:16Z: segunda revisión independiente del candidato BASE-anchored: evidence evidence/r2-4/base_anchored_candidate_independent_review_02.json SHA-256 84b2bc79bd644711cd55da8ebc4b0104042205cd6286f718058ba5c3ee5e025a; independence PASS; static/dynamic FAIL; candidate/bootstrap BLOCKED; R2AA-011 CRITICAL falso verde +1; R2AA-012..015 no bloqueantes; false greens 5; EXP-01/DC-006 OPEN.
+
+## Segunda revisión independiente del candidato R2-4 - BASE anchored
+- Evidence: evidence/r2-4/base_anchored_candidate_independent_review_02.json
+- Evidence SHA-256: 84b2bc79bd644711cd55da8ebc4b0104042205cd6286f718058ba5c3ee5e025a
+- Bundle SHA-256 revisado: 1f2b42fadef243e78b08c2255bf6f5b2ed65e5cb2af4d78dac9af76bf9a12d03
+- Manifest SHA-256 revisado: 7ffa6164274873b0bf799bb23189dcdbcded51fc80e8f829005b3f77486aa5d1
+- Reviewer: Anthropic Claude / Claude Opus 5 según identificador visible del revisor.
+- fresh_context: true.
+- authored_current_change: false.
+- prior_conclusions_used_as_authority: false.
+- independence_satisfied: PASS.
+- static_review: FAIL.
+- dynamic_review: FAIL.
+- candidate_disposition: BLOCKED.
+- bootstrap_disposition: BLOCKED.
+- C2 checks: 25 PASS / 3 FAIL / 2 UNCERTAIN.
+- C2 FAIL: C2-13, C2-17, C2-21.
+- C2 UNCERTAIN: C2-15, C2-23.
+- R2AA-011: CRITICAL BLOCKING; falso verde dinámicamente reproducido; incrementa falsos verdes +1.
+- R2AA-012: HIGH NONBLOCKING; binding del check `pull_request_target` al SHA de HEAD requiere prueba GitHub real.
+- R2AA-013: MEDIUM NONBLOCKING; `default_branch=main` observado ahora read-only, pero la posible desviación temporal workflow/default-branch vs PR_BASE_SHA sigue pendiente.
+- R2AA-014: MEDIUM NONBLOCKING; la comprobación BASE/HEAD debe exigir claves presentes e igualdad estricta.
+- R2AA-015: LOW NONBLOCKING; limitaciones fail-closed/liveness deben documentarse y distinguirse de riesgo.
+- R2AA resolution report del candidato: 001 RESOLVED; 002 RESOLVED; 003 BLOCKING; 004 RESOLVED; 005 RESOLVED; 006 RESOLVED; 007 PARTIAL; 008 RESOLVED; 009 PARTIAL; 010 PARTIAL.
+- Corrección mínima autorizada solo para diseño/falsificación scratch: proteger como D todos los bytes que el gate ejecute; fijar integridad contra blobs exactos de BASE; exigir BASE/HEAD estrictos; evaluar el PR antes de ejecutar self-tests/fixtures.
+- Una simple comprobación de working tree limpio NO se considera corrección suficiente; la review reprodujo evasión mediante `assume-unchanged`.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- Historical R2-3 independence gap: UNCHANGED.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Esta revisión no autoriza implementación, merge, branch protection, required check ni GitHub settings.
+- 2026-08-15T14:45:16Z: segunda revisión independiente del candidato canonicalizada como BLOCKED.
+
 ## Blockers
+- R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
+- R2AA-011 CRITICAL BLOCKING: fixtures ejecutados por el gate eran B y permiten captura temporal de acceptance authority; falso verde reproducido.
+- R2AA-012 HIGH NONBLOCKING, R2AA-013 MEDIUM NONBLOCKING, R2AA-014 MEDIUM NONBLOCKING, R2AA-015 LOW NONBLOCKING: conservar como deuda explícita; no elevan la métrica de falsos verdes.
 - R2-4 acceptance-authority independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; enforcement_disposition=BLOCKED.
 - R2AA-001 CRITICAL BLOCKING: verificadores inline sombreables desde el checkout del PR; falso verde dinámicamente demostrado.
 - R2AA-002 CRITICAL BLOCKING: un job saltado puede satisfacer el check nominal sin ejecutar validación.
