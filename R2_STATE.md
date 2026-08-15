@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Diseñar y falsar en scratch una corrección general de semántica de materialización: clasificar `.gitattributes` y `.gitmodules` como D por basename a cualquier profundidad; conservar `unknown_normal=C`; conservar contenido regular normal en `src/` y `tests/` como B; detectar modos Git y bloquear symlinks 120000, gitlinks 160000 y type-changes como D; elevar cambios de modo ejecutable fuera de B; volver a probar lockout CRLF anidado, symlinks, type-changes y gitlinks; preservar R2AA-011 y R2AA-014; tratar freeze-before-probes como disciplina procedural y no garantía criptográfica; y proponer required_approving_review_count=1 como control temporal mientras DC-006 siga OPEN; no implementar todavía control plane ni GitHub settings.
-- Last updated: 2026-08-15T19:15:19Z
+- Authorized next step: Preparar y congelar los bytes exactos del nuevo candidato R2-4, generar su manifest, ejecutar sobre esos mismos bytes los probes de materialización y autoridad, ligar la evidencia al manifest y someter el paquete exacto a revisión independiente antes de implementar; no modificar todavía workflow, checker, policy, runner, fixtures, task packets, main ni configuración GitHub.
+- Last updated: 2026-08-15T19:52:49Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 6 detectados (FALSE_GREEN_6=EVIDENCE_VERIFIER_FALSE_GREEN: la evidencia del candidato declaró PASS para `R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS`, pero la revisión independiente reprodujo el lockout mediante un PR B ordinario con `.gitattributes` anidado; incremento 5 -> 6)
+- Falsos verdes: 6 detectados (FALSE_GREEN_6=EVIDENCE_VERIFIER_FALSE_GREEN permanece canónico; la falsificación scratch de semántica de materialización 27/27 no añadió un nuevo falso verde)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -344,10 +344,10 @@
 - R2AA-019: OPEN.
 - R2AA-020: OPEN.
 - R2AA-021: OPEN.
-- R2AA-022: HIGH BLOCKING; un `.gitattributes` anidado bajo un prefijo B puede entrar como B y reproducir el lockout CRLF sin bypass forzado.
-- R2AA-023: MEDIUM NONBLOCKING; symlinks y type-changes pueden entrar como B dentro de `src/`/`tests/`.
-- R2AA-024: MEDIUM NONBLOCKING; gitlink mode 160000 puede entrar como B sin tocar `.gitmodules` raíz.
-- R2AA-025: LOW NONBLOCKING; `RISK_PAYLOAD_OBJECT_MISMATCH` enmascara errores del checker y casos de liveness.
+- R2AA-022 HIGH - CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW: `.gitattributes` queda D por basename a cualquier profundidad; el lockout CRLF anidado sigue siendo reproducible tras bypass forzado, pero su entrada B ordinaria queda bloqueada.
+- R2AA-023 MEDIUM NONBLOCKING - CORRECTION_SCRATCH_PASS; PENDING_EXACT_CANDIDATE_REVIEW: symlink mode 120000 y type-change quedan D en el prototipo Git-mode-aware.
+- R2AA-024 MEDIUM NONBLOCKING - CORRECTION_SCRATCH_PASS; PENDING_EXACT_CANDIDATE_REVIEW: gitlink mode 160000 queda D en el prototipo.
+- R2AA-025 OPEN LOW NONBLOCKING: `RISK_PAYLOAD_OBJECT_MISMATCH` continúa enmascarando errores del checker/liveness; no se corrigió en este scope.
 - FALSE_GREEN_6: EVIDENCE_VERIFIER_FALSE_GREEN.
 - FALSE_GREEN_6 cause: la evidencia del candidato declaró PASS para `R2AA_016_CRLF_LOCKOUT_REPRODUCED_ONLY_AFTER_FORCED_BYPASS`; la revisión independiente falsó dinámicamente esa propiedad con `tests/fixtures/.gitattributes` bajo flujo B ordinario.
 - False greens: 6 total; increment 5 -> 6.
@@ -363,14 +363,71 @@
 - This review grants no implementation, merge, protection, required-check, ruleset or GitHub-settings authority.
 - 2026-08-15T19:15:19Z: human-authorized canonicalization only; no control-plane implementation in this commit.
 
+- 2026-08-15T19:52:49Z: materialization-semantics V2 scratch PASS 27/27; manifest evidence/r2-4/r2aa_022_024_materialization_scratch_candidate_manifest_01.json SHA-256 ec76d56cc9722073e94ce8a0c48a7c836e36e122fe71307db1910a20f211ad28; evidence evidence/r2-4/r2aa_022_024_materialization_correction_scratch_falsification_01.json SHA-256 833d2502730d2b6113b60d96bc80d8a8caecca707ae0ad8efc8e3b188eeafa36; exact hash/byte binding PASS; R2AA-022/023/024 correction scratch PASS pending exact-candidate review; R2AA-016 BLOCKING; R2AA-017/018 PARTIAL; R2AA-025 OPEN; temporary approval proposal=1 NOT_CONFIGURED; false greens remain 6; DC-006/EXP-01 OPEN; IR2-002 blocking before first functional task.
+
+## Falsificación scratch de semántica de materialización V2
+- Candidate manifest: evidence/r2-4/r2aa_022_024_materialization_scratch_candidate_manifest_01.json
+- Candidate manifest SHA-256: ec76d56cc9722073e94ce8a0c48a7c836e36e122fe71307db1910a20f211ad28
+- Candidate manifest bytes: 2080
+- Falsification evidence: evidence/r2-4/r2aa_022_024_materialization_correction_scratch_falsification_01.json
+- Falsification evidence SHA-256: 833d2502730d2b6113b60d96bc80d8a8caecca707ae0ad8efc8e3b188eeafa36
+- Falsification evidence bytes: 10973
+- Scratch falsification: PASS 27/27.
+- Manifest/evidence binding: PASS; evidence.candidate_manifest_sha256 equals the exact manifest SHA-256.
+- Exercised object hash binding: PASS; evidence hashes exactly equal manifest object hashes.
+- Exercised object byte-count binding: PASS; evidence byte counts exactly equal manifest byte counts.
+- Proposed workflow SHA-256: 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830
+- Proposed base_gate SHA-256: f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11
+- Proposed checker SHA-256: e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283
+- Proposed policy SHA-256: d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b
+- Proposed runner SHA-256: d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f
+- Proposed GOOD fixture SHA-256: 1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827
+- Proposed BAD fixture SHA-256: b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce
+- Prototype: `.gitattributes` D by basename at any depth.
+- Prototype: `.gitmodules` D by basename at any depth.
+- Prototype: symlink mode 120000 D.
+- Prototype: gitlink mode 160000 D.
+- Prototype: Git type-change D.
+- Prototype: executable-mode change C.
+- Prototype: new executable C.
+- Prototype: `unknown_normal=C`.
+- Prototype: regular `src/` content B.
+- Prototype: regular `tests/` content B.
+- R2AA-022: CORRECTION_SCRATCH_PASS; BLOCKING_UNTIL_EXACT_CANDIDATE_INDEPENDENT_REVIEW.
+- R2AA-022 nested CRLF: mechanism remains reproducible after forced bypass; ordinary B entry is blocked by basename D.
+- R2AA-023: CORRECTION_SCRATCH_PASS; PENDING_EXACT_CANDIDATE_REVIEW.
+- R2AA-024: CORRECTION_SCRATCH_PASS; PENDING_EXACT_CANDIDATE_REVIEW.
+- R2AA-016: BLOCKING.
+- R2AA-017: PARTIAL; exact-object binding preserved; freeze-before-probes is procedural, not a cryptographic guarantee.
+- R2AA-018: PARTIAL; `unknown_normal=C` preserved.
+- R2AA-025: OPEN.
+- R2AA-011 correction preserved in scratch; historical disposition remains PARTIAL.
+- R2AA-014 strict BASE/HEAD binding preserved in scratch; historical disposition remains RESOLVED.
+- Temporary human gate proposal: `required_approving_review_count=1`, status `PROPOSAL_ONLY_NOT_CONFIGURED`, while DC-006 remains OPEN.
+- R2AA-012: OPEN.
+- R2AA-013: PARTIAL.
+- R2AA-015: OPEN.
+- R2AA-019: OPEN.
+- R2AA-020: OPEN.
+- R2AA-021: OPEN.
+- DC-006: OPEN.
+- EXP-01: OPEN.
+- IR2-002: BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Historical R2-3 independence gap: UNCHANGED.
+- False greens: 6; new increment from this scratch: 0.
+- Next exact candidate procedure: prepare/freeze exact candidate bytes; generate manifest; run materialization/authority probes on those same bytes; bind evidence to manifest; submit exact bundle to independent review before implementation.
+- This evidence grants no implementation, merge, protection, required-check, ruleset or GitHub-settings authority.
+- 2026-08-15T19:52:49Z: human-authorized canonicalization only; no control-plane implementation in this commit.
+
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
-- R2AA-011 PARTIAL: captura temporal de BASE y `assume-unchanged` siguen bloqueados; sin reetiquetar evidencia histórica.
+- R2AA-011 PARTIAL: captura temporal de BASE y `assume-unchanged` preservados en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
 - R2AA-016 BLOCKING: la corrección por exact root path fue insuficiente; R2AA-022 demuestra `.gitattributes` anidado bajo prefijo B y lockout CRLF sin bypass forzado.
 - R2AA-017 PARTIAL: la ligadura manifest/probes/bytes exactos es válida, pero freeze-before-probes queda como disciplina procedural y la evidencia ligada transportó una escena falsificada.
 - R2AA-012 OPEN NONBLOCKING: binding real de `pull_request_target` al SHA del PR requiere prueba GitHub real antes de required-check configuration.
 - R2AA-013 PARTIAL NONBLOCKING: `default_branch=main` observado; distinción temporal workflow-source SHA vs PR_BASE_SHA permanece abierta.
-- R2AA-014 RESOLVED: binding BASE/HEAD estricto permanece correcto; sin reetiquetar evidencia histórica.
+- R2AA-014 RESOLVED: binding BASE/HEAD estricto preservado en la falsificación scratch de materialización; sin reetiquetar evidencia histórica.
 - R2AA-015 OPEN NONBLOCKING: deuda de liveness/fail-closed permanece explícita.
 - R2AA-018 PARTIAL: `unknown_normal=C` funciona fuera de reglas explícitas, pero no contiene bypasses que viven dentro de `src/`/`tests/` B.
 - R2AA-019 OPEN LOW NONBLOCKING: `WORKFLOW_SOURCE_SHA` se captura pero no se compara directamente con PR_BASE_SHA.

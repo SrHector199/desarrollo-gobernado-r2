@@ -1,0 +1,317 @@
+{
+  "candidate_manifest_sha256": "ec76d56cc9722073e94ce8a0c48a7c836e36e122fe71307db1910a20f211ad28",
+  "candidate_manifest_type": "r2-4-materialization-semantics-scratch-candidate",
+  "correction_design": {
+    "basename_gitattributes_floor": "D",
+    "basename_gitmodules_floor": "D",
+    "dc_006": "OPEN",
+    "executable_mode_change_floor": "C",
+    "exp_01": "OPEN",
+    "gitlink_160000_floor": "D",
+    "implementation_authorized": false,
+    "new_executable_floor": "C",
+    "r2aa_011_preserved": true,
+    "r2aa_014_preserved": true,
+    "r2aa_025": "OPEN_NOT_FIXED_IN_THIS_SCOPE",
+    "src_regular_floor": "B",
+    "symlink_120000_floor": "D",
+    "tests_regular_floor": "B",
+    "type_change_floor": "D",
+    "unknown_normal_floor": "C"
+  },
+  "created_at_utc": "2026-08-15T19:28:44Z",
+  "evidence_type": "r2-4-materialization-semantics-v2-scratch-falsification",
+  "exercised_object_bytes": {
+    ".github/workflows/r2-ci.yml": 2085,
+    "policy/risk_floors.json": 9265,
+    "scripts/base_gate.py": 15382,
+    "scripts/risk_floor.py": 17761,
+    "scripts/run_functional.py": 27132,
+    "tests/fixtures/bad_splitter.py": 425,
+    "tests/fixtures/good_splitter.py": 465
+  },
+  "exercised_object_hashes": {
+    ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+    "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+    "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+    "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+    "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+    "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+  },
+  "procedural_claims": {
+    "cryptographic_claim_about_temporal_order": false,
+    "freeze_before_probes": "PROCEDURAL_DISCIPLINE_NOT_CRYPTOGRAPHIC_GUARANTEE"
+  },
+  "real_repo": {
+    "branch": "r2-4/ci-bootstrap",
+    "github_mutated": false,
+    "head": "df2d3106907dd2c12e8f7eb5cb054e8e5c5d32c9",
+    "main": "72a9c0c1995b3d56aa2711c3dccb448fbe8ecfb7",
+    "network_used": false,
+    "repo_mutated": false,
+    "review_04_sha256": "e41304ceb8fc91ffbcaadf8829d6aefcd04301a0e520267dcd27353e21e749f0"
+  },
+  "results": [
+    {
+      "gate_exit": 0,
+      "observed_floor": null,
+      "observed_reason": "TRUSTED_VERIFIERS_AND_INTEGRITY_PROVED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "SELF_TEST_UNTOUCHED_BASE"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "SRC_REGULAR_MODIFICATION_REMAINS_B"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "B",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "TESTS_REGULAR_ADD_REMAINS_B"
+    },
+    {
+      "gate_exit": 0,
+      "observed_floor": "A",
+      "observed_reason": "BASE_ANCHORED_RISK_GATE_PASSED",
+      "observed_status": "PASS",
+      "probe_result": "PASS",
+      "scenario": "README_EXACT_A_STILL_ALLOWED"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "ROOT_GITATTRIBUTES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "FIXTURE_DIR_GITATTRIBUTES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "TESTS_DIR_GITATTRIBUTES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "SRC_DIR_GITATTRIBUTES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "DEEP_GITATTRIBUTES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "ROOT_GITMODULES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "NESTED_GITMODULES_BASENAME_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "SYMLINK_ABSOLUTE_ADD_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "SYMLINK_CONTROL_PLANE_ADD_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "TYPE_CHANGE_REGULAR_TO_SYMLINK_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GITLINK_160000_ADD_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "EXECUTABLE_MODE_CHANGE_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "NEW_EXECUTABLE_ADD_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_MAKEFILE_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "C",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "UNKNOWN_NORMAL_OS_PY_BLOCKED_C"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "GOOD_FIXTURE_MUTATION_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_UNKNOWN_HIGH_AUTHORITY_SUBJECT",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "RENAME_B_TO_CONTROL_PLANE_BLOCKED_D"
+    },
+    {
+      "gate_exit": 1,
+      "observed_floor": "D",
+      "observed_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "DELETION_B_BLOCKED_D"
+    },
+    {
+      "detail": "AUTHORITY_BASE_BLOB_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "observed_reason": "AUTHORITY_INTEGRITY_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "R2AA_011_TEMPORAL_BASE_CAPTURE_STILL_BLOCKED"
+    },
+    {
+      "detail": "AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "gate_exit": 1,
+      "git_status_empty": true,
+      "observed_reason": "SELF_TEST_FAILED",
+      "observed_status": "FAIL",
+      "probe_result": "PASS",
+      "scenario": "R2AA_011_ASSUME_UNCHANGED_STILL_BLOCKED"
+    },
+    {
+      "blob_has_crlf": false,
+      "detail": "AUTHORITY_DISK_HASH_MISMATCH:tests/fixtures/good_splitter.py",
+      "disk_has_crlf": true,
+      "forced_bypass_required_under_corrected_policy": true,
+      "gate_exit": 1,
+      "git_status_clean": true,
+      "observed_reason": "SELF_TEST_FAILED",
+      "observed_status": "FAIL",
+      "ordinary_B_entry_probe": "FIXTURE_DIR_GITATTRIBUTES_BASENAME_BLOCKED_D",
+      "probe_result": "PASS",
+      "scenario": "R2AA_022_NESTED_CRLF_LOCKOUT_REPRODUCED_AFTER_FORCED_BYPASS"
+    },
+    {
+      "binding_contract": {
+        "exact": true,
+        "missing_base_rejected": true,
+        "missing_head_rejected": true,
+        "wrong_base_rejected": true,
+        "wrong_head_rejected": true
+      },
+      "probe_result": "PASS",
+      "scenario": "R2AA_014_STRICT_BASE_HEAD_BINDING_PRESERVED"
+    },
+    {
+      "evaluate_marker": 1512,
+      "mode_evaluate": 1702,
+      "mode_self_test": 2013,
+      "probe_result": "PASS",
+      "scenario": "EXACT_WORKFLOW_EVALUATION_BEFORE_SELF_TEST_ORDER",
+      "self_test_marker": 1822,
+      "workflow_bytes": 2085,
+      "workflow_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830"
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "R2AA-011": "PRESERVED",
+    "R2AA-014": "PRESERVED",
+    "R2AA-016": "BLOCKING_HISTORY_PRESERVED_CORRECTION_TARGET_MOVED_TO_R2AA-022",
+    "R2AA-017": "PARTIAL_BINDING_PRESERVED_FREEZE_ORDER_PROCEDURAL",
+    "R2AA-018": "PARTIAL_UNKNOWN_NORMAL_C_PRESERVED",
+    "R2AA-022": "SCRATCH_CORRECTION_PASS_BASENAME_D_ALL_DEPTHS",
+    "R2AA-023": "SCRATCH_CORRECTION_PASS_SYMLINK_AND_TYPE_CHANGE_D",
+    "R2AA-024": "SCRATCH_CORRECTION_PASS_GITLINK_160000_D",
+    "R2AA-025": "OPEN",
+    "all_expected_results_observed": true,
+    "disposition": "SCRATCH_CORRECTION_PASS_NOT_IMPLEMENTATION_AUTHORITY",
+    "false_greens_total_remains": 6,
+    "github_mutated": false,
+    "network_used": false,
+    "new_real_false_green_increment": 0,
+    "real_repo_mutated": false,
+    "scenario_count": 27,
+    "temporary_approval_status": "PROPOSAL_ONLY_NOT_CONFIGURED",
+    "temporary_required_approving_review_count": 1
+  },
+  "temporary_human_gate_proposal": {
+    "reason": "DC-006 remains OPEN; zero approvals are not justified.",
+    "required_approving_review_count": 1,
+    "status": "PROPOSAL_ONLY_NOT_CONFIGURED"
+  },
+  "workflow_positions_from_exact_bytes": {
+    "evaluate_marker": 1512,
+    "mode_evaluate": 1702,
+    "mode_self_test": 2013,
+    "self_test_marker": 1822
+  }
+}
