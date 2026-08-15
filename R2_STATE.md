@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar y ejecutar B2 same-repository para comprobar no-herencia de verde usando un nuevo HEAD SHA y un nuevo check-run. B2 debe demostrar que su HEAD difiere del B1 HEAD `8050ef9aadebaba594d29770d0677b02c400876d`, que el check-run B1 `95076911042` no aparece asociado al B2 HEAD, que B2 genera su propio workflow run y su propio check-run, que el nuevo check-run ID difiere de `95076911042`, que su `head_sha` coincide exactamente con B2 HEAD y que el verde B1 no se hereda. No cerrar R2AA-012 hasta evaluar B2. El probe D/control-plane y cualquier branch protection/required check permanecen para bloques posteriores.
-- Last updated: 2026-08-15T22:17:50Z
+- Authorized next step: Preparar y ejecutar un probe D/control-plane negativo en un PR separado. El probe debe tocar exclusivamente un objeto de control-plane clasificado D y demostrar en GitHub real que `r2-governed-validation` queda ligado al SHA exacto del PR y termina FAILURE por el motivo esperado; el PR no se mergea, ningún byte del probe entra en `main` y no se modifican branch protection, required checks, rulesets ni settings. La configuración de enforcement sigue prohibida hasta canonicalizar y evaluar ese probe.
+- Last updated: 2026-08-15T22:35:25Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -224,7 +224,7 @@
 - Evaluation order: PR evaluation before trusted fixture self-test.
 - Self-test post-runner integrity recheck: PASS.
 - New real false-green increment: 0; metric remains 5.
-- R2AA-012 OPEN NONBLOCKING: binding real de `pull_request_target` al SHA exacto del PR sigue sin evidencia de plataforma suficiente.
+- R2AA-012 RESOLVED: evidencia GitHub real B1+B2 demuestra binding por SHA exacto y no-herencia de verde. B1 HEAD `8050ef9aadebaba594d29770d0677b02c400876d` -> check `95076911042`; B2 HEAD `0e73f928c48c5811383f0aa627aa7b9972a5b5cd` -> check `95078644858`; los check IDs son distintos, B1 no aparece en B2 HEAD, B2 no tenía ese check antes del PR y generó workflow/check nuevos. Esto resuelve únicamente la incertidumbre de binding previa a required-check configuration; ENFORCED sigue False.
 - R2AA-013 PARTIAL NONBLOCKING: distinción temporal workflow-source SHA vs PR_BASE_SHA permanece abierta.
 - R2AA-014 MEDIUM NONBLOCKING: strict BASE/HEAD correction passed scratch; remains debt until exact candidate independent review.
 - R2AA-015 OPEN NONBLOCKING: deuda de liveness/fail-closed permanece explícita.
@@ -656,6 +656,75 @@
 - R2-5: NOT_AUTHORIZED.
 - Next authorized experiment: B2 same-repository no-green-inheritance; B2 must use a new HEAD and new check-run, prove the B1 check-run 95076911042 is not associated with B2 HEAD, and leave R2AA-012 OPEN until B2 is evaluated.
 - 2026-08-15T22:17:50Z: Human Gate D authorized closing PR #2 without merge and this two-path administrative canonicalization only.
+
+- 2026-08-15T22:35:25Z: B2 same-repository PASS canonicalized; PR #3 closed without merge; base 2d61dddb572aaf577ab5e914d49a1eeaf7635010, head 0e73f928c48c5811383f0aa627aa7b9972a5b5cd; workflow run 31912096187 success; check-run 95078644858 / app_id 15368 / head_sha 0e73f928c48c5811383f0aa627aa7b9972a5b5cd; B1_GREEN_INHERITED=OBSERVED_FALSE; B2_EXACT_PR_HEAD_BINDING=OBSERVED_TRUE; evidence evidence/r2-4/b2_no_green_inheritance_observation_10.json SHA-256 d88b7ab1085ef1a4976c053ea02540a06f016665a3b3da641b3e7cd03b14575e; R2AA-012 RESOLVED for real check-run binding/no-green-inheritance; ENFORCED remains False; MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED; false greens remain 6.
+
+## B2 same-repository no-green-inheritance
+- B2_DISPOSITION: PASS.
+- B2 evidence: evidence/r2-4/b2_no_green_inheritance_observation_10.json
+- B2 evidence SHA-256: d88b7ab1085ef1a4976c053ea02540a06f016665a3b3da641b3e7cd03b14575e
+- B2 evidence bytes: 13130
+- B2_PR_NUMBER: 3.
+- B2_BASE_SHA: 2d61dddb572aaf577ab5e914d49a1eeaf7635010.
+- B2_HEAD_SHA: 0e73f928c48c5811383f0aa627aa7b9972a5b5cd.
+- B2_HEAD_TREE: 698682c47e750cc2c80ff8063331fad32e8a21a9.
+- B2_BRANCH: `r2-4/b2-no-green-inheritance`.
+- B2 path: `tests/b2_no_green_inheritance_probe.txt`.
+- B2 path SHA-256: 6b8f0cbda9d422286279c5fb47e1264ae6ed03038284910a7d164a5c098d31b6.
+- B2 path mode: 100644.
+- B2 content PRE B: PASS.
+- B2 content POST B: PASS.
+- B1_WORKFLOW_RUN_ID: 31911406085.
+- B2_WORKFLOW_RUN_ID: 31912096187.
+- B2_WORKFLOW_RUN_DIFFERS_FROM_B1: True.
+- B2_WORKFLOW_EVENT: pull_request_target.
+- B2_WORKFLOW_NAME: R2 Governed Validation.
+- B2_WORKFLOW_PATH: .github/workflows/r2-ci.yml.
+- B2_WORKFLOW_HEAD_SHA: 0e73f928c48c5811383f0aa627aa7b9972a5b5cd.
+- B2_WORKFLOW_CONCLUSION: success.
+- B2_JOB_ID: 95078644858.
+- B2_JOB_NAME: r2-governed-validation.
+- B2_JOB_CONCLUSION: success.
+- B1_CHECK_RUN_ID: 95076911042.
+- B2_CHECK_RUN_ID: 95078644858.
+- B2_CHECK_RUN_DIFFERS_FROM_B1: True.
+- B2_CHECK_RUN_APP_ID: 15368.
+- B2_CHECK_RUN_APP_SLUG: github-actions.
+- B2_CHECK_RUN_HEAD_SHA: 0e73f928c48c5811383f0aa627aa7b9972a5b5cd.
+- B2_CHECK_CONCLUSION: success.
+- B1_CHECK_PRESENT_ON_B2_HEAD_BEFORE_PR: False.
+- B1_CHECK_PRESENT_ON_B2_HEAD_AFTER_PR: False.
+- B2_CHECK_PRESENT_ON_B2_HEAD_BEFORE_PR: False.
+- B2_CHECK_PRESENT_ON_B2_HEAD_AFTER_PR: True.
+- B2_CHECK_PRESENT_ON_BASE_SHA: False.
+- B1_GREEN_INHERITED: OBSERVED_FALSE.
+- B2_EXACT_PR_HEAD_BINDING: OBSERVED_TRUE.
+- GITHUB_SHA_DIRECTLY_OBSERVED: False; `workflow_run.head_sha` remains a GitHub API observation and is NOT relabeled as direct `GITHUB_SHA` environment evidence.
+- B2_PR_FINAL_STATE: CLOSED_UNMERGED.
+- B2 branch preserved at 0e73f928c48c5811383f0aa627aa7b9972a5b5cd; B1 branch preserved at 8050ef9aadebaba594d29770d0677b02c400876d; neither branch is deleted by this block.
+- B2_NEW_FALSE_GREENS: 0.
+- FALSE_GREENS: 6.
+- R2AA-012: RESOLVED.
+- R2AA-012 rationale: B1 and B2 each produced distinct new workflow/check runs bound to their own exact PR HEAD SHA; B1 check `95076911042` is absent from B2 HEAD, B2 check `95078644858` did not exist on B2 HEAD before the PR, and B2 created a new check bound to `0e73f928c48c5811383f0aa627aa7b9972a5b5cd`.
+- R2AA-013 remains PARTIAL.
+- R2AA-015 remains OPEN.
+- R2AA-019 remains OPEN.
+- R2AA-020 remains OPEN.
+- R2AA-021 remains OPEN.
+- R2AA-024 remains PARTIAL.
+- R2AA-025 remains OPEN.
+- R2AA-026 remains LOW_NONBLOCKING.
+- DC-006 remains OPEN.
+- EXP-01 remains OPEN.
+- IR2-002 remains BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK.
+- ENFORCED: False.
+- MINOR-5: ACTIVE_R2-4_NOT_EXECUTED.
+- Current phase remains R2-4.
+- Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
+- R2-4 exit gate: NOT_EXECUTED.
+- R2-5: NOT_AUTHORIZED.
+- Next authorized experiment: a D/control-plane negative PR that must produce a failure check bound to its exact PR HEAD; it must remain unmerged and must not change GitHub settings.
+- 2026-08-15T22:35:25Z: Human Gate D authorized closing PR #3 without merge and this two-path administrative canonicalization only.
 
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.

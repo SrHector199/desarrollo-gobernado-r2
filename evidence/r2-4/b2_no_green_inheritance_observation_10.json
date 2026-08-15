@@ -1,0 +1,365 @@
+{
+  "authorization": {
+    "b1_reference": {
+      "branch": "r2-4/b1-binding-probe",
+      "check_app_id": 15368,
+      "check_name": "r2-governed-validation",
+      "check_run_id": 95076911042,
+      "exact_pr_head_binding": "OBSERVED_TRUE",
+      "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "pr": 2,
+      "workflow_run_id": 31911406085
+    },
+    "base_branch": "main",
+    "base_sha": "2d61dddb572aaf577ab5e914d49a1eeaf7635010",
+    "base_tree": "7f18d999f482bb0a1cf3dc44a9989bc9e347763d",
+    "branch": "r2-4/b2-no-green-inheritance",
+    "branch_protection_authorized": false,
+    "content_bytes": 119,
+    "content_class": "B",
+    "content_sha256": "6b8f0cbda9d422286279c5fb47e1264ae6ed03038284910a7d164a5c098d31b6",
+    "force_push_authorized": false,
+    "github_settings_change_authorized": false,
+    "merge_authorized": false,
+    "operational_class": "D",
+    "path": "tests/b2_no_green_inheritance_probe.txt",
+    "r2_5_authorized": false,
+    "required_check_configuration_authorized": false,
+    "ruleset_authorized": false
+  },
+  "candidate": {
+    "commit_message": "test: add R2-4 B2 no-green-inheritance probe",
+    "commit_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+    "content_bytes": 119,
+    "content_post_B": {
+      "authorized_class": "B",
+      "base": "2d61dddb572aaf577ab5e914d49a1eeaf7635010",
+      "changes": [
+        {
+          "finding_roles": [
+            "functional_tests"
+          ],
+          "finding_subjects": [
+            "tests/b2_no_green_inheritance_probe.txt"
+          ],
+          "floors": [
+            "B"
+          ],
+          "new_mode": "100644",
+          "old_mode": "000000",
+          "paths": [
+            "tests/b2_no_green_inheritance_probe.txt"
+          ],
+          "status": "A"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b2_no_green_inheritance_probe.txt",
+          "subject_type": "path"
+        }
+      ],
+      "head": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "mechanical_path_floor": "B",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "content_sha256": "6b8f0cbda9d422286279c5fb47e1264ae6ed03038284910a7d164a5c098d31b6",
+    "git_blob_oid": "d201cda04a2ad128a2c2594eec177f28c3440c3d",
+    "head_differs_from_b1_head": true,
+    "mode": "100644",
+    "parent_sha": "2d61dddb572aaf577ab5e914d49a1eeaf7635010",
+    "path": "tests/b2_no_green_inheritance_probe.txt",
+    "tree_sha": "698682c47e750cc2c80ff8063331fad32e8a21a9"
+  },
+  "evidence_type": "r2-4-b2-same-repository-no-green-inheritance-observation",
+  "observation": {
+    "b1_branch_unchanged": true,
+    "b1_green_inherited": "OBSERVED_FALSE",
+    "b1_pr_closed_unmerged": true,
+    "b2_branch_head": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+    "b2_exact_pr_head_binding": "OBSERVED_TRUE",
+    "b2_pr_open_unmerged": true,
+    "base_sha_check_runs": [],
+    "baseline_base_check_run_ids": [],
+    "binding_details": {
+      "b1_check_present_on_b2_head_after_pr": false,
+      "b1_check_present_on_b2_head_before_pr": false,
+      "b1_check_run_id": 95076911042,
+      "b2_check_head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "b2_check_head_sha_equals_b2_head": true,
+      "b2_check_id_differs_from_b1_check_id": true,
+      "b2_check_present_on_b2_head_after_pr": true,
+      "b2_check_present_on_b2_head_before_pr": false,
+      "b2_check_present_on_base_sha": false,
+      "b2_check_run_id": 95078644858,
+      "b2_head_differs_from_b1_head": true,
+      "decision_rule_binding": "OBSERVED_TRUE iff B2 check-run head_sha equals exact B2 HEAD, appears on B2 HEAD and not base; OBSERVED_FALSE iff it binds to base instead; otherwise UNCERTAIN.",
+      "decision_rule_inheritance": "OBSERVED_FALSE iff B2 HEAD differs from B1 HEAD, B1 check-run ID is absent from B2 HEAD both before and after PR creation, and a distinct B2 check-run appears only after B2 PR creation. OBSERVED_TRUE iff B1 check ID appears on B2 HEAD or is reused; otherwise UNCERTAIN."
+    },
+    "branch_protection": false,
+    "completed_at_utc": "2026-08-15T22:25:50Z",
+    "current_phase": "R2-4",
+    "enforced": false,
+    "false_greens": 6,
+    "job": {
+      "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95078644858",
+      "completed_at": "2026-08-15T22:25:41Z",
+      "conclusion": "success",
+      "head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912096187/job/95078644858",
+      "id": 95078644858,
+      "name": "r2-governed-validation",
+      "run_id": 31912096187,
+      "started_at": "2026-08-15T22:25:36Z",
+      "status": "completed"
+    },
+    "main_unchanged": true,
+    "new_b2_head_check_run_ids": [
+      95078644858
+    ],
+    "new_base_check_run_ids": [],
+    "post_base_check_run_ids": [],
+    "post_pr_b2_head_check_run_ids": [
+      95078644858
+    ],
+    "post_pr_b2_head_check_runs": [
+      {
+        "app_id": 15368,
+        "app_slug": "github-actions",
+        "check_suite_id": 86551004242,
+        "conclusion": "success",
+        "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912096187/job/95078644858",
+        "head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+        "id": 95078644858,
+        "name": "r2-governed-validation",
+        "status": "completed"
+      }
+    ],
+    "pre_pr_b2_head_check_run_ids": [],
+    "pre_pr_b2_head_check_runs": [],
+    "r2aa_012": "OPEN",
+    "required_checks_configured": false,
+    "ruleset_count": 0,
+    "target_check_run": {
+      "app_id": 15368,
+      "app_slug": "github-actions",
+      "check_suite_id": 86551004242,
+      "completed_at": "2026-08-15T22:25:41Z",
+      "conclusion": "success",
+      "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912096187/job/95078644858",
+      "differs_from_b1_check_run_id": true,
+      "head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "id": 95078644858,
+      "name": "r2-governed-validation",
+      "new_on_b2_head": true,
+      "started_at": "2026-08-15T22:25:36Z",
+      "status": "completed"
+    },
+    "workflow_expected_success": true,
+    "workflow_run": {
+      "association_basis": "PR_NUMBER_OR_DISPLAY_TITLE",
+      "conclusion": "success",
+      "created_at": "2026-08-15T22:25:34Z",
+      "differs_from_b1_workflow_run_id": true,
+      "display_title": "R2-4 B2: no-green-inheritance probe",
+      "event": "pull_request_target",
+      "head_branch": "r2-4/b2-no-green-inheritance",
+      "head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31912096187",
+      "id": 31912096187,
+      "name": "R2 Governed Validation",
+      "new_run_vs_baseline": true,
+      "path": ".github/workflows/r2-ci.yml",
+      "pull_requests": [
+        {
+          "base": {
+            "ref": "main",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "2d61dddb572aaf577ab5e914d49a1eeaf7635010"
+          },
+          "head": {
+            "ref": "r2-4/b2-no-green-inheritance",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd"
+          },
+          "id": 4287946311,
+          "number": 3,
+          "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/pulls/3"
+        }
+      ],
+      "run_attempt": 1,
+      "run_number": 13,
+      "status": "completed",
+      "updated_at": "2026-08-15T22:25:42Z",
+      "workflow_id": 335007029
+    },
+    "workflow_source_observation": {
+      "github_sha_direct_value": null,
+      "github_sha_directly_observed": false,
+      "note": "The workflow did not emit the GITHUB_SHA environment value directly. workflow_run.head_sha is recorded verbatim from GitHub API and is not silently relabeled as direct GITHUB_SHA evidence.",
+      "workflow_name": "R2 Governed Validation",
+      "workflow_path": ".github/workflows/r2-ci.yml",
+      "workflow_run_head_branch": "r2-4/b2-no-green-inheritance",
+      "workflow_run_head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd"
+    }
+  },
+  "pr": {
+    "base_ref": "main",
+    "base_sha": "2d61dddb572aaf577ab5e914d49a1eeaf7635010",
+    "created_at": "2026-08-15T22:25:31Z",
+    "draft": false,
+    "head_ref": "r2-4/b2-no-green-inheritance",
+    "head_repo": "SrHector199/desarrollo-gobernado-r2",
+    "head_sha": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+    "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/pull/3",
+    "merged": false,
+    "number": 3,
+    "state": "open"
+  },
+  "pre_pr_observation": {
+    "b1_check_present_on_b2_head_before_pr": false,
+    "b2_head": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+    "b2_head_check_run_ids": [],
+    "b2_head_check_runs": [],
+    "baseline_base_check_run_ids": [],
+    "baseline_workflow_run_ids": [
+      31884688190,
+      31887704257,
+      31888617104,
+      31890792757,
+      31891550340,
+      31901316525,
+      31901871256,
+      31903405124,
+      31905159111,
+      31907364372,
+      31908128281,
+      31911406085
+    ]
+  },
+  "preflight": {
+    "b1_reference": {
+      "branch_head": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "check_app_id": 15368,
+      "check_conclusion": "success",
+      "check_head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "check_run_id": 95076911042,
+      "pr_merged": false,
+      "pr_state": "closed",
+      "present_on_b1_head_query": true
+    },
+    "branch_protection": false,
+    "content_pre_B": {
+      "authorized_class": "B",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b2_no_green_inheritance_probe.txt",
+          "subject_type": "path"
+        }
+      ],
+      "mechanical_path_floor": "B",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "main_tree": "7f18d999f482bb0a1cf3dc44a9989bc9e347763d",
+    "operational_pre_D": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b2_no_green_inheritance_probe.txt",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad pull_request_create.",
+          "role": "capability",
+          "subject": "pull_request_create",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "remote_main": "2d61dddb572aaf577ab5e914d49a1eeaf7635010",
+    "required_checks": "NOT_CONFIGURED",
+    "ruleset_count": 0
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-08-15T22:25:19Z",
+  "status": "PASS"
+}
