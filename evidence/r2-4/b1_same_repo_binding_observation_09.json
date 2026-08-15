@@ -1,0 +1,321 @@
+{
+  "authorization": {
+    "base_branch": "main",
+    "base_sha": "777686be4a86b6dbe2468db8457b588c4fd77825",
+    "base_tree": "d425f165ef74bfaf13b85035fe388339e40e84c0",
+    "branch": "r2-4/b1-binding-probe",
+    "branch_protection_authorized": false,
+    "content_bytes": 100,
+    "content_class": "B",
+    "content_sha256": "9c83e4ba47035dc5d7160c81ce5d64a3676003e8363f2b667ade88500022e6bd",
+    "force_push_authorized": false,
+    "github_settings_change_authorized": false,
+    "merge_authorized": false,
+    "operational_class": "D",
+    "path": "tests/b1_binding_probe.txt",
+    "r2_5_authorized": false,
+    "required_check_configuration_authorized": false,
+    "ruleset_authorized": false
+  },
+  "candidate": {
+    "commit_message": "test: add R2-4 B1 binding probe",
+    "commit_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+    "content_bytes": 100,
+    "content_post_B": {
+      "authorized_class": "B",
+      "base": "777686be4a86b6dbe2468db8457b588c4fd77825",
+      "changes": [
+        {
+          "finding_roles": [
+            "functional_tests"
+          ],
+          "finding_subjects": [
+            "tests/b1_binding_probe.txt"
+          ],
+          "floors": [
+            "B"
+          ],
+          "new_mode": "100644",
+          "old_mode": "000000",
+          "paths": [
+            "tests/b1_binding_probe.txt"
+          ],
+          "status": "A"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b1_binding_probe.txt",
+          "subject_type": "path"
+        }
+      ],
+      "head": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "mechanical_path_floor": "B",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "content_sha256": "9c83e4ba47035dc5d7160c81ce5d64a3676003e8363f2b667ade88500022e6bd",
+    "git_blob_oid": "77c718e9cafaa3dc8f6f8ad37f99dc3dbcedcec1",
+    "mode": "100644",
+    "parent_sha": "777686be4a86b6dbe2468db8457b588c4fd77825",
+    "path": "tests/b1_binding_probe.txt",
+    "tree_sha": "d9b49768026f2dda9e306aef0cb454fd22c5a6f6"
+  },
+  "evidence_type": "r2-4-b1-same-repository-binding-observation",
+  "observation": {
+    "b1_pr_open_unmerged": true,
+    "base_sha_check_runs": [],
+    "baseline_base_check_run_ids": [],
+    "binding_basis": {
+      "decision_rule": "OBSERVED_TRUE iff target check-run head_sha == exact PR HEAD and the same check-run is returned for PR HEAD but not base; OBSERVED_FALSE iff it binds exactly to base and is returned for base but not PR HEAD; otherwise UNCERTAIN.",
+      "target_check_present_on_base_sha_query": false,
+      "target_check_present_on_pr_head_query": true,
+      "target_check_run_head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "target_check_run_id": 95076911042
+    },
+    "branch_protection": false,
+    "check_name_context": "r2-governed-validation",
+    "completed_at_utc": "2026-08-15T22:10:04Z",
+    "enforced": false,
+    "exact_pr_head_binding": "OBSERVED_TRUE",
+    "expected_job_name": "r2-governed-validation",
+    "job": {
+      "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95076911042",
+      "completed_at": "2026-08-15T22:09:57Z",
+      "conclusion": "success",
+      "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31911406085/job/95076911042",
+      "id": 95076911042,
+      "name": "r2-governed-validation",
+      "run_id": 31911406085,
+      "started_at": "2026-08-15T22:09:52Z",
+      "status": "completed"
+    },
+    "job_name_matches": true,
+    "main_unchanged": true,
+    "new_check_run_ids_on_base": [],
+    "new_check_run_ids_on_pr_head": [
+      95076911042
+    ],
+    "post_base_check_run_ids": [],
+    "post_head_check_run_ids": [
+      95076911042
+    ],
+    "pr_head_check_runs": [
+      {
+        "app_id": 15368,
+        "app_slug": "github-actions",
+        "check_suite_id": 86549453295,
+        "conclusion": "success",
+        "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31911406085/job/95076911042",
+        "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+        "id": 95076911042,
+        "name": "r2-governed-validation",
+        "status": "completed"
+      }
+    ],
+    "pre_pr_head_check_run_ids": [],
+    "r2aa_012": "OPEN",
+    "required_checks_configured": false,
+    "ruleset_count": 0,
+    "target_check_run": {
+      "app_id": 15368,
+      "app_slug": "github-actions",
+      "check_suite_id": 86549453295,
+      "completed_at": "2026-08-15T22:09:57Z",
+      "conclusion": "success",
+      "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31911406085/job/95076911042",
+      "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "id": 95076911042,
+      "name": "r2-governed-validation",
+      "started_at": "2026-08-15T22:09:52Z",
+      "status": "completed"
+    },
+    "workflow_expected_success": true,
+    "workflow_run": {
+      "association_basis": "PR_NUMBER_OR_DISPLAY_TITLE",
+      "conclusion": "success",
+      "created_at": "2026-08-15T22:09:49Z",
+      "display_title": "R2-4 B1: same-repository binding probe",
+      "event": "pull_request_target",
+      "head_branch": "r2-4/b1-binding-probe",
+      "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31911406085",
+      "id": 31911406085,
+      "name": "R2 Governed Validation",
+      "path": ".github/workflows/r2-ci.yml",
+      "pull_requests": [
+        {
+          "base": {
+            "ref": "main",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "777686be4a86b6dbe2468db8457b588c4fd77825"
+          },
+          "head": {
+            "ref": "r2-4/b1-binding-probe",
+            "repo": {
+              "id": 1335059997,
+              "name": "desarrollo-gobernado-r2",
+              "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+            },
+            "sha": "8050ef9aadebaba594d29770d0677b02c400876d"
+          },
+          "id": 4287906490,
+          "number": 2,
+          "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/pulls/2"
+        }
+      ],
+      "run_attempt": 1,
+      "run_number": 12,
+      "status": "completed",
+      "updated_at": "2026-08-15T22:09:58Z",
+      "workflow_id": 335007029
+    },
+    "workflow_source_observation": {
+      "github_sha_direct_value": null,
+      "github_sha_directly_observed": false,
+      "note": "The workflow did not emit the GITHUB_SHA environment value directly. workflow_run.head_sha is recorded verbatim from GitHub API and is not silently relabeled as direct GITHUB_SHA evidence.",
+      "workflow_name": "R2 Governed Validation",
+      "workflow_path": ".github/workflows/r2-ci.yml",
+      "workflow_run_head_branch": "r2-4/b1-binding-probe",
+      "workflow_run_head_sha": "8050ef9aadebaba594d29770d0677b02c400876d"
+    }
+  },
+  "pr": {
+    "base_ref": "main",
+    "base_sha": "777686be4a86b6dbe2468db8457b588c4fd77825",
+    "created_at": "2026-08-15T22:09:46Z",
+    "draft": false,
+    "head_ref": "r2-4/b1-binding-probe",
+    "head_repo": "SrHector199/desarrollo-gobernado-r2",
+    "head_sha": "8050ef9aadebaba594d29770d0677b02c400876d",
+    "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/pull/2",
+    "merged": false,
+    "number": 2,
+    "state": "open"
+  },
+  "preflight": {
+    "baseline_base_check_run_ids": [],
+    "baseline_workflow_run_ids": [
+      31884688190,
+      31887704257,
+      31888617104,
+      31890792757,
+      31891550340,
+      31901316525,
+      31901871256,
+      31903405124,
+      31905159111,
+      31907364372,
+      31908128281
+    ],
+    "branch_protection": false,
+    "content_pre_B": {
+      "authorized_class": "B",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b1_binding_probe.txt",
+          "subject_type": "path"
+        }
+      ],
+      "mechanical_path_floor": "B",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "main_tree": "d425f165ef74bfaf13b85035fe388339e40e84c0",
+    "operational_pre_D": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/b1_binding_probe.txt",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad pull_request_create.",
+          "role": "capability",
+          "subject": "pull_request_create",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "remote_main": "777686be4a86b6dbe2468db8457b588c4fd77825",
+    "required_checks": "NOT_CONFIGURED",
+    "ruleset_count": 0
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-08-15T22:09:37Z",
+  "status": "PASS"
+}

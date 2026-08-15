@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar y ejecutar un PR B1 same-repository deliberadamente inocuo y limitado a un path mecánicamente B para observar en GitHub real el PR base SHA, PR head SHA, workflow run, workflow source / `github.sha` cuando sea observable, job `r2-governed-validation`, check name/context, check-run app_id y check-run head_sha, y producir una conclusión explícita sobre binding exacto. No mergear automáticamente B1 y no cerrar R2AA-012 todavía. B2 same-repo para no-herencia de verde, el probe D/control-plane que debe fallar y cualquier evaluación de branch protection/required check quedan para bloques posteriores.
-- Last updated: 2026-08-15T22:00:01Z
+- Authorized next step: Preparar y ejecutar B2 same-repository para comprobar no-herencia de verde usando un nuevo HEAD SHA y un nuevo check-run. B2 debe demostrar que su HEAD difiere del B1 HEAD `8050ef9aadebaba594d29770d0677b02c400876d`, que el check-run B1 `95076911042` no aparece asociado al B2 HEAD, que B2 genera su propio workflow run y su propio check-run, que el nuevo check-run ID difiere de `95076911042`, que su `head_sha` coincide exactamente con B2 HEAD y que el verde B1 no se hereda. No cerrar R2AA-012 hasta evaluar B2. El probe D/control-plane y cualquier branch protection/required check permanecen para bloques posteriores.
+- Last updated: 2026-08-15T22:17:50Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -607,6 +607,55 @@
 - R2-5: NOT_AUTHORIZED.
 - Next sequence after B1 is deliberately deferred: B2 same-repo no-green-inheritance; then D/control-plane negative probe; then evaluation of branch protection / required check.
 - 2026-08-15T22:00:01Z: human-authorized post-bootstrap canonicalization only; B1 is not executed in this commit.
+
+- 2026-08-15T22:17:50Z: B1 same-repository PASS canonicalized; PR #2 closed without merge; base 777686be4a86b6dbe2468db8457b588c4fd77825, head 8050ef9aadebaba594d29770d0677b02c400876d; workflow run 31911406085 success; check-run 95076911042 / app_id 15368 / head_sha 8050ef9aadebaba594d29770d0677b02c400876d; EXACT_PR_HEAD_BINDING=OBSERVED_TRUE; evidence evidence/r2-4/b1_same_repo_binding_observation_09.json SHA-256 ee8fc2e1e2fb52c7fe1569f18893fea13046904f8a84aa3b34ca542eaaa945df; R2AA-012 remains OPEN; ENFORCED=False; false greens remain 6.
+
+## B1 same-repository binding
+- B1_DISPOSITION: PASS.
+- B1 evidence: evidence/r2-4/b1_same_repo_binding_observation_09.json
+- B1 evidence SHA-256: ee8fc2e1e2fb52c7fe1569f18893fea13046904f8a84aa3b34ca542eaaa945df
+- B1 evidence bytes: 11147
+- B1_PR_NUMBER: 2.
+- B1_BASE_SHA: 777686be4a86b6dbe2468db8457b588c4fd77825.
+- B1_HEAD_SHA: 8050ef9aadebaba594d29770d0677b02c400876d.
+- B1_HEAD_TREE: d9b49768026f2dda9e306aef0cb454fd22c5a6f6.
+- B1_BRANCH: `r2-4/b1-binding-probe`.
+- B1 path: `tests/b1_binding_probe.txt`.
+- B1 path SHA-256: 9c83e4ba47035dc5d7160c81ce5d64a3676003e8363f2b667ade88500022e6bd.
+- B1 path mode: 100644.
+- B1 content PRE B: PASS.
+- B1 content POST B: PASS.
+- B1_WORKFLOW_RUN_ID: 31911406085.
+- B1_WORKFLOW_EVENT: pull_request_target.
+- B1_WORKFLOW_NAME: R2 Governed Validation.
+- B1_WORKFLOW_PATH: .github/workflows/r2-ci.yml.
+- B1_WORKFLOW_HEAD_SHA: 8050ef9aadebaba594d29770d0677b02c400876d.
+- B1_WORKFLOW_CONCLUSION: success.
+- B1_JOB_ID: 95076911042.
+- B1_JOB_NAME: r2-governed-validation.
+- B1_JOB_CONCLUSION: success.
+- B1_CHECK_RUN_ID: 95076911042.
+- B1_CHECK_NAME_CONTEXT: r2-governed-validation.
+- B1_CHECK_RUN_APP_ID: 15368.
+- B1_CHECK_RUN_APP_SLUG: github-actions.
+- B1_CHECK_RUN_HEAD_SHA: 8050ef9aadebaba594d29770d0677b02c400876d.
+- B1_CHECK_CONCLUSION: success.
+- B1_CHECK_PRESENT_ON_PR_HEAD: True.
+- B1_CHECK_PRESENT_ON_BASE: False.
+- B1_EXACT_PR_HEAD_BINDING: OBSERVED_TRUE.
+- GITHUB_SHA_DIRECTLY_OBSERVED: False; `workflow_run.head_sha` is preserved as a GitHub API observation and is NOT relabeled as a direct observation of the `GITHUB_SHA` environment variable.
+- B1_PR_FINAL_STATE: CLOSED_UNMERGED.
+- B1 branch preserved at 8050ef9aadebaba594d29770d0677b02c400876d; branch not deleted by this block.
+- B1_NEW_FALSE_GREENS: 0.
+- FALSE_GREENS: 6.
+- ENFORCED: False.
+- R2AA-012 remains OPEN pending B2 no-green-inheritance evaluation.
+- Current phase remains R2-4.
+- Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
+- R2-4 exit gate: NOT_EXECUTED.
+- R2-5: NOT_AUTHORIZED.
+- Next authorized experiment: B2 same-repository no-green-inheritance; B2 must use a new HEAD and new check-run, prove the B1 check-run 95076911042 is not associated with B2 HEAD, and leave R2AA-012 OPEN until B2 is evaluated.
+- 2026-08-15T22:17:50Z: Human Gate D authorized closing PR #2 without merge and this two-path administrative canonicalization only.
 
 ## Blockers
 - R2-4 exact BASE-anchored candidate review round 2: EXECUTED_BLOCKED; independence_satisfied=PASS; candidate_disposition=BLOCKED; bootstrap_disposition=BLOCKED.
