@@ -1,0 +1,390 @@
+{
+  "baseline_disposition": "BLOCKED",
+  "bundle_sha256": "02d4d91e741b43114c4e04e3357a78e3d95eee5278dd1bd76640e6c7287b8002",
+  "checks": [
+    {
+      "evidence": "sha256sum del ZIP adjunto devuelve 02d4d91e741b43114c4e04e3357a78e3d95eee5278dd1bd76640e6c7287b8002, idéntico al declarado en el REQUEST.",
+      "id": "CHK-BUNDLE-SHA256",
+      "status": "PASS"
+    },
+    {
+      "evidence": "sha256sum de REVIEW_MANIFEST.json devuelve 380c516ebd859b3fc9fa36ad1e434fc179ab2967ebc525b854f0d09c6ce657cc, idéntico al declarado en el REQUEST.",
+      "id": "CHK-MANIFEST-SHA256",
+      "status": "PASS"
+    },
+    {
+      "evidence": "R2_STATE.md 1c132630..., scripts/run_functional.py 43f128d2... y scripts/risk_floor.py 22a2a552... coinciden con los cuatro hashes de identidad del REQUEST.",
+      "id": "CHK-REQUEST-IDENTITY-HASHES",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Los 14 ficheros de REVIEW_MANIFEST.json coinciden en sha256 y en bytes; total 104576, igual a total_repo_file_bytes.",
+      "id": "CHK-FILE-HASHES-AND-SIZES",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El recorrido de repo/ no encuentra ficheros fuera del manifiesto: ni basura generada, ni __pycache__, ni artefactos temporales.",
+      "id": "CHK-NO-UNDECLARED-FILES",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Los floors declarados en el manifiesto coinciden con la clasificación de policy/risk_floors.json para los 14 paths: D para R2_STATE.md, docs/FEATURE_BRIEF.md, policy/risk_floors.json y ambos scripts; C para AGENTS.md y evidence/; B para tests/fixtures/.",
+      "id": "CHK-MANIFEST-FLOORS-VS-POLICY",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA sobre el runner 43f128d2...: good exit 0 PASS ALL_FUNCTIONAL_CHECKS_PASSED; bad exit 1 FAIL TOTAL_NOT_CONSERVED; exit_zero exit 1 FAIL MISSING_OBSERVATION; tamper_verdict exit 1 FAIL TOTAL_NOT_CONSERVED; tamper_json exit 1 FAIL TOTAL_NOT_CONSERVED; stderr vacío en los cinco. Coincide exactamente con cases_after de evidence/r2-3/runner_judge_separation.json.",
+      "id": "CHK-RUNNER-CASES-REPRODUCED",
+      "status": "PASS"
+    },
+    {
+      "evidence": "spec_from_file_location aparece solo dentro de la cadena WORKER_SOURCE; el controlador no importa ni ejecuta la implementación, únicamente lanza sys.executable con -I -B -c.",
+      "id": "CHK-CONTROLLER-DOES-NOT-LOAD-IMPLEMENTATION",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Análisis AST de WORKER_SOURCE: importa solo __future__, importlib.util, os, pathlib y sys; no importa json; no contiene los literales PASS, FAIL, reason_code, verdict ni 334. La única coincidencia textual de import json está en un comentario.",
+      "id": "CHK-WORKER-HAS-NO-VERDICT-AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El worker se lanza con stdout y stderr en subprocess.PIPE, stdin en DEVNULL y close_fds por defecto, heredando solo el fd de observación vía pass_fds. No puede escribir en el stdout del controlador, que es la corrección del primer falso verde.",
+      "id": "CHK-WORKER-STDOUT-CANNOT-CONTAMINATE-VERDICT",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. El canal de observación no está autenticado: una implementación que escribe una observación conforme al schema en el fd de sys.argv[2] y llama a os._exit(0) obtiene exit 0 y status PASS con un split_expense incorrecto. Ver IR-002.",
+      "id": "CHK-OBSERVATION-INTEGRITY",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "PROBES EJECUTADAS: dos líneas devuelve INVALID_OBSERVATION_COUNT; literal inválido devuelve INVALID_OBSERVATION_LITERAL; anidamiento de 3000 niveles devuelve INVALID_OBSERVATION_LITERAL sin traceback; clave status inyectada devuelve WORKER_ATTEMPTED_VERDICT; exit 7 devuelve WORKER_NONZERO_EXIT; observación vacía devuelve MISSING_OBSERVATION. Todas con exit 1 y veredicto JSON bien formado.",
+      "id": "CHK-OBSERVATION-PROTOCOL-GUARDS",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBES EJECUTADAS: tests/fixtures/good_splitter.py en clase B da PASS exit 0; R2_STATE.md en clase B da FLOOR_EXCEEDS_AUTHORIZED_CLASS exit 3; scripts/unknown_helper.py en clase D da UNKNOWN_HIGH_AUTHORITY_SUBJECT exit 3, es decir el control plane desconocido bloquea incluso con la clase máxima; ../etc/passwd da CHECKER_ERROR exit 2.",
+      "id": "CHK-RISK-PRE-FAIL-CLOSED",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. Con un HEAD sin relación de ancestro con BASE el checker devuelve status ERROR, reason_code CHECKER_ERROR, mensaje sobre HEAD que no desciende del BASE autorizado y exit 2, antes de clasificar ningún path.",
+      "id": "CHK-RISK-POST-ANCESTRY",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. El borrado de src/example.py produce floors [B, D] combinando el path y la acción deletion, mechanical_path_floor D y FAIL exit 3 con clase autorizada B.",
+      "id": "CHK-RISK-POST-DELETION-FLOOR",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. git reporta R100 src/example.py -> tests/moved.py y el checker clasifica ambos lados, registrando floors [B, B] y los dos findings. El parseo NUL de dos paths por registro R funciona.",
+      "id": "CHK-RISK-POST-RENAME-BOTH-SIDES",
+      "status": "PASS"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. El mismo path desaparece del árbol con FAIL exit 3 si se expresa como borrado y con PASS exit 0 si se expresa como rename hacia tests/. Ver IR-004.",
+      "id": "CHK-RISK-RENAME-VS-DELETION-EQUIVALENCE",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. Con base igual a head el diff es vacío, findings queda vacío, max_floor devuelve A y el resultado es PASS exit 0. Es correcto por vacuidad: no hay cambio que autorizar.",
+      "id": "CHK-RISK-POST-EMPTY-DIFF",
+      "status": "PASS"
+    },
+    {
+      "evidence": "policy/risk_floors.json en R2_STATE.md (IR-001) e I-05 anclada a un runner ausente del baseline (IR-003). El resto de referencias cruzadas entre evidencias, manifiesto y ficheros sí coinciden.",
+      "id": "CHK-EVIDENCE-HASH-CONSISTENCY",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "Los cinco fixtures ejercitan lo que la evidencia afirma: good_splitter reparte [334,333,333]; bad_splitter trunca a [333,333,333] con suma 999; exit_zero_splitter lanza SystemExit(0) sin observación; tamper_verdict parchea __main__.verdict y tamper_json parchea json.dumps, ambos inertes al vivir el juez en otro proceso. Verificado por ejecución.",
+      "id": "CHK-FIXTURES-PROVE-EVIDENCE-CLAIMS",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El baseline no contiene implementación funcional del producto: no hay src/, y las únicas piezas ejecutables son los verificadores y los fixtures. Coherente con I-07 DECLARADA y con la regla de AGENTS.md de no mezclar implementación y acceptance-authority.",
+      "id": "CHK-IMPLEMENTATION-VS-JUDGE-SEPARATION",
+      "status": "PASS"
+    },
+    {
+      "evidence": "El brief exige suma exacta, la distribución 3,34/3,33/3,33 y el rechazo claro de cantidad inválida o cero personas. El runner comprueba total 1000, distribución y rechazo con ValueError y mensaje no vacío para (1000, 0) y (-1, 2). La única divergencia es la exigencia de orden, recogida en IR-011.",
+      "id": "CHK-FEATURE-BRIEF-VS-RUNNER",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Las 14 rutas cubren estado, brief, política, ambos verificadores, las tres evidencias y los cinco fixtures, sin ficheros generados. Los modos previstos son razonables: 100755 para scripts/*.py y 100644 para el resto; el modo 0600 de R2_STATE.md se normaliza a 100644 en el índice.",
+      "id": "CHK-BASELINE-FILE-LIST-COMPLETENESS",
+      "status": "PASS"
+    },
+    {
+      "evidence": "Requiere staging, que no está autorizado y que el manifiesto declara ausente (staging_present false). Solo puede comprobarse con git ls-files -s tras el staging y antes del primer commit.",
+      "id": "CHK-MINOR-4-INDEX-MODES",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence": "El bundle no incluye .git. head null, remote_count 0, staging_present false y working_tree_status se toman como declarados en el manifiesto, sin observación independiente.",
+      "id": "CHK-GIT-STATE",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence": "evidence/r2-2 registra <TEMP_REPO> como placeholder y temporary_post_probe.repository_removed true. Los identificadores 291179fe..., 1da85ba9... y 35e278d8... no son rederivables porque commit-tree depende de autor, committer y fechas no registradas. He verificado el comportamiento POST sobre un repositorio sintético nuevo, no los objetos originales.",
+      "id": "CHK-R2-2-POST-EVIDENCE-REPRODUCIBILITY",
+      "status": "UNCERTAIN"
+    },
+    {
+      "evidence": "Los runners 6fe5c55d... y 200d6ea9... no están en el bundle, de modo que las dos reproducciones previas de falso verde no pueden re-ejecutarse de forma independiente; se aceptan como registro, no como hecho verificado por mí.",
+      "id": "CHK-OLD-RUNNERS-VERIFICATION",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. Sin capability_floors en la política, toda capacidad bloquea con UNKNOWN_HIGH_AUTHORITY_SUBJECT incluso en clase D. Ver IR-006.",
+      "id": "CHK-CAPABILITY-DIMENSION",
+      "status": "FAIL"
+    },
+    {
+      "evidence": "PROBE EJECUTADA. docs/ no figura en control_plane_roots y un docs/ desconocido obtiene B por defecto pese a que docs/ aloja la autoridad de producto. Ver IR-007.",
+      "id": "CHK-CONTROL-PLANE-COVERAGE",
+      "status": "FAIL"
+    }
+  ],
+  "dynamic_review": "FAIL",
+  "findings": [
+    {
+      "blocking": true,
+      "evidence": "La línea 39 (Decisiones resueltas) y la línea 61 (entrada 2026-08-14T18:19:41Z) vinculan DEC-CP V1 a policy/risk_floors.json SHA-256 b6d229b262d7afce045004338ad9d9c892742251c270118c7c87ff7bef1219e1. El objeto del bundle tiene SHA-256 391aebfc3c6c593a6b1efb6a905105fb56e07b69939c597fa6b4a1ee688ebeed (verificado por mí y coincidente con REVIEW_MANIFEST.json y con evidence/r2-2/local_falsification.json artifacts_sha256). La línea 65 y evidence/r2-2 policy_delta.only_added_exact_paths documentan que en R2-2 se añadieron los exact_paths scripts/run_functional.py y scripts/risk_floor.py con floor D, es decir, el objeto cambió después de la autorización. No existe entrada de decisión que reautorice 391aebfc..., ni ejecución PRE/POST alguna que clasifique la modificación de policy/risk_floors.json, que su propia política sitúa en floor D (exact_paths, role acceptance_authority).",
+      "falsification_probe": "Comprobar que sha256sum policy/risk_floors.json coincide exactamente con el hash citado en la línea DEC-CP de R2_STATE.md. Hoy devuelve 391aebfc... frente a b6d229b2... (falla); tras la corrección mínima ambos valores deben coincidir.",
+      "id": "IR-001",
+      "impact": "El baseline congelaría una autoridad de aceptación clase D cuya autorización registrada apunta a un objeto inexistente en el repositorio. Cualquier verificación posterior contra el hash autorizado falla, la cadena de autoridad DEC-CP queda rota y la modificación D del fichero de política nunca pasó por el control de riesgo que ese mismo fichero define.",
+      "lines": "39, 61 (y contraste con 65)",
+      "minimal_fix": "Actualizar en R2_STATE.md las líneas 39 y 61 para registrar el objeto realmente autorizado (391aebfc...), o abrir DEC-CP V2 citando evidence/r2-2/local_falsification.json policy_delta como registro del cambio; y dejar constancia explícita de que la modificación D de policy/risk_floors.json no fue cubierta por PRE/POST.",
+      "path": "R2_STATE.md",
+      "severity": "CRITICAL",
+      "title": "DEC-CP autoriza un objeto de política que no es el del baseline"
+    },
+    {
+      "blocking": true,
+      "evidence": "PROBE EJECUTADA. El worker recibe el número del fd de observación en sys.argv[2] y ejecuta la implementación con exec_module en el mismo proceso. Una implementación que escribe una observación conforme al schema cerrado con os.write(int(sys.argv[2]), repr(payload)+chr(10)) y a continuación llama a os._exit(0) evita todas las defensas: no hay segunda línea (INVALID_OBSERVATION_COUNT no dispara), no hay claves de autoridad (WORKER_ATTEMPTED_VERDICT no dispara), el exit es 0 y la observación no está vacía. Ejecutado contra el runner exacto del baseline (SHA-256 43f128d235f4849a252c0184d77bf150ceddcc7516618f0be4b5ce9ef6e6d44b) con una implementación cuyo split_expense devuelve [1, 1, 1]: exit_code 0, status PASS, reason_code ALL_FUNCTIONAL_CHECKS_PASSED. Las dos variantes ya corregidas (tamper_verdict, tamper_json) son estrictamente más difíciles que esta.",
+      "falsification_probe": "Añadir tests/fixtures/forge_observation_splitter.py que escriba una observación válida en el fd de sys.argv[2] y termine con os._exit(0), con un split_expense deliberadamente incorrecto. Hoy produce exit 0 y status PASS (falso verde); tras la corrección debe producir exit 1 y FAIL, o quedar registrado explícitamente como clase residual conocida.",
+      "id": "IR-002",
+      "impact": "Tercera variante viva de la clase WORKER_SHARED_JUDGE_INTERPRETER. El controlador es el único proceso que calcula el veredicto, pero su única entrada es un canal no autenticado y totalmente controlable por el código bajo prueba, de modo que un PASS sigue siendo falsificable. La afirmación de I-06 (COMPROBADA, 'el controlador en un intérprete separado es el único juez') y static_checks.worker_has_verdict_authority=false describen la separación del cómputo del veredicto, no la integridad de sus entradas, y sobreestiman lo verificado. La métrica 'Falsos verdes: 2 detectados' queda desactualizada.",
+      "lines": "WORKER_SOURCE (argv[2] como fd de observación) y controller_main/parse_observation",
+      "minimal_fix": "Dos opciones, ambas mínimas: (a) documental, corregir la redacción de I-06 y de architecture_after para limitar la afirmación al cómputo del veredicto, y registrar esta clase residual con su fixture; (b) técnica, que el controlador genere un nonce por ejecución, lo entregue al worker por un fd de lectura distinto que el worker consuma y cierre ANTES de exec_module, y exija ese nonce exacto en la observación, rechazando las que no lo lleven. Ninguna de las dos convierte el runner en una jaula de seguridad.",
+      "path": "scripts/run_functional.py",
+      "severity": "CRITICAL",
+      "title": "Falso verde reproducible: la implementación falsifica la observación escribiendo en el fd heredado"
+    },
+    {
+      "blocking": true,
+      "evidence": "I-05 está marcada COMPROBADA y cita, para 'Runner GOOD PASS y BAD FAIL por TOTAL_NOT_CONSERVED', la evidencia SHA-256 fd7b4f65fe20034ab357f1837a077f64428c2ee35eeba21f3dfb12753ad6277b. Esa evidencia declara en artifacts_sha256 el runner 6fe5c55da8e273c214a216ef4cca9a01d0a888eaafedbd12a57127683a5864bd, que la propia línea 67 de R2_STATE.md clasifica después como falso verde y que fue sustituido dos veces. El runner del baseline es 43f128d235f4849a252c0184d77bf150ceddcc7516618f0be4b5ce9ef6e6d44b. AGENTS.md exige que la evidencia certifique solo el objeto exacto observado.",
+      "falsification_probe": "Para cada invariante COMPROBADA, comprobar que todo hash de artefacto declarado en la evidencia citada existe en REVIEW_MANIFEST.json. Hoy I-05 falla por 6fe5c55d...; tras la corrección debe pasar.",
+      "id": "IR-003",
+      "impact": "El baseline congelaría una invariante COMPROBADA cuya evidencia primaria certifica un artefacto que no está en el baseline y que se sabe defectuoso. El contenido sustantivo sí está cubierto por I-06 y por evidence/r2-3/runner_judge_separation.json, de modo que el defecto es de anclaje, pero queda escrito en el estado de autorización clase D y engaña a cualquier lector posterior.",
+      "lines": "I-05 (tabla de Invariantes)",
+      "minimal_fix": "Reanclar la cláusula de runner de I-05 a evidence/r2-3/runner_judge_separation.json (a70882687105fd9a3f821b6b87eb506c90fbc181e7f754e346835d89e51a72a7) y conservar fd7b4f65... únicamente para la cláusula del risk checker, cuyo hash 22a2a552... sí coincide con el baseline.",
+      "path": "R2_STATE.md",
+      "severity": "HIGH",
+      "title": "Invariante COMPROBADA anclada a evidencia de un runner superado y falso-verde"
+    },
+    {
+      "blocking": false,
+      "evidence": "PROBE EJECUTADA sobre repositorio sintético con plumbing. Borrado puro de src/example.py: floors [B, D], mechanical_path_floor D, FAIL con clase autorizada B y exit 3. Rename idéntico src/example.py -> tests/moved.py, que git reporta como R100: floors [B, B], mechanical_path_floor B, PASS con clase autorizada B y exit 0. scripts/risk_floor.py implementa fielmente matching.rename = max_source_destination, por lo que el hueco está en la política, no en el checker.",
+      "falsification_probe": "POST BASE..HEAD con un único rename R100 de src/ a tests/ y --authorized-class B. Hoy devuelve PASS con exit 0; tras la corrección debe devolver FLOOR_EXCEEDS_AUTHORIZED_CLASS con exit 3.",
+      "id": "IR-004",
+      "impact": "action_floors.deletion = D pretende que toda desaparición de un path exija clase D. Expresando la misma desaparición como rename hacia un destino de floor bajo se consigue en clase B. Como git detecta renames por similitud, un borrado acompañado de una creación suficientemente parecida también se reclasifica automáticamente. Debilita mecánicamente un control D sin contradecir el texto de la política.",
+      "lines": "matching.rename y action_floors.deletion",
+      "minimal_fix": "En policy/risk_floors.json definir matching.rename como el máximo entre origen, destino y action_floors.deletion, y reflejarlo en la rama R/C de findings_from_post; o registrar la excepción como decisión explícita.",
+      "path": "policy/risk_floors.json",
+      "severity": "MEDIUM",
+      "title": "El rename permite eliminar un path por debajo del floor de borrado"
+    },
+    {
+      "blocking": false,
+      "evidence": "grep -rn NOT_A_SECURITY_SANDBOX sobre todo el bundle devuelve coincidencias solo en REVIEW_CRITERIA.md y REVIEW_PACKET.md, nunca en repo/. El descargo de alcance existe únicamente en evidence/r2-3/runner_judge_separation.json (architecture_after.limitation) y en la nota de I-04 de R2_STATE.md. El criterio de revisión afirma que el runner lo declara expresamente; el artefacto no lo hace.",
+      "falsification_probe": "grep -c NOT_A_SECURITY_SANDBOX scripts/run_functional.py. Hoy devuelve 0; tras la corrección debe devolver al menos 1.",
+      "id": "IR-005",
+      "impact": "El artefacto D que será reutilizado y del que depende la aceptación no transporta su propio límite de alcance. Quien lea scripts/run_functional.py sin la evidencia puede atribuirle contención frente a código hostil, que es justamente la lectura que IR-002 desmiente. La latitud que el criterio de revisión concede al runner se apoya en una declaración que el objeto revisado no contiene.",
+      "lines": "archivo completo",
+      "minimal_fix": "Añadir en scripts/run_functional.py una constante o docstring de cabecera con el marcador NOT_A_SECURITY_SANDBOX y una frase sobre el alcance real, coherente con architecture_after.limitation.",
+      "path": "scripts/run_functional.py",
+      "severity": "MEDIUM",
+      "title": "El runner no declara NOT_A_SECURITY_SANDBOX en su propio código"
+    },
+    {
+      "blocking": false,
+      "evidence": "PROBE EJECUTADA. La política no define capability_floors, por lo que Policy.capability_floors queda vacío y classify_capability devuelve siempre floor D con blocks_unknown=True. Con --mode pre --authorized-class D --capability network el resultado es UNKNOWN_HIGH_AUTHORITY_SUBJECT, status FAIL, exit 3, incluso con la clase máxima autorizada. Ninguna de las ejecuciones PRE registradas en las tres evidencias pasa --capability.",
+      "falsification_probe": "PRE --capability <capacidad clasificada> --authorized-class D. Hoy devuelve FAIL con exit 3; tras la corrección debe devolver FLOOR_WITHIN_AUTHORIZED_CLASS con exit 0, y una capacidad no clasificada debe seguir bloqueando.",
+      "id": "IR-006",
+      "impact": "AGENTS.md establece que PRE clasifica paths, capacidades y acciones previstos. En la práctica ningún PRE puede declarar capacidades sin bloquearse, de modo que esa parte del control nunca se ha ejercido y no existe PASS/FAIL conocido para ella. El comportamiento es fail-closed, por lo que no genera falso verde, pero la cobertura declarada es mayor que la real.",
+      "lines": "ausencia de la clave capability_floors",
+      "minimal_fix": "Añadir capability_floors a policy/risk_floors.json clasificando al menos las capacidades que el experimento usa (red, instalación, borrado, staging, commit), o documentar que las capacidades quedan deliberadamente sin clasificar y que PRE no debe recibir --capability.",
+      "path": "policy/risk_floors.json",
+      "severity": "MEDIUM",
+      "title": "La dimensión de capacidades es inutilizable: toda capacidad bloquea"
+    },
+    {
+      "blocking": false,
+      "evidence": "PROBE EJECUTADA. control_plane_roots enumera .github/, policy/, scripts/, tasks/, evidence/, AGENTS.md y R2_STATE.md, pero no docs/, aunque docs/FEATURE_BRIEF.md está clasificado como exact_path D con role product_acceptance_authority. Con --mode pre --authorized-class B --path docs/FEATURE_BRIEF_V2.md el resultado es role unknown_normal, floor B, status PASS, exit 0.",
+      "falsification_probe": "PRE --path docs/FEATURE_BRIEF_V2.md --authorized-class B. Hoy devuelve PASS con exit 0; tras la corrección debe devolver UNKNOWN_HIGH_AUTHORITY_SUBJECT con exit 3.",
+      "id": "IR-007",
+      "impact": "Un documento nuevo de autoridad de producto en docs/ obtiene B por defecto en lugar de D/STOP, es decir, puede crearse o modificarse bajo una clase autorizada baja sin volver a autorización. Contradice el principio declarado de que el control plane desconocido es D/STOP, aplicado de forma incompleta al directorio que contiene la autoridad de aceptación del producto.",
+      "lines": "control_plane_roots",
+      "minimal_fix": "Añadir 'docs/' a control_plane_roots. Las reglas de prefijo docs/reference/ (A) y docs/governance/ (C) tienen precedencia sobre el fallback, por lo que la clasificación existente no cambia y solo los paths docs/ desconocidos pasan a D/STOP.",
+      "path": "policy/risk_floors.json",
+      "severity": "MEDIUM",
+      "title": "docs/ no es raíz de control plane pese a alojar la autoridad de producto"
+    },
+    {
+      "blocking": false,
+      "evidence": "PROBE EJECUTADA. La guarda solo rechaza valores <= 0. Con --timeout-seconds nan la comparación es falsa, el valor llega a process.communicate(timeout=...) y selectors lanza ValueError no capturado: traceback en stderr, exit code 1 y stdout completamente vacío, sin ninguna línea de veredicto JSON.",
+      "falsification_probe": "Ejecutar el runner con --timeout-seconds nan. Hoy produce traceback, exit 1 y stdout vacío; tras la corrección debe producir status ERROR, reason_code INVALID_TIMEOUT y exit 2.",
+      "id": "IR-008",
+      "impact": "El runner promete exactamente una línea JSON de veredicto en stdout y aquí no emite ninguna. El exit 1 mantiene el fallo cerrado frente a un consumidor que mire el código de salida, pero un consumidor que parsee stdout no obtiene reason_code alguno. Con inf se produce un fallo análogo.",
+      "lines": "controller_main, guarda 'if timeout_seconds <= 0'",
+      "minimal_fix": "Extender la guarda existente a 'if not math.isfinite(timeout_seconds) or timeout_seconds <= 0' y devolver el ERROR INVALID_TIMEOUT ya definido.",
+      "path": "scripts/run_functional.py",
+      "severity": "LOW",
+      "title": "Timeout no finito evade la validación y rompe el protocolo de veredicto"
+    },
+    {
+      "blocking": false,
+      "evidence": "REVISION ESTATICA, no ejecutada. El controlador solo drena el pipe de observación después de que process.communicate() haya retornado. MAX_OBSERVATION_BYTES vale 65536, que coincide con el tamaño por defecto del buffer de pipe en Linux. Un worker que escriba más de esa cantidad se bloquea en os.write porque nadie lee el extremo de lectura, communicate agota el timeout y el flujo se desvía a la rama timed_out.",
+      "falsification_probe": "Fixture que escriba 128 KiB en el fd de observación y termine con os._exit(0). Hoy debe observarse WORKER_TIMEOUT; tras la corrección debe observarse OBSERVATION_TOO_LARGE.",
+      "id": "IR-009",
+      "impact": "La condición se notifica como WORKER_TIMEOUT en lugar de OBSERVATION_TOO_LARGE. Sigue siendo un FAIL, por lo que no hay falso verde, pero un reason_code declarado en la taxonomía resulta inalcanzable en el caso que motiva su existencia y el diagnóstico posterior sería erróneo.",
+      "lines": "controller_main (orden communicate/read_observation) y read_observation",
+      "minimal_fix": "Drenar el fd de observación concurrentemente con communicate (hilo o selector), o poner el extremo de lectura en modo no bloqueante con la misma fecha límite.",
+      "path": "scripts/run_functional.py",
+      "severity": "LOW",
+      "title": "OBSERVATION_TOO_LARGE es inalcanzable por encima de la capacidad del pipe"
+    },
+    {
+      "blocking": false,
+      "evidence": "REVISION ESTATICA, no ejecutada. read_observation itera os.read hasta EOF sin fecha límite, y EOF requiere que se cierren todos los extremos de escritura. La segunda llamada a process.communicate() tras el timeout tampoco lleva timeout. kill_process_group cubre el grupo creado por start_new_session=True, pero no un descendiente que haya llamado a setsid.",
+      "falsification_probe": "Fixture que haga fork de un hijo con setsid que conserve el fd abierto y duerma 60 segundos. Hoy el controlador queda bloqueado; tras la corrección debe emitir un veredicto dentro del límite.",
+      "id": "IR-010",
+      "impact": "timeout_seconds acota al worker, no al verificador. Un proceso superviviente que conserve el fd de observación deja al controlador bloqueado indefinidamente sin emitir veredicto. Es denegación de veredicto, no falso verde, y cae dentro del alcance hostil explícitamente excluido en architecture_after.limitation, pero contradice la lectura natural de un runner con timeout.",
+      "lines": "read_observation y la segunda llamada a process.communicate() tras kill_process_group",
+      "minimal_fix": "Aplicar una fecha límite también a read_observation y a la segunda communicate, emitiendo el FAIL WORKER_TIMEOUT ya existente al agotarse.",
+      "path": "scripts/run_functional.py",
+      "severity": "LOW",
+      "title": "El tiempo de ejecución del controlador no está acotado"
+    },
+    {
+      "blocking": false,
+      "evidence": "expected_distribution es exactamente [334, 333, 333] y la comparación es de igualdad de lista. docs/FEATURE_BRIEF.md exige que repartir 10,00 EUR entre 3 personas produzca 3,34, 3,33 y 3,33 y que la suma mostrada sea exactamente 10,00 EUR, sin declarar que el orden sea normativo. La conservación del total ya se comprueba antes por separado.",
+      "falsification_probe": "Fixture que devuelva [333, 334, 333] para 1000 y 3 personas. Hoy produce FAIL con DISTRIBUTION_MISMATCH; tras la corrección debe producir PASS, o bien el brief debe declarar el orden normativo y el fixture seguir fallando por una razón documentada.",
+      "id": "IR-011",
+      "impact": "Una implementación correcta que sitúe el céntimo sobrante en otra posición, por ejemplo [333, 334, 333], sería rechazada con DISTRIBUTION_MISMATCH. Es un falso fallo potencial y un acoplamiento del juez a un detalle no fijado por la autoridad de producto.",
+      "lines": "controller_verdict, comprobación DISTRIBUTION_MISMATCH",
+      "minimal_fix": "Comparar multiconjuntos, es decir sorted(parts) frente a sorted(expected_distribution), manteniendo intacta la comprobación de total; o fijar explícitamente en docs/FEATURE_BRIEF.md que el orden forma parte de la demo aceptada.",
+      "path": "scripts/run_functional.py",
+      "severity": "LOW",
+      "title": "Posible falso fallo por exigir un orden concreto en la distribución"
+    },
+    {
+      "blocking": false,
+      "evidence": "El controlador contiene tres sentencias assert, dos de ellas en la ruta que produce el veredicto. Python elimina los assert con -O o con PYTHONOPTIMIZE distinto de cero, y el runner se invoca por shebang, de modo que la variable de entorno basta para desactivarlos sin cambiar la línea de comandos.",
+      "falsification_probe": "Ejecutar todo el conjunto de fixtures con PYTHONOPTIMIZE=1 y comparar status, reason_code y exit code con la ejecución sin optimizar. Deben ser idénticos antes y después.",
+      "id": "IR-012",
+      "impact": "Hoy son redundantes porque el schema cerrado de parse_observation ya garantiza esas propiedades, por lo que no se ha identificado falso verde derivado. Aun así, un artefacto clase D no debería apoyar invariantes en construcciones que el intérprete puede eliminar según el entorno.",
+      "lines": "assert isinstance(parts, list); assert process is not None",
+      "minimal_fix": "Sustituir los assert de la ruta del juez por comprobaciones explícitas que emitan un veredicto ERROR con reason_code propio.",
+      "path": "scripts/run_functional.py",
+      "severity": "LOW",
+      "title": "Uso de assert en la ruta del juez de un artefacto D"
+    }
+  ],
+  "limitations": [
+    "Ejecuté las probes con Python 3.12.3; las evidencias se produjeron con Python 3.14.4 y Git 2.53.0. Los cinco casos documentados reproducen idénticamente, pero los detalles dependientes de versión (límites de anidamiento en ast, internos de subprocess y selectors, detección de renames) podrían diferir en el entorno original.",
+    "La revisión se hizo sobre copias en un directorio de trabajo aparte. No modifiqué ningún fichero del bundle y los fixtures de prueba se crearon fuera del árbol del repositorio; ninguno debe incorporarse al baseline tal cual.",
+    "El bundle no incluye .git, por lo que el estado del repositorio (head null, sin remotos, sin staging, working_tree_status) queda declarado y no observado. La comprobación MINOR-4 de modos en el índice es estructuralmente imposible antes del staging.",
+    "La evidencia POST de R2-2 no es reproducible desde el bundle: el repositorio temporal fue eliminado y los identificadores de commit no son rederivables. Re-verifiqué el comportamiento POST sobre un repositorio sintético propio, lo que sustenta el mecanismo pero no los objetos concretos registrados.",
+    "Los runners anteriores 6fe5c55d... y 200d6ea9... no están en el paquete, de modo que las dos reproducciones previas de falso verde quedan como registro no verificado independientemente.",
+    "IR-009 e IR-010 proceden de revisión estática y no fueron ejecutadas; ambas describen fallos cerrados o bloqueos, no falsos verdes.",
+    "Esta revisión certifica únicamente los bytes enumerados en REVIEW_MANIFEST.json. La ausencia de hallazgos adicionales no es prueba de ausencia de otras clases de falso verde, y en particular la clase de IR-002 sugiere que el espacio de forja a través del canal de observación no está agotado.",
+    "No emito juicio sobre la demo funcional del Feature Brief, que sigue NOT_EXECUTED, ni sobre DC-006 y EXP-01, que permanecen OPEN."
+  ],
+  "manifest_sha256": "380c516ebd859b3fc9fa36ad1e434fc179ab2967ebc525b854f0d09c6ce657cc",
+  "review_protocol": "r2-independent-review-v1",
+  "reviewed_objects": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c4f997bd24b6fe1764389ca648a13049978a89925c8233c2e131ebf14789ecab",
+      "status": "PASS"
+    },
+    {
+      "path": "R2_STATE.md",
+      "sha256": "1c132630ac3915ed5749a21de79cef80ca02907f44819c86b84f42c1eede0114",
+      "status": "FAIL"
+    },
+    {
+      "path": "docs/FEATURE_BRIEF.md",
+      "sha256": "26088a93747ac7e72160e22331818c5a1125cc3c229d6f5affc63dd352c04908",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-2/local_falsification.json",
+      "sha256": "fd7b4f65fe20034ab357f1837a077f64428c2ee35eeba21f3dfb12753ad6277b",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/runner_false_green_correction.json",
+      "sha256": "49cbd8e88ef9bc8e87c0879a5798eb154ad7dacc918167f76c45ea9d9df22ec2",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/runner_judge_separation.json",
+      "sha256": "a70882687105fd9a3f821b6b87eb506c90fbc181e7f754e346835d89e51a72a7",
+      "status": "FAIL"
+    },
+    {
+      "path": "policy/risk_floors.json",
+      "sha256": "391aebfc3c6c593a6b1efb6a905105fb56e07b69939c597fa6b4a1ee688ebeed",
+      "status": "FAIL"
+    },
+    {
+      "path": "scripts/risk_floor.py",
+      "sha256": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+      "status": "PASS"
+    },
+    {
+      "path": "scripts/run_functional.py",
+      "sha256": "43f128d235f4849a252c0184d77bf150ceddcc7516618f0be4b5ce9ef6e6d44b",
+      "status": "FAIL"
+    },
+    {
+      "path": "tests/fixtures/bad_splitter.py",
+      "sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/exit_zero_splitter.py",
+      "sha256": "12a5a0cb0bfc348638cfcf19a0d4c083e58774506dbcc74efc1354e6e8510000",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/good_splitter.py",
+      "sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/tamper_json_splitter.py",
+      "sha256": "57fddb07706e88eaf4ea27221e9f44e60eafa79593d17e56131fa93dc3b47223",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/tamper_verdict_splitter.py",
+      "sha256": "cb9e5390600488600875c815aae66bd4605f5fc8b98e02eef7b82170f6e76b91",
+      "status": "PASS"
+    }
+  ],
+  "reviewer": {
+    "fresh_context": true,
+    "independence_statement": "No participé en la implementación ni usé conclusiones previas como sustituto del análisis del paquete.",
+    "model": "Claude Opus 5",
+    "system": "Claude"
+  },
+  "static_review": "FAIL",
+  "summary": "El paquete es íntegro y su cadena de custodia se sostiene: el ZIP, el manifiesto y los cuatro hashes de identidad del REQUEST coinciden, los 14 ficheros cuadran en hash y tamaño, no hay ficheros no declarados y los floors del manifiesto concuerdan con la política. Los cinco casos del runner documentados en evidence/r2-3 reproducen exactamente sobre el objeto 43f128d2..., el controlador no carga la implementación, el worker no importa json ni contiene autoridad de veredicto, y su stdout está aislado del veredicto; el risk checker es fail-closed en PRE, en ancestría BASE/HEAD, en borrado, en paths malformados y en control plane desconocido, y clasifica ambos lados de un rename R100 con datos NUL-safe. Aun así el baseline queda BLOQUEADO por tres hallazgos. Primero, R2_STATE.md vincula DEC-CP a un policy/risk_floors.json con SHA-256 b6d229b2..., mientras el objeto del baseline es 391aebfc...; el cambio está documentado en evidence/r2-2 como policy_delta pero nunca fue reautorizado ni pasó por el control de riesgo que ese mismo fichero clase D define. Segundo, y ejecutado por mí, sobrevive una tercera variante de la clase WORKER_SHARED_JUDGE_INTERPRETER: una implementación que escribe una observación conforme al schema en el fd heredado de sys.argv[2] y termina con os._exit(0) obtiene exit 0 y ALL_FUNCTIONAL_CHECKS_PASSED devolviendo [1, 1, 1], de modo que I-06 describe la separación del cómputo del veredicto pero no la integridad de sus entradas y sobreestima lo verificado. Tercero, I-05 está marcada COMPROBADA citando evidencia que certifica el runner 6fe5c55d..., precisamente el que después se clasificó como falso verde y que no está en el baseline. A ello se añaden nueve hallazgos no bloqueantes, entre ellos que el rename permite eliminar un path por debajo del floor de borrado, que la dimensión de capacidades es inutilizable por falta de capability_floors, que docs/ no es raíz de control plane y que el marcador NOT_A_SECURITY_SANDBOX no aparece en el runner sino solo en los criterios de revisión y en la evidencia. La métrica de falsos verdes debería pasar de 2 a 3 antes de cualquier staging."
+}

@@ -1,0 +1,280 @@
+{
+  "authorization": {
+    "class": "D",
+    "commit": false,
+    "hostile_process_internal_tampering": "OUT_OF_SCOPE",
+    "human_gate": "PASS",
+    "network": false,
+    "publication": false,
+    "remote": false,
+    "runner_limitation_accepted": "NOT_A_SECURITY_SANDBOX",
+    "runner_scope_accepted": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+    "staging": false
+  },
+  "created_at_utc": "2026-08-14T23:17:23Z",
+  "dec_cp_v2": {
+    "decision_version": 2,
+    "docs_control_plane_root_added": true,
+    "historical_policy_pre_post": "NOT_EXECUTED",
+    "not_enforced": true,
+    "not_merge_authority": true,
+    "policy_sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550",
+    "status": "RESOLVED_V2_LOCAL_EXPERIMENTAL"
+  },
+  "evidence_type": "r2-independent-review-response-v1",
+  "finding_dispositions": [
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-001",
+      "note": "R2_STATE registra el hash exacto de policy V2; el cambio histórico 391a... fue autorizado dentro del bloque R2-2, pero HISTORICAL_POLICY_PRE_POST sigue NOT_EXECUTED.",
+      "status": "CORRECTED_DEC_CP_V2_EXACT_OBJECT"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-002",
+      "note": "El runner verifica implementaciones cooperativas o defectuosas; no es una frontera de seguridad. La forja deliberada del canal se conserva como falso verde número 3.",
+      "status": "ACCEPTED_KNOWN_OUT_OF_SCOPE_LIMITATION"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-003",
+      "note": "I-05 se enlaza a las regresiones del runner actual y a la evidencia del risk checker actual.",
+      "status": "CORRECTED_REANCHORED_TO_CURRENT_OBJECTS"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-004",
+      "note": "R2 canónico clasifica ambos lados del rename y conserva el máximo; la equivalencia rename=borrado no se declara como garantía.",
+      "status": "NOT_ADOPTED_CANONICAL_RENAME_RULE_PRESERVED"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-005",
+      "note": "El runner contiene RUNNER_LIMITATION=NOT_A_SECURITY_SANDBOX y la incluye en sus veredictos.",
+      "status": "CORRECTED_RUNNER_SELF_DECLARATION"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-006",
+      "note": "Las capacidades desconocidas siguen bloqueando; capability_floors se definirá antes de autorizar una tarea que declare capacidades.",
+      "status": "DEFERRED_FAIL_CLOSED_BEFORE_FIRST_CAPABILITY_TASK"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-007",
+      "note": "docs/ desconocido pasa de B/PASS a D/STOP; docs/reference y docs/governance conservan sus excepciones explícitas.",
+      "status": "CORRECTED_DOCS_CONTROL_PLANE_ROOT"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-008",
+      "note": "Timeout no finito falla con exit no cero; la taxonomía del error se corregirá en una tarea separada.",
+      "status": "DEFERRED_NONBLOCKING_FAIL_CLOSED"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-009",
+      "note": "El posible WORKER_TIMEOUT en lugar de OBSERVATION_TOO_LARGE no concede PASS.",
+      "status": "DEFERRED_NONBLOCKING_DIAGNOSTIC"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-010",
+      "note": "Contención host y descendientes que escapan del grupo pertenecen a una frontera de aislamiento separada.",
+      "status": "DEFERRED_OUT_OF_SCOPE_HOSTILE_PROCESS_TREE"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-011",
+      "note": "La demo funcional sigue NOT_EXECUTED; el orden se aclarará antes de aceptar una feature funcional.",
+      "status": "OPEN_NONBLOCKING_PRODUCT_CLARIFICATION_BEFORE_FEATURE_ACCEPTANCE"
+    },
+    {
+      "blocking_for_round_2": false,
+      "id": "IR-012",
+      "note": "No se ha demostrado un falso verde; la paridad con PYTHONOPTIMIZE queda pendiente.",
+      "status": "DEFERRED_NONBLOCKING_REDUNDANT_ASSERTS"
+    }
+  ],
+  "metrics": {
+    "false_greens_detected": 3,
+    "manual_agent_handoffs": 2
+  },
+  "nonclaims": [
+    "No se afirma contención frente a código deliberadamente hostil.",
+    "No se afirma ENFORCED, AISLADA ni autoridad de merge.",
+    "No se afirma que el histórico cambio de policy 391a... tuviera PRE/POST propio.",
+    "No se afirma que MINOR-4 esté ejecutado antes del staging.",
+    "No se afirma que la revisión independiente de ronda 2 esté ejecutada."
+  ],
+  "objects": {
+    "policy_before_sha256": "391aebfc3c6c593a6b1efb6a905105fb56e07b69939c597fa6b4a1ee688ebeed",
+    "policy_v1_authorized_sha256": "b6d229b262d7afce045004338ad9d9c892742251c270118c7c87ff7bef1219e1",
+    "policy_v2_sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550",
+    "risk_checker_sha256": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+    "runner_after_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+    "runner_before_sha256": "43f128d235f4849a252c0184d77bf150ceddcc7516618f0be4b5ce9ef6e6d44b",
+    "state_before_sha256": "1c132630ac3915ed5749a21de79cef80ca02907f44819c86b84f42c1eede0114"
+  },
+  "pre_step_gate": {
+    "full_candidate_pre_after": {
+      "exit_code": 0,
+      "mechanical_path_floor": "D",
+      "path_count": 16,
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "historical_policy_pre_post": "NOT_EXECUTED",
+    "post_check_current_block": "NOT_EXECUTED_NO_BASELINE_HEAD_EXISTS",
+    "risk_pre_after": {
+      "exit_code": 0,
+      "mechanical_path_floor": "D",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "risk_pre_before": {
+      "exit_code": 0,
+      "mechanical_path_floor": "D",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    }
+  },
+  "regressions": {
+    "risk_docs_after": {
+      "exit_code": 3,
+      "mechanical_path_floor": "D",
+      "reason_code": "UNKNOWN_HIGH_AUTHORITY_SUBJECT",
+      "status": "FAIL"
+    },
+    "risk_docs_before": {
+      "exit_code": 0,
+      "mechanical_path_floor": "B",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "risk_docs_governance": {
+      "exit_code": 0,
+      "mechanical_path_floor": "C",
+      "status": "PASS"
+    },
+    "risk_docs_reference": {
+      "exit_code": 0,
+      "mechanical_path_floor": "A",
+      "status": "PASS"
+    },
+    "runner": {
+      "bad": {
+        "command": [
+          "/usr/bin/python3",
+          "-S",
+          "/home/hector/desarrollo-gobernado-r2/scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/bad_splitter.py"
+        ],
+        "exit_code": 1,
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+        "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+        "status": "FAIL",
+        "stderr_empty": true
+      },
+      "exit_zero": {
+        "command": [
+          "/usr/bin/python3",
+          "-S",
+          "/home/hector/desarrollo-gobernado-r2/scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/exit_zero_splitter.py"
+        ],
+        "exit_code": 1,
+        "reason_code": "MISSING_OBSERVATION",
+        "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+        "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+        "status": "FAIL",
+        "stderr_empty": true
+      },
+      "good": {
+        "command": [
+          "/usr/bin/python3",
+          "-S",
+          "/home/hector/desarrollo-gobernado-r2/scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/good_splitter.py"
+        ],
+        "exit_code": 0,
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+        "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+        "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+        "status": "PASS",
+        "stderr_empty": true
+      },
+      "tamper_json": {
+        "command": [
+          "/usr/bin/python3",
+          "-S",
+          "/home/hector/desarrollo-gobernado-r2/scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/tamper_json_splitter.py"
+        ],
+        "exit_code": 1,
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+        "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+        "status": "FAIL",
+        "stderr_empty": true
+      },
+      "tamper_verdict": {
+        "command": [
+          "/usr/bin/python3",
+          "-S",
+          "/home/hector/desarrollo-gobernado-r2/scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/tamper_verdict_splitter.py"
+        ],
+        "exit_code": 1,
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "runner_limitation": "NOT_A_SECURITY_SANDBOX",
+        "runner_scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION",
+        "status": "FAIL",
+        "stderr_empty": true
+      }
+    }
+  },
+  "runner_scope": {
+    "hostile_process_internal_tampering": "OUT_OF_SCOPE",
+    "known_hostile_forge_reproduced": {
+      "classification": "KNOWN_OUT_OF_SCOPE_FALSE_GREEN_3",
+      "command_template": [
+        "python3",
+        "-S",
+        "scripts/run_functional.py",
+        "--implementation",
+        "<TEMP_FORGE_OBSERVATION_SPLITTER>"
+      ],
+      "exit_code": 0,
+      "probe_source_bytes": 970,
+      "probe_source_sha256": "100562fdaee98319c2033f11242919238b58173c45ab42be6a543929f251e1d4",
+      "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+      "status": "PASS"
+    },
+    "limitation": "NOT_A_SECURITY_SANDBOX",
+    "scope": "COOPERATIVE_OR_BUGGY_IMPLEMENTATION"
+  },
+  "schema_version": 1,
+  "source_review": {
+    "baseline_disposition": "BLOCKED",
+    "blocking_finding_count": 3,
+    "bundle_sha256": "02d4d91e741b43114c4e04e3357a78e3d95eee5278dd1bd76640e6c7287b8002",
+    "canonical_bytes": 36596,
+    "canonical_path": "evidence/r2-3/independent_review_01.json",
+    "canonical_sha256": "a505c414ce7949cb3ae175f3d4165036669d05d5e62e65128f471f94a35515cb",
+    "dynamic_review": "FAIL",
+    "finding_count": 12,
+    "manifest_sha256": "380c516ebd859b3fc9fa36ad1e434fc179ab2967ebc525b854f0d09c6ce657cc",
+    "review_protocol": "r2-independent-review-v1",
+    "source_uploaded_file_bytes": 37181,
+    "source_uploaded_file_sha256": "c0540024e9ecb79549874a47775866b12d09e3b2f2d24358612f4e687181eb10",
+    "static_review": "FAIL",
+    "status": "EXECUTED_BLOCKED"
+  }
+}

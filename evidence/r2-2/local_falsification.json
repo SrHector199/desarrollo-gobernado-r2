@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "phase": "R2-2",
+  "created_at": "2026-08-14T19:25:11Z",
+  "status": "PASS",
+  "purpose": "Demostrar PASS y FAIL conocidos del runner funcional y del risk-floor checker local PRE/POST.",
+  "authority": {
+    "human_authorization": "R2-2 complete block",
+    "policy_status": "AUTHORIZED_LOCAL_EXPERIMENTAL",
+    "policy_enforced": false,
+    "merge_authority": false
+  },
+  "main_repository": {
+    "path": "/home/hector/desarrollo-gobernado-r2",
+    "branch": "main",
+    "head": null,
+    "staging_performed": false,
+    "persistent_commit_created": false,
+    "network_used": false,
+    "installation_performed": false
+  },
+  "artifacts_sha256": {
+    "AGENTS.md": "c4f997bd24b6fe1764389ca648a13049978a89925c8233c2e131ebf14789ecab",
+    "R2_STATE.before": "30780f76cbbcd7ab4c57b3e3eb36f3df275b5cdba07c1f7033de44c895256404",
+    "docs/FEATURE_BRIEF.md": "26088a93747ac7e72160e22331818c5a1125cc3c229d6f5affc63dd352c04908",
+    "policy/risk_floors.json": "391aebfc3c6c593a6b1efb6a905105fb56e07b69939c597fa6b4a1ee688ebeed",
+    "scripts/run_functional.py": "6fe5c55da8e273c214a216ef4cca9a01d0a888eaafedbd12a57127683a5864bd",
+    "scripts/risk_floor.py": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+    "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+    "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce"
+  },
+  "policy_delta": {
+    "only_added_exact_paths": [
+      "scripts/run_functional.py",
+      "scripts/risk_floor.py"
+    ],
+    "both_floor": "D",
+    "status_unchanged": "AUTHORIZED_LOCAL_EXPERIMENTAL"
+  },
+  "cases": [
+    {
+      "id": "runner_good",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/run_functional.py",
+        "--implementation",
+        "tests/fixtures/good_splitter.py"
+      ],
+      "expected": {
+        "exit_code": 0,
+        "status": "PASS",
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 0,
+        "stdout": "{\"checks\": [{\"name\": \"total_conservation\", \"status\": \"PASS\"}, {\"name\": \"accepted_demo_distribution\", \"status\": \"PASS\"}, {\"exception\": \"ValueError\", \"message\": \"people debe ser un entero mayor que cero\", \"name\": \"zero_people_rejected\", \"status\": \"PASS\"}, {\"exception\": \"ValueError\", \"message\": \"amount_cents debe ser un entero no negativo\", \"name\": \"negative_amount_rejected\", \"status\": \"PASS\"}], \"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py\", \"reason_code\": \"ALL_FUNCTIONAL_CHECKS_PASSED\", \"status\": \"PASS\"}\n",
+        "stderr": "",
+        "parsed": {
+          "checks": [
+            {
+              "name": "total_conservation",
+              "status": "PASS"
+            },
+            {
+              "name": "accepted_demo_distribution",
+              "status": "PASS"
+            },
+            {
+              "exception": "ValueError",
+              "message": "people debe ser un entero mayor que cero",
+              "name": "zero_people_rejected",
+              "status": "PASS"
+            },
+            {
+              "exception": "ValueError",
+              "message": "amount_cents debe ser un entero no negativo",
+              "name": "negative_amount_rejected",
+              "status": "PASS"
+            }
+          ],
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py",
+          "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+          "status": "PASS"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "runner_bad",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/run_functional.py",
+        "--implementation",
+        "tests/fixtures/bad_splitter.py"
+      ],
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 1,
+        "stdout": "{\"details\": {\"expected_total_cents\": 1000, \"observed_total_cents\": 999, \"parts\": [333, 333, 333]}, \"message\": \"La suma de las partes no conserva exactamente el importe original.\", \"reason_code\": \"TOTAL_NOT_CONSERVED\", \"status\": \"FAIL\"}\n",
+        "stderr": "",
+        "parsed": {
+          "details": {
+            "expected_total_cents": 1000,
+            "observed_total_cents": 999,
+            "parts": [
+              333,
+              333,
+              333
+            ]
+          },
+          "message": "La suma de las partes no conserva exactamente el importe original.",
+          "reason_code": "TOTAL_NOT_CONSERVED",
+          "status": "FAIL"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "risk_pre_b_pass",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "B",
+        "--path",
+        "tests/fixtures/good_splitter.py"
+      ],
+      "expected": {
+        "exit_code": 0,
+        "status": "PASS",
+        "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 0,
+        "stdout": "{\"authorized_class\": \"B\", \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"B\", \"reason\": \"Tests funcionales del mini-proyecto.\", \"role\": \"functional_tests\", \"subject\": \"tests/fixtures/good_splitter.py\", \"subject_type\": \"path\"}], \"mechanical_path_floor\": \"B\", \"mode\": \"PRE\", \"reason_code\": \"FLOOR_WITHIN_AUTHORIZED_CLASS\", \"status\": \"PASS\"}\n",
+        "stderr": "",
+        "parsed": {
+          "authorized_class": "B",
+          "findings": [
+            {
+              "blocks_unknown": false,
+              "explicit": true,
+              "floor": "B",
+              "reason": "Tests funcionales del mini-proyecto.",
+              "role": "functional_tests",
+              "subject": "tests/fixtures/good_splitter.py",
+              "subject_type": "path"
+            }
+          ],
+          "mechanical_path_floor": "B",
+          "mode": "PRE",
+          "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+          "status": "PASS"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "risk_pre_b_to_d_fail",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "B",
+        "--path",
+        "R2_STATE.md"
+      ],
+      "expected": {
+        "exit_code": 3,
+        "status": "FAIL",
+        "reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 3,
+        "stdout": "{\"authorized_class\": \"B\", \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Registra fase, evidencia, pendientes y el único siguiente paso autorizado.\", \"role\": \"authorization_state\", \"subject\": \"R2_STATE.md\", \"subject_type\": \"path\"}], \"mechanical_path_floor\": \"D\", \"message\": \"El floor mecánico supera la clase autorizada; se requiere nueva autorización.\", \"mode\": \"PRE\", \"reason_code\": \"FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"status\": \"FAIL\"}\n",
+        "stderr": "",
+        "parsed": {
+          "authorized_class": "B",
+          "findings": [
+            {
+              "blocks_unknown": false,
+              "explicit": true,
+              "floor": "D",
+              "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+              "role": "authorization_state",
+              "subject": "R2_STATE.md",
+              "subject_type": "path"
+            }
+          ],
+          "mechanical_path_floor": "D",
+          "message": "El floor mecánico supera la clase autorizada; se requiere nueva autorización.",
+          "mode": "PRE",
+          "reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+          "status": "FAIL"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "risk_post_b_pass",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "post",
+        "--authorized-class",
+        "B",
+        "--repo",
+        "<TEMP_REPO>",
+        "--base",
+        "291179fe544cbf1fd2ab6eabca9f99a2c99c0fde",
+        "--head",
+        "1da85ba95edf527aaf547f4771550f1ccc629358"
+      ],
+      "expected": {
+        "exit_code": 0,
+        "status": "PASS",
+        "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 0,
+        "stdout": "{\"authorized_class\": \"B\", \"base\": \"291179fe544cbf1fd2ab6eabca9f99a2c99c0fde\", \"changes\": [{\"floors\": [\"B\"], \"paths\": [\"src/example.py\"], \"status\": \"A\"}], \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"B\", \"reason\": \"Implementación funcional limitada.\", \"role\": \"functional_implementation\", \"subject\": \"src/example.py\", \"subject_type\": \"path\"}], \"head\": \"1da85ba95edf527aaf547f4771550f1ccc629358\", \"mechanical_path_floor\": \"B\", \"mode\": \"POST\", \"reason_code\": \"FLOOR_WITHIN_AUTHORIZED_CLASS\", \"status\": \"PASS\"}\n",
+        "stderr": "",
+        "parsed": {
+          "authorized_class": "B",
+          "base": "291179fe544cbf1fd2ab6eabca9f99a2c99c0fde",
+          "changes": [
+            {
+              "floors": [
+                "B"
+              ],
+              "paths": [
+                "src/example.py"
+              ],
+              "status": "A"
+            }
+          ],
+          "findings": [
+            {
+              "blocks_unknown": false,
+              "explicit": true,
+              "floor": "B",
+              "reason": "Implementación funcional limitada.",
+              "role": "functional_implementation",
+              "subject": "src/example.py",
+              "subject_type": "path"
+            }
+          ],
+          "head": "1da85ba95edf527aaf547f4771550f1ccc629358",
+          "mechanical_path_floor": "B",
+          "mode": "POST",
+          "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+          "status": "PASS"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "risk_post_b_to_d_fail",
+      "command": [
+        "python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "post",
+        "--authorized-class",
+        "B",
+        "--repo",
+        "<TEMP_REPO>",
+        "--base",
+        "291179fe544cbf1fd2ab6eabca9f99a2c99c0fde",
+        "--head",
+        "35e278d8e0f10b17100c643c30907e5f4184dda3"
+      ],
+      "expected": {
+        "exit_code": 3,
+        "status": "FAIL",
+        "reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "stderr_empty": true
+      },
+      "observed": {
+        "exit_code": 3,
+        "stdout": "{\"authorized_class\": \"B\", \"base\": \"291179fe544cbf1fd2ab6eabca9f99a2c99c0fde\", \"changes\": [{\"floors\": [\"D\"], \"paths\": [\"R2_STATE.md\"], \"status\": \"A\"}], \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Registra fase, evidencia, pendientes y el único siguiente paso autorizado.\", \"role\": \"authorization_state\", \"subject\": \"R2_STATE.md\", \"subject_type\": \"path\"}], \"head\": \"35e278d8e0f10b17100c643c30907e5f4184dda3\", \"mechanical_path_floor\": \"D\", \"message\": \"El floor mecánico supera la clase autorizada; se requiere nueva autorización.\", \"mode\": \"POST\", \"reason_code\": \"FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"status\": \"FAIL\"}\n",
+        "stderr": "",
+        "parsed": {
+          "authorized_class": "B",
+          "base": "291179fe544cbf1fd2ab6eabca9f99a2c99c0fde",
+          "changes": [
+            {
+              "floors": [
+                "D"
+              ],
+              "paths": [
+                "R2_STATE.md"
+              ],
+              "status": "A"
+            }
+          ],
+          "findings": [
+            {
+              "blocks_unknown": false,
+              "explicit": true,
+              "floor": "D",
+              "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+              "role": "authorization_state",
+              "subject": "R2_STATE.md",
+              "subject_type": "path"
+            }
+          ],
+          "head": "35e278d8e0f10b17100c643c30907e5f4184dda3",
+          "mechanical_path_floor": "D",
+          "message": "El floor mecánico supera la clase autorizada; se requiere nueva autorización.",
+          "mode": "POST",
+          "reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+          "status": "FAIL"
+        },
+        "parse_error": null
+      },
+      "matched_expectation": true
+    }
+  ],
+  "temporary_post_probe": {
+    "repository_persistent": false,
+    "git_index_created": false,
+    "refs_created": false,
+    "base_object": "291179fe544cbf1fd2ab6eabca9f99a2c99c0fde",
+    "pass_head_object": "1da85ba95edf527aaf547f4771550f1ccc629358",
+    "fail_head_object": "35e278d8e0f10b17100c643c30907e5f4184dda3",
+    "construction": "git plumbing: hash-object, mktree, commit-tree",
+    "git_add_used": false,
+    "git_commit_used": false,
+    "repository_removed": true
+  },
+  "gate": {
+    "required_case_count": 6,
+    "matched_case_count": 6,
+    "decision": "PASS",
+    "advance_to_R2_3": true
+  }
+}

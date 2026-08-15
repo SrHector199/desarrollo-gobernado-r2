@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "evidence_id": "R2-3-RUNNER-JUDGE-SEPARATION",
+  "timestamp_utc": "2026-08-14T21:51:02Z",
+  "phase": "R2-3",
+  "scope": {
+    "authorized": [
+      "reproducir las variantes de falsificación de verdict y json del runner anterior",
+      "modificar scripts/run_functional.py",
+      "crear dos fixtures adversariales",
+      "crear esta evidencia",
+      "actualizar R2_STATE.md"
+    ],
+    "forbidden": [
+      "staging",
+      "commit",
+      "network",
+      "remote",
+      "publication",
+      "phase change"
+    ]
+  },
+  "artifacts": {
+    "old_runner_sha256": "200d6ea95984f6e62416b3da19fe7c6e32f38c6cf4292b5150a93f98d6a5fcd3",
+    "new_runner_sha256": "43f128d235f4849a252c0184d77bf150ceddcc7516618f0be4b5ce9ef6e6d44b",
+    "new_runner_bytes": 26733,
+    "tamper_verdict_fixture_sha256": "cb9e5390600488600875c815aae66bd4605f5fc8b98e02eef7b82170f6e76b91",
+    "tamper_verdict_fixture_bytes": 545,
+    "tamper_json_fixture_sha256": "57fddb07706e88eaf4ea27221e9f44e60eafa79593d17e56131fa93dc3b47223",
+    "tamper_json_fixture_bytes": 516,
+    "good_fixture_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+    "bad_fixture_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+    "exit_zero_fixture_sha256": "12a5a0cb0bfc348638cfcf19a0d4c083e58774506dbcc74efc1354e6e8510000",
+    "prior_evidence_sha256": "49cbd8e88ef9bc8e87c0879a5798eb154ad7dacc918167f76c45ea9d9df22ec2"
+  },
+  "false_green_class": {
+    "id": "WORKER_SHARED_JUDGE_INTERPRETER",
+    "metric_before": 1,
+    "metric_after": 2,
+    "variants_reproduced": [
+      {
+        "id": "tamper_verdict",
+        "observed": {
+          "command": [
+            "/usr/bin/python3",
+            "-B",
+            "scripts/run_functional.py",
+            "--implementation",
+            "tests/fixtures/tamper_verdict_splitter.py"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_verdict_splitter.py\", \"message\": \"forged pass through __main__.verdict\", \"protocol\": \"r2-functional-worker-v1\", \"reason_code\": \"ALL_FUNCTIONAL_CHECKS_PASSED\", \"status\": \"PASS\", \"timeout_seconds\": 5.0, \"worker_isolation\": \"subprocess\"}\n",
+          "stderr": ""
+        },
+        "verdict": {
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_verdict_splitter.py",
+          "message": "forged pass through __main__.verdict",
+          "protocol": "r2-functional-worker-v1",
+          "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+          "status": "PASS",
+          "timeout_seconds": 5.0,
+          "worker_isolation": "subprocess"
+        },
+        "classification": "FALSE_GREEN_REPRODUCED"
+      },
+      {
+        "id": "tamper_json",
+        "observed": {
+          "command": [
+            "/usr/bin/python3",
+            "-B",
+            "scripts/run_functional.py",
+            "--implementation",
+            "tests/fixtures/tamper_json_splitter.py"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_json_splitter.py\", \"message\": \"forged pass through json.dumps\", \"protocol\": \"r2-functional-worker-v1\", \"reason_code\": \"ALL_FUNCTIONAL_CHECKS_PASSED\", \"status\": \"PASS\", \"timeout_seconds\": 5.0, \"worker_isolation\": \"subprocess\"}\n",
+          "stderr": ""
+        },
+        "verdict": {
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_json_splitter.py",
+          "message": "forged pass through json.dumps",
+          "protocol": "r2-functional-worker-v1",
+          "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+          "status": "PASS",
+          "timeout_seconds": 5.0,
+          "worker_isolation": "subprocess"
+        },
+        "classification": "FALSE_GREEN_REPRODUCED"
+      }
+    ]
+  },
+  "architecture_after": {
+    "controller": "único proceso que calcula PASS/FAIL y reason_code",
+    "worker": "intérprete Python separado que devuelve solo observaciones",
+    "worker_source_contains_acceptance_verdict": false,
+    "worker_imports_json": false,
+    "observation_channel": "dedicated inherited file descriptor",
+    "observation_encoding": "repr de tipos literales incorporados",
+    "controller_parser": "ast.literal_eval + schema cerrado",
+    "timeout_seconds": 5.0,
+    "limitation": "No es una jaula de seguridad ni aislamiento frente a código hostil con capacidades de proceso; esta evidencia certifica únicamente los artefactos y probes enumerados."
+  },
+  "static_checks": {
+    "runner_compiles": true,
+    "worker_has_verdict_authority": false,
+    "worker_imports_json": false,
+    "worker_contains_expected_distribution": false,
+    "controller_contains_judge": true,
+    "dedicated_observation_fd": true
+  },
+  "risk_pre": {
+    "planned_paths": [
+      "scripts/run_functional.py",
+      "tests/fixtures/tamper_verdict_splitter.py",
+      "tests/fixtures/tamper_json_splitter.py",
+      "evidence/r2-3/runner_judge_separation.json",
+      "R2_STATE.md"
+    ],
+    "expected": {
+      "exit_code": 0,
+      "status": "PASS",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "mechanical_path_floor": "D",
+      "authorized_class": "D"
+    },
+    "observed": {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--path",
+        "scripts/run_functional.py",
+        "--path",
+        "tests/fixtures/tamper_verdict_splitter.py",
+        "--path",
+        "tests/fixtures/tamper_json_splitter.py",
+        "--path",
+        "evidence/r2-3/runner_judge_separation.json",
+        "--path",
+        "R2_STATE.md"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"authorized_class\": \"D\", \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Runner funcional crítico usado para decidir si la demo técnica pasa.\", \"role\": \"acceptance_authority\", \"subject\": \"scripts/run_functional.py\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"B\", \"reason\": \"Tests funcionales del mini-proyecto.\", \"role\": \"functional_tests\", \"subject\": \"tests/fixtures/tamper_verdict_splitter.py\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"B\", \"reason\": \"Tests funcionales del mini-proyecto.\", \"role\": \"functional_tests\", \"subject\": \"tests/fixtures/tamper_json_splitter.py\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"C\", \"reason\": \"Conserva hechos para revisión, pero no autoriza por sí sola.\", \"role\": \"control_plane_auxiliary\", \"subject\": \"evidence/r2-3/runner_judge_separation.json\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Registra fase, evidencia, pendientes y el único siguiente paso autorizado.\", \"role\": \"authorization_state\", \"subject\": \"R2_STATE.md\", \"subject_type\": \"path\"}], \"mechanical_path_floor\": \"D\", \"mode\": \"PRE\", \"reason_code\": \"FLOOR_WITHIN_AUTHORIZED_CLASS\", \"status\": \"PASS\"}\n",
+      "stderr": ""
+    },
+    "verdict": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Runner funcional crítico usado para decidir si la demo técnica pasa.",
+          "role": "acceptance_authority",
+          "subject": "scripts/run_functional.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/fixtures/tamper_verdict_splitter.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/fixtures/tamper_json_splitter.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "C",
+          "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+          "role": "control_plane_auxiliary",
+          "subject": "evidence/r2-3/runner_judge_separation.json",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+          "role": "authorization_state",
+          "subject": "R2_STATE.md",
+          "subject_type": "path"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "matched_expectation": true
+  },
+  "cases_after": [
+    {
+      "id": "good",
+      "expected": {
+        "exit_code": 0,
+        "status": "PASS",
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/good_splitter.py"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"details\":{\"checks\":[{\"name\":\"total_conservation\",\"result\":\"PASS\"},{\"name\":\"accepted_demo_distribution\",\"result\":\"PASS\"},{\"exception_message\":\"people debe ser un entero mayor que cero\",\"exception_type\":\"ValueError\",\"name\":\"zero_people_rejected\",\"result\":\"PASS\"},{\"exception_message\":\"amount_cents debe ser un entero no negativo\",\"exception_type\":\"ValueError\",\"name\":\"negative_amount_rejected\",\"result\":\"PASS\"}],\"implementation\":\"/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py\",\"judge_process\":\"controller\",\"timeout_seconds\":5.0,\"worker_interpreter_separate\":true,\"worker_role\":\"observations_only\",\"worker_stderr_bytes\":0,\"worker_stdout_bytes\":0},\"message\":\"La implementación cumple la demo funcional mínima.\",\"protocol\":\"r2-functional-verdict-v2\",\"reason_code\":\"ALL_FUNCTIONAL_CHECKS_PASSED\",\"status\":\"PASS\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "checks": [
+            {
+              "name": "total_conservation",
+              "result": "PASS"
+            },
+            {
+              "name": "accepted_demo_distribution",
+              "result": "PASS"
+            },
+            {
+              "exception_message": "people debe ser un entero mayor que cero",
+              "exception_type": "ValueError",
+              "name": "zero_people_rejected",
+              "result": "PASS"
+            },
+            {
+              "exception_message": "amount_cents debe ser un entero no negativo",
+              "exception_type": "ValueError",
+              "name": "negative_amount_rejected",
+              "result": "PASS"
+            }
+          ],
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py",
+          "judge_process": "controller",
+          "timeout_seconds": 5.0,
+          "worker_interpreter_separate": true,
+          "worker_role": "observations_only",
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "message": "La implementación cumple la demo funcional mínima.",
+        "protocol": "r2-functional-verdict-v2",
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+        "status": "PASS"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "bad",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "TOTAL_NOT_CONSERVED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/bad_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\":{\"expected_total_cents\":1000,\"implementation\":\"/home/hector/desarrollo-gobernado-r2/tests/fixtures/bad_splitter.py\",\"judge_process\":\"controller\",\"observed_total_cents\":999,\"parts\":[333,333,333],\"timeout_seconds\":5.0,\"worker_interpreter_separate\":true,\"worker_role\":\"observations_only\",\"worker_stderr_bytes\":0,\"worker_stdout_bytes\":0},\"message\":\"La suma de las partes no conserva exactamente el importe original.\",\"protocol\":\"r2-functional-verdict-v2\",\"reason_code\":\"TOTAL_NOT_CONSERVED\",\"status\":\"FAIL\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "expected_total_cents": 1000,
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/bad_splitter.py",
+          "judge_process": "controller",
+          "observed_total_cents": 999,
+          "parts": [
+            333,
+            333,
+            333
+          ],
+          "timeout_seconds": 5.0,
+          "worker_interpreter_separate": true,
+          "worker_role": "observations_only",
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "message": "La suma de las partes no conserva exactamente el importe original.",
+        "protocol": "r2-functional-verdict-v2",
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "status": "FAIL"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "exit_zero",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "MISSING_OBSERVATION"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/exit_zero_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\":{\"implementation\":\"/home/hector/desarrollo-gobernado-r2/tests/fixtures/exit_zero_splitter.py\",\"judge_process\":\"controller\",\"observation_bytes\":0,\"worker_exit_code\":0,\"worker_interpreter_separate\":true,\"worker_role\":\"observations_only\",\"worker_stderr_bytes\":0,\"worker_stdout_bytes\":0},\"message\":\"El worker terminó con exit 0 sin emitir observaciones obligatorias.\",\"protocol\":\"r2-functional-verdict-v2\",\"reason_code\":\"MISSING_OBSERVATION\",\"status\":\"FAIL\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/exit_zero_splitter.py",
+          "judge_process": "controller",
+          "observation_bytes": 0,
+          "worker_exit_code": 0,
+          "worker_interpreter_separate": true,
+          "worker_role": "observations_only",
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "message": "El worker terminó con exit 0 sin emitir observaciones obligatorias.",
+        "protocol": "r2-functional-verdict-v2",
+        "reason_code": "MISSING_OBSERVATION",
+        "status": "FAIL"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "tamper_verdict",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "TOTAL_NOT_CONSERVED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/tamper_verdict_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\":{\"expected_total_cents\":1000,\"implementation\":\"/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_verdict_splitter.py\",\"judge_process\":\"controller\",\"observed_total_cents\":999,\"parts\":[333,333,333],\"timeout_seconds\":5.0,\"worker_interpreter_separate\":true,\"worker_role\":\"observations_only\",\"worker_stderr_bytes\":0,\"worker_stdout_bytes\":0},\"message\":\"La suma de las partes no conserva exactamente el importe original.\",\"protocol\":\"r2-functional-verdict-v2\",\"reason_code\":\"TOTAL_NOT_CONSERVED\",\"status\":\"FAIL\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "expected_total_cents": 1000,
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_verdict_splitter.py",
+          "judge_process": "controller",
+          "observed_total_cents": 999,
+          "parts": [
+            333,
+            333,
+            333
+          ],
+          "timeout_seconds": 5.0,
+          "worker_interpreter_separate": true,
+          "worker_role": "observations_only",
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "message": "La suma de las partes no conserva exactamente el importe original.",
+        "protocol": "r2-functional-verdict-v2",
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "status": "FAIL"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "tamper_json",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "TOTAL_NOT_CONSERVED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/tamper_json_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\":{\"expected_total_cents\":1000,\"implementation\":\"/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_json_splitter.py\",\"judge_process\":\"controller\",\"observed_total_cents\":999,\"parts\":[333,333,333],\"timeout_seconds\":5.0,\"worker_interpreter_separate\":true,\"worker_role\":\"observations_only\",\"worker_stderr_bytes\":0,\"worker_stdout_bytes\":0},\"message\":\"La suma de las partes no conserva exactamente el importe original.\",\"protocol\":\"r2-functional-verdict-v2\",\"reason_code\":\"TOTAL_NOT_CONSERVED\",\"status\":\"FAIL\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "expected_total_cents": 1000,
+          "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/tamper_json_splitter.py",
+          "judge_process": "controller",
+          "observed_total_cents": 999,
+          "parts": [
+            333,
+            333,
+            333
+          ],
+          "timeout_seconds": 5.0,
+          "worker_interpreter_separate": true,
+          "worker_role": "observations_only",
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "message": "La suma de las partes no conserva exactamente el importe original.",
+        "protocol": "r2-functional-verdict-v2",
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "status": "FAIL"
+      },
+      "matched_expectation": true
+    }
+  ],
+  "gate": {
+    "all_cases_matched": true,
+    "i06_level_after": "COMPROBADA",
+    "phase_after": "R2-3",
+    "independent_review_before_baseline": "NOT_EXECUTED",
+    "minor_4_index_mode_check": "NOT_EXECUTED_UNTIL_STAGING"
+  },
+  "main_repository": {
+    "head": null,
+    "staging_performed": false,
+    "commit_created": false,
+    "remote_count": 0,
+    "network_used": false,
+    "publication_performed": false
+  }
+}

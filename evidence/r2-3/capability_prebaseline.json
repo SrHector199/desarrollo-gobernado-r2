@@ -1,0 +1,662 @@
+{
+  "authorization": {
+    "commit_authorized": false,
+    "human_gate": "PASS",
+    "network_authorized": false,
+    "publication_authorized": false,
+    "remote_authorized": false,
+    "scope": "CLASSIFY_CAPABILITIES_AND_EXPORT_FINAL_REVIEW_ONLY",
+    "staging_authorized": false
+  },
+  "created_at_utc": "2026-08-15T00:05:39Z",
+  "evidence_type": "R2_3_CAPABILITY_FLOORS_PRE_BASELINE",
+  "metrics": {
+    "false_greens_detected": 3,
+    "manual_agent_handoffs_after_round_2": 3
+  },
+  "nonclaims": [
+    "Un PASS de clasificación de capability no autoriza ejecutar esa capability.",
+    "No se realizó staging ni commit.",
+    "No se usó red, remoto ni publicación.",
+    "DEC-CP V3 no está ENFORCED ni es autoridad de merge.",
+    "La revisión independiente de ronda 3 sigue NOT_EXECUTED.",
+    "MINOR-4 sigue NOT_EXECUTED_UNTIL_STAGING."
+  ],
+  "policy_delta": {
+    "activation_rule": "LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY",
+    "capability_floors": {
+      "commit": "D",
+      "dependency_installation": "D",
+      "github_settings_change": "D",
+      "merge": "D",
+      "network": "D",
+      "publication": "D",
+      "pull_request_create": "D",
+      "push": "D",
+      "remote_create": "D",
+      "secret_access": "D",
+      "staging": "D"
+    },
+    "decision_id": "DEC-CP",
+    "decision_version_after": 3,
+    "decision_version_before": 2,
+    "only_top_level_changes": [
+      "decision_version",
+      "decision_record",
+      "capability_floors"
+    ],
+    "policy_after_bytes": 6448,
+    "policy_after_sha256": "8c078b056d9a6a278cdac2e3a20afb1c37084e6b6d598671091a22337d476ad9",
+    "policy_before_bytes": 5569,
+    "policy_before_sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550",
+    "policy_before_snapshot_rule": "Encode policy_before_utf8 as UTF-8 without transformation.",
+    "policy_before_utf8": "{\n  \"schema_version\": 1,\n  \"decision_id\": \"DEC-CP\",\n  \"decision_version\": 2,\n  \"decision_record\": {\n    \"label\": \"DEC-CP-V2\",\n    \"authorized_at_utc\": \"2026-08-14T23:17:23Z\",\n    \"authorization\": \"HUMAN_GATE_RESPONSE_TO_INDEPENDENT_REVIEW\",\n    \"scope\": \"LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY\",\n    \"runner_scope\": \"COOPERATIVE_OR_BUGGY_IMPLEMENTATION\",\n    \"runner_limitation\": \"NOT_A_SECURITY_SANDBOX\",\n    \"hostile_process_internal_tampering\": \"OUT_OF_SCOPE\",\n    \"historical_policy_pre_post\": \"NOT_EXECUTED\",\n    \"review_round_1\": \"EXECUTED_BLOCKED\"\n  },\n  \"status\": \"AUTHORIZED_LOCAL_EXPERIMENTAL\",\n  \"purpose\": \"Mapear el floor mecánico mínimo por path sin sustituir el escalado semántico.\",\n  \"activation_rule\": \"LOCAL_R2_EXPERIMENT_ONLY_NOT_ENFORCED_NOT_MERGE_AUTHORITY\",\n  \"class_order\": [\n    \"A\",\n    \"B\",\n    \"C\",\n    \"D\"\n  ],\n  \"matching\": {\n    \"path_format\": \"repo-relative-posix\",\n    \"precedence\": [\n      \"exact_path\",\n      \"longest_prefix\",\n      \"default\"\n    ],\n    \"rename\": \"max_source_destination\",\n    \"deletion\": \"max_action_and_deleted_path\",\n    \"aggregate\": \"max_all_changed_paths\"\n  },\n  \"action_floors\": {\n    \"deletion\": \"D\"\n  },\n  \"defaults\": {\n    \"unknown_control_plane\": \"D\",\n    \"unknown_normal\": \"B\"\n  },\n  \"control_plane_roots\": [\n    \".github/\",\n    \"policy/\",\n    \"scripts/\",\n    \"tasks/\",\n    \"evidence/\",\n    \"docs/\",\n    \"AGENTS.md\",\n    \"R2_STATE.md\"\n  ],\n  \"exact_paths\": [\n    {\n      \"path\": \"policy/risk_floors.json\",\n      \"floor\": \"D\",\n      \"role\": \"acceptance_authority\",\n      \"reason\": \"Define el mínimo mecánico que usará el risk-floor checker.\"\n    },\n    {\n      \"path\": \"R2_STATE.md\",\n      \"floor\": \"D\",\n      \"role\": \"authorization_state\",\n      \"reason\": \"Registra fase, evidencia, pendientes y el único siguiente paso autorizado.\"\n    },\n    {\n      \"path\": \"docs/FEATURE_BRIEF.md\",\n      \"floor\": \"D\",\n      \"role\": \"product_acceptance_authority\",\n      \"reason\": \"Fija el resultado y la demo que el dueño debe aceptar.\"\n    },\n    {\n      \"path\": \"AGENTS.md\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Instruye a los agentes, pero no debe constituir por sí solo una autoridad de aceptación.\"\n    },\n    {\n      \"path\": \".github/CODEOWNERS\",\n      \"floor\": \"D\",\n      \"role\": \"review_authority\",\n      \"reason\": \"Puede condicionar revisiones y protección.\"\n    },\n    {\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Ayuda a documentar la revisión sin bloquear el merge por sí solo.\"\n    },\n    {\n      \"path\": \"README.md\",\n      \"floor\": \"A\",\n      \"role\": \"documentation\",\n      \"reason\": \"Documentación explícitamente reversible y sin autoridad de aceptación.\"\n    },\n    {\n      \"path\": \"scripts/run_functional.py\",\n      \"floor\": \"D\",\n      \"role\": \"acceptance_authority\",\n      \"reason\": \"Runner funcional crítico usado para decidir si la demo técnica pasa.\"\n    },\n    {\n      \"path\": \"scripts/risk_floor.py\",\n      \"floor\": \"D\",\n      \"role\": \"acceptance_authority\",\n      \"reason\": \"Checker crítico que calcula y bloquea el floor mecánico PRE/POST.\"\n    }\n  ],\n  \"prefix_rules\": [\n    {\n      \"prefix\": \".github/workflows/\",\n      \"floor\": \"D\",\n      \"role\": \"acceptance_authority\",\n      \"reason\": \"Los workflows y jobs requeridos pueden permitir o bloquear aceptación.\"\n    },\n    {\n      \"prefix\": \".github/ISSUE_TEMPLATE/\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Plantillas auxiliares sin autoridad de merge.\"\n    },\n    {\n      \"prefix\": \"policy/auxiliary/\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Política auxiliar explícita sin autoridad de aceptación.\"\n    },\n    {\n      \"prefix\": \"scripts/auxiliary/\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Reporting o utilidades explícitamente no requeridas.\"\n    },\n    {\n      \"prefix\": \"tasks/authorized/\",\n      \"floor\": \"D\",\n      \"role\": \"task_authorization\",\n      \"reason\": \"Los packets autorizados pueden conceder alcance y clase.\"\n    },\n    {\n      \"prefix\": \"tasks/proposals/\",\n      \"floor\": \"C\",\n      \"role\": \"task_proposal\",\n      \"reason\": \"Una propuesta no equivale a autorización; DC-006 permanece abierto.\"\n    },\n    {\n      \"prefix\": \"evidence/\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Conserva hechos para revisión, pero no autoriza por sí sola.\"\n    },\n    {\n      \"prefix\": \"docs/governance/\",\n      \"floor\": \"C\",\n      \"role\": \"control_plane_auxiliary\",\n      \"reason\": \"Documentación de gobierno sin enforcement directo.\"\n    },\n    {\n      \"prefix\": \"docs/reference/\",\n      \"floor\": \"A\",\n      \"role\": \"documentation\",\n      \"reason\": \"Referencia explícitamente clasificada como reversible y sin autoridad.\"\n    },\n    {\n      \"prefix\": \"src/\",\n      \"floor\": \"B\",\n      \"role\": \"functional_implementation\",\n      \"reason\": \"Implementación funcional limitada.\"\n    },\n    {\n      \"prefix\": \"tests/\",\n      \"floor\": \"B\",\n      \"role\": \"functional_tests\",\n      \"reason\": \"Tests funcionales del mini-proyecto.\"\n    }\n  ],\n  \"constraints\": {\n    \"semantic_escalation\": \"MAY_ONLY_RAISE\",\n    \"pre_check\": \"mechanical_path_floor(planned_paths) <= authorized_class\",\n    \"post_check\": \"mechanical_path_floor(actual_diff_paths) <= authorized_class\",\n    \"unknown_control_plane_action\": \"D_AND_STOP_UNTIL_EXPLICIT_CLASSIFICATION\"\n  },\n  \"open_controls\": {\n    \"DC-006\": \"OPEN\",\n    \"EXP-01\": \"OPEN\"\n  }\n}\n",
+    "semantics": "CLASSIFICATION_ONLY_NOT_EXECUTION_AUTHORIZATION",
+    "status": "AUTHORIZED_LOCAL_EXPERIMENTAL"
+  },
+  "probes": {
+    "all_known_capabilities_class_D": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--capability",
+        "staging",
+        "--capability",
+        "commit",
+        "--capability",
+        "network",
+        "--capability",
+        "dependency_installation",
+        "--capability",
+        "remote_create",
+        "--capability",
+        "push",
+        "--capability",
+        "pull_request_create",
+        "--capability",
+        "merge",
+        "--capability",
+        "github_settings_change",
+        "--capability",
+        "secret_access",
+        "--capability",
+        "publication"
+      ],
+      "exit_code": 0,
+      "payload": {
+        "authorized_class": "D",
+        "findings": [
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad staging.",
+            "role": "capability",
+            "subject": "staging",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad commit.",
+            "role": "capability",
+            "subject": "commit",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad network.",
+            "role": "capability",
+            "subject": "network",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad dependency_installation.",
+            "role": "capability",
+            "subject": "dependency_installation",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad remote_create.",
+            "role": "capability",
+            "subject": "remote_create",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad push.",
+            "role": "capability",
+            "subject": "push",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad pull_request_create.",
+            "role": "capability",
+            "subject": "pull_request_create",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad merge.",
+            "role": "capability",
+            "subject": "merge",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad github_settings_change.",
+            "role": "capability",
+            "subject": "github_settings_change",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad secret_access.",
+            "role": "capability",
+            "subject": "secret_access",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad publication.",
+            "role": "capability",
+            "subject": "publication",
+            "subject_type": "capability"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "mode": "PRE",
+        "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+        "status": "PASS"
+      }
+    },
+    "full_candidate_with_staging_commit_class_D": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--path",
+        "AGENTS.md",
+        "--path",
+        "R2_STATE.md",
+        "--path",
+        "docs/FEATURE_BRIEF.md",
+        "--path",
+        "evidence/r2-2/local_falsification.json",
+        "--path",
+        "evidence/r2-3/capability_prebaseline.json",
+        "--path",
+        "evidence/r2-3/independent_review_01.json",
+        "--path",
+        "evidence/r2-3/independent_review_02.json",
+        "--path",
+        "evidence/r2-3/independent_review_response_01.json",
+        "--path",
+        "evidence/r2-3/runner_false_green_correction.json",
+        "--path",
+        "evidence/r2-3/runner_judge_separation.json",
+        "--path",
+        "policy/risk_floors.json",
+        "--path",
+        "scripts/risk_floor.py",
+        "--path",
+        "scripts/run_functional.py",
+        "--path",
+        "tests/fixtures/bad_splitter.py",
+        "--path",
+        "tests/fixtures/exit_zero_splitter.py",
+        "--path",
+        "tests/fixtures/good_splitter.py",
+        "--path",
+        "tests/fixtures/tamper_json_splitter.py",
+        "--path",
+        "tests/fixtures/tamper_verdict_splitter.py",
+        "--capability",
+        "staging",
+        "--capability",
+        "commit"
+      ],
+      "exit_code": 0,
+      "path_count": 18,
+      "payload": {
+        "authorized_class": "D",
+        "findings": [
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Instruye a los agentes, pero no debe constituir por sí solo una autoridad de aceptación.",
+            "role": "control_plane_auxiliary",
+            "subject": "AGENTS.md",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+            "role": "authorization_state",
+            "subject": "R2_STATE.md",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Fija el resultado y la demo que el dueño debe aceptar.",
+            "role": "product_acceptance_authority",
+            "subject": "docs/FEATURE_BRIEF.md",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-2/local_falsification.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/capability_prebaseline.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/independent_review_01.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/independent_review_02.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/independent_review_response_01.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/runner_false_green_correction.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/runner_judge_separation.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Define el mínimo mecánico que usará el risk-floor checker.",
+            "role": "acceptance_authority",
+            "subject": "policy/risk_floors.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Checker crítico que calcula y bloquea el floor mecánico PRE/POST.",
+            "role": "acceptance_authority",
+            "subject": "scripts/risk_floor.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Runner funcional crítico usado para decidir si la demo técnica pasa.",
+            "role": "acceptance_authority",
+            "subject": "scripts/run_functional.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "B",
+            "reason": "Tests funcionales del mini-proyecto.",
+            "role": "functional_tests",
+            "subject": "tests/fixtures/bad_splitter.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "B",
+            "reason": "Tests funcionales del mini-proyecto.",
+            "role": "functional_tests",
+            "subject": "tests/fixtures/exit_zero_splitter.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "B",
+            "reason": "Tests funcionales del mini-proyecto.",
+            "role": "functional_tests",
+            "subject": "tests/fixtures/good_splitter.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "B",
+            "reason": "Tests funcionales del mini-proyecto.",
+            "role": "functional_tests",
+            "subject": "tests/fixtures/tamper_json_splitter.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "B",
+            "reason": "Tests funcionales del mini-proyecto.",
+            "role": "functional_tests",
+            "subject": "tests/fixtures/tamper_verdict_splitter.py",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad staging.",
+            "role": "capability",
+            "subject": "staging",
+            "subject_type": "capability"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad commit.",
+            "role": "capability",
+            "subject": "commit",
+            "subject_type": "capability"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "mode": "PRE",
+        "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+        "status": "PASS"
+      }
+    },
+    "paths_before": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--path",
+        "policy/risk_floors.json",
+        "--path",
+        "R2_STATE.md",
+        "--path",
+        "evidence/r2-3/independent_review_02.json",
+        "--path",
+        "evidence/r2-3/capability_prebaseline.json"
+      ],
+      "exit_code": 0,
+      "payload": {
+        "authorized_class": "D",
+        "findings": [
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Define el mínimo mecánico que usará el risk-floor checker.",
+            "role": "acceptance_authority",
+            "subject": "policy/risk_floors.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+            "role": "authorization_state",
+            "subject": "R2_STATE.md",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/independent_review_02.json",
+            "subject_type": "path"
+          },
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "C",
+            "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+            "role": "control_plane_auxiliary",
+            "subject": "evidence/r2-3/capability_prebaseline.json",
+            "subject_type": "path"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "mode": "PRE",
+        "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+        "status": "PASS"
+      }
+    },
+    "staging_before_unknown": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--capability",
+        "staging"
+      ],
+      "exit_code": 3,
+      "payload": {
+        "authorized_class": "D",
+        "findings": [
+          {
+            "blocks_unknown": true,
+            "explicit": false,
+            "floor": "D",
+            "reason": "Capacidad no clasificada: D/STOP.",
+            "role": "unknown_capability",
+            "subject": "staging",
+            "subject_type": "capability"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "message": "Existe un path, acción o capacidad de alta autoridad sin clasificación explícita.",
+        "mode": "PRE",
+        "reason_code": "UNKNOWN_HIGH_AUTHORITY_SUBJECT",
+        "status": "FAIL"
+      }
+    },
+    "staging_class_C": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "C",
+        "--capability",
+        "staging"
+      ],
+      "exit_code": 3,
+      "payload": {
+        "authorized_class": "C",
+        "findings": [
+          {
+            "blocks_unknown": false,
+            "explicit": true,
+            "floor": "D",
+            "reason": "Floor explícito de la capacidad staging.",
+            "role": "capability",
+            "subject": "staging",
+            "subject_type": "capability"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "message": "El floor mecánico supera la clase autorizada; se requiere nueva autorización.",
+        "mode": "PRE",
+        "reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "status": "FAIL"
+      }
+    },
+    "unknown_capability_class_D": {
+      "command": [
+        "/usr/bin/python3",
+        "-S",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--capability",
+        "r2_unknown_capability_probe"
+      ],
+      "exit_code": 3,
+      "payload": {
+        "authorized_class": "D",
+        "findings": [
+          {
+            "blocks_unknown": true,
+            "explicit": false,
+            "floor": "D",
+            "reason": "Capacidad no clasificada: D/STOP.",
+            "role": "unknown_capability",
+            "subject": "r2_unknown_capability_probe",
+            "subject_type": "capability"
+          }
+        ],
+        "mechanical_path_floor": "D",
+        "message": "Existe un path, acción o capacidad de alta autoridad sin clasificación explícita.",
+        "mode": "PRE",
+        "reason_code": "UNKNOWN_HIGH_AUTHORITY_SUBJECT",
+        "status": "FAIL"
+      }
+    }
+  },
+  "round_2_finding_dispositions": [
+    {
+      "blocking_before_baseline": false,
+      "id": "IR2-001",
+      "note": "El runner no se modifica en este bloque.",
+      "status": "DEFERRED_NONBLOCKING_NO_ACCEPTANCE_SIGNAL"
+    },
+    {
+      "blocking_before_baseline": false,
+      "blocking_before_first_functional_task": true,
+      "id": "IR2-002",
+      "note": "Ampliar CASES antes de usar el runner para afirmar corrección funcional general.",
+      "status": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK"
+    },
+    {
+      "blocking_before_baseline": false,
+      "id": "IR2-003",
+      "note": "Timeout no finito termina con exit no cero; el contrato JSON se corregirá por separado.",
+      "status": "DEFERRED_NONBLOCKING_FAIL_CLOSED"
+    },
+    {
+      "blocking_before_baseline": false,
+      "id": "IR2-004",
+      "note": "R2_STATE usa COMPROBADA_SCOPED para I-06.",
+      "status": "CORRECTED_I06_LABEL_ALIGNED"
+    }
+  ],
+  "schema_version": 1,
+  "source_review_round_2": {
+    "baseline_disposition": "PASS_FOR_EXACT_REVIEWED_BYTES",
+    "blocking_finding_count": 0,
+    "bundle_sha256": "0fe599baa00dc02cf82786a3116ec30f89bda6189fcf511d92d03c87c759aedd",
+    "bytes": 33741,
+    "dynamic_review": "PASS",
+    "manifest_sha256": "b3db2f9598a903bb8760a25044e8c07cdefbb47f22b6b80223a41df51ef8d14c",
+    "reviewed_object_count": 16,
+    "sha256": "9da3383b0a2b88f6a428dd7203cac7e51a192641cfde7dd1e5bed04d4584c7db",
+    "static_review": "PASS"
+  },
+  "unchanged_objects": {
+    "risk_checker_sha256": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+    "runner_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f"
+  }
+}

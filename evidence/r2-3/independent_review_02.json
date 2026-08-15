@@ -1,0 +1,352 @@
+{
+  "review_protocol": "r2-independent-review-v1",
+  "review_round": 2,
+  "bundle_sha256": "0fe599baa00dc02cf82786a3116ec30f89bda6189fcf511d92d03c87c759aedd",
+  "manifest_sha256": "b3db2f9598a903bb8760a25044e8c07cdefbb47f22b6b80223a41df51ef8d14c",
+  "reviewer": {
+    "system": "Claude",
+    "model": "Claude Opus 5",
+    "fresh_context": true,
+    "independence_statement": "No participé en la implementación ni usé conclusiones previas como sustituto del análisis del paquete."
+  },
+  "static_review": "PASS",
+  "dynamic_review": "PASS",
+  "baseline_disposition": "PASS",
+  "declared_runner_scope_respected": "PASS",
+  "reviewed_objects": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c4f997bd24b6fe1764389ca648a13049978a89925c8233c2e131ebf14789ecab",
+      "status": "PASS"
+    },
+    {
+      "path": "R2_STATE.md",
+      "sha256": "fe49769d1ac3de13839c9170be2ce9eba9575916f1b90e720f62f9dd7234c8be",
+      "status": "PASS"
+    },
+    {
+      "path": "docs/FEATURE_BRIEF.md",
+      "sha256": "26088a93747ac7e72160e22331818c5a1125cc3c229d6f5affc63dd352c04908",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-2/local_falsification.json",
+      "sha256": "fd7b4f65fe20034ab357f1837a077f64428c2ee35eeba21f3dfb12753ad6277b",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/independent_review_01.json",
+      "sha256": "a505c414ce7949cb3ae175f3d4165036669d05d5e62e65128f471f94a35515cb",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/independent_review_response_01.json",
+      "sha256": "c07f425b4c71b6e0536b770c2699bc42311aba58054037bab31aad865280ad3b",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/runner_false_green_correction.json",
+      "sha256": "49cbd8e88ef9bc8e87c0879a5798eb154ad7dacc918167f76c45ea9d9df22ec2",
+      "status": "PASS"
+    },
+    {
+      "path": "evidence/r2-3/runner_judge_separation.json",
+      "sha256": "a70882687105fd9a3f821b6b87eb506c90fbc181e7f754e346835d89e51a72a7",
+      "status": "PASS"
+    },
+    {
+      "path": "policy/risk_floors.json",
+      "sha256": "518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550",
+      "status": "PASS"
+    },
+    {
+      "path": "scripts/risk_floor.py",
+      "sha256": "22a2a552963464ac07fd95c61e07721b38b74b426e4b962a2b2b31f8597b3781",
+      "status": "PASS"
+    },
+    {
+      "path": "scripts/run_functional.py",
+      "sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/bad_splitter.py",
+      "sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/exit_zero_splitter.py",
+      "sha256": "12a5a0cb0bfc348638cfcf19a0d4c083e58774506dbcc74efc1354e6e8510000",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/good_splitter.py",
+      "sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/tamper_json_splitter.py",
+      "sha256": "57fddb07706e88eaf4ea27221e9f44e60eafa79593d17e56131fa93dc3b47223",
+      "status": "PASS"
+    },
+    {
+      "path": "tests/fixtures/tamper_verdict_splitter.py",
+      "sha256": "cb9e5390600488600875c815aae66bd4605f5fc8b98e02eef7b82170f6e76b91",
+      "status": "PASS"
+    }
+  ],
+  "findings": [
+    {
+      "id": "IR2-001",
+      "severity": "MEDIUM",
+      "blocking": false,
+      "path": "scripts/run_functional.py",
+      "lines": "controller_main, rama 'if timeout_seconds <= 0' y rama OSError/WORKER_START_ERROR",
+      "title": "Dos veredictos ERROR no transportan los campos de alcance del runner",
+      "evidence": "PROBE EJECUTADA sobre el runner d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f. protocol_failure() y controller_verdict() construyen base_details con runner_scope, runner_limitation y out_of_scope, y los tres campos se observan en PASS, en todos los FAIL y en IMPLEMENTATION_LOAD_ERROR. En cambio los veredictos emitidos directamente por controller_main no los llevan: '--timeout-seconds 0' devuelve exit 2 y {\"status\":\"ERROR\",\"reason_code\":\"INVALID_TIMEOUT\"} sin clave details; '--timeout-seconds -1' idem. La rama WORKER_START_ERROR construye details solo con implementation, exception_type y exception_message (revisión estática, no ejecutada). La disposición IR-005 del response (c07f425b4c71b6e0536b770c2699bc42311aba58054037bab31aad865280ad3b) afirma sin matiz que el runner 'la incluye en sus veredictos'.",
+      "impact": "Precisión incompleta de la corrección 5, no falso verde. Ninguna de las dos rutas juzga una implementación ni emite señal de aceptación, por lo que no puede atribuírseles contención frente a código hostil; el riesgo que la corrección 5 pretende cubrir no está presente en ellas. Queda una generalización de la disposición IR-005 ligeramente más amplia que el artefacto.",
+      "minimal_fix": "Enrutar los veredictos INVALID_TIMEOUT y WORKER_START_ERROR por el mismo bloque de details que protocol_failure(), o acotar la redacción de la disposición IR-005 a los veredictos que juzgan una implementación.",
+      "falsification_probe": "python3 -B -S scripts/run_functional.py --implementation tests/fixtures/good_splitter.py --timeout-seconds 0 y comprobar que details contiene runner_scope, runner_limitation y out_of_scope. Hoy no existe la clave details; tras la corrección debe contener los tres campos."
+    },
+    {
+      "id": "IR2-002",
+      "severity": "MEDIUM",
+      "blocking": false,
+      "path": "scripts/run_functional.py",
+      "lines": "CASES y controller_verdict",
+      "title": "Una implementación cooperativa codificada a la demo obtiene PASS",
+      "evidence": "PROBE EJECUTADA. CASES fija exactamente tres invocaciones: (1000,3), (1000,0) y (-1,2). Una implementación cooperativa, sin manipulación de descriptores ni del intérprete, cuyo cuerpo es 'if people == 0 or amount_cents < 0: raise ValueError(\"entrada invalida\"); return [334, 333, 333]' e ignora por completo sus argumentos en el caso válido, produce exit 0, status PASS y reason_code ALL_FUNCTIONAL_CHECKS_PASSED. En el mismo barrido, once implementaciones cooperativas defectuosas fallaron cerradas con el reason_code correcto: tupla y subclase de list INVALID_RESULT_TYPE; bool INVALID_PART_TYPE; orden alterado DISTRIBUTION_MISMATCH; TypeError WRONG_REJECTION_TYPE; mensaje en blanco UNCLEAR_REJECTION; sin rechazo INVALID_INPUT_ACCEPTED; sleep(30) WORKER_TIMEOUT; sin split_expense y excepción en import IMPLEMENTATION_LOAD_ERROR; escritura de un veredicto falso en el stdout del worker TOTAL_NOT_CONSERVED.",
+      "impact": "No contradice ninguna afirmación vigente: I-07 está DECLARADA sin implementación funcional, la demo del Feature Brief sigue NOT_EXECUTED y el propio veredicto se limita a 'cumple la demo funcional mínima'. Pero el conjunto de casos es exactamente la demo aceptada, de modo que el runner no distingue una implementación general correcta de un stub que la reproduce. En cuanto una tarea futura afirme corrección funcional a partir de este PASS, el hueco se convierte en falso verde dentro del alcance cooperativo declarado.",
+      "minimal_fix": "Antes de aceptar la primera feature funcional, ampliar CASES con al menos un importe y un número de personas distintos de la demo, por ejemplo (1, 3) y (100, 7), comprobando conservación del total y reparto de restos; o registrar explícitamente en docs/FEATURE_BRIEF.md y en R2_STATE.md que el runner solo certifica la demo aceptada.",
+      "falsification_probe": "Fixture cooperativo que devuelva la constante [334, 333, 333] ignorando amount_cents y people, y rechace (1000,0) y (-1,2) con ValueError. Hoy produce exit 0 y ALL_FUNCTIONAL_CHECKS_PASSED; tras ampliar CASES debe producir exit 1 y FAIL por TOTAL_NOT_CONSERVED en el caso añadido."
+    },
+    {
+      "id": "IR2-003",
+      "severity": "LOW",
+      "blocking": false,
+      "path": "scripts/run_functional.py",
+      "lines": "controller_main, guarda 'if timeout_seconds <= 0'",
+      "title": "Timeout no finito rompe el contrato de una única línea de veredicto",
+      "evidence": "PROBE EJECUTADA. La guarda sigue siendo solo '<= 0'. Con '--timeout-seconds nan' el valor atraviesa la guarda y process.communicate lo propaga: traceback en stderr terminado en 'ValueError: cannot convert float NaN to integer', exit code 1 y stdout completamente vacío. Con '--timeout-seconds inf' el fallo es análogo con 'OverflowError: cannot convert float infinity to integer'. Corresponde a IR-008, dispuesto como DEFERRED_NONBLOCKING_FAIL_CLOSED con la nota 'Timeout no finito falla con exit no cero', afirmación que la probe confirma.",
+      "impact": "No hay falso verde: el exit es distinto de cero y ningún consumidor que mire el código de salida acepta la ejecución. El defecto vivo es de protocolo y de taxonomía: el runner promete exactamente una línea JSON en stdout y no emite ninguna, y usa EXIT_FAIL=1 donde su propia taxonomía prevé INVALID_TIMEOUT con EXIT_ERROR=2. La nota de la disposición describe el exit pero no menciona la ausencia de veredicto.",
+      "minimal_fix": "Extender la guarda a 'if not math.isfinite(timeout_seconds) or timeout_seconds <= 0' reutilizando el ERROR INVALID_TIMEOUT ya definido, y completar la nota de IR-008 indicando que hoy no se emite línea de veredicto.",
+      "falsification_probe": "python3 -B -S scripts/run_functional.py --implementation tests/fixtures/good_splitter.py --timeout-seconds nan. Hoy: traceback, exit 1 y stdout vacío. Tras la corrección: una línea JSON con status ERROR, reason_code INVALID_TIMEOUT y exit 2."
+    },
+    {
+      "id": "IR2-004",
+      "severity": "LOW",
+      "blocking": false,
+      "path": "R2_STATE.md",
+      "lines": "fila I-06 de la tabla de Invariantes, columna 'Nivel actual'",
+      "title": "La etiqueta de nivel de I-06 es más amplia que la del manifiesto",
+      "evidence": "La columna 'Nivel actual' de I-06 en R2_STATE.md contiene la etiqueta desnuda 'COMPROBADA', mientras REVIEW_MANIFEST.json known_state declara 'I-06': 'COMPROBADA_SCOPED'. La limitación sí figura íntegra en la misma fila, en la celda de evidencia: 'alcance limitado a COOPERATIVE_OR_BUGGY_IMPLEMENTATION. NOT_A_SECURITY_SANDBOX; la forja hostil del canal queda OUT_OF_SCOPE y registrada como falso verde 3'.",
+      "impact": "No es sobreafirmación: la frontera está declarada en la misma fila y el artefacto de mayor autoridad no omite el límite. Es una divergencia de nomenclatura entre el estado clase D y el manifiesto que puede inducir a error a quien recorra solo la columna de niveles de un artefacto que se congelará en el baseline.",
+      "minimal_fix": "Escribir 'COMPROBADA_SCOPED' en la columna 'Nivel actual' de I-06, alineándola con known_state del manifiesto.",
+      "falsification_probe": "Comparar la etiqueta de nivel de cada invariante COMPROBADA en R2_STATE.md con el valor homónimo de known_state en REVIEW_MANIFEST.json. Hoy I-06 difiere; tras la corrección deben coincidir literalmente."
+    }
+  ],
+  "checks": [
+    {
+      "id": "CHK-BUNDLE-SHA256",
+      "status": "PASS",
+      "evidence": "sha256sum del ZIP adjunto devuelve 0fe599baa00dc02cf82786a3116ec30f89bda6189fcf511d92d03c87c759aedd, idéntico al declarado en el REQUEST."
+    },
+    {
+      "id": "CHK-MANIFEST-SHA256",
+      "status": "PASS",
+      "evidence": "sha256sum de REVIEW_MANIFEST.json devuelve b3db2f9598a903bb8760a25044e8c07cdefbb47f22b6b80223a41df51ef8d14c, idéntico al declarado en el REQUEST."
+    },
+    {
+      "id": "CHK-REQUEST-IDENTITY-HASHES",
+      "status": "PASS",
+      "evidence": "Los ocho hashes de identidad del REQUEST resuelven sobre el paquete: bundle y manifiesto verificados aparte; R2_STATE.md fe49769d, policy/risk_floors.json 518c325c, scripts/run_functional.py d08fe9bd, scripts/risk_floor.py 22a2a552, evidence/r2-3/independent_review_01.json a505c414 y evidence/r2-3/independent_review_response_01.json c07f425b coinciden byte a byte."
+    },
+    {
+      "id": "CHK-FILE-HASHES-SIZES-MODES",
+      "status": "PASS",
+      "evidence": "Los 16 ficheros del manifiesto coinciden en sha256 y en bytes; la suma es 154589, igual a total_repo_file_bytes. Los filesystem_mode declarados coinciden con los del árbol extraído, incluido 0600 para R2_STATE.md y 0755 para ambos scripts."
+    },
+    {
+      "id": "CHK-NO-UNDECLARED-FILES",
+      "status": "PASS",
+      "evidence": "El recorrido completo de repo/ devuelve exactamente los 16 paths del manifiesto: ningún fichero no declarado, ningún __pycache__, ningún artefacto temporal, ningún .git."
+    },
+    {
+      "id": "CHK-MANIFEST-FLOORS-VS-POLICY",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. PRE con los 16 paths del manifiesto y policy 518c325c produce 16 findings, todos explicit=true y blocks_unknown=false, y cada floor coincide con el campo floor del manifiesto: D para R2_STATE.md, docs/FEATURE_BRIEF.md, policy/risk_floors.json y ambos scripts; C para AGENTS.md y evidence/; B para tests/fixtures/."
+    },
+    {
+      "id": "CHK-DEC-CP-V2-EXACT-OBJECT",
+      "status": "PASS",
+      "evidence": "Corrección bloqueante 1. La entrada 'DEC-CP V2 - RESOLVED_V2_LOCAL_EXPERIMENTAL' de R2_STATE.md cita policy/risk_floors.json SHA-256 518c325c9fedfd174b2cac1dca5806058ea0104e77696368972ddf474c660550, que es exactamente el objeto del manifiesto y del paquete. La misma entrada cita runner d08fe9bd y response c07f425b, ambos presentes, y declara NOT_ENFORCED y NOT_MERGE_AUTHORITY."
+    },
+    {
+      "id": "CHK-POLICY-V1-HISTORICAL-ONLY",
+      "status": "PASS",
+      "evidence": "Auditoría de los 16 hashes de 64 hex que aparecen en R2_STATE.md: diez resuelven a objetos del manifiesto y seis a objetos históricos ausentes (b6d229b2 y 391aebfc de policy, 6fe5c55d, 200d6ea9 y 43f128d2 de runner, beafe65b de estado inicial). Ninguno queda sin resolver. Los hashes V1 aparecen solo bajo 'DEC-CP V1 - SUPERSEDED' y en entradas de 'Última evidencia' marcadas HISTORICAL_RECORD_ONLY y SUPERSEDED_BY_DEC_CP_V2; ninguna afirmación vigente los presenta como política activa."
+    },
+    {
+      "id": "CHK-HISTORICAL-POLICY-PRE-POST-NOT-EXECUTED",
+      "status": "PASS",
+      "evidence": "HISTORICAL_POLICY_PRE_POST=NOT_EXECUTED aparece tres veces en R2_STATE.md, en la decisión DEC-CP V1 y en las dos entradas históricas de R2-2. El response lo repite en dec_cp_v2 y en pre_step_gate, y sus nonclaims declaran expresamente: 'No se afirma que el histórico cambio de policy 391a... tuviera PRE/POST propio'. No se observa evidencia retroactiva fabricada para ese cambio."
+    },
+    {
+      "id": "CHK-I05-REANCHORED",
+      "status": "PASS",
+      "evidence": "Corrección bloqueante 2. La cláusula funcional de I-05 cita el runner actual d08fe9bd y la evidencia c07f425b, que contiene regressions.runner con los cinco casos ejecutados sobre runner_after_sha256 = d08fe9bd. La cláusula de risk checker cita el checker actual 22a2a552 y la evidencia fd7b4f65, cuyo artifacts_sha256 declara ese mismo checker y cuyos cuatro casos PRE/POST son PASS y FAIL conocidos. Las cuatro invariantes con hashes (I-03, I-04, I-05, I-06) citan exclusivamente objetos presentes en el manifiesto."
+    },
+    {
+      "id": "CHK-RUNNER-REGRESSIONS-REPRODUCED",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA sobre el runner d08fe9bd: good exit 0 PASS ALL_FUNCTIONAL_CHECKS_PASSED; bad exit 1 FAIL TOTAL_NOT_CONSERVED; exit_zero exit 1 FAIL MISSING_OBSERVATION; tamper_verdict exit 1 FAIL TOTAL_NOT_CONSERVED; tamper_json exit 1 FAIL TOTAL_NOT_CONSERVED. En los cinco: stderr vacío y exactamente una línea de veredicto. Coincide con regressions.runner del response c07f425b."
+    },
+    {
+      "id": "CHK-I06-SCOPED-AND-FG3-PRESERVED",
+      "status": "PASS",
+      "evidence": "Corrección bloqueante 3. La celda de evidencia de I-06 limita la afirmación a COOPERATIVE_OR_BUGGY_IMPLEMENTATION, declara NOT_A_SECURITY_SANDBOX y registra la forja hostil del canal como OUT_OF_SCOPE y como falso verde 3. El response conserva runner_scope.known_hostile_forge_reproduced con classification KNOWN_OUT_OF_SCOPE_FALSE_GREEN_3, exit 0 y status PASS, es decir como limitación viva y no como propiedad corregida. La métrica es 3 en R2_STATE.md, en el manifiesto y en el response."
+    },
+    {
+      "id": "CHK-DOCS-CONTROL-PLANE-ROOT",
+      "status": "PASS",
+      "evidence": "Corrección bloqueante 4, PROBE EJECUTADA. 'docs/' figura en control_plane_roots de policy 518c325c. PRE con --path docs/FEATURE_BRIEF_V2.md devuelve role unknown_control_plane, floor D, blocks_unknown true, UNKNOWN_HIGH_AUTHORITY_SUBJECT y exit 3 tanto con --authorized-class B como con D, es decir bloquea incluso con la clase máxima. POST sobre un repositorio sintético que añade docs/NEW_AUTHORITY.md da el mismo resultado, de modo que la corrección también alcanza al diff."
+    },
+    {
+      "id": "CHK-DOCS-EXCEPTIONS-PRESERVED",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. Las excepciones explícitas siguen teniendo precedencia sobre el fallback de control plane: docs/reference/api.md devuelve floor A con role documentation y exit 0; docs/governance/nota.md devuelve floor C con role control_plane_auxiliary y exit 0; docs/FEATURE_BRIEF.md conserva su exact_path D. classify_path evalúa exact_paths, después prefix_rules por longitud descendente y solo entonces el fallback de control plane."
+    },
+    {
+      "id": "CHK-RUNNER-SELF-DECLARES-SCOPE",
+      "status": "PASS",
+      "evidence": "Corrección bloqueante 5, primera mitad. scripts/run_functional.py define en cabecera RUNNER_SCOPE = 'COOPERATIVE_OR_BUGGY_IMPLEMENTATION', RUNNER_LIMITATION = 'NOT_A_SECURITY_SANDBOX' y OUT_OF_SCOPE = 'HOSTILE_PROCESS_INTERNAL_TAMPERING'. El marcador NOT_A_SECURITY_SANDBOX, ausente de repo/ en la ronda 1, aparece ahora en scripts/run_functional.py, en policy/risk_floors.json y en R2_STATE.md además de en las evidencias."
+    },
+    {
+      "id": "CHK-VERDICTS-CARRY-SCOPE-FIELDS",
+      "status": "FAIL",
+      "evidence": "Corrección bloqueante 5, segunda mitad. PROBE EJECUTADA: los tres campos aparecen en el veredicto PASS, en todos los FAIL observados y en IMPLEMENTATION_LOAD_ERROR, pero no en INVALID_TIMEOUT ('--timeout-seconds 0' y '-1' devuelven un veredicto ERROR sin clave details) ni, por revisión estática, en WORKER_START_ERROR. Ver IR2-001: se considera no bloqueante porque ninguna de esas dos rutas juzga una implementación ni emite señal de aceptación."
+    },
+    {
+      "id": "CHK-FULL-CANDIDATE-PRE-REPRODUCED",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. PRE con --authorized-class D sobre los 16 paths del manifiesto y policy 518c325c devuelve exit 0, status PASS, reason_code FLOOR_WITHIN_AUTHORIZED_CLASS y mechanical_path_floor D, con stderr vacío. Reproduce exactamente pre_step_gate.full_candidate_pre_after del response, incluido path_count 16."
+    },
+    {
+      "id": "CHK-COOPERATIVE-FAIL-CLOSED-SWEEP",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. Barrido de once implementaciones cooperativas o defectuosas, sin manipulación de descriptores ni del intérprete: todas fallan cerradas con el reason_code esperado y exactamente una línea de veredicto (INVALID_RESULT_TYPE para tupla y subclase de list, INVALID_PART_TYPE para bool, DISTRIBUTION_MISMATCH para orden alterado, WRONG_REJECTION_TYPE para TypeError, UNCLEAR_REJECTION para mensaje en blanco, INVALID_INPUT_ACCEPTED sin rechazo, WORKER_TIMEOUT para sleep(30), IMPLEMENTATION_LOAD_ERROR sin split_expense y con excepción en import). Un veredicto falso escrito en el stdout del worker no contamina el del controlador: devuelve TOTAL_NOT_CONSERVED."
+    },
+    {
+      "id": "CHK-DEMO-CASE-COVERAGE",
+      "status": "FAIL",
+      "evidence": "PROBE EJECUTADA. CASES contiene solo (1000,3), (1000,0) y (-1,2), que son exactamente la demo aceptada. Un stub cooperativo que ignora sus argumentos y devuelve la constante [334, 333, 333] obtiene exit 0 y ALL_FUNCTIONAL_CHECKS_PASSED. Ver IR2-002: no bloqueante hoy porque I-07 está DECLARADA, la demo sigue NOT_EXECUTED y el veredicto se limita a 'la demo funcional mínima'."
+    },
+    {
+      "id": "CHK-TIMEOUT-NONFINITE",
+      "status": "FAIL",
+      "evidence": "PROBE EJECUTADA. '--timeout-seconds nan' y '--timeout-seconds inf' atraviesan la guarda '<= 0' y producen traceback, exit 1 y stdout vacío, sin línea de veredicto. Ver IR2-003: no bloqueante, sin falso verde, y la disposición IR-008 describe correctamente el exit distinto de cero."
+    },
+    {
+      "id": "CHK-RISK-PRE-FAIL-CLOSED",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. scripts/unknown_helper.py con --authorized-class D devuelve UNKNOWN_HIGH_AUTHORITY_SUBJECT y exit 3, es decir el control plane desconocido bloquea incluso con la clase máxima. normalize_path rechaza NUL, backslash, paths absolutos, '..' y formas no canónicas con CHECKER_ERROR y exit 2."
+    },
+    {
+      "id": "CHK-RISK-POST-ANCESTRY-DELETION-RENAME",
+      "status": "PASS",
+      "evidence": "PROBES EJECUTADAS sobre un repositorio sintético propio con policy 518c325c. Ancestría: con BASE y HEAD sin relación de descendencia devuelve status ERROR, CHECKER_ERROR y exit 2 antes de clasificar path alguno. Borrado de src/example.py: floors [B, D] combinando path y acción deletion, floor mecánico D y FAIL exit 3 con clase B. Rename R100 src/example.py -> tests/moved.py: clasifica ambos lados con floors [B, B] mediante parseo NUL de dos paths por registro."
+    },
+    {
+      "id": "CHK-RENAME-CANONICAL-RULE",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. matching.rename sigue siendo max_source_destination y el checker lo implementa fielmente: el rename R100 hacia tests/ da PASS exit 0 con clase B mientras el borrado equivalente da FAIL exit 3. El comportamiento coincide con la regla canónica que el REQUEST declara vigente y la disposición IR-004 no afirma equivalencia con la acción deletion, por lo que no se registra como hallazgo nuevo."
+    },
+    {
+      "id": "CHK-CAPABILITY-FAIL-CLOSED",
+      "status": "PASS",
+      "evidence": "PROBE EJECUTADA. policy 518c325c sigue sin definir capability_floors, de modo que classify_capability devuelve floor D con blocks_unknown true: '--mode pre --authorized-class D --capability network' produce UNKNOWN_HIGH_AUTHORITY_SUBJECT y exit 3. Coincide con la disposición IR-006 DEFERRED_FAIL_CLOSED_BEFORE_FIRST_CAPABILITY_TASK y con el blocker homónimo de R2_STATE.md. No genera falso verde."
+    },
+    {
+      "id": "CHK-TWELVE-DISPOSITIONS",
+      "status": "PASS",
+      "evidence": "finding_dispositions del response contiene exactamente IR-001 a IR-012, cada uno con status y nota, y blocking_for_round_2 false en los doce. R2_STATE.md no los cierra en silencio: la sección Blockers conserva IR-006 como fail-closed previo a la primera tarea con capacidades y IR-004, IR-008, IR-009, IR-010, IR-011 e IR-012 como deuda no bloqueante explícita; IR-002 queda registrado en I-06 como falso verde 3."
+    },
+    {
+      "id": "CHK-IMPLEMENTATION-VS-JUDGE-SEPARATION",
+      "status": "PASS",
+      "evidence": "El candidato no contiene implementación funcional del producto: no existe src/ y los únicos ejecutables son los dos verificadores y los cinco fixtures. Coherente con I-07 DECLARADA y con la regla de AGENTS.md de no modificar simultáneamente implementación y acceptance-authority. El worker se lanza con -I -B -c, stdin en DEVNULL y stdout/stderr en PIPE, y el controlador no importa la implementación."
+    },
+    {
+      "id": "CHK-NON-SUCCESS-STATES-NOT-TREATED-AS-PASS",
+      "status": "PASS",
+      "evidence": "Ningún estado distinto de éxito aparece como PASS: revisión ronda 2 NOT_EXECUTED, gate de salida de R2-3 NOT_EXECUTED, siguiente fase permitida NO, demo funcional NOT_EXECUTED, MINOR-4 DEFERRED, MINOR-5 DEFERRED_TO_R2-4, DC-006 y EXP-01 OPEN, POST del bloque actual NOT_EXECUTED_NO_BASELINE_HEAD_EXISTS y capacidades sin clasificar bloqueando."
+    },
+    {
+      "id": "CHK-NO-STAGING-COMMIT-REMOTE-CLAIMED",
+      "status": "PASS",
+      "evidence": "El manifiesto declara head null, staging_present false, remote_count 0 y los 16 paths como '??'; las cuatro evidencias declaran staging_performed false, commit_created false, remote_count 0, network_used false y publication_performed false; el response declara authorization.staging, commit, network, remote y publication en false. Ninguna afirmación contradice a otra."
+    },
+    {
+      "id": "CHK-ROUND-2-NOT-PRECLAIMED",
+      "status": "PASS",
+      "evidence": "independent_review_round_2 figura como NOT_EXECUTED en known_state del manifiesto y en R2_STATE.md, y la revisión de ronda 1 se conserva como EXECUTED_BLOCKED en evidencia y no como veredicto del candidato actual. El paquete no anticipa el resultado de esta revisión."
+    },
+    {
+      "id": "CHK-METRICS-CONSISTENCY",
+      "status": "PASS",
+      "evidence": "false_greens_detected 3 y manual_agent_handoffs 2 coinciden en known_state del manifiesto, en metrics del response y en la sección Métricas de R2_STATE.md. source_review del response declara finding_count 12 y blocking_finding_count 3, que coinciden con el recuento real de findings y de blocking true en independent_review_01.json, y su canonical_sha256 y canonical_bytes coinciden con el manifiesto."
+    },
+    {
+      "id": "CHK-I06-LEVEL-LABEL",
+      "status": "FAIL",
+      "evidence": "La columna 'Nivel actual' de I-06 en R2_STATE.md dice 'COMPROBADA' mientras known_state del manifiesto dice 'COMPROBADA_SCOPED'. Ver IR2-004: no bloqueante porque la limitación consta íntegra en la celda de evidencia de la misma fila."
+    },
+    {
+      "id": "CHK-HOSTILE-OBSERVATION-FORGE",
+      "status": "NOT_EXECUTED",
+      "evidence": "No re-ejecuto la forja deliberada del descriptor de observación. Cae dentro de HOSTILE_PROCESS_INTERNAL_TAMPERING=OUT_OF_SCOPE según la frontera declarada, y el candidato ya la conserva reproducida y clasificada como KNOWN_OUT_OF_SCOPE_FALSE_GREEN_3 en el response c07f425b, con probe_source_sha256 100562fd y exit 0. La registro como limitación conocida viva, no como propiedad corregida ni como hallazgo nuevo."
+    },
+    {
+      "id": "CHK-MINOR-4-INDEX-MODES",
+      "status": "NOT_EXECUTED",
+      "evidence": "Requiere staging, que no está autorizado y que el manifiesto declara ausente. Solo puede comprobarse con git ls-files -s tras el staging y antes del primer commit. Sigue como NOT_EXECUTED_UNTIL_STAGING y no puede convertirse en PASS."
+    },
+    {
+      "id": "CHK-GIT-STATE",
+      "status": "NOT_EXECUTED",
+      "evidence": "El bundle no incluye .git. head null, remote_count 0, staging_present false, working_tree_status e identidad Git se toman como declarados en el manifiesto, sin observación independiente."
+    },
+    {
+      "id": "CHK-POST-UNDER-POLICY-V2",
+      "status": "NOT_EXECUTED",
+      "evidence": "No existe PASS/FAIL conocido de POST ejecutado sobre el candidato con la policy V2: el response declara post_check_current_block = NOT_EXECUTED_NO_BASELINE_HEAD_EXISTS porque no hay HEAD. Verifiqué el mecanismo POST con policy 518c325c sobre un repositorio sintético propio, no sobre el candidato. Ninguna afirmación del candidato reclama lo contrario: I-03 limita la cláusula V2 a PRE."
+    },
+    {
+      "id": "CHK-HISTORICAL-OBJECTS-VERIFICATION",
+      "status": "NOT_EXECUTED",
+      "evidence": "Los objetos históricos citados no están en el paquete: policy b6d229b2 y 391aebfc, runners 6fe5c55d, 200d6ea9 y 43f128d2, y estados beafe65b, 30780f76 y 1c132630. En consecuencia no puedo verificar el delta V1 a V2 de la política ni re-ejecutar las tres reproducciones previas de falso verde; se aceptan como registro histórico, no como hecho verificado por mí."
+    },
+    {
+      "id": "CHK-R2-2-POST-EVIDENCE-REPRODUCIBILITY",
+      "status": "UNCERTAIN",
+      "evidence": "evidence/r2-2 registra <TEMP_REPO> como placeholder y temporary_post_probe.repository_removed true. Los identificadores 291179fe, 1da85ba9 y 35e278d8 no son rederivables porque commit-tree depende de autor, committer y fechas no registradas. Re-verifiqué el comportamiento POST sobre un repositorio sintético nuevo, lo que sustenta el mecanismo pero no los objetos concretos registrados."
+    },
+    {
+      "id": "CHK-HUMAN-GATE-INDEPENDENT-ARTIFACT",
+      "status": "UNCERTAIN",
+      "evidence": "authorization.human_gate = PASS y decision_record.authorization = HUMAN_GATE_RESPONSE_TO_INDEPENDENT_REVIEW constan únicamente dentro de los artefactos producidos en el mismo bloque, sin firma, commit ni registro externo. Es inherente a un experimento local sin Git ni publicación y el candidato no afirma enforcement, pero la puerta humana no es independientemente observable desde el paquete."
+    }
+  ],
+  "limitations": [
+    "Ejecuté las probes con Python 3.12.3 y Git 2.43.0; las evidencias del candidato se produjeron con Python 3.14.4 y Git 2.53.0. Los cinco casos declarados del runner y los resultados PRE/POST reproducen idénticamente, pero los detalles dependientes de versión (internos de subprocess y selectors, límites de ast, detección de renames) podrían diferir en el entorno original.",
+    "La revisión se hizo sobre copias en un directorio de trabajo aparte. No modifiqué ningún fichero del paquete: tras completar todas las probes, los 16 objetos vuelven a verificar sha256 y bytes contra el manifiesto y no aparece ningún fichero nuevo en repo/. Los fixtures de prueba se crearon fuera del árbol del repositorio y ninguno debe incorporarse al baseline.",
+    "En reviewed_objects uso la convención de la ronda 1: FAIL significa que el objeto porta un hallazgo bloqueante. Los 16 objetos figuran PASS porque no queda ninguno; scripts/run_functional.py porta IR2-001, IR2-002 e IR2-003 y R2_STATE.md porta IR2-004, todos no bloqueantes.",
+    "baseline_disposition=PASS se refiere exclusivamente a la revisión independiente de ronda 2 sobre los bytes enumerados en REVIEW_MANIFEST.json. No es autorización de staging, commit, remoto ni publicación, que siguen NOT_AUTHORIZED, ni cierra MINOR-4, DC-006, EXP-01 ni la demo funcional.",
+    "No verifico la frontera de aislamiento frente a código deliberadamente hostil: no está afirmada por el candidato y queda declarada OUT_OF_SCOPE. El falso verde 3 por forja del canal de observación sigue vivo y registrado como limitación conocida; no lo re-ejecuté.",
+    "El paquete no incluye .git ni los objetos históricos citados, por lo que el estado del repositorio y el delta de policy V1 a V2 quedan declarados y no observados.",
+    "No existe POST ejecutado sobre el candidato bajo la policy V2 porque no hay BASE ni HEAD; el mecanismo POST lo verifiqué sobre un repositorio sintético propio.",
+    "Esta revisión certifica únicamente los bytes enumerados en REVIEW_MANIFEST.json. La ausencia de hallazgos bloqueantes adicionales no es prueba de ausencia de otras clases de falso verde dentro del alcance cooperativo; mi barrido cubrió doce implementaciones y no agota el espacio.",
+    "No emito juicio sobre la demo funcional del Feature Brief, que sigue NOT_EXECUTED, ni sobre DC-006 y EXP-01, que permanecen OPEN."
+  ],
+  "summary": "El paquete es íntegro y su cadena de custodia se sostiene por completo: ZIP, manifiesto y los ocho hashes de identidad del REQUEST coinciden, los 16 ficheros cuadran en sha256, bytes y modo, la suma es 154589 igual a total_repo_file_bytes, no hay ficheros no declarados y los floors del manifiesto coinciden con la clasificación ejecutada de la policy. Las cinco correcciones bloqueantes de la ronda 1 se comprueban satisfechas: DEC-CP V2 cita el objeto exacto 518c325c y los hashes V1 figuran solo como históricos y superados con HISTORICAL_POLICY_PRE_POST=NOT_EXECUTED, sin evidencia retroactiva fabricada; I-05 queda reanclada al runner actual d08fe9bd con regresiones ejecutadas sobre ese objeto y al checker actual 22a2a552; I-06 limita su afirmación al alcance declarado y conserva el falso verde hostil 3 como limitación viva y no como propiedad corregida; un docs/ desconocido pasa a D/STOP en PRE y en POST incluso con clase D mientras docs/reference y docs/governance conservan sus excepciones; y el runner declara RUNNER_SCOPE, RUNNER_LIMITATION y OUT_OF_SCOPE en su propio código. La auditoría de los dieciséis hashes citados en R2_STATE.md no deja ninguno sin resolver y toda invariante COMPROBADA cita únicamente objetos presentes. Reproduje las cinco regresiones declaradas del runner y el PRE completo de 16 paths con resultados idénticos, y un barrido de doce implementaciones cooperativas o defectuosas falló cerrado en once. Quedan cuatro hallazgos no bloqueantes, todos ejecutados salvo donde se indica: dos veredictos ERROR del controlador no transportan los campos de alcance; el conjunto de casos del runner es exactamente la demo aceptada, de modo que un stub que la codifica obtiene PASS, hueco que debe cerrarse antes de afirmar corrección funcional; un timeout no finito rompe el contrato de una única línea de veredicto sin conceder PASS; y la etiqueta de nivel de I-06 en R2_STATE.md es más amplia que la del manifiesto. Ninguno contradice una afirmación vigente ni produce un falso verde dentro de la frontera declarada, por lo que dispongo el baseline como PASS, entendido estrictamente como resultado de esta revisión y no como autorización de staging, commit ni publicación, que siguen NOT_AUTHORIZED junto con MINOR-4, DC-006, EXP-01 y la demo funcional."
+}

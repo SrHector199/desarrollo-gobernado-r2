@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "evidence_id": "R2-3-RUNNER-FALSE-GREEN-CORRECTION",
+  "timestamp_utc": "2026-08-14T21:03:35Z",
+  "phase": "R2-3",
+  "scope": {
+    "authorized": [
+      "reproducir el falso verde del runner anterior",
+      "modificar scripts/run_functional.py",
+      "crear tests/fixtures/exit_zero_splitter.py",
+      "crear esta evidencia",
+      "actualizar R2_STATE.md"
+    ],
+    "forbidden": [
+      "staging",
+      "commit",
+      "network",
+      "remote",
+      "publication",
+      "phase change"
+    ]
+  },
+  "artifacts": {
+    "old_runner_sha256": "6fe5c55da8e273c214a216ef4cca9a01d0a888eaafedbd12a57127683a5864bd",
+    "new_runner_sha256": "200d6ea95984f6e62416b3da19fe7c6e32f38c6cf4292b5150a93f98d6a5fcd3",
+    "new_runner_bytes": 14511,
+    "exit_zero_fixture_sha256": "12a5a0cb0bfc348638cfcf19a0d4c083e58774506dbcc74efc1354e6e8510000",
+    "exit_zero_fixture_bytes": 57,
+    "good_fixture_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+    "bad_fixture_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce"
+  },
+  "false_green_reproduction": {
+    "runner_sha256": "6fe5c55da8e273c214a216ef4cca9a01d0a888eaafedbd12a57127683a5864bd",
+    "fixture_sha256": "12a5a0cb0bfc348638cfcf19a0d4c083e58774506dbcc74efc1354e6e8510000",
+    "observed": {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/run_functional.py",
+        "--implementation",
+        "tests/fixtures/exit_zero_splitter.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "expected_signature": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "matched": true,
+    "classification": "FALSE_GREEN_DETECTED"
+  },
+  "risk_pre": {
+    "expected": {
+      "exit_code": 0,
+      "status": "PASS",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "mechanical_path_floor": "D",
+      "authorized_class": "D"
+    },
+    "observed": {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/risk_floor.py",
+        "--policy",
+        "policy/risk_floors.json",
+        "--mode",
+        "pre",
+        "--authorized-class",
+        "D",
+        "--path",
+        "scripts/run_functional.py",
+        "--path",
+        "tests/fixtures/exit_zero_splitter.py",
+        "--path",
+        "evidence/r2-3/runner_false_green_correction.json",
+        "--path",
+        "R2_STATE.md"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"authorized_class\": \"D\", \"findings\": [{\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Runner funcional crítico usado para decidir si la demo técnica pasa.\", \"role\": \"acceptance_authority\", \"subject\": \"scripts/run_functional.py\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"B\", \"reason\": \"Tests funcionales del mini-proyecto.\", \"role\": \"functional_tests\", \"subject\": \"tests/fixtures/exit_zero_splitter.py\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"C\", \"reason\": \"Conserva hechos para revisión, pero no autoriza por sí sola.\", \"role\": \"control_plane_auxiliary\", \"subject\": \"evidence/r2-3/runner_false_green_correction.json\", \"subject_type\": \"path\"}, {\"blocks_unknown\": false, \"explicit\": true, \"floor\": \"D\", \"reason\": \"Registra fase, evidencia, pendientes y el único siguiente paso autorizado.\", \"role\": \"authorization_state\", \"subject\": \"R2_STATE.md\", \"subject_type\": \"path\"}], \"mechanical_path_floor\": \"D\", \"mode\": \"PRE\", \"reason_code\": \"FLOOR_WITHIN_AUTHORIZED_CLASS\", \"status\": \"PASS\"}\n",
+      "stderr": ""
+    },
+    "verdict": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Runner funcional crítico usado para decidir si la demo técnica pasa.",
+          "role": "acceptance_authority",
+          "subject": "scripts/run_functional.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "B",
+          "reason": "Tests funcionales del mini-proyecto.",
+          "role": "functional_tests",
+          "subject": "tests/fixtures/exit_zero_splitter.py",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "C",
+          "reason": "Conserva hechos para revisión, pero no autoriza por sí sola.",
+          "role": "control_plane_auxiliary",
+          "subject": "evidence/r2-3/runner_false_green_correction.json",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Registra fase, evidencia, pendientes y el único siguiente paso autorizado.",
+          "role": "authorization_state",
+          "subject": "R2_STATE.md",
+          "subject_type": "path"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "matched_expectation": true
+  },
+  "correction": {
+    "implementation_isolation": "python_subprocess",
+    "timeout_seconds": 5.0,
+    "protocol": "single JSON verdict line, r2-functional-worker-v1",
+    "missing_verdict_action": "FAIL",
+    "missing_verdict_exit_code": 1
+  },
+  "cases": [
+    {
+      "id": "good",
+      "expected": {
+        "exit_code": 0,
+        "status": "PASS",
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/good_splitter.py"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"details\": {\"checks\": [{\"name\": \"total_conservation\", \"status\": \"PASS\"}, {\"name\": \"accepted_demo_distribution\", \"status\": \"PASS\"}, {\"exception\": \"ValueError\", \"message\": \"people debe ser un entero mayor que cero\", \"name\": \"zero_people_rejected\", \"status\": \"PASS\"}, {\"exception\": \"ValueError\", \"message\": \"amount_cents debe ser un entero no negativo\", \"name\": \"negative_amount_rejected\", \"status\": \"PASS\"}]}, \"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py\", \"message\": \"La implementación cumple la demo funcional mínima.\", \"protocol\": \"r2-functional-worker-v1\", \"reason_code\": \"ALL_FUNCTIONAL_CHECKS_PASSED\", \"status\": \"PASS\", \"timeout_seconds\": 5.0, \"worker_isolation\": \"subprocess\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "checks": [
+            {
+              "name": "total_conservation",
+              "status": "PASS"
+            },
+            {
+              "name": "accepted_demo_distribution",
+              "status": "PASS"
+            },
+            {
+              "exception": "ValueError",
+              "message": "people debe ser un entero mayor que cero",
+              "name": "zero_people_rejected",
+              "status": "PASS"
+            },
+            {
+              "exception": "ValueError",
+              "message": "amount_cents debe ser un entero no negativo",
+              "name": "negative_amount_rejected",
+              "status": "PASS"
+            }
+          ]
+        },
+        "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/good_splitter.py",
+        "message": "La implementación cumple la demo funcional mínima.",
+        "protocol": "r2-functional-worker-v1",
+        "reason_code": "ALL_FUNCTIONAL_CHECKS_PASSED",
+        "status": "PASS",
+        "timeout_seconds": 5.0,
+        "worker_isolation": "subprocess"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "bad",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "TOTAL_NOT_CONSERVED"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/bad_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\": {\"expected_total_cents\": 1000, \"observed_total_cents\": 999, \"parts\": [333, 333, 333]}, \"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/bad_splitter.py\", \"message\": \"La suma de las partes no conserva exactamente el importe original.\", \"protocol\": \"r2-functional-worker-v1\", \"reason_code\": \"TOTAL_NOT_CONSERVED\", \"status\": \"FAIL\", \"timeout_seconds\": 5.0, \"worker_isolation\": \"subprocess\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "expected_total_cents": 1000,
+          "observed_total_cents": 999,
+          "parts": [
+            333,
+            333,
+            333
+          ]
+        },
+        "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/bad_splitter.py",
+        "message": "La suma de las partes no conserva exactamente el importe original.",
+        "protocol": "r2-functional-worker-v1",
+        "reason_code": "TOTAL_NOT_CONSERVED",
+        "status": "FAIL",
+        "timeout_seconds": 5.0,
+        "worker_isolation": "subprocess"
+      },
+      "matched_expectation": true
+    },
+    {
+      "id": "exit_zero",
+      "expected": {
+        "exit_code": 1,
+        "status": "FAIL",
+        "reason_code": "MISSING_VERDICT"
+      },
+      "observed": {
+        "command": [
+          "/usr/bin/python3",
+          "scripts/run_functional.py",
+          "--implementation",
+          "tests/fixtures/exit_zero_splitter.py"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"details\": {\"worker_exit_code\": 0, \"worker_stderr_bytes\": 0, \"worker_stdout_bytes\": 0}, \"implementation\": \"/home/hector/desarrollo-gobernado-r2/tests/fixtures/exit_zero_splitter.py\", \"message\": \"El subproceso terminó con exit 0 sin emitir el veredicto obligatorio.\", \"protocol\": \"r2-functional-worker-v1\", \"reason_code\": \"MISSING_VERDICT\", \"status\": \"FAIL\", \"worker_isolation\": \"subprocess\"}\n",
+        "stderr": ""
+      },
+      "verdict": {
+        "details": {
+          "worker_exit_code": 0,
+          "worker_stderr_bytes": 0,
+          "worker_stdout_bytes": 0
+        },
+        "implementation": "/home/hector/desarrollo-gobernado-r2/tests/fixtures/exit_zero_splitter.py",
+        "message": "El subproceso terminó con exit 0 sin emitir el veredicto obligatorio.",
+        "protocol": "r2-functional-worker-v1",
+        "reason_code": "MISSING_VERDICT",
+        "status": "FAIL",
+        "worker_isolation": "subprocess"
+      },
+      "matched_expectation": true
+    }
+  ],
+  "gate": {
+    "all_cases_matched": true,
+    "i06_level_after": "COMPROBADA",
+    "phase_after": "R2-3",
+    "independent_review_before_baseline": "NOT_EXECUTED"
+  },
+  "main_repository": {
+    "head": null,
+    "staging_performed": false,
+    "commit_created": false,
+    "remote_count": 0,
+    "network_used": false,
+    "publication_performed": false
+  }
+}

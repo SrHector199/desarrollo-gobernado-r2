@@ -1,0 +1,61 @@
+{
+  "authorization_after": {
+    "baseline_commit": "NOT_AUTHORIZED_UNTIL_INDEX_GATES_PASS",
+    "baseline_staging": "AUTHORIZED_ONE_SHOT_FOR_EXACT_CURRENT_CANDIDATE",
+    "network": false,
+    "publication": false,
+    "remote": false
+  },
+  "created_at_utc": "2026-08-15T01:09:14Z",
+  "current_phase": "R2-3",
+  "evidence_type": "human_exception_independent_review_unavailable",
+  "external_review_objects": [
+    {
+      "baseline_disposition": "PASS",
+      "bytes": 41612,
+      "dynamic_review": "PASS",
+      "fresh_context": false,
+      "independence_gate": "FAIL",
+      "reviewer_model": "Claude Opus 5",
+      "reviewer_system": "Claude",
+      "sha256": "cb0f315e723511544f93ae5669e826463d44e70b2f7a86e619d6cd7c042f9945",
+      "static_review": "PASS"
+    },
+    {
+      "baseline_disposition": "BLOCKED",
+      "bytes": 37164,
+      "dynamic_review": "PASS",
+      "fresh_context": true,
+      "independence_gate": "FAIL",
+      "reviewer_model": "Claude Opus 5",
+      "reviewer_system": "Claude",
+      "sha256": "39c3aab4500b741a14f133ea3bfe36081da42d68eca4b9113708216d3aed982d",
+      "static_review": "PASS"
+    }
+  ],
+  "human_authorization": {
+    "authority_basis": "I-08_USER_DECIDES_EXCEPTIONS_AND_CRITICAL_RISK",
+    "classification": "EXPLICIT_HUMAN_EXCEPTION",
+    "decision": "ACCEPT_KNOWN_REVIEW_INDEPENDENCE_GAP",
+    "text": "no dispongo de otra IA revisora, autorizo pass"
+  },
+  "known_risk": "No se obtuvo un revisor distinto de Claude / Claude Opus 5. El PASS técnico no constituye una revisión independiente.",
+  "metrics_after": {
+    "false_greens_detected": 3,
+    "manual_agent_handoffs": 5
+  },
+  "nonclaims": [
+    "No se afirma que independent_review_round_3 sea PASS.",
+    "No se afirma ENFORCED ni AISLADA.",
+    "No se realizó staging ni commit en este bloque.",
+    "No se usó red, remoto ni publicación."
+  ],
+  "review_state": {
+    "baseline_progression_allowed_by_human_exception": true,
+    "independence_requirement": "WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER",
+    "independent_review_round_3": "NOT_SATISFIED",
+    "not_relabelled_as_independent_pass": true,
+    "technical_review_round_3": "PASS"
+  },
+  "schema_version": 1
+}
