@@ -49,7 +49,7 @@
 
 ## Métricas
 - Handoffs manuales entre agentes: 5
-- Falsos verdes: 7 detectados (el candidato Materialization V2 obtuvo revisión independiente PASS 57/57; NEW-01 es fail-closed y no añade falso verde)
+- Falsos verdes: 8 detectados (el candidato Materialization V2 obtuvo revisión independiente PASS 57/57; NEW-01 es fail-closed y no añade falso verde)
 - Violaciones de scope: 0 detectadas / 0 no detectadas
 - Tiempo feature B: NOT_MEASURED
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
@@ -848,7 +848,9 @@
 - Branch-protection candidate V1 is NOT execution authority; REQUIRED_CHECK remains NOT_CONFIGURED; BRANCH_PROTECTION/NO-BYPASS remains NOT_CONFIGURED; ENFORCED remains False.
 - FALSE_GREEN_7: CANONICAL_STATE_BLOCKERS_SCOPE_FALSE_GREEN.
 - FALSE_GREEN_7 cause: el validator de canonicalización declaró PASS sin verificar que `R2AA-012=RESOLVED` estuviera aplicado dentro de la sección canónica actual `## Blockers`; la búsqueda global sustituyó una aparición histórica y dejó el blocker actual contradictorio.
-- FALSE_GREENS: 7 total.
+- FALSE_GREEN_8: STALE_AUTHORIZED_NEXT_STEP_IN_CURRENT_BLOCKERS.
+- FALSE_GREEN_8 cause: el validador declaró PASS sin rechazar una línea obsoleta de autorización dentro del `## Blockers` actual; la cabecera `## Estado` ya autorizaba solo preparación/diseño de BP-B-02/BP-B-03 y exigía un nuevo Human Gate D antes de cualquier ejecución.
+- FALSE_GREENS: 8 total.
 - R2AA-011: PARTIAL.
 - R2AA-012: RESOLVED; B1+B2 demostraron binding por HEAD exacto y no-herencia de verde.
 - R2AA-013: PARTIAL.
@@ -878,7 +880,7 @@
 - Historical review dispositions remain historical and are not relabeled by this repair.
 - Current phase remains R2-4.
 - Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
-- Authorized next step remains preparation/preflight only for exact required-check + branch-protection settings; no settings mutation is authorized by this repair.
+- Authorized next step remains preparation/design only for BP-B-02/BP-B-03 probes and preservation of BP-B-01/BP-B-04 correction requirements; execution requires a new Human Gate D.
 
 ## Gate de fase
 - R2-0 gate: PASS
