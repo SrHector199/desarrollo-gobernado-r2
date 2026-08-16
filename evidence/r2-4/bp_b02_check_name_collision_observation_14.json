@@ -1,0 +1,828 @@
+{
+  "authorization": {
+    "base_branch": "main",
+    "base_sha": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "base_tree": "a6bba8a9a84a7cea475173c99c873b4fed711fa7",
+    "bp_b03_authorized": false,
+    "branch_deletion_authorized": false,
+    "branch_protection_authorized": false,
+    "class": "D",
+    "external_evidence_authorized": true,
+    "force_push_authorized": false,
+    "github_settings_change_authorized": false,
+    "held_workflow_approval_authorized": false,
+    "merge_authorized": false,
+    "pr_close_without_merge_authorized": true,
+    "probe_branch": "r2-4/bp-b02-check-name-collision",
+    "probe_path": ".github/workflows/r2-b02-collision-success.yml",
+    "probe_workflow_bytes": 423,
+    "probe_workflow_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+    "r2_5_authorized": false,
+    "r2_state_change_authorized": false,
+    "repository_canonicalization_authorized": false,
+    "required_check_configuration_authorized": false,
+    "ruleset_authorized": false,
+    "scope": "BP-B-02_ONLY",
+    "source": "explicit_current_chat_human_gate"
+  },
+  "bp_b02_disposition": "IDENTITY_COLLISION_OBSERVED_BYPASS_NOT_DEMONSTRATED",
+  "candidate": {
+    "commit_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "git_blob_oid": "02ddd98fe81cbda3ed5b08c538317f37caf7c26e",
+    "mode": "100644",
+    "parent_sha": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "path": ".github/workflows/r2-b02-collision-success.yml",
+    "risk_post_D": {
+      "authorized_class": "D",
+      "base": "494337e0b56fc4a52eef3f78914042805571b81a",
+      "changes": [
+        {
+          "finding_roles": [
+            "acceptance_authority"
+          ],
+          "finding_subjects": [
+            ".github/workflows/r2-b02-collision-success.yml"
+          ],
+          "floors": [
+            "D"
+          ],
+          "new_mode": "100644",
+          "old_mode": "000000",
+          "paths": [
+            ".github/workflows/r2-b02-collision-success.yml"
+          ],
+          "status": "A"
+        }
+      ],
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación.",
+          "role": "acceptance_authority",
+          "subject": ".github/workflows/r2-b02-collision-success.yml",
+          "subject_type": "path"
+        }
+      ],
+      "head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+      "mechanical_path_floor": "D",
+      "mode": "POST",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "status": "A",
+    "tree_sha": "30f955478ae78586ecccd4db13c849aa38145ea7",
+    "trusted_base_gate_local_expected_failure": {
+      "candidate_gate_executed": false,
+      "executed_gate_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "exit": 1,
+      "payload": {
+        "authority_root": "/tmp/r2-b02-base-wt-45uji_wg/wt",
+        "base": "494337e0b56fc4a52eef3f78914042805571b81a",
+        "candidate_code_executed": false,
+        "candidate_worktree_checked_out": false,
+        "dc_006": "OPEN",
+        "evaluation_before_self_test": true,
+        "exp_01": "OPEN",
+        "head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "integrity": {
+          "policy/risk_floors.json": {
+            "base_blob_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "expected_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+            "pinned": true
+          },
+          "scripts/base_gate.py": {
+            "base_blob_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+            "pinned": false
+          },
+          "scripts/risk_floor.py": {
+            "base_blob_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "expected_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+            "pinned": true
+          },
+          "scripts/run_functional.py": {
+            "base_blob_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "expected_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+            "pinned": true
+          },
+          "tests/fixtures/bad_splitter.py": {
+            "base_blob_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "expected_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+            "pinned": true
+          },
+          "tests/fixtures/good_splitter.py": {
+            "base_blob_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "disk_equals_base_blob": true,
+            "disk_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "expected_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+            "pinned": true
+          }
+        },
+        "integrity_model": "PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS",
+        "normal_pr_authorized_class": "B",
+        "reason_code": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_checker_exit": 3,
+        "risk_floor": "D",
+        "risk_payload_base": "494337e0b56fc4a52eef3f78914042805571b81a",
+        "risk_payload_head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "risk_reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "risk_status": "FAIL",
+        "status": "FAIL"
+      },
+      "stderr": "",
+      "stdout": "{\"authority_root\": \"/tmp/r2-b02-base-wt-45uji_wg/wt\", \"base\": \"494337e0b56fc4a52eef3f78914042805571b81a\", \"candidate_code_executed\": false, \"candidate_worktree_checked_out\": false, \"dc_006\": \"OPEN\", \"evaluation_before_self_test\": true, \"exp_01\": \"OPEN\", \"head\": \"915edd738abe94bd0dea3ccf1e59e854f2d64af6\", \"integrity\": {\"policy/risk_floors.json\": {\"base_blob_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"expected_sha256\": \"d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b\", \"pinned\": true}, \"scripts/base_gate.py\": {\"base_blob_sha256\": \"f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11\", \"pinned\": false}, \"scripts/risk_floor.py\": {\"base_blob_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"expected_sha256\": \"e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283\", \"pinned\": true}, \"scripts/run_functional.py\": {\"base_blob_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"expected_sha256\": \"d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f\", \"pinned\": true}, \"tests/fixtures/bad_splitter.py\": {\"base_blob_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"expected_sha256\": \"b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce\", \"pinned\": true}, \"tests/fixtures/good_splitter.py\": {\"base_blob_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"disk_equals_base_blob\": true, \"disk_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"expected_sha256\": \"1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827\", \"pinned\": true}}, \"integrity_model\": \"PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS\", \"normal_pr_authorized_class\": \"B\", \"reason_code\": \"RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"risk_checker_exit\": 3, \"risk_floor\": \"D\", \"risk_payload_base\": \"494337e0b56fc4a52eef3f78914042805571b81a\", \"risk_payload_head\": \"915edd738abe94bd0dea3ccf1e59e854f2d64af6\", \"risk_reason_code\": \"FLOOR_EXCEEDS_AUTHORIZED_CLASS\", \"risk_status\": \"FAIL\", \"status\": \"FAIL\"}\n"
+    },
+    "workflow_bytes": 423,
+    "workflow_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3"
+  },
+  "closeout": {
+    "attempted": true,
+    "closed_at": "2026-08-16T13:15:17Z",
+    "head_ref": "r2-4/bp-b02-check-name-collision",
+    "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "merged": false,
+    "state": "closed",
+    "success": true
+  },
+  "completed_at_utc": "2026-08-16T13:15:21Z",
+  "design_review_binding": {
+    "design_bytes": 40404,
+    "design_file": "r2_4_bp_b02_b03_probe_design_v3.json",
+    "design_sha256": "8f2d5974a0c670ffef799c3574793d28e17f72259ef20b4a264a9efea93fe145",
+    "review_blocking_findings": [],
+    "review_bytes": 53772,
+    "review_design_disposition": "PASS",
+    "review_false_green_increment": 0,
+    "review_file": "R2_4_BP_B02_B03_DESIGN_REVIEW_RESULT_V3.json",
+    "review_sha256": "79bf414afeabccbce99252e9e3459780af961727ffad7b3f803e56ef817ff34e"
+  },
+  "evidence_type": "r2-4-bp-b02-homonymous-check-collision-observation",
+  "false_green_accounting": {
+    "after": 8,
+    "before": 8,
+    "increment": 0
+  },
+  "final": {
+    "bp_b03_authorized": false,
+    "bp_b03_executed": false,
+    "branch_protection": false,
+    "false_greens": 8,
+    "github_settings_changed": false,
+    "local_branch": "r2-4/ci-bootstrap",
+    "local_head": "a41da96f16567717de0c1299adab626c2b31089e",
+    "pr_merged": false,
+    "pr_number": 5,
+    "pr_state": "closed",
+    "preserved_historical_branches": {
+      "r2-4/b1-binding-probe": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "r2-4/b2-no-green-inheritance": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "r2-4/d-control-plane-negative": "27b0291f907e9f99a80b8d99d1495cab88ebb57f"
+    },
+    "probe_branch": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "probe_branch_deleted": false,
+    "r2_4_exit_gate": "NOT_EXECUTED",
+    "r2_5": "NOT_AUTHORIZED",
+    "r2_state_modified": false,
+    "remote_main": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "repo_files_canonicalized": false,
+    "required_check": "NOT_CONFIGURED",
+    "ruleset_count": 0,
+    "staging": "EMPTY",
+    "worktree": "CLEAN"
+  },
+  "git_objects": {
+    "BASE_MAIN": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "PR_HEAD": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "TEST_MERGE": "ad38e790823133bf1d1597ded534ef07244e51cc",
+    "test_merge_observation": {
+      "pr_api_merge_commit_sha": null,
+      "pr_mergeable": true,
+      "pr_mergeable_state": "unstable",
+      "ref": "refs/pull/5/merge",
+      "sha": "ad38e790823133bf1d1597ded534ef07244e51cc",
+      "source": "git_ls_remote_refs_pull_number_merge"
+    }
+  },
+  "observation": {
+    "claims": {
+      "aislada": false,
+      "bp_b03_authorized": false,
+      "branch_protection_configured": false,
+      "bypass_demonstrated": false,
+      "enforced": false,
+      "producer_exclusivity_established": false,
+      "required_check_satisfaction_tested": false,
+      "same_app_id_observed": true,
+      "same_name_observed": true
+    },
+    "collision": {
+      "check_run": {
+        "app_id": 15368,
+        "app_slug": "github-actions",
+        "check_suite_id": 86635672396,
+        "completed_at": "2026-08-16T13:15:00Z",
+        "conclusion": "success",
+        "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274416/job/95170108343",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "id": 95170108343,
+        "name": "r2-governed-validation",
+        "started_at": "2026-08-16T13:14:58Z",
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95170108343",
+          "completed_at": "2026-08-16T13:15:00Z",
+          "conclusion": "success",
+          "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+          "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274416/job/95170108343",
+          "id": 95170108343,
+          "name": "r2-governed-validation",
+          "run_id": 31949274416,
+          "started_at": "2026-08-16T13:14:58Z",
+          "status": "completed",
+          "steps": [
+            {
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Emit controlled success collision",
+              "number": 2,
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 3,
+              "status": "completed"
+            }
+          ]
+        }
+      ],
+      "target_job": {
+        "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95170108343",
+        "completed_at": "2026-08-16T13:15:00Z",
+        "conclusion": "success",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274416/job/95170108343",
+        "id": 95170108343,
+        "name": "r2-governed-validation",
+        "run_id": 31949274416,
+        "started_at": "2026-08-16T13:14:58Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Emit controlled success collision",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "status": "completed"
+          }
+        ]
+      },
+      "validation": {
+        "controlled_success_marker_observed": true,
+        "log_source": "GH_RUN_VIEW"
+      },
+      "workflow_run": {
+        "conclusion": "success",
+        "created_at": "2026-08-16T13:14:55Z",
+        "display_title": "R2-4 BP-B-02: homonymous check collision probe",
+        "event": "pull_request",
+        "head_branch": "r2-4/bp-b02-check-name-collision",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274416",
+        "id": 31949274416,
+        "name": "R2 BP-B-02 Collision Probe",
+        "path": ".github/workflows/r2-b02-collision-success.yml",
+        "pull_requests": [
+          {
+            "base": {
+              "ref": "main",
+              "repo": {
+                "id": 1335059997,
+                "name": "desarrollo-gobernado-r2",
+                "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+              },
+              "sha": "494337e0b56fc4a52eef3f78914042805571b81a"
+            },
+            "head": {
+              "ref": "r2-4/bp-b02-check-name-collision",
+              "repo": {
+                "id": 1335059997,
+                "name": "desarrollo-gobernado-r2",
+                "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+              },
+              "sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6"
+            },
+            "id": 4290148172,
+            "number": 5,
+            "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/pulls/5"
+          }
+        ],
+        "run_attempt": 1,
+        "run_number": 1,
+        "status": "completed",
+        "updated_at": "2026-08-16T13:15:01Z"
+      }
+    },
+    "disposition": "IDENTITY_COLLISION_OBSERVED_BYPASS_NOT_DEMONSTRATED",
+    "equality_matrix": {
+      "base_main": "494337e0b56fc4a52eef3f78914042805571b81a",
+      "collision_check_sha_eq_BASE_MAIN": false,
+      "collision_check_sha_eq_PR_HEAD": true,
+      "collision_check_sha_eq_TEST_MERGE": false,
+      "collision_workflow_run_head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+      "pr_head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+      "test_merge": "ad38e790823133bf1d1597ded534ef07244e51cc",
+      "trusted_check_sha_eq_BASE_MAIN": false,
+      "trusted_check_sha_eq_PR_HEAD": true,
+      "trusted_check_sha_eq_TEST_MERGE": false,
+      "trusted_check_sha_eq_collision_check_sha": true,
+      "trusted_workflow_run_head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6"
+    },
+    "identity": {
+      "collision_app_id": 15368,
+      "collision_app_slug": "github-actions",
+      "queries": {
+        "BASE_MAIN": [],
+        "PR_HEAD": [
+          {
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "check_suite_id": 86635672396,
+            "completed_at": "2026-08-16T13:15:00Z",
+            "conclusion": "success",
+            "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274416/job/95170108343",
+            "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+            "id": 95170108343,
+            "name": "r2-governed-validation",
+            "started_at": "2026-08-16T13:14:58Z",
+            "status": "completed"
+          },
+          {
+            "app_id": 15368,
+            "app_slug": "github-actions",
+            "check_suite_id": 86635672238,
+            "completed_at": "2026-08-16T13:15:02Z",
+            "conclusion": "failure",
+            "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274328/job/95170108251",
+            "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+            "id": 95170108251,
+            "name": "r2-governed-validation",
+            "started_at": "2026-08-16T13:14:57Z",
+            "status": "completed"
+          }
+        ],
+        "TEST_MERGE": []
+      },
+      "target_ids_seen_in_known_object_queries": [
+        95170108251,
+        95170108343
+      ],
+      "trusted_app_id": 15368,
+      "trusted_app_slug": "github-actions"
+    },
+    "next_precondition_only": "BP_B03_PRECONDITION_SATISFIED_SEPARATE_HUMAN_GATE_D_STILL_REQUIRED",
+    "object_classes": {
+      "collision": "PR_HEAD",
+      "trusted": "PR_HEAD"
+    },
+    "object_relation": "SAME_OBJECT_PR_HEAD",
+    "trusted": {
+      "check_run": {
+        "app_id": 15368,
+        "app_slug": "github-actions",
+        "check_suite_id": 86635672238,
+        "completed_at": "2026-08-16T13:15:02Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274328/job/95170108251",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "id": 95170108251,
+        "name": "r2-governed-validation",
+        "started_at": "2026-08-16T13:14:57Z",
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95170108251",
+          "completed_at": "2026-08-16T13:15:02Z",
+          "conclusion": "failure",
+          "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+          "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274328/job/95170108251",
+          "id": 95170108251,
+          "name": "r2-governed-validation",
+          "run_id": 31949274328,
+          "started_at": "2026-08-16T13:14:57Z",
+          "status": "completed",
+          "steps": [
+            {
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Reject cross-repository PRs",
+              "number": 2,
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Materialize exact trusted BASE and candidate object",
+              "number": 3,
+              "status": "completed"
+            },
+            {
+              "conclusion": "failure",
+              "name": "Evaluate exact BASE to HEAD diff before executing trusted fixtures",
+              "number": 4,
+              "status": "completed"
+            },
+            {
+              "conclusion": "skipped",
+              "name": "Prove trusted verifier positive and negative paths after evaluation",
+              "number": 5,
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 6,
+              "status": "completed"
+            }
+          ]
+        }
+      ],
+      "target_job": {
+        "check_run_url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/check-runs/95170108251",
+        "completed_at": "2026-08-16T13:15:02Z",
+        "conclusion": "failure",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274328/job/95170108251",
+        "id": 95170108251,
+        "name": "r2-governed-validation",
+        "run_id": 31949274328,
+        "started_at": "2026-08-16T13:14:57Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Reject cross-repository PRs",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Materialize exact trusted BASE and candidate object",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "failure",
+            "name": "Evaluate exact BASE to HEAD diff before executing trusted fixtures",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "skipped",
+            "name": "Prove trusted verifier positive and negative paths after evaluation",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 6,
+            "status": "completed"
+          }
+        ]
+      },
+      "validation": {
+        "evaluate_step": {
+          "conclusion": "failure",
+          "status": "completed"
+        },
+        "exact_failure_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "exact_risk_reason": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+        "gate_payload": {
+          "authority_root": "/home/runner/work/desarrollo-gobernado-r2/desarrollo-gobernado-r2",
+          "base": "494337e0b56fc4a52eef3f78914042805571b81a",
+          "candidate_code_executed": false,
+          "candidate_worktree_checked_out": false,
+          "dc_006": "OPEN",
+          "evaluation_before_self_test": true,
+          "exp_01": "OPEN",
+          "head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+          "integrity": {
+            "policy/risk_floors.json": {
+              "base_blob_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+              "expected_sha256": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+              "pinned": true
+            },
+            "scripts/base_gate.py": {
+              "base_blob_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+              "pinned": false
+            },
+            "scripts/risk_floor.py": {
+              "base_blob_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+              "expected_sha256": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+              "pinned": true
+            },
+            "scripts/run_functional.py": {
+              "base_blob_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+              "expected_sha256": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+              "pinned": true
+            },
+            "tests/fixtures/bad_splitter.py": {
+              "base_blob_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+              "expected_sha256": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+              "pinned": true
+            },
+            "tests/fixtures/good_splitter.py": {
+              "base_blob_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+              "disk_equals_base_blob": true,
+              "disk_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+              "expected_sha256": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827",
+              "pinned": true
+            }
+          },
+          "integrity_model": "PINNED_SHA256_PLUS_EXACT_BASE_GIT_BLOBS",
+          "normal_pr_authorized_class": "B",
+          "reason_code": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+          "risk_checker_exit": 3,
+          "risk_floor": "D",
+          "risk_payload_base": "494337e0b56fc4a52eef3f78914042805571b81a",
+          "risk_payload_head": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+          "risk_reason_code": "FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+          "risk_status": "FAIL",
+          "status": "FAIL"
+        },
+        "log_source": "GH_RUN_VIEW",
+        "risk_floor": "D",
+        "self_test_step": {
+          "conclusion": "skipped",
+          "status": "completed"
+        }
+      },
+      "workflow_run": {
+        "conclusion": "failure",
+        "created_at": "2026-08-16T13:14:55Z",
+        "display_title": "R2-4 BP-B-02: homonymous check collision probe",
+        "event": "pull_request_target",
+        "head_branch": "r2-4/bp-b02-check-name-collision",
+        "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+        "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/actions/runs/31949274328",
+        "id": 31949274328,
+        "name": "R2 Governed Validation",
+        "path": ".github/workflows/r2-ci.yml",
+        "pull_requests": [
+          {
+            "base": {
+              "ref": "main",
+              "repo": {
+                "id": 1335059997,
+                "name": "desarrollo-gobernado-r2",
+                "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+              },
+              "sha": "494337e0b56fc4a52eef3f78914042805571b81a"
+            },
+            "head": {
+              "ref": "r2-4/bp-b02-check-name-collision",
+              "repo": {
+                "id": 1335059997,
+                "name": "desarrollo-gobernado-r2",
+                "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2"
+              },
+              "sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6"
+            },
+            "id": 4290148172,
+            "number": 5,
+            "url": "https://api.github.com/repos/SrHector199/desarrollo-gobernado-r2/pulls/5"
+          }
+        ],
+        "run_attempt": 1,
+        "run_number": 15,
+        "status": "completed",
+        "updated_at": "2026-08-16T13:15:03Z"
+      }
+    }
+  },
+  "platform_currency": {
+    "director_reverified_date_utc": "2026-08-16",
+    "official_sources": [
+      "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/",
+      "https://github.blog/changelog/2026-07-28-github-actions-holds-unproven-workflows-for-approval/"
+    ],
+    "runtime_rule_for_held_run": "DO_NOT_APPROVE; RECORD_AND_STOP"
+  },
+  "pr": {
+    "base_ref": "main",
+    "base_sha": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "created_at": "2026-08-16T13:14:52Z",
+    "draft": false,
+    "head_ref": "r2-4/bp-b02-check-name-collision",
+    "head_repo": "SrHector199/desarrollo-gobernado-r2",
+    "head_sha": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "html_url": "https://github.com/SrHector199/desarrollo-gobernado-r2/pull/5",
+    "merged": false,
+    "number": 5,
+    "publication_rule": "NO_PUSH_NO_SYNCHRONIZE_NO_REOPEN_NO_RERUN_NO_UNRELATED_PUBLICATION",
+    "state": "open"
+  },
+  "preflight": {
+    "base_workflows": [
+      ".github/workflows/r2-ci.yml"
+    ],
+    "baseline_workflow_run_ids": [
+      31884688190,
+      31887704257,
+      31888617104,
+      31890792757,
+      31891550340,
+      31901316525,
+      31901871256,
+      31903405124,
+      31905159111,
+      31907364372,
+      31908128281,
+      31911406085,
+      31912096187,
+      31912976540
+    ],
+    "branch_protection": false,
+    "control_hashes": {
+      ".github/workflows/r2-ci.yml": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "policy/risk_floors.json": "d68240ee3b13bd5f10ccce10dfd2da9af038495d9a7adeb6fe411ab5622b8a1b",
+      "scripts/base_gate.py": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+      "scripts/risk_floor.py": "e3be85d4c8d64ea8f24f74b3033dac5d127635a5aba3398220f36c0cab0bd283",
+      "scripts/run_functional.py": "d08fe9bd6188508ae9fc181a6806ce7835a16ab48ce749b1de283655dce2b32f",
+      "tests/fixtures/bad_splitter.py": "b9989b0e62c55b54528a87f26f835a137f52b2e5d76f6bf0608482351a50d3ce",
+      "tests/fixtures/good_splitter.py": "1c86e6843ad8ab5e07d2fac2575f53bfdbaa695646dde5211c68cda732b45827"
+    },
+    "held_run_policy": "DO_NOT_APPROVE_AND_STOP",
+    "local_branch": "r2-4/ci-bootstrap",
+    "local_head": "a41da96f16567717de0c1299adab626c2b31089e",
+    "main_parent": "178d9a0dc554afe360a3556a5079c9e3dd427b26",
+    "main_tree": "a6bba8a9a84a7cea475173c99c873b4fed711fa7",
+    "open_pr_count": 0,
+    "preserved_branches": {
+      "r2-4/b1-binding-probe": "8050ef9aadebaba594d29770d0677b02c400876d",
+      "r2-4/b2-no-green-inheritance": "0e73f928c48c5811383f0aa627aa7b9972a5b5cd",
+      "r2-4/d-control-plane-negative": "27b0291f907e9f99a80b8d99d1495cab88ebb57f"
+    },
+    "probe_branch_exists_before": false,
+    "probe_path_exists_in_base": false,
+    "remote_main": "494337e0b56fc4a52eef3f78914042805571b81a",
+    "repository": {
+      "archived": false,
+      "authenticated_user": "SrHector199",
+      "default_branch": "main",
+      "disabled": false,
+      "github_account_plan": "API_OMITTED_UNOBSERVED",
+      "note": "Repository visibility is execution-relevant because GitHub's July 2026 held-run protection currently applies to public github.com repositories. Account plan is recorded when API-exposed; Stage A does not configure protected branches.",
+      "owner": "SrHector199",
+      "plan_required_for_stage_a": false,
+      "private": false,
+      "visibility": "public"
+    },
+    "required_check_checks": [],
+    "required_check_contexts": [],
+    "risk_pre_D": {
+      "authorized_class": "D",
+      "findings": [
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Los workflows y jobs requeridos pueden permitir o bloquear aceptación.",
+          "role": "acceptance_authority",
+          "subject": ".github/workflows/r2-b02-collision-success.yml",
+          "subject_type": "path"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad staging.",
+          "role": "capability",
+          "subject": "staging",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad commit.",
+          "role": "capability",
+          "subject": "commit",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad network.",
+          "role": "capability",
+          "subject": "network",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad push.",
+          "role": "capability",
+          "subject": "push",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad pull_request_create.",
+          "role": "capability",
+          "subject": "pull_request_create",
+          "subject_type": "capability"
+        },
+        {
+          "blocks_unknown": false,
+          "explicit": true,
+          "floor": "D",
+          "reason": "Floor explícito de la capacidad publication.",
+          "role": "capability",
+          "subject": "publication",
+          "subject_type": "capability"
+        }
+      ],
+      "mechanical_path_floor": "D",
+      "mode": "PRE",
+      "reason_code": "FLOOR_WITHIN_AUTHORIZED_CLASS",
+      "status": "PASS"
+    },
+    "ruleset_count": 0,
+    "staging": "EMPTY",
+    "state": {
+      "blockers_section_sha256": "18b65dffa9a3904a81fd71d069e4cff78926d38176f4dd48f89b774c2aec9900",
+      "estado_section_sha256": "2e25a9562768a0833d0c6ca52f0140a6281ae62b44e7d4adaa651ed72ecd064f",
+      "metricas_section_sha256": "c54a54deba4787086b9ac99890bf120099d03121cc891af4a259debf8d8e5ee1",
+      "state_blob_oid": "3a2addbc290d5f19890bad8c85ab0e329f3f9916",
+      "state_sha256": "35798f5a0e64b76b38998f6dc9f7607d1c2af39137e85844c179eb3fe2c4378e"
+    },
+    "worktree": "CLEAN"
+  },
+  "schema_version": 1,
+  "script": {
+    "bytes": 80611,
+    "path": "/mnt/c/Users/Hecto/Downloads/r2_4_execute_bp_b02_check_name_collision_v2.py",
+    "sha256": "be3843b1941d51ec3d3a114a2305ad1b925e3fe37319fe5440862c5a002e1921"
+  },
+  "started_at_utc": "2026-08-16T13:14:34Z",
+  "status": "PASS"
+}

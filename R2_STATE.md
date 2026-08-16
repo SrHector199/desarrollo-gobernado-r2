@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar únicamente el diseño exacto de los probes adversariales BP-B-02 (colisión de check homónimo) y BP-B-03 (`skipped`/`neutral`), y conservar los requisitos de corrección BP-B-01/BP-B-04 para un futuro candidato de branch protection. Esta autorización es solo de preparación/preflight: no autoriza ejecutar probes, publicar ramas/PRs ni mutar required checks, branch protection, rulesets o settings. Toda ejecución D posterior requiere un nuevo Human Gate D.
-- Last updated: 2026-08-15T23:41:44Z
+- Authorized next step: Preparar únicamente una decisión read-only sobre si BP-B-03 aporta información material tras BP-B-02 y fijar, sin mutar GitHub, el mecanismo candidato de Stage B (classic branch protection vs ruleset), incluyendo la resolución de STAGE_B_RECENCY_CONTAMINATION. Esta autorización es solo preparación/read-only: no autoriza BP-B-03, ramas/PRs, required checks, branch protection, rulesets, merge ni settings. Toda ejecución o mutación D posterior requiere un nuevo Human Gate D.
+- Last updated: 2026-08-16T13:44:26Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -838,13 +838,45 @@
 - Next authorized work is preparation/design only for BP-B-02/BP-B-03 probes and preservation of BP-B-01/BP-B-04 correction requirements; execution requires a new Human Gate D.
 - 2026-08-15T23:41:44Z: Human Gate D authorized canonicalization of this BLOCKED review only.
 
+## BP-B-02 homonymous check collision observed
+- Design review evidence: evidence/r2-4/bp_b02_b03_design_independent_review_v3_13.json
+- Design review evidence SHA-256: 79bf414afeabccbce99252e9e3459780af961727ffad7b3f803e56ef817ff34e
+- Design review evidence bytes: 53772
+- Reviewed design V3 SHA-256: 8f2d5974a0c670ffef799c3574793d28e17f72259ef20b4a264a9efea93fe145; bytes 40404.
+- Design review: independence_satisfied=true; design_disposition=PASS; blocking_findings=0; review grants no execution authority.
+- BP-B-02 observation evidence: evidence/r2-4/bp_b02_check_name_collision_observation_14.json
+- BP-B-02 observation evidence SHA-256: 825ed8749394cc97e2d4c5379a6b0efb92bd730341c723eb1695afbdeec93ac0
+- BP-B-02 observation evidence bytes: 36045
+- BP-B-02 PR: #5 CLOSED_UNMERGED; BASE 494337e0b56fc4a52eef3f78914042805571b81a; HEAD 915edd738abe94bd0dea3ccf1e59e854f2d64af6; TEST_MERGE_AT_PROBE ad38e790823133bf1d1597ded534ef07244e51cc.
+- BP-B-02 workflow exact bytes: SHA-256 f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3; bytes 423; path `.github/workflows/r2-b02-collision-success.yml`.
+- TRUSTED_CHECK: id 95170108251; name `r2-governed-validation`; app_id 15368; head_sha 915edd738abe94bd0dea3ccf1e59e854f2d64af6; conclusion=failure; exact reason RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS; risk reason FLOOR_EXCEEDS_AUTHORIZED_CLASS; floor D.
+- COLLISION_CHECK: id 95170108343; name `r2-governed-validation`; app_id 15368; head_sha 915edd738abe94bd0dea3ccf1e59e854f2d64af6; conclusion=success; completed_at 2026-08-16T13:15:00Z.
+- OBJECT_RELATION: SAME_OBJECT_PR_HEAD.
+- SAME_NAME_SAME_APP_SAME_PR_HEAD_COLLISION: OBSERVED_TRUE.
+- PRODUCER_EXCLUSIVITY: FALSIFIED for the prospective required-check identity `context=r2-governed-validation` + GitHub Actions app_id=15368; another PR-side workflow produced that same identity on the same PR HEAD.
+- BYPASS: NOT_DEMONSTRATED.
+- REQUIRED_CHECK_SATISFACTION: NOT_TESTED.
+- BP-B-03: NOT_EXECUTED and NOT_AUTHORIZED by BP-B-02; necessity must be reevaluated read-only.
+- STAGE_B_RECENCY_CONTAMINATION: ACTIVE from the successful homonymous collision check completed at 2026-08-16T13:15:00Z; protection configuration remains blocked until seven-day quiescence or an independently reviewed alternative with live readback.
+- REQUIRED_CHECK remains NOT_CONFIGURED.
+- BRANCH_PROTECTION/NO-BYPASS remains NOT_CONFIGURED.
+- RULESET_COUNT remains 0.
+- ENFORCED remains False; AISLADA is not claimed.
+- FALSE_GREENS remains 8; BP-B-02 adds NEW_FALSE_GREEN=0.
+- DC-006 remains OPEN; EXP-01 remains OPEN; IR2-002 remains BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED.
+- Current phase remains R2-4; R2-4 exit gate remains NOT_EXECUTED; R2-5 remains NOT_AUTHORIZED.
+- Probe-branch deletion is an external post-canonicalization action in this Human Gate: the canonical commit does NOT preclaim deletion; external cleanup evidence must verify the exact deletion after these evidence bytes are live on `main`.
+- 2026-08-16T13:44:26Z: Human Gate D authorized this three-path administrative canonicalization and, only after live verification, deletion of remote branch `r2-4/bp-b02-check-name-collision`. No other branch deletion or GitHub-settings mutation is authorized.
+
 ## Blockers
 - Branch-protection candidate V1 independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; static_review=FAIL; candidate_disposition=BLOCKED.
 - Branch-protection candidate V1 SHA-256: 7868cd6aaa726f116dc53e7411571b63eb1a33a6e1b6f89e79de490cf5bc96e9; review evidence: evidence/r2-4/branch_protection_candidate_independent_review_12.json SHA-256 f95dffd3804af024318aa2efe7adbc628ef8b83c25ef8f80911ea6deabf59f86.
 - BP-B-01 BLOCKING: `required_approving_review_count=0` elimina el gate humano compensatorio mientras DC-006 permanece OPEN; el revisor exige count=1 para el siguiente candidato, condicionado a controles de aprobación posteriores al último push.
-- BP-B-02 BLOCKING_UNCERTAINTY: un workflow de rama podría emitir un check homónimo `r2-governed-validation` bajo el mismo GitHub Actions app_id=15368; la review lo trata como bloqueante. BYPASS_NOT_DEMONSTRATED; requiere probe real de colisión antes de configurar enforcement.
-- BP-B-03 BLOCKING: `skipped`/`neutral` pueden ser conclusiones satisfactorias para required checks; no existe probe dedicado R2 para esta semántica.
+- BP-B-02 CONFIRMED_BLOCKING_FINDING: SAME_NAME_SAME_APP_SAME_PR_HEAD_COLLISION=OBSERVED_TRUE; PRODUCER_EXCLUSIVITY=FALSIFIED; BYPASS_NOT_DEMONSTRATED; REQUIRED_CHECK_SATISFACTION_NOT_TESTED.
+- BP-B-03 BLOCKING_NOT_EXECUTED: dedicated skipped/neutral probe remains NOT_EXECUTED; BP-B-02 does not authorize it; necessity must be reevaluated read-only before any new Human Gate D.
 - BP-B-04 BLOCKING: count=1 con `dismiss_stale_reviews=false` y `require_last_push_approval=false` no cierra BP-B-01; el siguiente candidato debe reconsiderar ambos flags junto al count.
+- STAGE_B_RECENCY_CONTAMINATION ACTIVE: homonymous collision check 95170108343 concluded success at 2026-08-16T13:15:00Z; branch protection/required-check configuration remains blocked until seven-day quiescence or an independently reviewed alternative with live readback.
+- BP-B-02 branch cleanup: external post-canonicalization action only; verify PR #5 CLOSED_UNMERGED and exact head 915edd738abe94bd0dea3ccf1e59e854f2d64af6 before deleting only `r2-4/bp-b02-check-name-collision`; deletion result remains external evidence and is not preclaimed by this commit.
 - Branch-protection candidate V1 is NOT execution authority; REQUIRED_CHECK remains NOT_CONFIGURED; BRANCH_PROTECTION/NO-BYPASS remains NOT_CONFIGURED; ENFORCED remains False.
 - FALSE_GREEN_7: CANONICAL_STATE_BLOCKERS_SCOPE_FALSE_GREEN.
 - FALSE_GREEN_7 cause: el validator de canonicalización declaró PASS sin verificar que `R2AA-012=RESOLVED` estuviera aplicado dentro de la sección canónica actual `## Blockers`; la búsqueda global sustituyó una aparición histórica y dejó el blocker actual contradictorio.
@@ -880,7 +912,7 @@
 - Historical review dispositions remain historical and are not relabeled by this repair.
 - Current phase remains R2-4.
 - Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
-- Authorized next step remains preparation/design only for BP-B-02/BP-B-03 probes and preservation of BP-B-01/BP-B-04 correction requirements; execution requires a new Human Gate D.
+- Authorized next step remains read-only preparation only: decide whether BP-B-03 adds material evidence after BP-B-02, fix the candidate Stage B enforcement mechanism, and resolve STAGE_B_RECENCY_CONTAMINATION. No BP-B-03 execution or GitHub settings mutation is authorized; a new Human Gate D is required for any D execution/mutation.
 
 ## Gate de fase
 - R2-0 gate: PASS

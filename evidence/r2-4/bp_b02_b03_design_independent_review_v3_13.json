@@ -1,0 +1,620 @@
+{
+  "schema_version": 3,
+  "artifact_type": "r2-4-bp-b02-b03-independent-review-result",
+  "status": "READ_ONLY_INDEPENDENT_REVIEW_RESULT_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-16T00:41:00Z",
+  "review_performed_at_utc": "2026-08-16",
+  "repository_referenced_not_accessed": "SrHector199/desarrollo-gobernado-r2",
+  "review_protocol": {
+    "fresh_context": true,
+    "authored_current_design": false,
+    "prior_conclusions_used_as_authority": false,
+    "prior_review_v2_artifact_supplied": false,
+    "all_supplied_claims_treated_as_untrusted": true,
+    "primary_authority": "Current official GitHub Docs pages fetched live. Where official documentation is silent, semantics are recorded UNCERTAIN and are not filled from community sources.",
+    "secondary_official_authority_used_and_labelled": "GitHub Changelog (github.blog/changelog) used only where it states platform behaviour not covered by the cited Docs pages, and is labelled as changelog rather than Docs.",
+    "non_official_sources_used_as_authority": false,
+    "actions_performed": [
+      "recomputed SHA-256 and byte counts of the supplied V3 design file",
+      "decoded and recomputed SHA-256/byte counts of both embedded workflow documents",
+      "byte-level verification of line endings, ASCII purity and trailing newline",
+      "structural YAML parse and audit of both embedded workflow documents",
+      "internal consistency audit of the design against its own declared invariants",
+      "live read-only HTTPS GET of the cited GitHub Docs URLs and two GitHub Changelog entries"
+    ],
+    "actions_not_performed": [
+      "no repository access of any kind, public or authenticated",
+      "no branch, commit, push, pull request or workflow interaction",
+      "no GitHub settings, branch protection or ruleset observation or mutation",
+      "no workflow execution or rerun",
+      "no canonicalization of any artifact in any repository",
+      "no live verification of the declared R2 baseline state"
+    ]
+  },
+  "reviewed_design_sha256": "8f2d5974a0c670ffef799c3574793d28e17f72259ef20b4a264a9efea93fe145",
+  "reviewed_design_bytes": 40404,
+  "reviewer": {
+    "identity": "Independent LLM reviewer (Claude, Anthropic), operating with no prior context on this design",
+    "role": "READ_ONLY_INDEPENDENT_DESIGN_REVIEW_FOR_RISK_CLASS_D",
+    "authored_v1_v2_or_v3_design": false,
+    "participated_in_prior_review": false,
+    "limitations_declared": [
+      "cannot verify repository state, policy blob, R2_STATE, protection, rulesets or false-green count",
+      "cannot verify the superseded V2 design or V2 review artifacts because they were not supplied",
+      "cannot verify undocumented GitHub runtime behaviour without live observation, which is out of scope and prohibited here"
+    ]
+  },
+  "independence_satisfied": {
+    "value": true,
+    "basis": [
+      "reviewer did not author the design under review",
+      "reviewer received no prior review conclusions as authority; BF-01 and NB-01..NB-08 closure was re-derived from the design text rather than accepted",
+      "every design claim about GitHub semantics was re-checked against live official documentation rather than accepted",
+      "every hash, byte count and encoding claim was recomputed from the supplied bytes"
+    ],
+    "residual_caveat": "The assertion that the embedded workflow bytes are unchanged from V2 is anchored to V2 digests supplied inside the untrusted review request. The V2 artifacts themselves were not supplied and could not be independently obtained."
+  },
+  "integrity_gate": {
+    "result": "PASS",
+    "v3_design_file": {
+      "declared_sha256": "8f2d5974a0c670ffef799c3574793d28e17f72259ef20b4a264a9efea93fe145",
+      "recomputed_sha256": "8f2d5974a0c670ffef799c3574793d28e17f72259ef20b4a264a9efea93fe145",
+      "sha256_match": true,
+      "declared_bytes": 40404,
+      "recomputed_bytes": 40404,
+      "bytes_match": true,
+      "line_endings_observed": "LF_ONLY_NO_CR_BYTES",
+      "trailing_newline_observed": true,
+      "pure_ascii_observed": false,
+      "non_ascii_detail": "Two U+2014 EM DASH characters occur in stage_a.bp_b02.title and stage_a.bp_b03_runtime_skipped.title. The design makes no ASCII claim about the container file itself, only about the embedded workflow bytes, so this is recorded rather than treated as a contradiction.",
+      "json_parse": "VALID"
+    },
+    "bp_b02_workflow": {
+      "declared_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+      "recomputed_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+      "sha256_match": true,
+      "declared_bytes": 423,
+      "recomputed_bytes": 423,
+      "bytes_match": true,
+      "matches_v2_digest_asserted_in_review_request": true,
+      "line_endings_verified_from_bytes": "LF_ONLY_NO_CR_BYTES",
+      "pure_ascii_verified_from_bytes": true,
+      "trailing_newline_verified_from_bytes": true,
+      "utf8_decode": "VALID",
+      "yaml_parse": "VALID_SINGLE_DOCUMENT"
+    },
+    "bp_b03_workflow": {
+      "declared_sha256": "e65e2a870636eb76c2119a9f56471a0d3fa2963fb92396a74d08d29d45ad09ad",
+      "recomputed_sha256": "e65e2a870636eb76c2119a9f56471a0d3fa2963fb92396a74d08d29d45ad09ad",
+      "sha256_match": true,
+      "declared_bytes": 482,
+      "recomputed_bytes": 482,
+      "bytes_match": true,
+      "matches_v2_digest_asserted_in_review_request": true,
+      "line_endings_verified_from_bytes": "LF_ONLY_NO_CR_BYTES",
+      "pure_ascii_verified_from_bytes": true,
+      "trailing_newline_verified_from_bytes": true,
+      "utf8_decode": "VALID",
+      "yaml_parse": "VALID_SINGLE_DOCUMENT"
+    },
+    "unverifiable_supplied_constants": [
+      "supersedes.design_v2 sha256 68e8b1472231abac520aec70477650390fe31cd3eba4d73f5c79a0783b126cf2 / 27147 bytes (artifact not supplied)",
+      "supersedes.independent_review_v2 sha256 7944ba7602236609d71a1edac2cb73e04e9b924cb44672f600256049bc072bd2 / 34224 bytes (artifact not supplied)",
+      "all live_design_baseline_observed_read_only values including main SHA/tree, policy blob, false-green count and settings state"
+    ],
+    "integrity_contradictions_found": 0,
+    "note": "No INTEGRITY_FAIL condition was reached. Every recomputed digest, byte count and encoding property matches the corresponding declared value."
+  },
+  "static_review": {
+    "workflow_structural_audit": {
+      "bp_b02": {
+        "trigger": "pull_request with base-branch filter main and activity types opened, synchronize, reopened",
+        "permissions": "empty mapping (no GITHUB_TOKEN scopes granted)",
+        "jobs": 1,
+        "job_id": "collision",
+        "job_display_name": "r2-governed-validation",
+        "job_conditional": "none",
+        "runner": "ubuntu-latest",
+        "timeout_minutes": 2,
+        "steps": 1,
+        "checkout_present": false,
+        "external_actions_present": false,
+        "secrets_referenced": false,
+        "network_or_write_side_effects": "none observed; the single step prints one fixed line",
+        "consistency_with_declared_invariants": "CONSISTENT for permissions, no-checkout, no-external-actions, no-secrets and timeout-minutes"
+      },
+      "bp_b03": {
+        "trigger": "pull_request with base-branch filter main and activity types opened, synchronize, reopened",
+        "permissions": "empty mapping",
+        "jobs": 1,
+        "job_id": "skipped_collision",
+        "job_display_name": "r2-governed-validation",
+        "job_conditional": "${{ github.event.pull_request.number < 0 }}",
+        "conditional_assessment": "Deterministically false for any real pull request while still depending on runtime event context rather than a literal constant. The pull_request trigger guarantees the pull_request object exists, so the expression is well-formed at evaluation time.",
+        "runner": "ubuntu-latest",
+        "timeout_minutes": 2,
+        "steps": 1,
+        "checkout_present": false,
+        "external_actions_present": false,
+        "secrets_referenced": false,
+        "consistency_with_declared_invariants": "CONSISTENT"
+      },
+      "note_on_yaml_parsing": "Under YAML 1.1 loaders the on key is read as a boolean. This is a loader artifact only and is not a defect in the workflow documents."
+    },
+    "internal_consistency_audit": {
+      "status_and_authority": "CONSISTENT",
+      "declared_invariants_versus_embedded_bytes": "CONSISTENT",
+      "false_green_arithmetic": "CONSISTENT (8 before, 0 added, 8 after; matches the declared baseline value of 8)",
+      "cross_references_between_execution_order_dispositions_and_stage_b_preconditions": "CONSISTENT",
+      "forbidden_claim_scan": "Every occurrence of ENFORCED, AISLADA, bypass, producer exclusivity, DC-006, EXP-01, IR2-002, R2-4 exit and R2-5 appears only inside prohibitive or negated constructions. No affirmative claim of any forbidden conclusion was found.",
+      "residual_default_deny_present_in": [
+        "object_binding_classifier.default_deny",
+        "stage_a.bp_b02.disposition_rules.any_unenumerated_observed_combination",
+        "stage_a.bp_b03_runtime_skipped.disposition_rules.any_unenumerated_observed_combination",
+        "common_future_execution_invariants.unrecognized_or_unenumerated_state"
+      ]
+    },
+    "mandatory_review_questions": [
+      {
+        "question": "Does V3 remain DESIGN_ONLY_NOT_EXECUTION_AUTHORITY with no implicit branch/PR/workflow/settings authority?",
+        "answer": "YES",
+        "basis": "status is DESIGN_ONLY_NOT_EXECUTION_AUTHORITY; authorization_boundary.not_authorized_now enumerates branch creation, PR creation/reopen/update, workflow execution and rerun, protection mutation, required-check configuration, ruleset changes, merge, branch deletion, file changes, R2_STATE changes, canonicalization and R2-5 entry; future_execution_requires demands a separate Human Gate D per probe; execution_gate_rule states that no value in the artifact self-authorizes execution."
+      },
+      {
+        "question": "Is BF-01 fully closed: both asymmetric PR_HEAD/TEST_MERGE directions covered, OTHER fail-closed, residual default-deny in both disposition maps?",
+        "answer": "YES",
+        "basis": "object_binding_classifier.recognized_pair_relations enumerates all four ordered pairs including both asymmetric directions. classify_check_sha maps anything else to OTHER, and default_deny routes either-side-OTHER, same-unrecognized-object, unavailable TEST_MERGE and any other relation to explicit STOP states. BP-B-02 enumerates all four relations for the success case plus an OTHER-object rule; BP-B-03 enumerates all four relations for both the skipped and the success representation. Both maps terminate in any_unenumerated_observed_combination mapped to UNENUMERATED_STATE_UNCERTAIN_AND_STOP.",
+        "verdict": "BF-01 CLOSED"
+      },
+      {
+        "question": "Is object_binding_classifier logically complete for all relations that may be safely interpreted, without overclaiming undocumented GitHub semantics?",
+        "answer": "COMPLETE_AND_FAIL_CLOSED_BUT_LIKELY_UNDER_INCLUSIVE",
+        "basis": "The classifier is total: every observable pair maps either to one of four recognized relations or to an explicit STOP. It asserts no aggregation, precedence or gating semantics, so it does not overclaim. However it recognizes only two Git objects. Official changelog material states that for pull_request_target the executing reference and commit resolve to the repository default branch, so the trusted gate's run is anchored to a third object. Official Docs do not state which head_sha the resulting check object carries, so this must stay UNCERTAIN, but if the trusted check is bound to the default-branch commit the classifier will return OTHER and the probe will deterministically stop before any recognized relation is reachable. This is safe but probably non-informative. See NB-V3-01."
+      },
+      {
+        "question": "Does BP-B-02 correctly turn an identity-observed result only into BP_B03_PRECONDITION_SATISFIED_SEPARATE_HUMAN_GATE_D_STILL_REQUIRED rather than execution authority?",
+        "answer": "YES",
+        "basis": "All four recognized-relation success dispositions terminate in BP_B03_PRECONDITION_SATISFIED_SEPARATE_HUMAN_GATE_D_STILL_REQUIRED and each is accompanied by BYPASS_NOT_DEMONSTRATED. stage_a.execution_order explicitly forbids executing BP-B-03 under the BP-B-02 authorization, and bp_b03_runtime_skipped.dependency repeats that the BP-B-02 gate never authorizes BP-B-03. No MAY_PROCEED or equivalent permissive wording remains."
+      },
+      {
+        "question": "Do the no-post-open-push/no-synchronize/no-reopen/no-rerun rules make the 30-minute PR-creation deadline logically sound?",
+        "answer": "YES_AS_A_PROCEDURAL_CONSTRUCTION",
+        "basis": "With no post-creation push, no synchronize, no reopen and no manual rerun, the head object and the set of triggering events are fixed at PR creation, so anchoring the deadline to PR creation is coherent. Any such event is defined as invalidating and routes to PROBE_INVALIDATED_UNCERTAIN_AND_STOP, and no disposition may be taken from a non-terminal object. Two caveats: the invariant is procedural rather than mechanical because both workflow files still subscribe to synchronize and reopened (NB-V3-08), and the design does not enumerate the platform state in which a run is held pending approval, which can consume the whole window without producing a terminal object (NB-V3-02)."
+      },
+      {
+        "question": "Are multiplicity and disagreement handled fail-closed for all disposition-relevant runs, jobs and homonymous checks?",
+        "answer": "YES_WITH_ONE_UNDEFINED_EXCEPTION_CLAUSE",
+        "basis": "Both probes require every disposition-relevant run, job and check to be terminal, forbid disposition from queued, requested, waiting, pending or in_progress objects, and map instance disagreement to UNCERTAIN_AND_STOP with an explicit prohibition on choosing a representative by convenience. The exception permitting a proven byte-identical duplicate is undefined for API objects, whose identifiers and timestamps necessarily differ; as literally written it is unsatisfiable and therefore fails closed, but it should be defined or removed. See NB-V3-06."
+      },
+      {
+        "question": "Does BP-B-03 first classify object binding and then interpret skipped/success representation, preserving the object relation in the result?",
+        "answer": "YES",
+        "basis": "disposition_algorithm steps 2 to 6 require direct PR_HEAD and TEST_MERGE identities, separate classification of the trusted and homonymous checks, an explicit STOP for OTHER/unavailable/unenumerated/disagreeing cases, interpretation only for a recognized relation, and mandatory appending of the recognized relation plus GATING_EFFECT_NOT_TESTED. Every one of the eight recognized-relation outcomes names the object it was observed on."
+      },
+      {
+        "question": "Are job-object absence and check-object absence separately dispositioned?",
+        "answer": "YES",
+        "basis": "BP-B-03 distinguishes collision_workflow_missing_at_deadline, skipped_collision_job_object_not_observed_at_deadline mapped to SKIPPED_JOB_OBJECT_NOT_OBSERVED, and homonymous_check_not_emitted_at_deadline mapped to SKIPPED_JOB_CHECK_OBJECT_NOT_OBSERVED. Run absence, job absence and check absence are three distinct outcomes, all fail-closed."
+      },
+      {
+        "question": "Is U-04 sufficient to prevent generalizing runtime-false behavior to literal-false or all conditional skips?",
+        "answer": "YES",
+        "basis": "U-04 keeps the question open; the disposition map contains an explicit FORBIDDEN_GENERALIZATION entry; stage_a_does_not_claim rules out identical representation of runtime-false and literal-false and rules out generalizing to all conditional skips; claims_forbidden_until_later_evidence repeats the prohibition. Note that current official documentation makes no literal-versus-runtime distinction at all, so this restriction is a self-imposed conservatism rather than a documented divergence; that is acceptable and errs safe."
+      },
+      {
+        "question": "Is the Stage-B recency-contamination barrier logically sound and proportionate?",
+        "answer": "YES_WITH_ONE_DEFINITIONAL_GAP",
+        "basis": "The seven-day recency rule is confirmed in current official documentation, and the barrier neither ignores it nor converts it into a mandatory seven-day wait: it offers quiescence or an independently reviewed alternative backed by live readback, and blocks protection configuration until one is satisfied. Documentation on selecting an app as the expected source refers to an app that recently set the check, which independently supports treating recent probe history as a configuration hazard. The gap is definitional: the required evidence speaks of the last successful homonymous probe check, while documentation treats skipped and neutral as successful statuses, so a BP-B-03 check concluding skipped could escape the criterion. See NB-V3-05."
+      },
+      {
+        "question": "Does V3 correctly avoid assuming that app-source pinning distinguishes trusted and collision GitHub Actions producers?",
+        "answer": "YES",
+        "basis": "app_source_identity_rule forbids assuming app_id distinguishes the producers, requires recording exact app identity live, and requires Stage B to treat shared source-app identity as unresolved producer-exclusivity risk. The previously observed app id is explicitly labelled previous-observation-only. This is correct: documentation describes app pinning as excluding other sources, and both producers here are GitHub Actions workflows in the same repository, so pinning cannot be assumed to separate them."
+      },
+      {
+        "question": "Are the hard cleanup conditions sufficient before any later protection configuration?",
+        "answer": "NECESSARY_AND_SUBSTANTIALLY_SUFFICIENT_WITH_ADDITIONS_RECOMMENDED",
+        "basis": "Closure without merge, branch deletion after evidence preservation, preserved evidence, no reopenable or executable impersonation branch, resolved recency contamination, then re-observation and a separate Human Gate D together cover the enumerated risks, and the ordering is correct because deleting a branch before preserving evidence could degrade the recoverable run and ref association. Recommended additions: prove that no probe workflow path exists on any remaining ref, and confirm by live readback that no homonymous check remains selectable as a required check, treating skipped and neutral as successful for that purpose."
+      },
+      {
+        "question": "Do all current official-source claims GH-01..GH-10 match current GitHub Docs and are their resolved URLs correct?",
+        "answer": "YES_FOR_ALL_TEN",
+        "basis": "Each of the ten claims was located on the cited page in its current live form and each cited URL resolved with HTTP 200 and no redirect to a page whose heading matches the cited source title. A deliberately invalid control URL on the same host returned 404, confirming that the 200 responses are meaningful. Full detail is in github_semantics_verified. One methodological caveat is recorded separately: GH-06 is drawn from the rulesets troubleshooting page while GH-01 and GH-10 are drawn from the classic protected-branches page, and the design does not state which enforcement mechanism Stage B will use. See NB-V3-04."
+      },
+      {
+        "question": "Does any wording accidentally claim bypass, required-check satisfaction, producer exclusivity, ENFORCED, AISLADA, closure of DC-006/EXP-01, discharge of IR2-002, R2-4 exit or R2-5 authority?",
+        "answer": "NO_AFFIRMATIVE_CLAIM_FOUND",
+        "basis": "A full-text scan found every such term only inside prohibitions, negations or explicit not-claimed lists. Two low-severity wording observations remain: the BP-B-03 hypothesis uses the phrase success-satisfying, and one BP-B-02 disposition uses POTENTIAL_TEST_MERGE_PRECEDENCE_PATH. The second is well grounded, because documentation states that where the test-merge commit carries a status it is that commit which must pass, which makes the trusted-on-head plus collision-on-test-merge direction the materially riskier one; it is also explicitly paired with BYPASS_NOT_DEMONSTRATED. The first should still be reworded. See NB-V3-10."
+      },
+      {
+        "question": "If any state combination remains unenumerated, does it always route to UNENUMERATED_STATE_UNCERTAIN_AND_STOP rather than requiring operator improvisation?",
+        "answer": "YES",
+        "basis": "Both probe disposition maps, the classifier and the common invariants each terminate in an explicit residual clause. Every path the reviewer constructed, including the anticipated default-branch binding of the trusted gate and a run held pending approval, terminates in a named STOP state rather than in operator discretion."
+      }
+    ]
+  },
+  "design_disposition": "PASS",
+  "design_disposition_scope": "PASS applies only to V3 as a read-only design artifact. It confers no execution authority, does not validate the declared live baseline, and is conditioned on the items in required_changes_before_human_gate_d being resolved before any Human Gate D is opened.",
+  "bp_b02_disposition": "DESIGN_LOGICALLY_SOUND_AND_FAIL_CLOSED; NOT_EXECUTION_AUTHORIZED; SEPARATE_HUMAN_GATE_D_REQUIRED; PRE_GATE_CLARIFICATIONS_NB-V3-01_NB-V3-02_NB-V3-03_NB-V3-06_REQUIRED",
+  "bp_b03_disposition": "DESIGN_LOGICALLY_SOUND_AND_FAIL_CLOSED; NOT_EXECUTION_AUTHORIZED; DEPENDS_ON_BP_B02_PRECONDITION_PLUS_ITS_OWN_SEPARATE_HUMAN_GATE_D; NECESSITY_SHOULD_BE_RE_EVALUATED_BECAUSE_THE_SKIPPED_JOB_REPRESENTATION_IS_ALREADY_DOCUMENTED_AND_THE_PROBE_ADDS_FURTHER_RECENCY_CONTAMINATION",
+  "stage_b_disposition": "REMAINS_DEFERRED_AND_NOT_EXECUTION_READY; ALL_DECLARED_PRECONDITIONS_STILL_OPEN; PROTECTION_CONFIGURATION_BLOCKED_WHILE_STAGE_B_RECENCY_CONTAMINATION_IS_OPEN; ENFORCEMENT_MECHANISM_CLASSIC_PROTECTION_VERSUS_RULESET_MUST_BE_FIXED_AND_ITS_SEMANTICS_RE_DERIVED_BEFORE_ANY_STAGE_B_DESIGN",
+  "blocking_findings": [],
+  "blocking_findings_note": "No blocking design defect and no integrity contradiction was found. BF-01 from the prior review is verified closed by re-derivation from the V3 text rather than by accepting the design's own assertion. Every residual weakness identified below resolves to an explicit STOP state, so none of them can produce an optimistic interpretation or a false green.",
+  "nonblocking_findings": [
+    {
+      "id": "NB-V3-01",
+      "severity": "HIGH_NONBLOCKING",
+      "title": "The trusted pull_request_target gate's object binding is not represented in the classifier",
+      "detail": "The classifier recognizes only PR_HEAD and TEST_MERGE. Official GitHub changelog material effective 8 December 2025 states that for pull_request_target the executing reference and commit resolve to the repository default branch, and that the workflow source is always taken from the default branch. Official Docs do not state which head_sha the resulting check object carries, so the binding must remain UNCERTAIN. If the trusted check is bound to the default-branch commit, it classifies as OTHER, default_deny fires, and BP-B-02 terminates in UNRECOGNIZED_OBJECT_BINDING_UNCERTAIN_AND_STOP before any of the four recognized relations can be reached.",
+      "risk_direction": "FAIL_CLOSED. There is no misclassification path, because the default-branch commit cannot equal PR_HEAD or TEST_MERGE while main is required not to move. The cost is a probably wasted Human Gate D rather than an unsafe conclusion.",
+      "recommendation": "Add a third recognized object such as DEFAULT_BRANCH_HEAD, defined as the live default-branch commit observed immediately before publication, with an explicit conservative disposition that records the trusted-versus-collision non-comparability, retains GATING_EFFECT_NOT_TESTED, and is distinguished from a genuine anomaly. Add a matching uncertainty entry, proposed as U-06."
+    },
+    {
+      "id": "NB-V3-02",
+      "severity": "HIGH_NONBLOCKING",
+      "title": "The held-pending-approval workflow-run state is not enumerated",
+      "detail": "An official GitHub changelog entry dated 28 July 2026, three weeks before this design, describes automatic holding of workflow runs that are identified as potentially malicious, requiring approval by a collaborator with write access through an authenticated web session before the run starts, applied automatically to public repositories on github.com. A probe that adds a new workflow whose job name duplicates the trusted gate's check name is plausibly within scope of such heuristics. The design enumerates neither the held state, nor whether approving a held run is an authorized Gate D action, nor the effect of approval on a deadline anchored to pull request creation.",
+      "risk_direction": "FAIL_CLOSED. A held run is non-terminal, so at the deadline the design routes to a timeout STOP.",
+      "recommendation": "Enumerate a held-run state explicitly; state whether approving a held run is forbidden, which preserves the current anchoring, or authorized as a named Gate D action with its own timestamped evidence and an explicitly re-anchored deadline; and require the held-run status to be captured in the evidence schema either way."
+    },
+    {
+      "id": "NB-V3-03",
+      "severity": "MEDIUM",
+      "title": "Repository visibility and plan are never recorded",
+      "detail": "Neither the design nor its baseline records whether the repository is public or private or which plan applies. This determines whether the automatic held-run protection applies at all, and current documentation states that protected branches are available in public repositories on the free tier but require a paid tier for private repositories, so Stage B's feasibility also depends on it.",
+      "risk_direction": "PLANNING_RISK_ONLY",
+      "recommendation": "Add repository visibility and plan to the Human Gate D live preflight fields and to the Stage B preconditions."
+    },
+    {
+      "id": "NB-V3-04",
+      "severity": "MEDIUM",
+      "title": "Official sources are mixed across two different enforcement mechanisms",
+      "detail": "GH-06, which supplies the check-name format and the statement that required status checks disregard workflow, matrix and event trigger type, comes from the rulesets troubleshooting page, whereas GH-01 and GH-10 come from the classic protected-branches page. The baseline records both branch_protection false and ruleset_count zero, and Stage B refers to a future branch-protection body without fixing the mechanism. Semantics documented for one mechanism should not be assumed to hold for the other.",
+      "risk_direction": "PLANNING_RISK_ONLY",
+      "recommendation": "Fix the intended Stage B mechanism explicitly and re-derive the name-format, app-pinning and recency semantics from the documentation for that mechanism before any Stage B design is written."
+    },
+    {
+      "id": "NB-V3-05",
+      "severity": "MEDIUM",
+      "title": "The recency-contamination criterion is narrower than the documented notion of success",
+      "detail": "The required evidence and the quiescence path both refer to the last successful homonymous probe check. Current documentation treats success, skipped and neutral as successful check statuses. A BP-B-03 check concluding skipped could therefore fall outside the stated criterion while still being, on the documented reading, a successful check inside the seven-day window.",
+      "risk_direction": "COULD_UNDER_COMPUTE_THE_BARRIER",
+      "recommendation": "Redefine the criterion to cover any terminal homonymous check whose conclusion is success, skipped or neutral, and record completed_at for each."
+    },
+    {
+      "id": "NB-V3-06",
+      "severity": "MEDIUM",
+      "title": "The byte-identical duplicate exception is undefined for API objects",
+      "detail": "BP-B-02 permits an exception to the multiplicity STOP where an extra run or check is proven to be a byte-identical duplicate with identical terminal identity and conclusion. Distinct API objects necessarily differ in identifier and timestamps, so byte identity is not a satisfiable predicate and the clause is undefined as written.",
+      "risk_direction": "FAIL_CLOSED. Read literally the exception can never be satisfied, so the outcome is a STOP.",
+      "recommendation": "Either delete the exception or replace it with an explicit equality field set, for example exact name, app_id, app_slug, head_sha, status and conclusion, with identifiers and timestamps explicitly excluded from the comparison."
+    },
+    {
+      "id": "NB-V3-07",
+      "severity": "LOW_MEDIUM",
+      "title": "Asymmetric enumeration between the collision side and the trusted side",
+      "detail": "BP-B-02 enumerates collision-side non-terminality, exact-name mismatch and app-identity mismatch, but has no matching trusted-side entries for a non-terminal trusted check or for trusted-side name or app drift. These paths are covered by the terminality requirement and the residual clause, so they are fail-closed, but the asymmetry weakens auditability.",
+      "risk_direction": "FAIL_CLOSED",
+      "recommendation": "Add explicit mirrored trusted-side entries so that both producers are dispositioned symmetrically."
+    },
+    {
+      "id": "NB-V3-08",
+      "severity": "LOW_MEDIUM",
+      "title": "The workflow trigger surface is wider than the declared invariants",
+      "detail": "Both workflow files subscribe to the synchronize and reopened activity types while the design forbids both events during the observation window. The prohibition is therefore procedural and depends on operator discipline, even though a violation is detected and invalidates the probe.",
+      "risk_direction": "FAIL_CLOSED_BUT_AVOIDABLE",
+      "recommendation": "Consider restricting the probe workflows to the opened activity type so that the invariant is mechanical. Note that this changes the workflow bytes and therefore the frozen digests, so it would require a new design version and a fresh independent review."
+    },
+    {
+      "id": "NB-V3-09",
+      "severity": "LOW",
+      "title": "The documented failure mode of duplicate job names is blocking, not bypass",
+      "detail": "The protected-branches page advises unique job names across workflows because reusing a name can make status-check results ambiguous and prevent pull requests from merging. The documented consequence therefore points toward blocking rather than toward a bypass. The design does not overclaim, since it keeps aggregation UNCERTAIN under U-01, but its Stage B framing leans on the bypass hypothesis.",
+      "risk_direction": "EXPECTATION_SETTING",
+      "recommendation": "State explicitly that an outcome in which ambiguity blocks a merge is an expected and equally informative result, so that a negative finding is planned for rather than treated as a surprise."
+    },
+    {
+      "id": "NB-V3-10",
+      "severity": "LOW",
+      "title": "Claim-flavoured wording inside a hypothesis",
+      "detail": "The BP-B-03 hypothesis describes the outcome as a skipped or success-satisfying job or check. The word satisfying belongs to the family of claims the artifact forbids elsewhere.",
+      "risk_direction": "WORDING_ONLY",
+      "recommendation": "Reword to skipped or success-represented so that no sentence in the artifact can be quoted as claiming satisfaction of a required check."
+    },
+    {
+      "id": "NB-V3-11",
+      "severity": "LOW",
+      "title": "Stale version label inside the V3 artifact",
+      "detail": "stage_a.bp_b03_runtime_skipped.neutral_variant.status is DEFERRED_NOT_IN_STAGE_A_V2 inside a V3 artifact.",
+      "risk_direction": "DOCUMENTATION_HYGIENE",
+      "recommendation": "Relabel to the current version to avoid ambiguity for future readers and tooling."
+    },
+    {
+      "id": "NB-V3-12",
+      "severity": "LOW",
+      "title": "The V3 container file is not pure ASCII",
+      "detail": "Two U+2014 characters appear in probe titles. No declared property is violated, because ASCII purity is asserted only for the embedded workflow bytes, but any future tooling that assumes an ASCII-only artifact would fail.",
+      "risk_direction": "TOOLING_HYGIENE",
+      "recommendation": "Either state explicitly that the container permits non-ASCII characters or normalize the two titles in a future version."
+    },
+    {
+      "id": "NB-V3-13",
+      "severity": "INFORMATIONAL",
+      "title": "Terminology difference between the design and the documentation for GH-02",
+      "detail": "The design speaks of successful conclusions while the cited page speaks of successful statuses. The design's usage is the more precise one for the checks API, and the protected-branches page uses status wording for the same three values. No correction is required; this is recorded so that the difference is not later mistaken for a mismatch.",
+      "risk_direction": "NONE",
+      "recommendation": "No change required."
+    }
+  ],
+  "github_semantics_verified": [
+    {
+      "id": "GH-01",
+      "design_claim_summary": "GitHub advises unique job names across workflows when specific required status checks are used, because duplicates can make status-check results ambiguous and block merging.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "About protected branches",
+      "verification_note": "The advisory and the stated consequence of ambiguity blocking merges are both present in the current live page."
+    },
+    {
+      "id": "GH-02",
+      "design_claim_summary": "Successful required-check conclusions include success, skipped and neutral.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting required status checks",
+      "verification_note": "The three values are listed on the cited page and the same three appear on the protected-branches page. See NB-V3-13 on status versus conclusion wording."
+    },
+    {
+      "id": "GH-03",
+      "design_claim_summary": "A job skipped by a job-level conditional reports Success and does not prevent a pull request from merging even where it is a required check.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-jobs-with-conditions",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Using conditions to control job execution",
+      "verification_note": "Both halves of the claim appear on the cited page and are repeated on the status-checks reference page. The documentation draws no distinction between literal and runtime-evaluated conditions, which is why U-04 remains a self-imposed conservatism."
+    },
+    {
+      "id": "GH-04",
+      "design_claim_summary": "Required checks must succeed on the latest relevant commit SHA and checks from earlier commits do not satisfy the requirement.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting required status checks",
+      "verification_note": "Present in the current live page under the latest-commit-SHA section."
+    },
+    {
+      "id": "GH-05",
+      "design_claim_summary": "Where the test-merge commit carries a status it is the test-merge commit that must pass; otherwise the head commit's status governs.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting required status checks",
+      "verification_note": "Present as a two-row table describing which commit must pass in each case, and the page also notes that conflicting results are surfaced in the pull request status box. This is the basis on which the reviewer accepts the design's asymmetric labelling of the two different-object directions as well founded rather than as an overclaim."
+    },
+    {
+      "id": "GH-06",
+      "design_claim_summary": "For a normal workflow the required status-check name format is the job name, and required status checks disregard workflow, matrix and event trigger type.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/troubleshooting-rules",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting rules",
+      "verification_note": "Both halves are present, alongside distinct formats for reusable workflows and for other checks. Mechanism caveat recorded as NB-V3-04, since this page documents rulesets."
+    },
+    {
+      "id": "GH-07",
+      "design_claim_summary": "GitHub Actions generates checks rather than commit statuses.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/reference/status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Status checks",
+      "verification_note": "Present as an explicit note. The same page tabulates check statuses and conclusions, including that skipped and neutral are treated as success for dependent checks in GitHub Actions, and records a 400-day retention period after which checks data is archived."
+    },
+    {
+      "id": "GH-08",
+      "design_claim_summary": "Where a check and a commit status share the same required name, both are required.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting required status checks",
+      "verification_note": "Present in the current live page. It concerns check versus commit status and does not resolve check-versus-check aggregation, exactly as the design states."
+    },
+    {
+      "id": "GH-09",
+      "design_claim_summary": "To be required, a status check must have completed successfully in the repository within the past seven days.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "Troubleshooting required status checks",
+      "verification_note": "Present in the current live page and consistent across the enterprise variants inspected."
+    },
+    {
+      "id": "GH-10",
+      "design_claim_summary": "A branch protection rule can require a status check from a specific GitHub App, and a status from another source cannot satisfy it.",
+      "verdict": "VERIFIED",
+      "cited_url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "url_resolution": "HTTP_200_NO_REDIRECT",
+      "page_heading_observed": "About protected branches",
+      "verification_note": "The page describes selecting an app as the expected source when adding a required status check and states that a status set by any other person or integration will not permit merging. It also describes the selectable app as one that recently set the check, which independently corroborates the Stage B recency concern. It does not state that app pinning can separate two GitHub Actions workflows within one repository, so the design's refusal to assume that is correct."
+    },
+    {
+      "id": "AUX-01",
+      "authority": "OFFICIAL_GITHUB_CHANGELOG_NOT_DOCS",
+      "claim_summary": "For pull_request_target the workflow source and checkout commit are always taken from the repository default branch, the executing reference resolves to the default branch and the executing commit points at the latest commit on that branch. The change was announced on 7 November 2025 with effect from 8 December 2025.",
+      "verdict": "VERIFIED_ON_OFFICIAL_CHANGELOG",
+      "url": "https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/",
+      "relevance": "Basis for NB-V3-01 and for proposed U-06. It also confirms that the trusted gate's definition cannot be altered by the probe branch, which supports the design's model of an independent trusted gate. The same entry notes that environment rules for pull_request are evaluated against the pull request merge ref, which supports the design's definition of TEST_MERGE."
+    },
+    {
+      "id": "AUX-02",
+      "authority": "OFFICIAL_GITHUB_CHANGELOG_NOT_DOCS",
+      "claim_summary": "Since 28 July 2026 GitHub Actions automatically holds workflow runs identified as potentially malicious until a collaborator with write access approves them through an authenticated web session, applied automatically and currently limited to public repositories on github.com.",
+      "verdict": "VERIFIED_ON_OFFICIAL_CHANGELOG",
+      "url": "https://github.blog/changelog/2026-07-28-github-actions-holds-potentially-malicious-workflows-for-approval/",
+      "relevance": "Basis for NB-V3-02 and NB-V3-03. Post-dates nothing in the design's own citations and is not reflected anywhere in the V3 state machine."
+    }
+  ],
+  "github_semantics_uncertain": [
+    {
+      "id": "U-01",
+      "design_status": "UNCERTAIN",
+      "reviewer_assessment": "CORRECTLY_UNCERTAIN",
+      "note": "No official documentation was found that resolves how protected-branch evaluation treats two same-named GitHub Actions check runs on the same Git object. The only adjacent official statement is the advisory that duplicate job names can produce ambiguous results and block merging, which does not define an aggregation rule. Community discussion exists but was not used as authority."
+    },
+    {
+      "id": "U-02",
+      "design_status": "UNCERTAIN_UNTIL_LIVE_OBSERVATION",
+      "reviewer_assessment": "CORRECTLY_UNCERTAIN",
+      "note": "Official documentation does not state which head_sha a pull_request-triggered check object carries in a given repository. Recording rather than inferring is the correct instruction."
+    },
+    {
+      "id": "U-03",
+      "design_status": "UNCERTAIN_UNTIL_LIVE_OBSERVATION",
+      "reviewer_assessment": "CORRECTLY_UNCERTAIN",
+      "note": "Documentation states the reported status of a conditionally skipped job but does not specify the resulting job and check object representation in the APIs. Requiring existence, identity and conclusion to be recorded without inferring gating effect is appropriate."
+    },
+    {
+      "id": "U-04",
+      "design_status": "UNCERTAIN",
+      "reviewer_assessment": "CORRECTLY_UNCERTAIN_AND_MORE_CONSERVATIVE_THAN_THE_DOCUMENTATION",
+      "note": "Documentation makes no literal-versus-runtime distinction. Refusing to generalize is safe and is not contradicted by any official source."
+    },
+    {
+      "id": "U-05",
+      "design_status": "UNCERTAIN_STAGE_B_RECENCY_CONTAMINATION",
+      "reviewer_assessment": "CORRECTLY_UNCERTAIN",
+      "note": "The seven-day rule and the description of selecting a recently observed app as the expected source are documented, but the interaction between recent probe history, branch deletion and the required-check selection list is not. Blocking configuration until resolved is proportionate."
+    },
+    {
+      "id": "U-06",
+      "design_status": "NOT_PRESENT_IN_V3",
+      "reviewer_assessment": "SHOULD_BE_ADDED",
+      "question": "Which Git object does the check produced by the trusted pull_request_target gate carry as head_sha in this repository, given that the executing reference and commit resolve to the default branch?",
+      "note": "Official Docs are silent. Changelog material makes a default-branch anchoring likely but does not speak to the check object itself, so this must be observed live and recorded, not inferred. See NB-V3-01."
+    },
+    {
+      "id": "U-07",
+      "design_status": "NOT_PRESENT_IN_V3",
+      "reviewer_assessment": "SHOULD_BE_ADDED",
+      "question": "Do homonymous checks whose conclusion is skipped or neutral appear in the required-check selection list and count toward the seven-day recency window on the same footing as a check concluding success?",
+      "note": "Documentation treats all three as successful statuses but does not describe selection-list behaviour. Directly affects how BP-B-03 contributes to recency contamination. See NB-V3-05."
+    },
+    {
+      "id": "U-08",
+      "design_status": "NOT_PRESENT_IN_V3",
+      "reviewer_assessment": "SHOULD_BE_ADDED",
+      "question": "When a workflow run is held pending approval, is any check object created before approval, and with what status, name and app identity?",
+      "note": "Not addressed by the changelog entry and not covered by the cited Docs pages. Determines whether a held probe is observable as a pending homonymous check within the observation window. See NB-V3-02."
+    }
+  ],
+  "false_green_increment": 0,
+  "false_green_rationale": "No probe was executed, no repository or settings state was observed or changed, and no green result was claimed on the basis of unverified evidence. This review reaches PASS only on the read-only design artifact, on the basis of digests recomputed from the supplied bytes and documentation claims re-verified against live official pages, and it explicitly declines to confirm the declared live baseline. The declared count of 8 before and after V3 is arithmetically consistent with the design's own record, but the reviewer treats that count itself as an unverified supplied value.",
+  "required_changes_before_human_gate_d": [
+    {
+      "ref": "NB-V3-01",
+      "requirement": "Extend the object model with an explicit default-branch object class and a conservative disposition for a trusted check bound to it, plus uncertainty entry U-06, so that the anticipated pull_request_target binding is recorded as a known outcome rather than consuming a Human Gate D on an unrecognized-object stop.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    },
+    {
+      "ref": "NB-V3-02",
+      "requirement": "Enumerate the held-pending-approval run state, state explicitly whether approving a held run is forbidden or is a named and separately evidenced Gate D action, and define the deadline consequence in each case.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    },
+    {
+      "ref": "NB-V3-03",
+      "requirement": "Record repository visibility and plan in the Gate D live preflight, since they determine both the applicability of automatic run holding and the availability of the protection mechanisms Stage B assumes.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    },
+    {
+      "ref": "NB-V3-06",
+      "requirement": "Define the exact equality field set for the duplicate-instance exception or remove the exception entirely, so that no operator has to interpret an unsatisfiable predicate under time pressure.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    },
+    {
+      "ref": "NB-V3-05",
+      "requirement": "Broaden the recency-contamination criterion and its evidence fields to cover any terminal homonymous check concluding success, skipped or neutral.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": false,
+      "required_before_stage_b": true
+    },
+    {
+      "ref": "NB-V3-04",
+      "requirement": "Fix the intended Stage B enforcement mechanism and re-derive its documented semantics from the documentation for that mechanism.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": false,
+      "required_before_stage_b": true
+    },
+    {
+      "ref": "NB-V3-07_NB-V3-10_NB-V3-11_NB-V3-12",
+      "requirement": "Apply the symmetry and wording corrections in a future revision. None of them changes the frozen workflow bytes.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": false
+    },
+    {
+      "ref": "CURRENCY",
+      "requirement": "Re-verify GH-01 through GH-10 and the two changelog items against live official sources immediately before the Human Gate D is opened, because platform behaviour in this area changed twice within the nine months preceding this review.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    },
+    {
+      "ref": "BASELINE",
+      "requirement": "Re-observe the full live baseline as the design's own execution_gate_rule already demands. Nothing in this review substitutes for that re-observation, and no baseline value in the design was verified here.",
+      "blocking_for_design_pass": false,
+      "required_before_execution": true
+    }
+  ],
+  "authority_confirmation": {
+    "this_review_is": "A read-only independent design review of the supplied V3 artifact only.",
+    "this_review_grants": "NOTHING",
+    "explicitly_not_granted": [
+      "repository mutation of any kind",
+      "branch creation, push or deletion",
+      "pull request creation, update, reopening, closure or merge",
+      "workflow execution, rerun or approval of a held run",
+      "GitHub settings, branch protection or ruleset observation or mutation",
+      "required-check configuration",
+      "canonicalization of this review or of the design in any repository",
+      "R2_STATE modification",
+      "R2-4 exit or R2-5 entry"
+    ],
+    "execution_precondition_restated": "Each probe requires its own separate new Human Gate D, preceded by a fresh live baseline re-observation. A PASS on this design is not an authorization and BP-B-02's result never authorizes BP-B-03.",
+    "reviewer_side_effects": "None on the repository. The only outbound actions were read-only HTTPS GET requests to docs.github.com and github.blog, and local hashing and parsing of the two supplied files."
+  },
+  "claims_still_forbidden": [
+    "BP-B-02 bypass demonstrated",
+    "success collision satisfies or supersedes a required check",
+    "skipped collision satisfies a required check",
+    "same-name check-versus-check aggregation semantics resolved",
+    "producer exclusivity established",
+    "runtime-false results generalize to every conditional skip or to literal-false conditions",
+    "branch protection configured",
+    "required check configured",
+    "ENFORCED",
+    "AISLADA",
+    "DC-006 closed",
+    "EXP-01 closed",
+    "IR2-002 discharged",
+    "R2-4 exit gate executed",
+    "R2-5 authorized",
+    "the declared live baseline has been independently verified",
+    "this review authorizes any execution",
+    "BF-01 closure has been demonstrated by observation rather than by design analysis",
+    "the probes are expected to reach a recognized object relation, given the unresolved trusted-gate binding question"
+  ],
+  "strongest_claim_after_stage_a_if_expected": {
+    "bp_b02_if_everything_matches_expectation": "In this repository, at the recorded time, with branch protection absent, no required check configured and no rulesets present, a same-repository pull_request workflow emitted a GitHub Actions check whose exact name equalled the trusted gate's check name and whose app identity was the recorded one, bound to the recorded Git object, with the recorded terminal conclusion, while the trusted pull_request_target gate independently reached a failure conclusion with the recorded floor-D rejection reason on the same pull request. Nothing about protected-branch acceptance, rejection, aggregation, precedence, producer exclusivity or bypass follows from this observation.",
+    "bp_b03_if_everything_matches_expectation": "In this repository, at the recorded time, under the same absent-protection conditions, a homonymous job whose runtime event-dependent condition evaluated false was represented by the recorded job and check objects with the recorded conclusion on the recorded Git object, while the trusted gate independently failed the floor-D change. The gating effect was not tested, and the result characterizes only this runtime event-dependent condition, not literal-false conditions and not conditional skips in general.",
+    "explicitly_excluded_from_any_stage_a_claim": [
+      "any statement about what a protected branch would do with the observed pattern",
+      "any statement that one check satisfied, superseded or overrode another",
+      "any statement about check-versus-check aggregation or ordering",
+      "any statement that source-app pinning would separate the two producers",
+      "any statement of ENFORCED, AISLADA, bypass, or closure or discharge of any open finding"
+    ],
+    "if_the_trusted_check_binds_to_the_default_branch_commit": "The only claim available is that the trusted and collision checks were bound to different Git objects that the current classifier does not treat as comparable, and that the probe therefore stopped without an interpretable relation. That is a legitimate and reportable outcome, not a failure of the operator."
+  }
+}
