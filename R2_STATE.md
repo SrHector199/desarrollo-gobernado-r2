@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar únicamente una decisión read-only sobre si BP-B-03 aporta información material tras BP-B-02 y fijar, sin mutar GitHub, el mecanismo candidato de Stage B (classic branch protection vs ruleset), incluyendo la resolución de STAGE_B_RECENCY_CONTAMINATION. Esta autorización es solo preparación/read-only: no autoriza BP-B-03, ramas/PRs, required checks, branch protection, rulesets, merge ni settings. Toda ejecución o mutación D posterior requiere un nuevo Human Gate D.
-- Last updated: 2026-08-16T13:44:26Z
+- Authorized next step: D1 queda ELIGIBLE_FOR_CONSIDERATION únicamente mediante un Human Gate D posterior, después de que el PASS independiente V4 y sus artefactos exactos sean canónicos en main y se complete un pre-step D1 fresco. D1, D2 y D3 siguen NOT_AUTHORIZED; no se autorizan probes, ejecución de workflows, WEP/Actions Policies/rulesets/branch protection/required checks, merge, cleanup, cambio de fase ni entrada en R2-5.
+- Last updated: 2026-08-17T07:25:47Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -55,6 +55,7 @@
 - Demo Feature Brief: BRIEF_ACCEPTED_FIRST_DRAFT / FUNCTIONAL_DEMO_NOT_EXECUTED
 
 ## Última evidencia
+- 2026-08-17T07:25:47Z: paquete B1 WEP V4 incorporado en rama administrativa para canonicalización mediante PR; todavía NOT_CANONICAL_UNTIL_MERGED_TO_MAIN. Independent review V4: PROBE_DESIGN_V4_PASS_NO_BLOCKING_FINDINGS_D1_HUMAN_GATE_D_ELIGIBLE_FOR_CONSIDERATION_ONLY; WEP treatment spec V2 PASS; blocking_findings=0; sequencing_findings=0. Artefactos exactos: `evidence/r2-4/r2_4_b1_wep_probe_design_v4.json` SHA-256 8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4 bytes 30073; `evidence/r2-4/r2_4_b1_wep_exact_treatment_spec_v2.json` SHA-256 0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc bytes 6975; `evidence/r2-4/r2_4_b1_wep_probe_independent_review_request_v4.json` SHA-256 af7a49803bd75713ada7870fee0b3a1e4fd01007b9c8ccbed317f8ee10a82cc7 bytes 10061; `evidence/r2-4/r2_4_b1_wep_probe_independent_review_result_v4.json` SHA-256 e7798b4c3595732117440f54a1bdf51e309354eac6c27693c4ef80fc4545e04a bytes 81061. Este PASS no autoriza D1/D2/D3, no cierra blockers, no resuelve STAGE_B_RECENCY_CONTAMINATION, preserva FALSE_GREENS=8, ENFORCED=False, R2-4 abierto y R2-5 NOT_AUTHORIZED.
 - Preflight R2-0: Ubuntu sobre WSL 2; usuario hector; HOME /home/hector.
 - Herramientas observadas: Git 2.53.0 y Python 3.14.4.
 - Repositorio nuevo creado en /home/hector/desarrollo-gobernado-r2, rama main y sin commits.
@@ -912,7 +913,7 @@
 - Historical review dispositions remain historical and are not relabeled by this repair.
 - Current phase remains R2-4.
 - Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
-- Authorized next step remains read-only preparation only: decide whether BP-B-03 adds material evidence after BP-B-02, fix the candidate Stage B enforcement mechanism, and resolve STAGE_B_RECENCY_CONTAMINATION. No BP-B-03 execution or GitHub settings mutation is authorized; a new Human Gate D is required for any D execution/mutation.
+- Authorized next step after this administrative canonicalization: D1 may be considered only through a separate Human Gate D after the PASS V4 evidence is canonical on main and a fresh D1 pre-step is complete. D1, D2 and D3 execution remain NOT_AUTHORIZED; no GitHub settings mutation, merge, cleanup, phase change or R2-5 entry is authorized by this state update.
 
 ## Gate de fase
 - R2-0 gate: PASS

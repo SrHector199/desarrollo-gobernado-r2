@@ -1,0 +1,962 @@
+{
+  "schema_version": 4,
+  "artifact_type": "r2-4-stage-b-b1-probe-independent-review-result",
+  "status": "READ_ONLY_INDEPENDENT_REVIEW_RESULT_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-17T00:00:00Z",
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "reviewed_design_file": "r2_4_b1_wep_probe_design_v4.json",
+  "reviewed_design_sha256": "8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4",
+  "reviewed_design_bytes": 30073,
+  "reviewed_wep_spec_file": "r2_4_b1_wep_exact_treatment_spec_v2.json",
+  "reviewed_wep_spec_sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+  "reviewed_wep_spec_bytes": 6975,
+  "integrity_gate": {
+    "verdict": "INTEGRITY_PASS",
+    "method": "Every supplied file was hashed and byte-counted locally with sha256sum/stat before any semantic reading. No declared hash was trusted. Git blob OIDs for the three exact YAML files were recomputed independently as sha1('blob <len>\\0' + bytes).",
+    "all_required_files_present": true,
+    "files_verified": [
+      {
+        "file": "r2_4_b1_wep_probe_design_v4.json",
+        "expected_sha256": "8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4",
+        "recomputed_sha256": "8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4",
+        "expected_bytes": 30073,
+        "recomputed_bytes": 30073,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_exact_treatment_spec_v2.json",
+        "expected_sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+        "recomputed_sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+        "expected_bytes": 6975,
+        "recomputed_bytes": 6975,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_probe_independent_review_request_v4.json",
+        "expected_sha256": "af7a49803bd75713ada7870fee0b3a1e4fd01007b9c8ccbed317f8ee10a82cc7",
+        "recomputed_sha256": "af7a49803bd75713ada7870fee0b3a1e4fd01007b9c8ccbed317f8ee10a82cc7",
+        "expected_bytes": 10061,
+        "recomputed_bytes": 10061,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_probe_design_v3.json",
+        "expected_sha256": "e3347d321f7ffcb3506c5338d274090a9e7319d5fdfda0d4bbe06f8cf9baca3d",
+        "recomputed_sha256": "e3347d321f7ffcb3506c5338d274090a9e7319d5fdfda0d4bbe06f8cf9baca3d",
+        "expected_bytes": 22117,
+        "recomputed_bytes": 22117,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_probe_independent_review_result_v3.json",
+        "expected_sha256": "709bc6d589caf69f373553f5fb499518c832b9309f91db2d0cd8acd7799d05fd",
+        "recomputed_sha256": "709bc6d589caf69f373553f5fb499518c832b9309f91db2d0cd8acd7799d05fd",
+        "expected_bytes": 78755,
+        "recomputed_bytes": 78755,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_exact_treatment_spec_v1.json",
+        "expected_sha256": "0845961a466c924ea5fd7c31679582271f7b15100499e53c33a7ce8293cc728e",
+        "recomputed_sha256": "0845961a466c924ea5fd7c31679582271f7b15100499e53c33a7ce8293cc728e",
+        "expected_bytes": 3873,
+        "recomputed_bytes": 3873,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_probe_design_v2.json",
+        "expected_sha256": "d70d8470bb87dda9cd010bc0f976f97316a6f93aab87c7308ad07afd2290759b",
+        "recomputed_sha256": "d70d8470bb87dda9cd010bc0f976f97316a6f93aab87c7308ad07afd2290759b",
+        "expected_bytes": 20122,
+        "recomputed_bytes": 20122,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_b1_wep_probe_independent_review_result_v2.json",
+        "expected_sha256": "240694219d34eacf246981c09b400acaf13bae8fa20554e4fc90ac022234b429",
+        "recomputed_sha256": "240694219d34eacf246981c09b400acaf13bae8fa20554e4fc90ac022234b429",
+        "expected_bytes": 93020,
+        "recomputed_bytes": 93020,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_b1_trusted_r2_ci_snapshot.yml",
+        "expected_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+        "recomputed_sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+        "expected_bytes": 2085,
+        "recomputed_bytes": 2085,
+        "match": true,
+        "parses": "YAML_OK"
+      },
+      {
+        "file": "r2_b1_pull_request_collision_exact.yml",
+        "expected_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+        "recomputed_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+        "expected_bytes": 423,
+        "recomputed_bytes": 423,
+        "match": true,
+        "parses": "YAML_OK"
+      },
+      {
+        "file": "r2_b1_push_collision_exact.yml",
+        "expected_sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311",
+        "recomputed_sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311",
+        "expected_bytes": 369,
+        "recomputed_bytes": 369,
+        "match": true,
+        "parses": "YAML_OK"
+      },
+      {
+        "file": "r2_4_stage_b_enforcement_design_v5_ruleset_single_operator.json",
+        "expected_sha256": "5a0d3da1dc4bbbc7a5cd6d41611fcae9172c212f700cc38eae9c021e5de78493",
+        "recomputed_sha256": "5a0d3da1dc4bbbc7a5cd6d41611fcae9172c212f700cc38eae9c021e5de78493",
+        "expected_bytes": 20284,
+        "recomputed_bytes": 20284,
+        "match": true,
+        "parses": "JSON_OK"
+      },
+      {
+        "file": "r2_4_stage_b_independent_review_result_v5_ruleset_single_operator.json",
+        "expected_sha256": "961b5b05d628139682df572ce869a080048e4617845e1b3571e37088c8c5f128",
+        "recomputed_sha256": "961b5b05d628139682df572ce869a080048e4617845e1b3571e37088c8c5f128",
+        "expected_bytes": 83796,
+        "recomputed_bytes": 83796,
+        "match": true,
+        "parses": "JSON_OK"
+      }
+    ],
+    "git_blob_oid_independent_recomputation": [
+      {
+        "file": "r2_b1_trusted_r2_ci_snapshot.yml",
+        "recomputed_blob_sha1": "48a63b864c5e8f5506961194b41934c4e8088624",
+        "design_field": "trusted_required_job_invariants.source_main_blob_oid",
+        "design_value": "48a63b864c5e8f5506961194b41934c4e8088624",
+        "match": true
+      },
+      {
+        "file": "r2_b1_pull_request_collision_exact.yml",
+        "recomputed_blob_sha1": "02ddd98fe81cbda3ed5b08c538317f37caf7c26e",
+        "design_field": "pull_request_positive_control_anchor.historical_git_blob_oid",
+        "design_value": "02ddd98fe81cbda3ed5b08c538317f37caf7c26e",
+        "match": true
+      },
+      {
+        "file": "r2_b1_push_collision_exact.yml",
+        "recomputed_blob_sha1": "73564b9689b0b6d65c7f66d0d1789d128edafc7c",
+        "design_field": "push_probe.exact_git_blob_oid_from_review",
+        "design_value": "73564b9689b0b6d65c7f66d0d1789d128edafc7c",
+        "match": true
+      }
+    ],
+    "yaml_byte_hygiene": "All three exact YAML files are LF-only, contain no CRLF, and terminate with a single trailing newline. Blob OID equality is therefore reproducible from the supplied bytes without normalization.",
+    "cross_reference_check": {
+      "review_request_v4_declared_hashes_vs_recomputed": "ALL_MATCH (13/13 declared artifacts)",
+      "design_v4_supersedes_block_vs_recomputed": "MATCH for probe_design_v3, independent_review_v3 and exact_treatment_v1",
+      "design_v4_exact_inputs_block_vs_recomputed": "MATCH for all three YAML sha256/bytes",
+      "design_v4_architecture_authority_block_vs_recomputed": "MATCH for v5 design and v5 review sha256/bytes",
+      "wep_spec_v2_supersedes_block_vs_recomputed": "MATCH for exact_treatment_spec_v1",
+      "wep_spec_v2_revision_basis_vs_recomputed": "MATCH for independent_review_result_v3",
+      "design_v4_wep_pointer_vs_recomputed": "wep_uncertainties_and_preconditions.exact_treatment_spec and exact_WEP_treatment both point at spec V2 with the correct sha256/bytes"
+    },
+    "extra_files_supplied_not_required": [
+      "r2_4_b1_wep_probe_independent_review_request_v3.json",
+      "R2_4_BP_B02_B03_DESIGN_REVIEW_RESULT_V3.json"
+    ],
+    "extra_files_note": "Two additional artifacts were present in the package beyond the required set. They were parsed for integrity but were not used as authority. Their presence does not affect the integrity verdict.",
+    "declared_hashes_trusted_without_recomputation": false
+  },
+  "independence_satisfied": {
+    "reviewer_authored_v4": false,
+    "fresh_context": true,
+    "v4_closure_map_used_as_evidence": false,
+    "closure_judged_against": "The verbatim required_change text of r2_4_b1_wep_probe_independent_review_result_v3.json (sequencing_findings) and r2_4_b1_wep_probe_independent_review_result_v2.json (blocking_findings/sequencing_findings), read directly from the supplied bytes.",
+    "method": "For each finding, the V3/V2 required_change string was extracted programmatically, then the V4 design and WEP spec V2 were searched field-by-field for the concrete construct that would satisfy it. A full flattened path diff V3->V4 and V1->V2 was run to detect silent deletions independently of any author claim.",
+    "repository_contacted": false,
+    "github_api_called": false,
+    "documentation_contact_only": true,
+    "documentation_contact_note": "Public GitHub Docs and GitHub Changelog pages were read for platform semantics. This is documentary contact only and is expressly distinct from any contact with the repository under review. No repository, API, workflow, ruleset or policy surface of SrHector199/desarrollo-gobernado-r2 was touched."
+  },
+  "probe_design_disposition": "PROBE_DESIGN_V4_PASS_NO_BLOCKING_FINDINGS_D1_HUMAN_GATE_D_ELIGIBLE_FOR_CONSIDERATION_ONLY",
+  "wep_treatment_disposition": "WEP_TREATMENT_SPEC_V2_PASS_B1R2_01_PRESERVED_B1S3_01_AND_B1S3_02_CORRECTIONS_PRESENT",
+  "combined_review_note": "V4 and WEP spec V2 substantively close all six V3 sequencing findings and B1N3-05 against the V3 review's own required_change text. No B1R2/B1S2 closure regresses. The authority split stays fail-closed and no new blocking ambiguity was introduced. Six nonblocking observations are recorded, none of which can manufacture a false green.",
+  "B1S3_01_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Extend the stop-and-redesign clause to the actor rule explicitly, and add a D1 read-only observation recording whether the surface permits saving a workflow execution protection ruleset with an empty actor-rule set.",
+    "element_1_actor_rule_stop_clause": {
+      "required": "STOP_AND_REDESIGN must explicitly reach the actor rule, not only the event rule.",
+      "found_at": "r2_4_b1_wep_exact_treatment_spec_v2.json -> exact_treatment.actor_rule.if_UI_cannot_express_exact_state",
+      "found_value": "STOP_AND_REDESIGN; do not add an actor rule as an approximation and do not proceed to D2.",
+      "v3_baseline": "In WEP spec V1 the clause existed only under exact_treatment.event_rule. The actor_rule block carried configured_actor_rules_exact, meaning and collaborator_change_rule but no stop clause.",
+      "assessment": "SATISFIED. The clause is now a sibling field of the actor rule and is strictly stronger than the event-rule version, because it additionally forbids the specific approximation the finding feared (adding an actor rule to make the save go through) and forbids proceeding to D2.",
+      "diff_evidence": "V1->V2 flattened path diff shows zero dropped paths and the actor_rule stop clause as a new path."
+    },
+    "element_2_D1_read_only_observation": {
+      "required": "A D1 read-only observation recording whether the surface permits saving with an empty actor-rule set.",
+      "found_at": [
+        "r2_4_b1_wep_exact_treatment_spec_v2.json -> exact_treatment.actor_rule.D1_read_only_representability_observation",
+        "r2_4_b1_wep_probe_design_v4.json -> wep_uncertainties_and_preconditions.GU-02",
+        "r2_4_b1_wep_probe_design_v4.json -> future_gate_split.D1_PRESTATE_AND_POSITIVE_CONTROL.scope[1]",
+        "r2_4_b1_wep_probe_design_v4.json -> rulesets_and_actions_prestate.Actions_UI[5]",
+        "r2_4_b1_wep_exact_treatment_spec_v2.json -> prestate_and_conditional_restore.capture_before_mutation[6]",
+        "r2_4_b1_wep_exact_treatment_spec_v2.json -> field_by_field_D2_acceptance[7]"
+      ],
+      "required_flag": true,
+      "failure_disposition": "NOT_SATISFIED_AND_STOP_BEFORE_D2 in both artifacts; GU-02 adds 'do not approximate'.",
+      "assessment": "SATISFIED and redundantly anchored in six places, including the D2 acceptance list, so the observation cannot be silently skipped at D2."
+    },
+    "read_only_character_check": {
+      "may_open_the_surface": {
+        "permitted": true,
+        "evidence": "'Open the repository Actions Policies configuration surface without saving any change.'"
+      },
+      "may_build_or_observe_the_draft_state": {
+        "permitted": true,
+        "evidence": "'Record whether the intended event-rule state can carry zero actor rules' / GU-02 'Record the exact zero-actor-rule draft state'."
+      },
+      "may_observe_whether_save_is_available_or_enabled": {
+        "permitted": true,
+        "evidence": "'whether the UI save action is visibly available/enabled for that exact draft state'."
+      },
+      "must_not_activate_save": {
+        "prohibited": true,
+        "evidence": "'Do not activate the save action.' (spec V2) and 'Do not activate save.' (GU-02 discharge)."
+      },
+      "verdict": "The observation is genuinely read-only with respect to GitHub state. Constructing an unsaved draft in the configuration surface is a client-side act; no policy object is created, updated or evaluated. Ordering is also correct: D1 scope places this observation at index 1, explicitly 'before any recency mutation', ahead of ref creation at index 4."
+    },
+    "sufficiency_without_overclaiming_post_save_behaviour": {
+      "question_answered": "Is a read-only availability/enabled observation enough for the required_change without falsely asserting that it demonstrates post-save behaviour?",
+      "answer": "YES for the required_change as written, which asks only for an observation 'recording whether the surface permits saving', not for a demonstration that a save succeeds. A read-only observation is the only construction that satisfies the finding without importing the very mutation the finding exists to gate.",
+      "limit_that_must_not_be_overstated": "An available/enabled save control is evidence about the client-side surface only. It does not establish that the server would accept and persist a zero-actor-rule workflow execution protection ruleset, nor what the post-save readback would contain. Nothing short of D2 can establish that.",
+      "does_v4_overstate_it": "NOT MATERIALLY, BUT IMPRECISELY. Neither artifact anywhere asserts that the D1 observation proves post-save behaviour, and GU-02's satisfied_only_if is scoped to visible availability. However the forbidden-claim strings 'actor_rules=[] representability proven before D1 observation' (spec V2) and 'actor_rules=[] representability assumed without the D1 observation' (design V4) are worded so that a careless reader could infer that the D1 observation itself proves representability. Recorded as B1N4-01, nonblocking.",
+      "fail_closed_backstop_confirmed": "field_by_field_D2_acceptance requires 'actor rule set empty' at post-mutation readback and terminates in 'any divergence => INVALID_EXPERIMENT'. The adversarial scenario 'actor-rule empty state appears representable but actual D2 readback differs' therefore resolves to INVALID_EXPERIMENT, not to a silent approximation and not to a false green."
+    },
+    "github_documentation_position": "MARK_UNCERTAIN. Current official documentation states that workflow execution protections are built on the rulesets framework, come with two rule types (event and actor), and are configured by creating a ruleset and then adding event and actor rules. No official page reviewed states whether a ruleset can be saved carrying an event rule and zero actor rules. Documentary silence is recorded as uncertainty and is not converted into either a positive or a negative claim. V4's treatment of this as an empirical read-only D1 precondition is the correct handling of that silence."
+  },
+  "B1S3_02_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Restore the V2 rule in full: enumerate accepted collaborators via API, fall back to the repository Collaborators UI, and STOP if neither is available. Record an unobservable pending-invitation surface as NOT_SATISFIED rather than omitting it, and re-check both immediately before the D2 mutation rather than only at D1.",
+    "chain_check_api_then_ui_then_stop": {
+      "primary_api": {
+        "present": true,
+        "design_v4": "identity_and_transport_invariant.single_operator_rule.accepted_collaborators_primary = 'GitHub API enumeration'",
+        "wep_spec_v2": "actor_rule.single_operator_evidence.accepted_collaborators.primary = enumerate current repository collaborators through the GitHub API and record effective permission/capability sufficient to identify every write-capable identity"
+      },
+      "fallback_collaborators_ui": {
+        "present": true,
+        "design_v4": "single_operator_rule.accepted_collaborators_fallback = 'repository Collaborators UI'",
+        "wep_spec_v2": "accepted_collaborators.fallback = if the API cannot prove the complete accepted-collaborator set, use the repository Collaborators UI as the fallback evidence surface"
+      },
+      "stop_if_neither_proves_the_complete_set": {
+        "present": true,
+        "design_v4": "single_operator_rule.if_neither_can_prove_complete_set = 'STOP'",
+        "wep_spec_v2": "accepted_collaborators.if_neither_available = 'STOP'"
+      },
+      "assessment": "The full three-link chain is restored in both artifacts. The V3 defect (two prestate list entries with the fallback and the stop dropped) is repaired. The design wording is additionally stronger than V2's: the stop triggers on inability to prove the complete set, not merely on surface unavailability, which closes the case where the API answers but answers incompletely."
+    },
+    "pending_invitation_unobservable_is_not_satisfied_and_stop": {
+      "present": true,
+      "design_v4": "single_operator_rule.pending_invitations_unobservable = 'NOT_SATISFIED_AND_STOP'",
+      "wep_spec_v2": "pending_invitations.require_observation = true; pending_invitations.if_surface_unobservable = 'NOT_SATISFIED_AND_STOP'",
+      "assessment": "SATISFIED. 'When observable' as a discharge condition is gone. Unobservability now produces a recorded non-satisfaction and a stop rather than silence. spec V2 also pins the accepted_result semantics: no pending invitation capable of becoming an additional write-capable identity during the experiment.",
+      "supporting_capture": "prestate_and_conditional_restore.capture_before_mutation[5] requires the pending-invitation surface observability and raw result to be captured; design V4 identity_and_transport_invariant.prestate[6] and rulesets_and_actions_prestate.Actions_UI[9] carry the same requirement."
+    },
+    "recheck_immediately_before_D2": {
+      "present": true,
+      "design_v4": [
+        "single_operator_rule.D2_immediate_recheck = 'Repeat accepted collaborators and pending invitations immediately before WEP mutation; any drift or inability to prove => STOP.'",
+        "future_gate_split.D2...precondition includes 'immediate accepted-collaborator and pending-invitation recheck SATISFIED'",
+        "future_gate_split.D2...scope[0] = 'repeat accepted-collaborator enumeration and pending-invitation observation immediately before mutation; any failure => STOP'"
+      ],
+      "wep_spec_v2": [
+        "actor_rule.single_operator_evidence.D2_immediate_recheck",
+        "field_by_field_D2_acceptance[8] = 'single-operator collaborator/invitation recheck SATISFIED immediately before mutation'"
+      ],
+      "ordering_verified": "D2 scope index 0 is the recheck and index 1 is 'apply only exact WEP treatment spec V2'. The recheck strictly precedes the mutation in the declared ordering, which is what the finding required.",
+      "assessment": "SATISFIED, and anchored in the precondition, the ordered scope and the field-by-field acceptance list, so it cannot be discharged by a single sentence."
+    },
+    "additional_write_capable_identity_reopens_design": {
+      "present": true,
+      "design_v4": "single_operator_rule.additional_write_capable_identity = 'STOP_AND_REOPEN_ACTOR_RULE_DESIGN'",
+      "wep_spec_v2": [
+        "accepted_collaborators.additional_write_capable_identity = 'STOP_AND_REOPEN_ACTOR_RULE_DESIGN'",
+        "actor_rule.collaborator_change_rule extended in V2 to add 'or inability to prove the single-operator premise'"
+      ],
+      "assessment": "SATISFIED and strengthened relative to WEP spec V1, where collaborator_change_rule was triggered only by an additional identity and not by an enumeration failure.",
+      "adversarial_scenario_pending_invitation_accepted_between_D1_and_D2": "Covered by the D2 immediate recheck plus STOP_AND_REOPEN_ACTOR_RULE_DESIGN. The window is closed at the last point before mutation rather than only at D1."
+    },
+    "github_documentation_position": "VERIFIED that both evidence surfaces are documented. Official REST documentation describes a repository collaborators listing whose permissions hash carries base role permissions and whose role_name is the highest role after considering all sources of grant, and a separate repository invitations listing that returns all currently open invitations when authenticated with admin rights. The single-operator premise is therefore provable in principle on this platform, which makes V4's NOT_SATISFIED_AND_STOP a fail-closed response to an availability failure rather than a workaround for a documented gap."
+  },
+  "B1S3_03_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Extend directory-level enumeration of .github/workflows to the PR-negative head at PR creation and at the point of negative interpretation, with the same requirement of no additional candidate producer path.",
+    "enumeration_at_pr_creation": {
+      "present": true,
+      "found_at": "pull_request_negative_preconditions.directory_invariance.at_PR_creation",
+      "value": "Enumerate the complete directory at the exact PR-negative HEAD immediately after PR creation.",
+      "also_in_gate_scope": "future_gate_split.D2...scope[3]"
+    },
+    "enumeration_at_negative_interpretation": {
+      "present": true,
+      "found_at": "pull_request_negative_preconditions.directory_invariance.at_negative_interpretation",
+      "value": "Re-enumerate the complete directory at the exact PR-negative HEAD immediately before interpreting candidate non-execution.",
+      "also_in_gate_scope": "future_gate_split.D2...scope[5]"
+    },
+    "is_it_directory_enumeration_not_single_blob_verification": {
+      "verdict": "YES",
+      "evidence": "Both clauses say 'Enumerate the complete directory' at the exact PR-negative HEAD, and allowed_candidate_producer whitelists exactly one candidate path with exact reviewed bytes. failure = 'Any additional candidate producer path, any path drift, or inability to enumerate => INVALID_PROBE_AND_STOP'.",
+      "why_this_matters": "The finding was precisely that blob invariance pins one path and cannot exclude a second producer at another path. A whitelist plus a complete-directory enumeration excludes additional producers; a blob check alone would not. The inability-to-enumerate branch is also present, so an unreadable directory cannot be treated as an empty one."
+    },
+    "trusted_producer_separation": {
+      "present": true,
+      "value": ".github/workflows/r2-ci.yml is observed separately as the trusted pull_request_target liveness producer",
+      "assessment": "Correct. The trusted workflow is not counted as an additional candidate producer, and it is not laundered into the whitelist of candidate producers either."
+    },
+    "ordering_verified": "D2 scope ordering is: create PR (2) -> enumerate at PR creation (3) -> prove trusted post-WEP liveness (4) -> re-enumerate (5) -> interpret PR negative (6). Both enumerations bracket the interpretation, and the liveness gate still precedes it.",
+    "symmetry_with_push_branch": "push_probe.directory_invariance retains the equivalent PRE_WEP_HEAD/POST_WEP_HEAD enumeration with the same no-additional-candidate-producer requirement. The asymmetry the finding identified is removed.",
+    "residual_recorded": "B1N4-02. Enumeration is specified at the PR-negative HEAD only. The TEST_MERGE surface, which two_surface_PR_observation requires to be read, is not itself enumerated at directory level. Nonblocking: homonym_rule scores any non-trusted satisfactory homonymous result on either PR_HEAD or TEST_MERGE as B1 FAIL and never PASS, so the residual is fail-closed."
+  },
+  "B1S3_04_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Restore the field-by-field comparison of surviving settings as an explicit D3 output artifact, stored as evidence rather than asserted, against either the intended post-D2 state or the captured prestate depending on which path D2 took.",
+    "stored_artifact_not_assertion": {
+      "present": true,
+      "found_at": "future_gate_split.D3_REF_CLEANUP_AND_FINAL_STATE_EVIDENCE_ONLY.scope_by_path.AFTER_D2[2]",
+      "value": "produce and store a field-by-field final GitHub settings comparison against the intended post-D2 state if WEP intentionally remains active, or against the captured prestate if D2 restored it",
+      "verbs_checked": "'produce and store' is a production obligation on the D3 gate, not a precondition phrase. The V3 formulation the finding rejected ('final intended or restored WEP state verified') survives only where it belongs, as the AFTER_D2 precondition, and no longer stands in for the artifact.",
+      "reinforced_by": [
+        "D3.stored_final_settings_evidence_required = true",
+        "the gate is renamed D3_REF_CLEANUP_AND_FINAL_STATE_EVIDENCE_ONLY, so the evidence obligation is visible in the gate identifier itself"
+      ],
+      "assessment": "SATISFIED. A bare 'verified' would not have been sufficient and is not what V4 carries."
+    },
+    "both_comparison_baselines_present_and_path_selected_by_actual_D2_route": {
+      "baseline_1": "intended post-D2 state, applicable if WEP intentionally remains active",
+      "baseline_2": "captured prestate, applicable if D2 restored it",
+      "selector": "The clause selects the baseline by which path D2 actually took, matching the required_change exactly.",
+      "prestate_source_verified": "wep_exact_treatment_spec_v2.prestate_and_conditional_restore.capture_before_mutation enumerates seven captured items, so the prestate baseline is a real captured object and not a notional one."
+    },
+    "no_wep_mutation_smuggled_into_D3": {
+      "verified": true,
+      "evidence": "D3.WEP_mutation = false, and D3.if_required_evidence_export_incomplete = 'NO_RESTORE_AND_NO_DELETION; STOP with current state in place.' Restoration authority remains inside D2 under conditional_restore_limits."
+    },
+    "residual_recorded": "B1N4-04. The V3 D3 list also asked that the recorded reason for the incomplete-export stop be retained (an active allow-list policy is more restrictive than the prestate, not less). The operative rule is retained in three places, but the reason itself is not written into either artifact. It was absent from the V3 design too, so this is not a regression; it is an unrecorded rationale in the artifact a D3 approver reads."
+  },
+  "B1S3_05_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Add an explicit D3 precondition variant covering D1 completed and D2 not granted, scoped to deletion of the D1-created ref and verification of ref absence, with no WEP component since none was applied.",
+    "precondition_variant_present": {
+      "present": true,
+      "found_at": "future_gate_split.D3....precondition_variants.D1_COMPLETE_D2_NEVER_GRANTED",
+      "value": "D1 evidence is complete; D2 was never authorized or started; no WEP mutation occurred.",
+      "structure_note": "V3 carried a single scalar precondition, which is exactly why the path was unreachable. V4 replaces it with a two-key variants object, so AFTER_D2 and D1_COMPLETE_D2_NEVER_GRANTED are alternatives rather than a single conjunction."
+    },
+    "scope_check_against_the_four_required_capabilities": [
+      {
+        "capability": "delete only the ref created by D1",
+        "satisfied": true,
+        "evidence": "scope_by_path.D1_COMPLETE_D2_NEVER_GRANTED[0] = 'delete only the exact D1-created push-probe ref'",
+        "note": "Correctly singular. On this path the PR-negative branch was never created, so deleting 'the exact two disposable B1 refs' would have been wrong; V4 does not copy that clause across."
+      },
+      {
+        "capability": "verify its absence",
+        "satisfied": true,
+        "evidence": "scope_by_path.D1_COMPLETE_D2_NEVER_GRANTED[1] = 'verify that exact ref absent'"
+      },
+      {
+        "capability": "verify invariance of non-probe refs",
+        "satisfied": true,
+        "evidence": "same entry, '...and all non-probe refs unchanged'"
+      },
+      {
+        "capability": "no WEP component",
+        "satisfied": true,
+        "evidence": "scope_by_path.D1_COMPLETE_D2_NEVER_GRANTED[2] = 'record explicitly that no WEP comparison/restoration component applies because D2 never executed', plus D3.WEP_mutation = false",
+        "note": "Stronger than the required_change: the absence is not merely implied by omission, it must be affirmatively recorded, which leaves an auditable trace that the path was taken deliberately."
+      }
+    ],
+    "stranded_authority_check": "Resolved. The only state D3 can now strand is inert probe refs left in place, which is more visible rather than less. No WEP mutation is outstanding on this path by construction, since the path is defined by D2 never having executed.",
+    "separate_human_gate_preserved": "D3.separate_Human_Gate_required = true is retained for both variants."
+  },
+  "B1S3_06_disposition": {
+    "verdict": "SATISFIED",
+    "v3_required_change_verbatim": "Split B1_pass_claim_limit by event class, recording that the push negative rests on a same-window dynamic positive control and the pull_request negative rests on a historical anchor plus structurally enumerated exclusions, so that a downstream reader cannot treat the two as equally supported.",
+    "structural_change_verified": "In V3, B1_pass_claim_limit was a single string covering both event classes in one clause. In V4 it is an object with common_bounds plus separate push and pull_request members, each carrying claim, evidential_basis and strength_label, plus a non_equivalence_rule.",
+    "push_branch": {
+      "claim": "The exact candidate push producer path actually probed did not execute post-WEP.",
+      "strength_label": "SAME_WINDOW_DYNAMIC_POSITIVE_CONTROL",
+      "evidential_basis_summary": "Same-window dynamic PRE-WEP positive control over the same producer bytes, D1/D2 credential identity and capability equality, identical PUT Contents endpoint transport, post-WEP trusted pull_request_target liveness, and push workflow blob plus directory invariance."
+    },
+    "pull_request_branch": {
+      "claim": "The exact candidate pull_request producer path actually probed did not execute post-WEP.",
+      "strength_label": "HISTORICAL_ANCHOR_PLUS_STRUCTURAL_EXCLUSIONS",
+      "evidential_basis_summary": "Historical PR #5 positive anchor over exact candidate bytes with D1 re-derivation, exact commit-message control, exact main base/ref precondition, same-repository non-fork branch state observed at D2, full PR_HEAD/TEST_MERGE object enumeration, PR-head directory enumeration, and post-WEP trusted liveness."
+    },
+    "non_equivalence_made_explicit": {
+      "present": true,
+      "at": [
+        "B1_pass_claim_limit.non_equivalence_rule",
+        "claims_forbidden[18] = 'push and pull_request negative claims have equal evidential strength'"
+      ],
+      "assessment": "SATISFIED twice over: once as a positive instruction and once as a forbidden claim, which is the construction that actually binds a downstream reader."
+    },
+    "no_unnecessary_dynamic_pull_request_control_added": {
+      "verified": true,
+      "check": "The design still creates the PR-negative branch and PR only at D2 and still relies on the PR #5 historical anchor; no dynamic pre-WEP pull_request positive control was introduced, and D1.PR_creation remains false.",
+      "did_this_audit_find_a_new_blocking_need_for_one": "NO. The competing explanations for a pull_request non-run remain individually excluded by construction: internal suppression is excluded by the exact reviewed probe bytes, skip instructions by commit_message_control, branch-filter mismatch by the base-ref precondition and the workflow's own branches:[main] filter, and fork-approval hold by the same-repository non-fork branch under the owner's credential. Adding a dynamic control would buy a second recency anchor and a wider D1 mutation scope in exchange for re-confirming exclusions already made structurally. The V3 assessment stands and is not reopened."
+    }
+  },
+  "B1N3_05_disposition": {
+    "verdict": "SATISFIED",
+    "v3_recommendation_verbatim": "Require identical method and endpoint, since the exact endpoint is already specified.",
+    "v3_defect": "V3's transport_equality read 'same endpoint family or client mode', which was looser than the exact endpoint pinned one field above and could have admitted a different write API as the same family.",
+    "identical_http_method": {
+      "required": true,
+      "found_at": "identity_and_transport_invariant.transport_equality",
+      "value_fragment": "must use identical HTTP method PUT",
+      "pinned_separately_at": "identity_and_transport_invariant.file_write_transport_exact.method = 'PUT'",
+      "assessment": "SATISFIED. The method is named literally, not by family."
+    },
+    "identical_contents_endpoint": {
+      "required": true,
+      "value_fragment": "and the identical endpoint template /repos/{owner}/{repo}/contents/{path}",
+      "pinned_separately_at": "identity_and_transport_invariant.file_write_transport_exact.endpoint_template",
+      "assessment": "SATISFIED. The endpoint template is restated inline inside the equality rule rather than referenced loosely, so the equality rule is self-contained."
+    },
+    "capture_of_method_and_endpoint_actually_used": {
+      "required": true,
+      "found_at": "identity_and_transport_invariant.transport_equality",
+      "value_fragment": "record the exact resolved endpoint and method for every write",
+      "assessment": "SATISFIED, and it is the resolved endpoint that must be recorded, not the template, which is what makes the equality check auditable after the fact rather than merely declared in advance. 'for every write' covers both the D1 workflow write and the D2 sentinel write.",
+      "failure_disposition": "Any difference => STOP."
+    },
+    "same_endpoint_family_language_removed": {
+      "verified": true,
+      "method": "Byte-level search of r2_4_b1_wep_probe_design_v4.json for the V3 phrasing. The 'same endpoint family or client mode' formulation does not appear anywhere in V4."
+    },
+    "carried_into_downstream_claims": "B1_pass_claim_limit.push.evidential_basis and future_gate_split.D2...scope[7] both restate the identical PUT Contents endpoint transport, so the tightened invariant is not stranded in one field.",
+    "github_documentation_position": "VERIFIED for the endpoint and capability facts. Official REST documentation for repository contents documents the create-or-update operation as PUT on /repos/{owner}/{repo}/contents/{path}, states that OAuth app tokens and classic personal access tokens need the repo scope and additionally the workflow scope to modify files in the .github/workflows directory, and documents an optional committer object in the request body. Those three facts are exactly what B1S2-02, B1S2-03 and B1S2-04 respectively depend on. UNCERTAIN remains on whether a commit created through this endpoint dispatches an on: push workflow; no official page reviewed states it affirmatively, and V4 correctly leaves that as an empirical D1 precondition rather than an assumption."
+  },
+  "prior_closure_regression_check": {
+    "verdict": "NO_REGRESSION_DETECTED",
+    "method": "Flattened-path diff of design V3 -> V4 and of WEP spec V1 -> V2, plus set comparison of claims_forbidden, plus direct field lookup of each V2 required_change element against V4 bytes. Author closure maps were read but not used as evidence.",
+    "B1R2_01": {
+      "verdict": "PRESERVED_CLOSED",
+      "v2_required_change_elements": [
+        {
+          "element": "intended enforcement status active",
+          "present": true,
+          "where": "wep_spec_v2.exact_treatment.enforcement_exact = 'active', with evaluate_is_not_acceptable and disabled_is_not_acceptable both true; design V4 wep_uncertainties_and_preconditions.enforcement_mode repeats required=active, evaluate FORBIDDEN_AS_PASS, disabled FORBIDDEN_AS_PASS"
+        },
+        {
+          "element": "exact event allow list with pull_request_target explicitly permitted",
+          "present": true,
+          "where": "event_rule.permitted_events_exact = ['pull_request_target']"
+        },
+        {
+          "element": "push and pull_request explicitly not permitted",
+          "present": true,
+          "where": "event_rule.explicitly_not_permitted_for_this_experiment = ['pull_request','push'] plus required_ui_semantic restating it as an observable saved state"
+        },
+        {
+          "element": "intended actor_rules value",
+          "present": true,
+          "where": "actor_rule.configured_actor_rules_exact = []"
+        },
+        {
+          "element": "intended bypass value or recorded INAPPLICABLE",
+          "present": true,
+          "where": "bypass block unchanged from V1: present-and-empty required if exposed, non-empty => STOP, absent surface => INAPPLICABLE_NOT_SATISFIED with an explicit prohibition on inferring universal no-bypass"
+        },
+        {
+          "element": "ruleset name and target",
+          "present": true,
+          "where": "policy_name_exact = 'R2 B1 WEP Producer Boundary', repository_scope pinned to the single repository, target_encoding human_semantic THIS_REPOSITORY_ONLY with machine encoding marked UNDOCUMENTED_FOR_WEP_PREVIEW_DO_NOT_INVENT",
+          "caveat": "Terminology caveat B1N3-01 remains open and is correctly not claimed closed."
+        },
+        {
+          "element": "explicit statement on unlisted event classes",
+          "present": true,
+          "where": "event_rule.unlisted_event_semantics, reinforced by design V4 unprobed_event_classes.status = UNCLAIMED_BOTH_DIRECTIONS and claims_forbidden 'unprobed event protection'"
+        },
+        {
+          "element": "field-by-field D2 readback with divergence classified INVALID_EXPERIMENT",
+          "present": true,
+          "where": "field_by_field_D2_acceptance, now twelve items (grown from ten), still terminating in 'any divergence => INVALID_EXPERIMENT'; design V4 future_gate_split.D2.readback repeats it"
+        }
+      ],
+      "diff_evidence": "V1 -> V2 flattened diff shows zero dropped paths. All apparent index changes in field_by_field_D2_acceptance and claims_forbidden are insertions that shift later entries, not deletions. Every V1 string is still present in V2.",
+      "assessment": "The independent variable remains fully specified and reviewable. Informed consent for a future D2 Human Gate is preserved."
+    },
+    "B1S2_01": {
+      "verdict": "PRESERVED_CLOSED",
+      "v2_required_change": "Conditional narrow pre-authorization inside D2 to restore only the exact captured WEP prestate for the exact object D2 created, contingent on verified evidence export; all ref deletion stays in D3; if export cannot be verified, neither action executes and the line STOPs with the mutation in place.",
+      "evidence_in_v4": [
+        "future_gate_split.D2...scope[11] CONDITIONAL restore after verified evidence export",
+        "conditional_restore_limits = ['only exact WEP object D2 changed','only exact captured prestate','no ref deletion','if evidence export incomplete => no restore; STOP with state in place']",
+        "D3.WEP_mutation = false",
+        "D3.if_required_evidence_export_incomplete = 'NO_RESTORE_AND_NO_DELETION; STOP with current state in place.'",
+        "wep_spec_v2.prestate_and_conditional_restore.if_export_incomplete = 'DO_NOT_RESTORE; STOP with state in place.'"
+      ],
+      "regression_risk_examined": "The D3 rewrite for B1S3-04/05 was the place a WEP component could have leaked back into D3. It did not: both D3 variants keep WEP_mutation false and the D1-only variant affirmatively records that no WEP component applies.",
+      "assessment": "No regression. The safe direction is unchanged: an unverified export leaves the more restrictive allow-list policy in place rather than discarding evidence while widening the producer surface."
+    },
+    "B1S2_02": {
+      "verdict": "PRESERVED_AND_TIGHTENED",
+      "v2_required_change": "State transport equality as an explicit invariant and record the exact endpoint used for every write at both gates.",
+      "evidence_in_v4": "identity_and_transport_invariant.transport_equality now additionally pins identical HTTP method PUT and the identical endpoint template, and still requires recording the exact resolved endpoint and method for every write. See B1N3_05_disposition.",
+      "assessment": "No regression; strictly stronger than the closure V2 required."
+    },
+    "B1S2_03": {
+      "verdict": "PRESERVED_CLOSED",
+      "v2_required_change": "Add the workflow capability as an explicit D1 precondition, capture resolved scopes at both gates, and require equality alongside identity equality.",
+      "evidence_in_v4": [
+        "credential_requirements.D1 = '.github/workflows write requires documented workflow capability in addition to contents/repo capability'",
+        "credential_requirements.D2 = 'same fingerprint, type and captured scopes/permissions as D1 even though sentinel needs less'",
+        "credential_requirements.capture includes token source/type, gh api /user login and id, and OAuth scopes or accepted fine-grained permissions without secret material",
+        "credential_requirements.mismatch = 'STOP'"
+      ],
+      "documentation_alignment": "Confirmed against current official REST documentation for repository contents: the workflow scope is additionally required to modify files in the .github/workflows directory.",
+      "assessment": "No regression."
+    },
+    "B1S2_04": {
+      "verdict": "PRESERVED_CLOSED",
+      "v2_required_change": "Require actor.id == triggering_actor.id == the id returned by gh api user on the D1 positive-control run, record the comparison as evidence, and forbid supplying committer or author overrides in any Contents API call.",
+      "evidence_in_v4": [
+        "recorded_actor_binding = 'For D1 positive-control run require actor.id == triggering_actor.id == authenticated /user id. D2 authenticated /user id must equal D1. Any mismatch => INVALID_EXPERIMENT.'",
+        "author_committer_override = 'FORBIDDEN'"
+      ],
+      "documentation_alignment": "The override prohibition remains load-bearing: the current Contents API reference documents an optional committer object in the request body, so supplying it is a real capability rather than a hypothetical one.",
+      "assessment": "No regression. B1N3-04 (the dropped run_identity_capture list including run_attempt) remains correctly open and is not claimed closed."
+    },
+    "B1S2_05": {
+      "verdict": "PRESERVED_CLOSED",
+      "v2_required_change": "Define qualifying as conclusion in {success, skipped, neutral} and require anchor capture over every homonymous result observed during B1.",
+      "evidence_in_v4": [
+        "recency_anchor.qualifying_conclusions = ['success','skipped','neutral']",
+        "recency_anchor.capture_for_every_qualifying_homonym enumerates nine fields",
+        "recency_anchor.B2_consumption_barrier and B2_barrier both forbid required-check evidence or configuration until the seven-day window is recomputed from the newest qualifying homonymous result observed during B1"
+      ],
+      "diff_evidence": "All recency_anchor paths are byte-identical between V3 and V4; the V4 rewrite did not touch this block.",
+      "assessment": "No regression."
+    },
+    "other_carried_controls_spot_checked": [
+      {
+        "control": "B1R-01 commit_message_control",
+        "status": "UNCHANGED between V3 and V4, including the six forbidden substrings, the push_range_rule and the case-fold-only normalization"
+      },
+      {
+        "control": "B1R-02 historical anchor",
+        "status": "UNCHANGED, and its declared blob OID 02ddd98fe81cbda3ed5b08c538317f37caf7c26e was independently recomputed from the supplied pull_request YAML and matches"
+      },
+      {
+        "control": "B1R-04 post_WEP_liveness_gate",
+        "status": "UNCHANGED, including must_precede_any_negative_interpretation = true and the documented_strength corollary that trusted pull_request_target liveness does not prove pull_request-class capability"
+      },
+      {
+        "control": "B1S-05 two_surface_PR_observation",
+        "status": "UNCHANGED, including homonym_rule and the absent_TEST_MERGE rule forbidding treatment as an empty clean surface"
+      },
+      {
+        "control": "trusted_required_job_invariants",
+        "status": "UNCHANGED. Independently cross-checked against the supplied trusted YAML bytes: the workflow carries no paths or paths-ignore filter, no job-level if, no step-level if, no matrix and no needs, its job name is r2-governed-validation, its base branch filter is [main], and its activity types are opened, synchronize and reopened. Every invariant the design asserts about the trusted workflow is true of the bytes supplied."
+      }
+    ]
+  },
+  "D1_disposition": {
+    "verdict": "REVIEWABLE_AND_PROPORTIONAL",
+    "scope_unchanged_in_kind_from_V3": true,
+    "WEP_mutation": false,
+    "PR_creation": false,
+    "new_observations_ordered_before_any_recency_producing_mutation": {
+      "verified": true,
+      "declared_order": [
+        "0 fresh read-only pre-step over all live repository/platform facts",
+        "1 read-only WEP availability plus zero-actor-rule save-representability observation (do not save) before any recency mutation",
+        "2 accepted-collaborator enumeration with API->Collaborators-UI fallback and pending-invitation observation before any recency mutation",
+        "3 read-only historical anchor verification",
+        "4 create exact push-probe ref from frozen main",
+        "5 write exact reviewed push workflow using exact safe commit message",
+        "6 observe successful PRE-WEP push positive and capture recency anchor"
+      ],
+      "assessment": "Indices 0 to 3 are read-only; the first irreversible act is at index 4. Both new observations additionally carry the phrase 'before any recency mutation' inline, so the ordering is stated twice rather than left to list position. This is the correct construction: a failed representability or collaborator observation stops the line before any recency anchor is created, which means it costs nothing."
+    },
+    "proportionality": "The two additions are observations, not mutations. D1's irreversible footprint is unchanged from V3: one ref, one workflow blob, one new recency anchor.",
+    "irreversibility_accounting": "push_probe.recency_cost still states plainly that the pre-WEP successful homonymous check becomes the newest recency anchor and restarts Stage B contamination. The cost is disclosed rather than concealed.",
+    "stop_clause": "Widened in V4 to name actor-rule representability, collaborator and invitation ambiguity alongside the V3 list.",
+    "does_remaining_ambiguity_make_D1_unsafe": "No. Every D1 dependency is either verified within this packet, converted to a read-only precondition terminating in STOP, or converted to an empirical precondition whose failure stops the line before WEP is touched."
+  },
+  "D2_disposition": {
+    "verdict": "REVIEWABLE_NOT_YET_ELIGIBLE_FAIL_CLOSED_PRECONDITIONS_INTACT",
+    "precondition": "D1 PASS + fresh D2 pre-step + independent PASS of exact WEP treatment spec V2 + immediate accepted-collaborator and pending-invitation recheck SATISFIED",
+    "fail_closed_check": "All four conjuncts are required. The fourth is new in V4 and is the operative half of B1S3-02.",
+    "ordering_check": "Recheck (0) precedes mutation (1). PR creation (2) and enumeration at creation (3) precede the liveness gate (4), which precedes re-enumeration (5), which precedes interpretation (6). No negative is interpretable before trusted post-WEP liveness is proven.",
+    "readback": "Field-by-field against exact WEP treatment spec V2, divergence => INVALID_EXPERIMENT. The acceptance list grew from ten to twelve items, adding the D1 representability observation and the immediate single-operator recheck.",
+    "residual_risk_direction": "Fail-closed throughout. Every enumerated misconfiguration direction resolves to STOP, UNCERTAIN_AND_STOP, INVALID_PROBE, INVALID_EXPERIMENT or PROBE_FAIL."
+  },
+  "D3_disposition": {
+    "verdict": "REVIEWABLE_NOT_YET_ELIGIBLE_TWO_PATH_AUTHORITY_NOW_COMPLETE",
+    "separate_human_gate_required": true,
+    "paths": [
+      "AFTER_D2",
+      "D1_COMPLETE_D2_NEVER_GRANTED"
+    ],
+    "stranded_cleanup_resolved": true,
+    "wep_mutation_smuggled_into_D3": false,
+    "stored_final_settings_evidence_required": true,
+    "assessment": "The two sequencing findings against D3 are both closed, and closing them did not import WEP mutation authority into D3 nor cleanup authority into D2. The split remains clean in both directions."
+  },
+  "B1_Human_Gate_D_readiness": {
+    "D1_Human_Gate_D_eligible_for_consideration": true,
+    "D2_Human_Gate_D_eligible_for_consideration": false,
+    "D3_Human_Gate_D_eligible_for_consideration": false,
+    "D1_note": "Eligible for consideration only. This result does not open a Human Gate, does not authorize D1, and confers no execution authority. A human must still open and decide Gate D on its own terms.",
+    "D2_precondition": "D1 PASS on recorded evidence, a fresh D2 pre-step, an independent PASS of exact WEP treatment spec V2 evaluated on its own, and the immediate accepted-collaborator and pending-invitation recheck SATISFIED at the moment before mutation.",
+    "D3_precondition": "Either AFTER_D2 (D2 evidence export verified and final intended or restored WEP state verified) or D1_COMPLETE_D2_NEVER_GRANTED (D1 evidence complete, D2 never authorized or started, no WEP mutation occurred), each behind its own Human Gate.",
+    "public_preview_reverification": "wep_spec_v2.authority.public_preview_reverification_required_immediately_before_mutation remains true. Current official documentation and the June 2026 changelog both present workflow execution protections as a public preview capability, so a spec written today can be stale at D2 through no fault of its author. The requirement is correct and is not discharged by this review.",
+    "carried_pre_step_distinction": {
+      "verified": true,
+      "evidence": "pre_step_gate.status = CARRIED_FROM_V3_AS_RECORDED_STATE_NOT_REOBSERVED_BY_V4_AUTHORING; the snapshot values are nested under recorded_snapshot rather than sitting at the top level as in V3; fresh_read_required_before_each_future_D_gate = true; rule = 'The recorded snapshot is provenance only. Re-read every live repository/platform value at each future D gate. Any drift is evaluated before authority; no recorded value is execution authority.'",
+      "assessment": "This is an improvement on V3, where the same values sat at the top level of pre_step_gate and could more easily be mistaken for fresh observations. The adversarial scenario 'carried V3 pre-step values are mistaken for fresh live observations' is structurally addressed."
+    }
+  },
+  "blocking_findings": [],
+  "sequencing_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "B1N4-01",
+      "finding": "The empty-actor-rule representability observation records whether the save action is visibly available or enabled, but neither artifact states in terms that an available or enabled save control is evidence about the client-side surface only and does not establish the server-accepted post-save state. The forbidden-claim strings 'actor_rules=[] representability proven before D1 observation' (spec V2) and 'actor_rules=[] representability assumed without the D1 observation' (design V4) are each worded so that a reader could infer the converse, that the D1 observation proves representability.",
+      "direction": "Fail-closed. field_by_field_D2_acceptance requires the empty actor rule set at readback and terminates in INVALID_EXPERIMENT, so a save that would in fact be rejected is caught at D2 rather than believed.",
+      "recommendation": "Add one sentence to GU-02 and to actor_rule.D1_read_only_representability_observation recording that the observation establishes UI representability only, and that the accepted post-save state can be established only by the D2 field-by-field readback.",
+      "gate": "D2",
+      "blocking": false
+    },
+    {
+      "id": "B1N4-02",
+      "finding": "Directory-level enumeration on the pull_request-negative branch is specified at the PR-negative HEAD at both required moments, but the TEST_MERGE surface, which two_surface_PR_observation requires to be read, is not itself enumerated at directory level.",
+      "direction": "Fail-closed. homonym_rule scores any non-trusted satisfactory homonymous result on PR_HEAD or TEST_MERGE as B1 FAIL and never PASS, so an unenumerated additional producer on the merge surface cannot manufacture a pass.",
+      "recommendation": "Either extend enumeration to the live TEST_MERGE object when it is available, or record explicitly that the merge surface is covered by homonym_rule rather than by enumeration, so the asymmetry is deliberate on the record.",
+      "gate": "D2",
+      "blocking": false
+    },
+    {
+      "id": "B1N4-03",
+      "finding": "V4 removes two version-pinned entries from claims_forbidden ('D1/D2/D3 Human Gate ready before independent V3 PASS' and 'Human Gate D ready before independent V2 review PASS') and adds a generic 'D1/D2/D3 execution authorized by this design'. Gate readiness and execution authorization are not the same proposition; the generic entry does not by itself forbid a readiness claim made ahead of an independent PASS of the current design version.",
+      "direction": "Net tightening overall. The list grows from 18 to 20 entries and adds three substantive prohibitions, and the substance of the removed entries survives in scope.independent_review_required_before_any_V4_execution = true and architecture_authority.execution_authority = NONE.",
+      "recommendation": "Restore a version-agnostic readiness prohibition, for example 'D1/D2/D3 Human Gate ready before an independent PASS of the current design version', so the readiness proposition is forbidden in its own right.",
+      "gate": "D1",
+      "blocking": false
+    },
+    {
+      "id": "B1N4-04",
+      "finding": "The third V3 D3 required change asked that the recorded reason for the incomplete-export stop be retained alongside the rule, namely that an active allow-list policy is more restrictive than the prestate rather than less. The rule is retained in three places, but the reason appears in neither artifact.",
+      "direction": "Neutral. Not a regression, since the reason was absent from the V3 design too. The operative behaviour is unchanged.",
+      "recommendation": "Record the reason next to D3.if_required_evidence_export_incomplete, so a D3 approver can see why stopping with the mutation in place is the safe direction rather than having to reconstruct it.",
+      "gate": "D3",
+      "blocking": false
+    },
+    {
+      "id": "B1N4-05",
+      "finding": "V4's supersedes block drops the probe_design_v2 and independent_review_v2 provenance entries that V3 carried, retaining only V3 and exact_treatment_v1. The V2 lineage is now reachable only transitively through the V3 artifact.",
+      "direction": "Neutral. Both V2 artifacts were nonetheless supplied to this review as required supporting artifacts, and their hashes were recomputed and matched.",
+      "recommendation": "Restore the two V2 entries to supersedes so the chain is self-describing from the newest artifact alone.",
+      "gate": "D1",
+      "blocking": false
+    },
+    {
+      "id": "B1N4-06",
+      "finding": "B1N3-01 is correctly carried open, but its weight has increased rather than stayed constant. B1S3-01 adds a D1 observation performed directly on the configuration surface, and current official documentation describes that surface's procedure as creating a ruleset and then adding event and actor rules, while spec V2 still names the object with policy_name_exact and policy_type and uses the term ruleset only once in passing.",
+      "direction": "Neutral for safety, adverse for operator accuracy. An operator performing the new zero-actor-rule observation will be reading a surface labelled with the other term.",
+      "recommendation": "Adopt the V3 recommendation now rather than at D2, since the artifact has acquired a second reader of that surface.",
+      "gate": "D2",
+      "blocking": false
+    }
+  ],
+  "github_semantics_verified": [
+    "Workflow execution protections are built on the GitHub rulesets framework and are available at the enterprise, organization and repository levels.",
+    "Actions policies are configured in a Policies section of GitHub Actions settings that is separate from General settings, and workflow execution protections are currently the only policy type.",
+    "Workflow execution protections define an allow list and come with two rule types, event and actor.",
+    "Event rules control which events are permitted, with push, pull_request, pull_request_target and workflow_dispatch given as examples, so pull_request_target is itself a controllable event and an allow list omitting it would remove the trusted liveness control. The spec permits it explicitly.",
+    "By default every user with write access to a repository can trigger workflows, which is exactly the residual that actor_rules=[] leaves in force and that the single-operator premise must carry.",
+    "Evaluate mode exists as a non-enforcing mode, which is why the spec's rejection of evaluate as a pass condition is a real distinction rather than a formality.",
+    "The documented configuration procedure is to create a ruleset and then add event and actor rules.",
+    "A repository collaborators listing is documented, whose permissions hash carries base role permissions and whose role_name is the highest role after considering all sources of grant.",
+    "A repository invitations listing is documented that returns all currently open invitations when authenticated as a user with admin rights, so the pending-invitation surface is observable in principle.",
+    "The repository contents create-or-update operation is documented as PUT on /repos/{owner}/{repo}/contents/{path}.",
+    "OAuth app tokens and classic personal access tokens need the repo scope for that endpoint, and the workflow scope is additionally required to modify files in the .github/workflows directory.",
+    "The contents write request body documents an optional committer object, which is what makes the author/committer override prohibition load-bearing rather than decorative.",
+    "The current REST API version string is 2026-03-10, matching the value declared in rulesets_and_actions_prestate.api_version."
+  ],
+  "github_semantics_uncertain": [
+    {
+      "id": "GHU4-01",
+      "question": "Can a workflow execution protection ruleset be saved carrying an event rule and zero actor rules?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "No official page reviewed states it in either direction. The configuration procedure is described as creating a ruleset and then adding event and actor rules, which settles neither.",
+      "handling_in_v4": "Converted into a read-only D1 precondition (GU-02) whose failure is NOT_SATISFIED_AND_STOP_BEFORE_D2, with a second fail-closed route at D2 readback. Correct handling of documentary silence."
+    },
+    {
+      "id": "GHU4-02",
+      "question": "Is there a documented machine-readable REST surface for reading or writing workflow execution protection configuration on this plan?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "Not established by any official page reviewed. Silence is not converted into a claim that no such surface exists.",
+      "handling_in_v4": "rulesets_and_actions_prestate states that absence from REST is absence of evidence only and that 400/404/410/version/media failures are transport outcomes rather than evidence of WEP absence. Correct."
+    },
+    {
+      "id": "GHU4-03",
+      "question": "Is repository-level workflow execution protection available on this specific account and plan?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "Availability on a given personal account and plan is not established by documentation. The repository-level article additionally still describes scoping via repository custom properties, an organization-level construct, which is the substance of B1N3-10.",
+      "handling_in_v4": "GU-01 remains a HARD_D1_PRECONDITION discharged by visible support in the repository surface, failing to STOP_AND_REDESIGN before branch creation or recency mutation."
+    },
+    {
+      "id": "GHU4-04",
+      "question": "Does a commit created through the Contents API dispatch an on: push workflow?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "Not stated affirmatively by any official page reviewed. The documented negative case concerns the repository GITHUB_TOKEN.",
+      "handling_in_v4": "Converted into the D1 dynamic positive control, whose failure stops the line before WEP is touched, with transport equality carrying the certification forward to D2. Correct."
+    },
+    {
+      "id": "GHU4-05",
+      "question": "Does a bypass surface exist for this feature, and what would an empty value mean?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "No bypass field is documented for workflow execution protections.",
+      "handling_in_v4": "present-and-empty required if exposed, non-empty => STOP, absent => INAPPLICABLE_NOT_SATISFIED with an explicit prohibition on inferring universal no-bypass. Correct."
+    },
+    {
+      "id": "GHU4-06",
+      "question": "Are refs/pull/N/head refs retained and immutable?",
+      "status": "MARK_UNCERTAIN",
+      "reason": "No documentation reviewed guarantees retention or immutability. This is B1N3-08, carried as a handled fail-closed assessment.",
+      "handling_in_v4": "The historical anchor's strength rests on the commit SHA and blob equality, with the ref as a convenience retrieval path; both failure modes resolve to STOP."
+    },
+    {
+      "id": "GHU4-07",
+      "question": "Does an allow list that omits an event class deny that class?",
+      "status": "MARK_UNCERTAIN_FOR_UNPROBED_CLASSES",
+      "reason": "The model is documented as an allow list, but the documented event set is exemplary rather than exhaustive, and this review found no official statement enumerating the denial semantics for unlisted classes.",
+      "handling_in_v4": "B1 claims are bounded to the two event classes actually probed; unprobed_event_classes.status = UNCLAIMED_BOTH_DIRECTIONS and claims_forbidden includes 'unprobed event protection'. Correct."
+    }
+  ],
+  "open_controls_preservation_check": {
+    "verdict": "PRESERVED_NO_ACCIDENTAL_CLOSURE",
+    "method": "Direct dict comparison of pre_step_gate current_blockers V3 vs V4 and set comparison of claims_forbidden, not author assertion.",
+    "current_blockers_identical_to_v3": true,
+    "controls": {
+      "BP-B-01": {
+        "state": "HUMAN_ACCEPTED_RISK_SINGLE_OPERATOR_NOT_MECHANICALLY_CLOSED",
+        "preserved": true
+      },
+      "BP-B-02": {
+        "state": "CONFIRMED_BLOCKING_FINDING_ADDRESSED_BY_WEP_DESIGN_PENDING_PROOF",
+        "preserved": true,
+        "note": "Still pending proof. V4 is a design revision and proves nothing empirically."
+      },
+      "BP-B-03": {
+        "state": "BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH",
+        "preserved": true,
+        "note": "claims_forbidden explicitly forbids 'BP-B-03 resolved'."
+      },
+      "BP-B-04": {
+        "state": "NOT_APPLICABLE_ZERO_APPROVAL_PROFILE_NOT_MECHANICALLY_RESOLVED",
+        "preserved": true
+      },
+      "STAGE_B_RECENCY_CONTAMINATION": {
+        "state": "ACTIVE",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'recency resolved'. D1 would create a new anchor and restart the window; push_probe.recency_cost states this plainly."
+      },
+      "DC-006": {
+        "state": "OPEN",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'DC-006 closed'."
+      },
+      "EXP-01": {
+        "state": "OPEN",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'EXP-01 closed'."
+      },
+      "IR2-002": {
+        "state": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'IR2-002 discharged'."
+      },
+      "MINOR-5": {
+        "state": "ACTIVE_R2-4_NOT_EXECUTED",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'MINOR-5 completed'."
+      },
+      "ENFORCED": {
+        "state": false,
+        "preserved": true,
+        "note": "claims_forbidden forbids 'ENFORCED' and 'AISLADA'."
+      },
+      "R2-4_exit": {
+        "state": "NOT_EXECUTED",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'R2-4 exit'."
+      },
+      "R2-5": {
+        "state": "NOT_AUTHORIZED",
+        "preserved": true,
+        "note": "claims_forbidden forbids 'R2-5 authorized'."
+      }
+    },
+    "architecture_disposition_matches_v5_review": true,
+    "architecture_disposition_value": "ARCHITECTURE_PASS_WITH_B1_EXECUTION_NOT_READY",
+    "claims_forbidden_added_in_v4": [
+      "actor_rules=[] representability assumed without the D1 observation",
+      "single-operator premise satisfied when collaborator/invitation enumeration is unavailable",
+      "push and pull_request negative claims have equal evidential strength",
+      "D1/D2/D3 execution authorized by this design"
+    ],
+    "claims_forbidden_removed_in_v4": [
+      "D1/D2/D3 Human Gate ready before independent V3 PASS",
+      "Human Gate D ready before independent V2 review PASS"
+    ],
+    "removal_assessment": "Both removals are version-pinned strings whose substance is carried by scope.independent_review_required_before_any_V4_execution and by the new generic execution-authorization prohibition. Net direction is tightening: 18 entries to 20, with three substantive new prohibitions. Recorded as B1N4-03 rather than as a regression.",
+    "nonblocking_findings_disposition_check": {
+      "B1N3-01": {
+        "v4_claim": "CARRIED_OPEN_RECOMMENDATION",
+        "independently_confirmed_open": true,
+        "evidence": "Neither artifact adopts the ruleset term for the configured object; spec V2 still uses policy_name_exact and policy_type. Correctly not claimed closed."
+      },
+      "B1N3-02": {
+        "v4_claim": "CARRIED_OPEN_RECOMMENDATION",
+        "independently_confirmed_open": true,
+        "evidence": "credential_fingerprint is still an unsalted SHA-256 over a constant prefix concatenated with the raw token bytes. Unchanged from V3. Correctly not claimed closed."
+      },
+      "B1N3-03": {
+        "v4_claim": "CARRIED_OPEN_RECOMMENDATION",
+        "independently_confirmed_open": true,
+        "evidence": "No constraint on how raw token bytes reach the hashing step appears in V4. Correctly not claimed closed."
+      },
+      "B1N3-04": {
+        "v4_claim": "CARRIED_OPEN_RECOMMENDATION",
+        "independently_confirmed_open": true,
+        "evidence": "recency_anchor.must_capture still carries eight fields and does not include event, head_branch, workflow path or run_attempt. Correctly not claimed closed."
+      },
+      "B1N3-05": {
+        "v4_claim": "ADDRESSED",
+        "independently_confirmed_closed": true,
+        "evidence": "See B1N3_05_disposition. This is the one nonblocking finding V4 was required to close before D2, and it is closed."
+      },
+      "B1N3-06": {
+        "v4_claim": "CARRIED_OPEN_RECOMMENDATION",
+        "independently_confirmed_open": true,
+        "evidence": "mutation_client remains a descriptive field naming a local client rather than a checkable recorded precondition. The GITHUB_TOKEN prohibition survives explicitly. Correctly not claimed closed."
+      },
+      "B1N3-07": {
+        "v4_claim": "CARRIED_AS_FAIL_CLOSED_ASSESSMENT",
+        "independently_confirmed": true,
+        "evidence": "The bare skip-checks substring is still in forbidden_case_insensitive_substrings, still stricter than the documented trailer form, still in the fail-closed direction. Disposition matches V3."
+      },
+      "B1N3-08": {
+        "v4_claim": "CARRIED_AS_HANDLED_FAIL_CLOSED_ASSESSMENT",
+        "independently_confirmed": true,
+        "evidence": "historical_ref is still recorded alongside the commit SHA and blob OID, with missing-or-mismatch resolving to STOP. Disposition matches V3."
+      },
+      "B1N3-09": {
+        "v4_claim": "CARRIED_B2_DEFERRED",
+        "independently_confirmed": true,
+        "evidence": "B2_deferred_not_B1_blockers still carries the base_gate blob OID and expected sha256 as a B2 item; B1 consumes no base-gate evidence. Disposition matches V3."
+      },
+      "B1N3-10": {
+        "v4_claim": "CARRIED_AS_HARD_D1_AVAILABILITY_PRECONDITION",
+        "independently_confirmed": true,
+        "evidence": "GU-01 remains a HARD_D1_PRECONDITION, and target_encoding still forbids substituting organization or custom-property targeting while marking the machine encoding undocumented. The underlying documentation ambiguity was re-observed in this review and persists."
+      }
+    },
+    "bearing": "V4 closes no open control by side effect. Every blocker, the false-green total and the architecture disposition carry forward unchanged. Exactly one nonblocking finding, B1N3-05, moves from open to closed, and it moves because the V3 review listed it as required before D2, not by side effect."
+  },
+  "false_green_increment": {
+    "value": 0,
+    "before": 8,
+    "after": 8,
+    "reasoning": "This review executed nothing, contacted no repository surface, called no GitHub API against the repository under review, and mutated nothing. It cannot increment the count. The design's own accounting of eight before, zero design increment and eight after is correct for the same reason.",
+    "design_accounting_independently_checked": "false_green_accounting.before = 8, design_increment = 0, after = 8, matching the carried pre_step_gate snapshot value of 8 and the V5 architecture review's carried total of 8.",
+    "post_WEP_candidate_execution_rule_assessment": "Unchanged from V3 and still correct. An unexpected post-WEP candidate execution is scored PROBE_FAIL plus fresh recency contamination and the increment stays at zero as long as the harness reports FAIL; it becomes a false green only if the system nevertheless declares B1 PASS. Such an execution would also be a fresh empirical instance of the BP-B-02 producer collision and should be recorded against that blocker.",
+    "residuals_do_not_increment": "All six nonblocking findings in this review are fail-closed in direction. None can manufacture a false green; each resolves to STOP, NOT_SATISFIED, INVALID_PROBE, INVALID_EXPERIMENT, PROBE_FAIL or B1 FAIL.",
+    "structural_note": "This review by construction cannot generate a false green, because it does not run the experiment."
+  },
+  "required_changes_before_D1_Human_Gate_D": [
+    "None blocking. All V3 findings gated at D2 or D3 are closed, and no D1-gated blocking change remains outstanding.",
+    "Recommended, not required (B1N3-03, carried open from V3): require the credential to be supplied to the fingerprint computation through standard input or a file descriptor rather than as a command argument, so the raw secret cannot reach shell history or the process table.",
+    "Recommended, not required (B1N3-04, carried open from V3): restore the run identity capture list alongside the equality rule, with run_attempt explicitly included, since a re-run can change the attribution the equality rule asserts over.",
+    "Recommended, not required (B1N3-06, carried open from V3): restore the explicit checkable precondition that execution occurs outside GitHub Actions, rather than relying on a descriptive client field.",
+    "Recommended, not required (B1N4-03, new): restore a version-agnostic prohibition on claiming Human Gate readiness ahead of an independent PASS of the current design version.",
+    "Recommended, not required (B1N4-05, new): restore the V2 design and V2 review entries to the supersedes block so the provenance chain is self-describing from the newest artifact alone."
+  ],
+  "required_changes_before_D2_Human_Gate_D": [
+    "Structural, not a document change: D1 must complete and PASS on recorded evidence, a fresh D2 pre-step must be taken, exact WEP treatment spec V2 must receive its own independent PASS, and the accepted-collaborator and pending-invitation recheck must be SATISFIED immediately before mutation.",
+    "Recommended, not required (B1N4-01, new): state in GU-02 and in actor_rule.D1_read_only_representability_observation that an available or enabled save control evidences UI representability only, and that the accepted post-save state is established solely by the D2 field-by-field readback.",
+    "Recommended, not required (B1N3-01 / B1N4-06, carried open and now weightier): add the ruleset term alongside the policy term in the treatment spec, so both the D2 field-by-field readback and the new D1 zero-actor-rule observation map one to one onto the surface the operator actually sees.",
+    "Recommended, not required (B1N3-02, carried open from V3): adopt a salted keyed digest for the credential fingerprint, recording the per-experiment salt alongside the result, which preserves determinism and cross-gate equality exactly while removing the stable cross-artifact correlator.",
+    "Recommended, not required (B1N4-02, new): either extend directory enumeration to the live TEST_MERGE object when available, or record explicitly that the merge surface is covered by homonym_rule rather than by enumeration."
+  ],
+  "required_changes_before_D3_Human_Gate_D": [
+    "None blocking. Both V3 D3 sequencing findings are closed and the retained incomplete-export rule survives in all three places it appears.",
+    "Recommended, not required (B1N4-04, new): record next to D3.if_required_evidence_export_incomplete the reason the stop direction is safe, namely that an active allow-list policy is more restrictive than the prestate rather than less.",
+    "Structural, not a document change: whichever D3 precondition variant applies must be established on fresh evidence at its own Human Gate, and the variant actually taken must be recorded."
+  ],
+  "authority_confirmation": {
+    "this_result_authorizes": "NOTHING. At most it determines that D1 becomes eligible for consideration at a subsequent Human Gate D, which a human must still open and decide independently.",
+    "D1_authorized": false,
+    "D2_authorized": false,
+    "D3_authorized": false,
+    "WEP_configured_or_authorized": false,
+    "B1_closed": false,
+    "any_blocker_closed_by_this_result": false,
+    "recency_contamination_resolved": false,
+    "R2_4_exit": "NOT_EXECUTED",
+    "R2_5": "NOT_AUTHORIZED",
+    "human_gate_D_opened_by_this_result": false,
+    "canonicalization_performed": false,
+    "R2_STATE_md_updated": false,
+    "repository_or_github_mutation_performed": false,
+    "github_api_called_against_reviewed_repository": false,
+    "repository_contacted": false,
+    "branch_created": false,
+    "pull_request_created_or_closed": false,
+    "commit_or_push_performed": false,
+    "workflow_execution_performed": false,
+    "actions_policy_modified": false,
+    "ruleset_created_updated_or_deleted": false,
+    "cleanup_performed": false,
+    "reviewed_files_modified": false,
+    "documentation_contact_distinguished_from_repository_contact": true,
+    "live_facts_remain_assertions": "Every live repository and platform fact in this packet remains an assertion until re-observed at the corresponding pre-step. This review verified artifact bytes and public documentation only.",
+    "actions_actually_taken": [
+      "Extracted the supplied archive to a local read-only working copy and enumerated its contents.",
+      "Recomputed SHA-256 and byte counts for all fifteen supplied files without relying on any declared value.",
+      "Compared the recomputed values against the three expected values in the prompt and against every hash declared in the V4 review request, the V4 design and the WEP spec V2.",
+      "Parsed all twelve JSON files and all three YAML files.",
+      "Independently recomputed the Git blob OID of each of the three exact YAML files and compared them against the three OIDs the design asserts.",
+      "Extracted the verbatim required_change text of B1S3-01 through B1S3-06 and B1N3-01 through B1N3-10 from the V3 review, and of B1R2-01 and B1S2-01 through B1S2-05 from the V2 review.",
+      "Located and quoted the concrete V4 and WEP spec V2 fields bearing on each finding, without consulting the V4 closure maps as evidence.",
+      "Ran a flattened-path diff of design V3 against V4 and of WEP spec V1 against V2 to detect silent deletions, and a set comparison of claims_forbidden across versions.",
+      "Cross-checked the trusted workflow invariants the design asserts against the supplied trusted YAML bytes.",
+      "Compared the carried blocker set and false-green total between V3 and V4 by direct comparison.",
+      "Read current official GitHub documentation and the GitHub Changelog for workflow execution protections, Actions policies, repository collaborators, repository invitations and repository contents, and marked every unsettled question UNCERTAIN rather than resolving it by inference."
+    ],
+    "sources": [
+      "GitHub Docs, Workflow execution protections",
+      "GitHub Docs, About Actions policies (repository and enterprise-cloud variants)",
+      "GitHub Docs, Actions policies (repository)",
+      "GitHub Changelog, Control who and what triggers GitHub Actions workflows",
+      "GitHub Docs, REST API endpoints for collaborators",
+      "GitHub Docs, REST API endpoints for repository invitations",
+      "GitHub Docs, REST API endpoints for repository contents"
+    ],
+    "source_exclusions": "No third-party blog, Stack Overflow answer, Reddit thread, community discussion or community-maintained documentation was used as authority. Where such material appeared in search results it was disregarded."
+  },
+  "decision_rule_applied": "V4 PASS was available only if B1S3-01 through B1S3-06 and B1N3-05 are substantively closed against the verbatim V3 required_change text, B1R2-01 and B1S2-01 through B1S2-05 do not regress, the authority split stays fail-closed, and no new blocking ambiguity is introduced. All four conditions hold on the bytes as supplied: integrity is clean on all thirteen required artifacts with all three Git blob OIDs independently reproduced; each of the seven required closures is anchored in named fields rather than in a closure map; the V1-to-V2 and V3-to-V4 diffs show no dropped control; the D1/D2/D3 split remains fail-closed in both directions with no cleanup smuggled into D2 and no WEP mutation smuggled into D3; and the six residuals identified are fail-closed and nonblocking. PASS is not execution authority. It determines only that D1 may again be considered at a subsequent Human Gate D. D2 and D3 remain ineligible and must be evaluated separately against their own preconditions.",
+  "authority_boundary": "Read-only independent review only. No GitHub or repository mutation, no workflow execution, no canonicalization, no phase change, and no modification of any reviewed file."
+}
