@@ -1,0 +1,168 @@
+{
+  "schema_version": 4,
+  "artifact_type": "r2-4-stage-b-b1-probe-independent-review-request",
+  "status": "READ_ONLY_REVIEW_REQUEST_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-17T06:13:00Z",
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "review_target": {
+    "file": "r2_4_b1_wep_probe_design_v4.json",
+    "sha256": "8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4",
+    "bytes": 30073
+  },
+  "exact_treatment_target": {
+    "file": "r2_4_b1_wep_exact_treatment_spec_v2.json",
+    "sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+    "bytes": 6975
+  },
+  "required_supporting_artifacts": [
+    {
+      "file": "r2_4_b1_wep_probe_design_v3.json",
+      "sha256": "e3347d321f7ffcb3506c5338d274090a9e7319d5fdfda0d4bbe06f8cf9baca3d",
+      "bytes": 22117,
+      "role": "superseded V3 design to diff field-by-field"
+    },
+    {
+      "file": "r2_4_b1_wep_probe_independent_review_result_v3.json",
+      "sha256": "709bc6d589caf69f373553f5fb499518c832b9309f91db2d0cd8acd7799d05fd",
+      "bytes": 78755,
+      "role": "authoritative B1S3-01..06 required_change text and B1N3 findings"
+    },
+    {
+      "file": "r2_4_b1_wep_exact_treatment_spec_v1.json",
+      "sha256": "0845961a466c924ea5fd7c31679582271f7b15100499e53c33a7ce8293cc728e",
+      "bytes": 3873,
+      "role": "superseded exact WEP treatment"
+    },
+    {
+      "file": "r2_4_b1_wep_probe_design_v2.json",
+      "sha256": "d70d8470bb87dda9cd010bc0f976f97316a6f93aab87c7308ad07afd2290759b",
+      "bytes": 20122,
+      "role": "earlier design used to detect regression across prior closures"
+    },
+    {
+      "file": "r2_4_b1_wep_probe_independent_review_result_v2.json",
+      "sha256": "240694219d34eacf246981c09b400acaf13bae8fa20554e4fc90ac022234b429",
+      "bytes": 93020,
+      "role": "original B1R2-01 and B1S2-01..05 required_change text"
+    },
+    {
+      "file": "r2_b1_trusted_r2_ci_snapshot.yml",
+      "sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "bytes": 2085,
+      "role": "exact trusted workflow"
+    },
+    {
+      "file": "r2_b1_pull_request_collision_exact.yml",
+      "sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+      "bytes": 423,
+      "role": "exact pull_request collision workflow"
+    },
+    {
+      "file": "r2_b1_push_collision_exact.yml",
+      "sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311",
+      "bytes": 369,
+      "role": "exact push collision workflow"
+    },
+    {
+      "file": "r2_4_stage_b_enforcement_design_v5_ruleset_single_operator.json",
+      "sha256": "5a0d3da1dc4bbbc7a5cd6d41611fcae9172c212f700cc38eae9c021e5de78493",
+      "bytes": 20284,
+      "role": "architecture authority"
+    },
+    {
+      "file": "r2_4_stage_b_independent_review_result_v5_ruleset_single_operator.json",
+      "sha256": "961b5b05d628139682df572ce869a080048e4617845e1b3571e37088c8c5f128",
+      "bytes": 83796,
+      "role": "architecture PASS and carried requirements"
+    }
+  ],
+  "integrity_rule": "Recompute V4 design, WEP spec V2 and every supplied supporting artifact hash/byte count; parse JSON/YAML. Any missing, mismatched or unparseable required input => INTEGRITY_FAIL/PARTIAL and no V4 PASS.",
+  "review_protocol": {
+    "fresh_context": true,
+    "reviewer_did_not_author_v4": true,
+    "all_v4_claims_untrusted": true,
+    "read_V3_review_required_change_text_verbatim": true,
+    "read_V2_review_required_change_text_for_regression_check": true,
+    "closure_verification_rule": "Judge B1S3-01..06 against the V3 review's required_change text, not against V4.review_v3_required_change_closure.",
+    "platform_semantics": "Current official GitHub Docs/Changelog only; official silence => UNCERTAIN.",
+    "mutation_or_execution": "PROHIBITED",
+    "PASS_authorizes": "NOTHING. A PASS may only make a subsequent D1 Human Gate D consideration eligible; it does not authorize D1, D2, D3, canonicalization or any GitHub mutation."
+  },
+  "mandatory_questions": [
+    "B1S3-01: Does V4 explicitly extend STOP_AND_REDESIGN to actor_rule and make a D1 read-only observation of whether the exact zero-actor-rule draft has an available/enabled save action part of D1 before recency mutation, while prohibiting activation of save and therefore not pretending that D1 actually saved the policy?",
+    "B1S3-02: Does V4 fully restore accepted-collaborator enumeration API -> repository Collaborators UI fallback -> STOP, classify an unobservable pending-invitation surface as NOT_SATISFIED/STOP, and require both to be rechecked immediately before D2 mutation?",
+    "B1S3-03: Does V4 enumerate the complete .github/workflows directory on the pull_request-negative HEAD both at PR creation and immediately before negative interpretation, with no additional candidate producer path permitted?",
+    "B1S3-04: Does D3 now require a stored field-by-field final GitHub-settings comparison against the intended post-D2 state or captured prestate according to the actual D2 path, rather than a bare assertion/precondition?",
+    "B1S3-05: Is there now an explicit D3 authority path for D1-complete/D2-never-granted that can delete only the D1-created ref, verify absence/non-probe invariance, and contains no WEP mutation?",
+    "B1S3-06: Are push and pull_request pass claims now split so the push negative is identified as same-window dynamic-positive-backed while the pull_request negative is historical-anchor-plus-structural-exclusions-backed, with no claim that their evidential strength is equal?",
+    "B1N3-05: Is transport equality now exact enough to require identical HTTP method PUT and identical Contents endpoint template for the D1 workflow write and D2 sentinel write, with exact resolved endpoint/method recorded?",
+    "Does WEP treatment spec V2 preserve every element that closed B1R2-01 while adding only the actor-rule/single-operator corrections required by B1S3-01/02?",
+    "Do all B1S2-01..05 closures survive V4 without regression, especially conditional WEP restore only after verified export and no WEP mutation in D3?",
+    "Does the D1 scope remain proportional: no WEP mutation and no PR creation, while the new read-only actor/collaborator observations are ordered before any recency-producing mutation?",
+    "Does the D2 scope remain fail-closed and require a fresh pre-step plus D1 PASS plus independent WEP-spec PASS plus immediate single-operator recheck before policy mutation?",
+    "Does the D3 split avoid stranded cleanup authority without smuggling WEP mutation into D3?",
+    "Are B1N3-01/02/03/04/06 deliberately still open recommendations rather than accidentally claimed closed? Are B1N3-07..10 preserved with their prior disposition?",
+    "Are false greens still exactly 8 and are BP-B-01..04, STAGE_B_RECENCY_CONTAMINATION, DC-006, EXP-01, IR2-002, MINOR-5, ENFORCED=false, R2-4 exit and R2-5 state preserved without accidental closure?",
+    "Does V4 clearly distinguish the carried V3 pre-step snapshot from a fresh live observation and require re-read at every future D gate?",
+    "Does any new ambiguity introduced by V4 make D1 unsafe or unreviewable? If yes, identify it as blocking; if no, state precisely what a V4 PASS would and would not make eligible."
+  ],
+  "adversarial_scenarios": [
+    "WEP UI requires at least one actor rule",
+    "actor-rule empty state appears representable but actual D2 readback differs",
+    "accepted collaborator API is incomplete or unavailable",
+    "repository Collaborators UI is unavailable as fallback",
+    "pending invitation surface cannot be observed",
+    "pending invitation becomes accepted between D1 and D2",
+    "additional write-capable collaborator appears immediately before D2",
+    "extra workflow producer exists on pull_request-negative head at PR creation",
+    "extra workflow producer appears between PR creation and negative interpretation",
+    "D3 records verified final settings but stores no field-by-field evidence",
+    "D1 completes and D2 is denied forever",
+    "D1-only cleanup attempts to touch WEP",
+    "downstream reader treats push and pull_request negatives as equally supported",
+    "D1 and D2 use different write APIs or different HTTP methods",
+    "V4 closure map says CLOSED while V3 required_change is not actually satisfied",
+    "V4 accidentally drops a B1R2/B1S2 control",
+    "V4 accidentally reduces false-green count or closes an existing blocker",
+    "carried V3 pre-step values are mistaken for fresh live observations"
+  ],
+  "requested_output": {
+    "format": "JSON",
+    "required_fields": [
+      "schema_version",
+      "artifact_type",
+      "status",
+      "reviewed_design_sha256",
+      "reviewed_design_bytes",
+      "reviewed_wep_spec_sha256",
+      "reviewed_wep_spec_bytes",
+      "integrity_gate",
+      "independence_satisfied",
+      "probe_design_disposition",
+      "wep_treatment_disposition",
+      "B1S3_01_disposition",
+      "B1S3_02_disposition",
+      "B1S3_03_disposition",
+      "B1S3_04_disposition",
+      "B1S3_05_disposition",
+      "B1S3_06_disposition",
+      "B1N3_05_disposition",
+      "prior_closure_regression_check",
+      "D1_disposition",
+      "D2_disposition",
+      "D3_disposition",
+      "B1_Human_Gate_D_readiness",
+      "blocking_findings",
+      "sequencing_findings",
+      "nonblocking_findings",
+      "open_controls_preservation_check",
+      "false_green_increment",
+      "required_changes_before_D1_Human_Gate_D",
+      "required_changes_before_D2_Human_Gate_D",
+      "required_changes_before_D3_Human_Gate_D",
+      "authority_confirmation"
+    ]
+  },
+  "decision_rule": "V4 PASS only if B1S3-01..06 and B1N3-05 are substantively closed against the V3 review required_change text, B1R2-01 and B1S2-01..05 do not regress, the authority split stays fail-closed, and no new blocking ambiguity is introduced. PASS is not execution authority.",
+  "authority_boundary": "Read-only independent review only; no GitHub/repository mutation, workflow execution, canonicalization or phase change."
+}

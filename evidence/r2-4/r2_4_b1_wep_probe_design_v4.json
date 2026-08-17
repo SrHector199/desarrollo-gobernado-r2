@@ -1,0 +1,602 @@
+{
+  "schema_version": 4,
+  "artifact_type": "r2-4-stage-b-b1-wep-probe-design",
+  "status": "READ_ONLY_PROBE_DESIGN_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-17T06:13:00Z",
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "supersedes": {
+    "probe_design_v3": {
+      "file": "r2_4_b1_wep_probe_design_v3.json",
+      "sha256": "e3347d321f7ffcb3506c5338d274090a9e7319d5fdfda0d4bbe06f8cf9baca3d",
+      "bytes": 22117
+    },
+    "independent_review_v3": {
+      "file": "r2_4_b1_wep_probe_independent_review_result_v3.json",
+      "sha256": "709bc6d589caf69f373553f5fb499518c832b9309f91db2d0cd8acd7799d05fd",
+      "bytes": 78755,
+      "verdict": "PROBE_DESIGN_PASS_WITH_SEQUENCING_CHANGES_BEFORE_D2_AND_D3"
+    },
+    "exact_treatment_v1": {
+      "file": "r2_4_b1_wep_exact_treatment_spec_v1.json",
+      "sha256": "0845961a466c924ea5fd7c31679582271f7b15100499e53c33a7ce8293cc728e",
+      "bytes": 3873
+    }
+  },
+  "revision_scope": {
+    "rule": "Apply only the minimum changes required by the independent V3 review before D2/D3, plus B1N3-05 because that review explicitly lists it as required before D2. Preserve all other nonblocking findings without accidental closure.",
+    "sequencing_findings_addressed": [
+      "B1S3-01",
+      "B1S3-02",
+      "B1S3-03",
+      "B1S3-04",
+      "B1S3-05",
+      "B1S3-06"
+    ],
+    "additional_required_before_D2_addressed": [
+      "B1N3-05"
+    ],
+    "nonblocking_findings_carried_open_or_as_assessment": [
+      "B1N3-01",
+      "B1N3-02",
+      "B1N3-03",
+      "B1N3-04",
+      "B1N3-06",
+      "B1N3-07",
+      "B1N3-08",
+      "B1N3-09",
+      "B1N3-10"
+    ]
+  },
+  "architecture_authority": {
+    "v5_design": {
+      "file": "r2_4_stage_b_enforcement_design_v5_ruleset_single_operator.json",
+      "sha256": "5a0d3da1dc4bbbc7a5cd6d41611fcae9172c212f700cc38eae9c021e5de78493",
+      "bytes": 20284
+    },
+    "v5_review": {
+      "file": "r2_4_stage_b_independent_review_result_v5_ruleset_single_operator.json",
+      "sha256": "961b5b05d628139682df572ce869a080048e4617845e1b3571e37088c8c5f128",
+      "bytes": 83796
+    },
+    "architecture_disposition": "ARCHITECTURE_PASS_WITH_B1_EXECUTION_NOT_READY",
+    "current_permission": "READ_ONLY_REVISION_AND_INDEPENDENT_REVIEW_ONLY",
+    "execution_authority": "NONE"
+  },
+  "pre_step_gate": {
+    "status": "CARRIED_FROM_V3_AS_RECORDED_STATE_NOT_REOBSERVED_BY_V4_AUTHORING",
+    "recorded_snapshot": {
+      "plan_v2": "REVIEWED",
+      "live_main_sha": "5a5b4b1bd95f50824180e2146f9d76fbe861db7c",
+      "live_main_tree": "bcce13857458b651d4bd9ac727854056a6a27b2b",
+      "default_branch": "main",
+      "visibility": "public",
+      "authenticated_user_observed": "SrHector199",
+      "branch_protection": false,
+      "required_checks": [],
+      "rulesets": [],
+      "open_pull_requests": [],
+      "phase": "R2-4",
+      "false_greens": 8,
+      "current_blockers": {
+        "BP-B-01": "HUMAN_ACCEPTED_RISK_SINGLE_OPERATOR_NOT_MECHANICALLY_CLOSED",
+        "BP-B-02": "CONFIRMED_BLOCKING_FINDING_ADDRESSED_BY_WEP_DESIGN_PENDING_PROOF",
+        "BP-B-03": "BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH",
+        "BP-B-04": "NOT_APPLICABLE_ZERO_APPROVAL_PROFILE_NOT_MECHANICALLY_RESOLVED",
+        "STAGE_B_RECENCY_CONTAMINATION": "ACTIVE",
+        "DC-006": "OPEN",
+        "EXP-01": "OPEN",
+        "IR2-002": "BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK",
+        "MINOR-5": "ACTIVE_R2-4_NOT_EXECUTED",
+        "ENFORCED": false,
+        "R2-4_exit": "NOT_EXECUTED",
+        "R2-5": "NOT_AUTHORIZED"
+      }
+    },
+    "fresh_read_required_before_each_future_D_gate": true,
+    "rule": "The recorded snapshot is provenance only. Re-read every live repository/platform value at each future D gate. Any drift is evaluated before authority; no recorded value is execution authority."
+  },
+  "scope": {
+    "design_only": true,
+    "future_execution_class": "D",
+    "independent_review_required_before_any_V4_execution": true,
+    "Human_Gate_D_required_per_mutating_gate": true,
+    "forbidden_now": [
+      "GitHub/repository mutation",
+      "branch/PR creation",
+      "workflow execution",
+      "WEP/ruleset mutation",
+      "push",
+      "merge",
+      "cleanup/deletion",
+      "canonicalization",
+      "R2-4 exit",
+      "R2-5 entry"
+    ]
+  },
+  "review_v1_blocker_closure_map": {
+    "B1R-01": "ADDRESSED_COMMIT_MESSAGE_INVARIANT_AND_CAPTURE",
+    "B1R-02": "ADDRESSED_HISTORICAL_BLOB_ANCHOR_AND_REDERIVATION",
+    "B1R-03": "ADDRESSED_PR_BASE_MAIN_PRECONDITION",
+    "B1R-04": "ADDRESSED_TRUSTED_LIVENESS_BEFORE_NEGATIVE_INTERPRETATION",
+    "B1R-05": "ADDRESSED_GU01_GU04_AND_ACTIVE_NOT_EVALUATE",
+    "B1R-06": "ADDRESSED_AUTH_IDENTITY_TOKEN_AND_ACTIONS_PRESTATE",
+    "B1S-01": "ADDRESSED_RECENCY_ANCHOR_CAPTURE_AND_B2_CONSUMPTION_BARRIER",
+    "B1S-02": "ADDRESSED_SPLIT_D1_D2_D3",
+    "B1S-03": "ADDRESSED_CLEANUP_SEPARATE_D3",
+    "B1S-04": "CARRIED_AS_B2_BLOCKER_NOT_B1",
+    "B1S-05": "ADDRESSED_EXPLICIT_TWO_SURFACE_ENUMERATION",
+    "B1N-06": "ADDRESSED_UNPROBED_EVENTS_NAMED"
+  },
+  "exact_inputs": {
+    "trusted_workflow": {
+      "file": "r2_b1_trusted_r2_ci_snapshot.yml",
+      "sha256": "76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830",
+      "bytes": 2085
+    },
+    "pull_request_probe": {
+      "file": "r2_b1_pull_request_collision_exact.yml",
+      "sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+      "bytes": 423
+    },
+    "push_probe": {
+      "file": "r2_b1_push_collision_exact.yml",
+      "sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311",
+      "bytes": 369
+    }
+  },
+  "trusted_required_job_invariants": {
+    "context": "r2-governed-validation",
+    "source_repo_path": ".github/workflows/r2-ci.yml",
+    "source_main_blob_oid": "48a63b864c5e8f5506961194b41934c4e8088624",
+    "no_paths_or_paths_ignore": true,
+    "no_job_level_if": true,
+    "no_step_if": true,
+    "no_matrix": true,
+    "no_needs": true,
+    "events": [
+      "opened",
+      "synchronize",
+      "reopened"
+    ],
+    "branch_base_filter": [
+      "main"
+    ],
+    "D_rejection_requires": {
+      "conclusion": "failure",
+      "reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS"
+    },
+    "never_accepted_as_D_rejection": [
+      "skipped",
+      "neutral",
+      "missing",
+      "cancelled",
+      "timed_out",
+      "action_required",
+      "stale",
+      "generic infrastructure failure"
+    ],
+    "drift_rule": "Any new filter/if/dependent-job skip path affecting the required job is class-D design drift => STOP and independent review."
+  },
+  "commit_message_control": {
+    "finding": "B1R-01",
+    "forbidden_case_insensitive_substrings": [
+      "[skip ci]",
+      "[ci skip]",
+      "[no ci]",
+      "[skip actions]",
+      "[actions skip]",
+      "skip-checks"
+    ],
+    "exact_future_messages": {
+      "D1_PUSH_POSITIVE": "test: add R2 B1 push collision positive control",
+      "D2_PUSH_SENTINEL": "test: trigger R2 B1 push collision negative sentinel",
+      "D2_PR_COLLISION": "test: add R2 B1 pull request collision negative"
+    },
+    "pre_write_rule": "Before every probe commit/write, obtain the full exact commit message that GitHub will record, normalize only for the search, and reject if any forbidden token/sub-string appears. The literal message is then stored verbatim as evidence.",
+    "push_range_rule": "For every branch update, enumerate every newly introduced commit and store each full message verbatim; any forbidden token makes the probe INVALID_PROBE, never WEP_PASS.",
+    "pull_request_rule": "The PR HEAD commit message must equal D2_PR_COLLISION exactly and pass the same forbidden-token check before the PR absence can be interpreted.",
+    "normalization": "Case-fold only for search; do not trim/collapse/rewrite whitespace.",
+    "evidence_of_record": "Store exact message sent to GitHub and exact message read back after commit creation."
+  },
+  "pull_request_positive_control_anchor": {
+    "finding": "B1R-02",
+    "historical_PR": 5,
+    "historical_commit": "915edd738abe94bd0dea3ccf1e59e854f2d64af6",
+    "repo_path": ".github/workflows/r2-b02-collision-success.yml",
+    "historical_git_blob_oid": "02ddd98fe81cbda3ed5b08c538317f37caf7c26e",
+    "expected_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+    "expected_bytes": 423,
+    "historical_check_run_id": 95170108343,
+    "historical_conclusion": "success",
+    "historical_app_id": 15368,
+    "historical_app_slug": "github-actions",
+    "D1_read_only_rederivation": "Require refs/pull/5/head -> 915edd738abe94bd0dea3ccf1e59e854f2d64af6 and exact path blob OID 02ddd98fe81cbda3ed5b08c538317f37caf7c26e plus sha256/bytes equality. Missing/mismatch => STOP.",
+    "historical_ref": "refs/pull/5/head"
+  },
+  "pull_request_negative_preconditions": {
+    "finding": "B1R-03/B1S3-03",
+    "future_branch": "r2-4/b1-wep-pull-request-collision",
+    "base_ref": "main",
+    "repo_path": ".github/workflows/r2-b02-collision-success.yml",
+    "exact_workflow": {
+      "file": "r2_b1_pull_request_collision_exact.yml",
+      "sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3",
+      "bytes": 423
+    },
+    "exact_commit_message": "test: add R2 B1 pull request collision negative",
+    "must_capture": [
+      "PR.number",
+      "PR.base.ref",
+      "PR.base.sha",
+      "PR.head.ref",
+      "PR.head.sha",
+      "mergeable",
+      "mergeable_state",
+      "live TEST_MERGE if available"
+    ],
+    "valid_only_if": "PR.base.ref == main and PR.base.sha == frozen D2 main at PR creation",
+    "invalid_rule": "Any other base/ref/SHA => INVALID_PROBE; do not interpret candidate non-run as WEP evidence.",
+    "directory_invariance": {
+      "path": ".github/workflows",
+      "at_PR_creation": "Enumerate the complete directory at the exact PR-negative HEAD immediately after PR creation.",
+      "at_negative_interpretation": "Re-enumerate the complete directory at the exact PR-negative HEAD immediately before interpreting candidate non-execution.",
+      "allowed_candidate_producer": ".github/workflows/r2-b02-collision-success.yml with exact reviewed bytes only",
+      "trusted_base_workflow": ".github/workflows/r2-ci.yml is observed separately as the trusted pull_request_target liveness producer",
+      "failure": "Any additional candidate producer path, any path drift, or inability to enumerate => INVALID_PROBE_AND_STOP"
+    }
+  },
+  "push_probe": {
+    "future_branch": "r2-4/b1-wep-push-collision",
+    "repo_path": ".github/workflows/r2-b1-push-collision.yml",
+    "exact_workflow": {
+      "file": "r2_b1_push_collision_exact.yml",
+      "sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311",
+      "bytes": 369
+    },
+    "exact_git_blob_oid_from_review": "73564b9689b0b6d65c7f66d0d1789d128edafc7c",
+    "D1_positive_commit_message": "test: add R2 B1 push collision positive control",
+    "D2_sentinel_commit_message": "test: trigger R2 B1 push collision negative sentinel",
+    "sentinel_path": "tests/r2_b1_wep_push_negative_sentinel.txt",
+    "sentinel_content": "R2 B1 WEP push negative sentinel v1\n",
+    "positive_control": "DYNAMIC_PRE_WEP_SAME_WORKFLOW_BYTES_REQUIRED",
+    "blob_invariance_rule": "At PRE_WEP_HEAD and POST_WEP_HEAD re-read the workflow blob at the same repo_path; both Git blob OIDs must equal 73564b9689b0b6d65c7f66d0d1789d128edafc7c and hashes/bytes must equal the reviewed file.",
+    "recency_cost": "The pre-WEP successful homonymous check becomes the newest recency anchor and restarts Stage B contamination.",
+    "directory_invariance": "Enumerate .github/workflows at PRE_WEP_HEAD and POST_WEP_HEAD; require no additional candidate producer path besides exact reviewed push workflow."
+  },
+  "identity_and_transport_invariant": {
+    "finding": "B1R-06/B1S2-02/B1S2-03/B1S2-04/B1N3-05",
+    "mutation_client": "Local gh/REST outside GitHub Actions",
+    "GITHUB_TOKEN": "FORBIDDEN",
+    "author_committer_override": "FORBIDDEN",
+    "file_write_transport_exact": {
+      "method": "PUT",
+      "endpoint_template": "/repos/{owner}/{repo}/contents/{path}"
+    },
+    "transport_equality": "D1 workflow write and D2 sentinel write must use identical HTTP method PUT and the identical endpoint template /repos/{owner}/{repo}/contents/{path}; record the exact resolved endpoint and method for every write. Any difference => STOP.",
+    "credential_fingerprint": "Compute locally SHA-256(\"R2-B1-CREDENTIAL\\0\" || raw token bytes) without printing/persisting token; store digest only; D1 and D2 digests must match.",
+    "credential_requirements": {
+      "capture": [
+        "token source/type",
+        "gh api /user login/id",
+        "OAuth scopes or accepted fine-grained permissions without secret material"
+      ],
+      "D1": ".github/workflows write requires documented workflow capability in addition to contents/repo capability",
+      "D2": "same fingerprint, type and captured scopes/permissions as D1 even though sentinel needs less",
+      "mismatch": "STOP"
+    },
+    "recorded_actor_binding": "For D1 positive-control run require actor.id == triggering_actor.id == authenticated /user id. D2 authenticated /user id must equal D1. Any mismatch => INVALID_EXPERIMENT.",
+    "prestate": [
+      "repo visibility",
+      "default branch name+SHA",
+      "Actions enabled/allowed",
+      "authenticated user",
+      "credential fingerprint/type/scopes",
+      "accepted collaborators with enumeration method/result",
+      "pending invitations with observability/result"
+    ],
+    "single_operator_rule": {
+      "accepted_collaborators_primary": "GitHub API enumeration",
+      "accepted_collaborators_fallback": "repository Collaborators UI",
+      "if_neither_can_prove_complete_set": "STOP",
+      "pending_invitations_unobservable": "NOT_SATISFIED_AND_STOP",
+      "additional_write_capable_identity": "STOP_AND_REOPEN_ACTOR_RULE_DESIGN",
+      "D2_immediate_recheck": "Repeat accepted collaborators and pending invitations immediately before WEP mutation; any drift or inability to prove => STOP."
+    }
+  },
+  "wep_uncertainties_and_preconditions": {
+    "GU-01": {
+      "status": "HARD_D1_PRECONDITION",
+      "discharge": "Repository Actions > Policies visibly supports repository WEP event-rule configuration.",
+      "failure": "STOP_AND_REDESIGN before branch creation/recency mutation."
+    },
+    "GU-02": {
+      "status": "HARD_D1_READ_ONLY_PRECONDITION_ADDED_BY_B1S3-01",
+      "question": "Does the repository Actions Policies surface visibly permit saving the intended event rule while carrying zero actor rules?",
+      "discharge": "Before D1 recency mutation, open the configuration surface without saving. Record the exact zero-actor-rule draft state and whether the save action is visibly available/enabled. Do not activate save. SATISFIED only if the UI does not require an actor rule.",
+      "failure": "NOT_SATISFIED_AND_STOP_BEFORE_D2; do not approximate."
+    },
+    "GU-04": {
+      "status": "OBSERVE_NOT_ASSUME",
+      "discharge": "If bypass exposed require empty; if absent record INAPPLICABLE_NOT_SATISFIED; non-empty => STOP."
+    },
+    "enforcement_mode": {
+      "required": "active",
+      "evaluate": "FORBIDDEN_AS_PASS",
+      "disabled": "FORBIDDEN_AS_PASS"
+    },
+    "exact_treatment_spec": {
+      "file": "r2_4_b1_wep_exact_treatment_spec_v2.json",
+      "sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+      "bytes": 6975
+    }
+  },
+  "rulesets_and_actions_prestate": {
+    "api_version": "2026-03-10",
+    "requests": [
+      "GET /repos/{owner}/{repo}/rulesets?includes_parents=true",
+      "GET /repos/{owner}/{repo}/rulesets?includes_parents=false",
+      "GET /repos/{owner}/{repo}/rulesets?targets=branch,tag,push&includes_parents=true"
+    ],
+    "conditional_reads": [
+      "GET /repos/{owner}/{repo}/rulesets/{ruleset_id}",
+      "GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history when documented/available"
+    ],
+    "store_per_request": [
+      "exact URL/query",
+      "X-GitHub-Api-Version",
+      "HTTP status",
+      "response headers excluding secrets",
+      "raw response body"
+    ],
+    "transport_outcomes": "400/404/410/version/media failures are transport/API outcomes, not evidence of WEP absence.",
+    "WEP_absence": "Absence from REST is absence of evidence only.",
+    "Actions_UI": [
+      "Actions enabled/allowed state",
+      "Policies availability",
+      "WEP prestate",
+      "event rules",
+      "actor rules",
+      "whether the intended zero-actor-rule state is visibly representable",
+      "bypass mechanism if exposed",
+      "fork/contributor approval configuration",
+      "accepted collaborator set or fallback UI evidence",
+      "pending invitation observability/result"
+    ],
+    "actor_rules_empty_residual": "actor_rules=[] leaves the documented default trigger permission in force for write-capable identities; accepted only while collaborator/invitation enumeration positively proves the single-operator premise.",
+    "trusted_liveness_strength": "pull_request_target is the liveness control; approval-hold configuration is a confounder baseline for candidate pull_request, not a reason to accept missing trusted liveness.",
+    "response_headers": "Store response headers excluding secrets for every read."
+  },
+  "post_WEP_liveness_gate": {
+    "finding": "B1R-04",
+    "rule": "No candidate non-execution may be labelled WEP-negative until a fresh trusted pull_request_target run after WEP is observed on the same PR and passes the liveness/evidence gate.",
+    "trusted_required_observation": [
+      "run event == pull_request_target",
+      "workflow path/source is the trusted default-branch workflow",
+      "run/check objects bind to the expected PR objects",
+      "check name == r2-governed-validation",
+      "check conclusion == failure for the D workflow-file PR",
+      "base gate reason == RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "not held/action_required/skipped/neutral/missing"
+    ],
+    "attribution": "Trusted liveness discharges global Actions-disabled and actor-rules-deny-all as competing explanations. Without it, every candidate non-run is UNCERTAIN_AND_STOP.",
+    "must_precede_any_negative_interpretation": true,
+    "documented_strength": [
+      "skip instructions suppress push/pull_request, not pull_request_target",
+      "trusted PRT liveness does not prove pull_request-class capability"
+    ]
+  },
+  "two_surface_PR_observation": {
+    "finding": "B1S-05",
+    "surfaces": [
+      "PR_HEAD",
+      "TEST_MERGE"
+    ],
+    "mandatory_raw_evidence_each_surface": [
+      "check suites",
+      "check runs",
+      "commit statuses"
+    ],
+    "workflow_runs": "enumerate relevant repository workflow runs across all represented statuses and bind by event/head/path/time/PR",
+    "homonym_rule": "Any non-trusted satisfactory homonymous result on PR_HEAD or TEST_MERGE => B1 FAIL, never PASS.",
+    "TEST_MERGE_scope": "Synthetic SHA is certified only for the observation window in which it is read.",
+    "PR_state_fields": [
+      "mergeable",
+      "mergeable_state"
+    ],
+    "absent_TEST_MERGE": "Record INAPPLICABLE with live mergeable/mergeable_state; never treat as an empty clean surface."
+  },
+  "recency_anchor": {
+    "finding": "B1S-01",
+    "source": "D1 push positive control",
+    "must_capture": [
+      "workflow run id",
+      "check run id",
+      "check name",
+      "head_sha",
+      "app.id",
+      "app.slug",
+      "completed_at UTC",
+      "exact workflow blob OID"
+    ],
+    "B2_barrier": "B2 must not use or configure required-status-check evidence until the seven-day window is recomputed from the newest qualifying homonymous result, including this D1 anchor and any later B1 failures that emit satisfactory homonyms.",
+    "qualifying_conclusions": [
+      "success",
+      "skipped",
+      "neutral"
+    ],
+    "capture_for_every_qualifying_homonym": [
+      "workflow run id",
+      "check run id",
+      "name",
+      "head_sha",
+      "app.id",
+      "app.slug",
+      "started_at",
+      "completed_at",
+      "workflow blob OID"
+    ],
+    "B2_consumption_barrier": "No required-check evidence/configuration until seven-day window is recomputed from newest qualifying homonymous result observed during B1."
+  },
+  "unprobed_event_classes": {
+    "status": "UNCLAIMED_BOTH_DIRECTIONS",
+    "rule": "Every GitHub Actions event class other than pull_request and push is unclaimed in both directions by B1.",
+    "examples_not_exhaustive": [
+      "workflow_dispatch",
+      "workflow_run",
+      "schedule",
+      "merge_group",
+      "repository_dispatch",
+      "create"
+    ]
+  },
+  "false_green_accounting": {
+    "before": 8,
+    "design_increment": 0,
+    "after": 8,
+    "post_WEP_candidate_executes_success": "PROBE_FAIL_AND_NEW_RECENCY_CONTAMINATION; false_green_increment remains 0 if the harness reports FAIL. It becomes a false green only if the system nevertheless declares B1 PASS.",
+    "post_WEP_candidate_satisfactory_execution": "B1 FAIL + fresh BP-B-02 collision instance + new recency anchor. false_green_increment remains 0 unless harness nevertheless declares PASS."
+  },
+  "future_gate_split": {
+    "D1_PRESTATE_AND_POSITIVE_CONTROL": {
+      "risk": "D",
+      "scope": [
+        "fresh read-only pre-step over all live repository/platform facts",
+        "read-only WEP availability plus zero-actor-rule save-representability observation (exact draft state and save-action availability/enabled state; do not save) before any recency mutation",
+        "accepted-collaborator enumeration with API->Collaborators-UI fallback and pending-invitation observation before any recency mutation",
+        "read-only historical anchor verification",
+        "create exact push-probe ref from frozen main",
+        "write exact reviewed push workflow using exact safe commit message",
+        "observe successful PRE-WEP push positive and capture recency anchor"
+      ],
+      "WEP_mutation": false,
+      "PR_creation": false,
+      "stop": "Any WEP availability/actor-rule representability/collaborator/invitation/identity/credential/scope/transport/message/blob/positive-control ambiguity => STOP before D2."
+    },
+    "D2_WEP_MUTATION_AND_NEGATIVES_WITH_CONDITIONAL_RESTORE": {
+      "risk": "D",
+      "precondition": "D1 PASS + fresh D2 pre-step + independent PASS of exact WEP treatment spec V2 + immediate accepted-collaborator and pending-invitation recheck SATISFIED",
+      "scope": [
+        "repeat accepted-collaborator enumeration and pending-invitation observation immediately before mutation; any failure => STOP",
+        "apply only exact WEP treatment spec V2",
+        "create exact PR-negative branch/commit/PR against main",
+        "enumerate .github/workflows at exact PR-negative HEAD at PR creation",
+        "prove trusted post-WEP liveness before negative interpretation",
+        "re-enumerate .github/workflows at exact PR-negative HEAD immediately before interpretation",
+        "interpret PR negative with full PR_HEAD and TEST_MERGE surfaces",
+        "write inert sentinel with same credential and identical PUT Contents endpoint transport",
+        "verify push workflow blob+directory invariance and interpret push negative",
+        "close PR without merge",
+        "export/preserve evidence",
+        "CONDITIONAL: after verified evidence export restore exact captured WEP prestate for exact D2 object if outcome requires restoration"
+      ],
+      "conditional_restore_limits": [
+        "only exact WEP object D2 changed",
+        "only exact captured prestate",
+        "no ref deletion",
+        "if evidence export incomplete => no restore; STOP with state in place"
+      ],
+      "readback": "Field-by-field against exact WEP treatment spec V2; divergence => INVALID_EXPERIMENT."
+    },
+    "D3_REF_CLEANUP_AND_FINAL_STATE_EVIDENCE_ONLY": {
+      "risk": "D",
+      "separate_Human_Gate_required": true,
+      "precondition_variants": {
+        "AFTER_D2": "D2 evidence export verified and final intended/restored WEP state verified.",
+        "D1_COMPLETE_D2_NEVER_GRANTED": "D1 evidence is complete; D2 was never authorized or started; no WEP mutation occurred."
+      },
+      "scope_by_path": {
+        "AFTER_D2": [
+          "delete only the exact two disposable B1 refs",
+          "verify both exact probe refs absent and all non-probe refs unchanged",
+          "produce and store a field-by-field final GitHub settings comparison against the intended post-D2 state if WEP intentionally remains active, or against the captured prestate if D2 restored it"
+        ],
+        "D1_COMPLETE_D2_NEVER_GRANTED": [
+          "delete only the exact D1-created push-probe ref",
+          "verify that exact ref absent and all non-probe refs unchanged",
+          "record explicitly that no WEP comparison/restoration component applies because D2 never executed"
+        ]
+      },
+      "WEP_mutation": false,
+      "stored_final_settings_evidence_required": true,
+      "if_required_evidence_export_incomplete": "NO_RESTORE_AND_NO_DELETION; STOP with current state in place."
+    }
+  },
+  "B2_deferred_not_B1_blockers": {
+    "base_gate_blob_oid_observed_on_current_main": "8bef7e1cd5f3504c5b69bc49602b5498844aad82",
+    "base_gate_sha256_expected": "f359b8c1c23491f05c722fe8553369bc97246169ec9875a4619fe2d99f21ff11",
+    "before_B2": "Review/freeze base_gate output contract and bind consumed run_id -> check_run_id -> head_sha -> app.id/app.slug -> trusted workflow blob. Do not use WORKFLOW_SOURCE_SHA == PR_BASE_SHA as an invariant.",
+    "before_B2_additions": [
+      "ship/freeze base_gate.py bytes+blob+sha256+output contract",
+      "bind run_id->check_run_id->head_sha->app.id/app.slug->trusted workflow blob",
+      "resolve pull_request_target check attachment object empirically",
+      "do not use WORKFLOW_SOURCE_SHA == PR_BASE_SHA"
+    ]
+  },
+  "B1_pass_claim_limit": {
+    "common_bounds": "At recorded time, with exact reviewed bytes/messages and exact WEP treatment ACTIVE, only the two event classes actually probed are claimed. Every other event class is unclaimed. No merge enforcement, universal no-bypass, durability or AISLADA claim.",
+    "push": {
+      "claim": "The exact candidate push producer path actually probed did not execute post-WEP.",
+      "evidential_basis": "Same-window dynamic PRE-WEP positive control using the same producer bytes plus D1/D2 credential identity/capability and identical PUT Contents endpoint transport, followed by post-WEP trusted pull_request_target liveness and exact push workflow blob/directory invariance.",
+      "strength_label": "SAME_WINDOW_DYNAMIC_POSITIVE_CONTROL"
+    },
+    "pull_request": {
+      "claim": "The exact candidate pull_request producer path actually probed did not execute post-WEP.",
+      "evidential_basis": "Historical PR #5 positive anchor over exact candidate bytes plus D1 re-derivation, exact commit-message control, exact main base/ref precondition, same-repository non-fork branch state observed at D2, full PR_HEAD/TEST_MERGE object enumeration, PR-head .github/workflows directory enumeration, and post-WEP trusted pull_request_target liveness.",
+      "strength_label": "HISTORICAL_ANCHOR_PLUS_STRUCTURAL_EXCLUSIONS"
+    },
+    "non_equivalence_rule": "Do not describe the push and pull_request negatives as equally supported; their claims are bounded separately by the evidential bases above."
+  },
+  "claims_forbidden": [
+    "B1 authorized",
+    "WEP configured",
+    "branch ruleset configured",
+    "universal producer isolation",
+    "unprobed event protection",
+    "BP-B-03 resolved",
+    "recency resolved",
+    "ENFORCED",
+    "AISLADA",
+    "DC-006 closed",
+    "EXP-01 closed",
+    "IR2-002 discharged",
+    "MINOR-5 completed",
+    "R2-4 exit",
+    "R2-5 authorized",
+    "universal no-bypass WEP claim",
+    "actor_rules=[] representability assumed without the D1 observation",
+    "single-operator premise satisfied when collaborator/invitation enumeration is unavailable",
+    "push and pull_request negative claims have equal evidential strength",
+    "D1/D2/D3 execution authorized by this design"
+  ],
+  "exact_WEP_treatment": {
+    "file": "r2_4_b1_wep_exact_treatment_spec_v2.json",
+    "sha256": "0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc",
+    "bytes": 6975
+  },
+  "review_v2_required_change_closure": {
+    "B1R2-01": "PRESERVED_BY_EXACT_WEP_TREATMENT_SPEC_V2",
+    "B1S2-01": "PRESERVED_D2_CONDITIONAL_WEP_RESTORE; D3_NO_WEP_MUTATION",
+    "B1S2-02": "PRESERVED_AND_TIGHTENED_TRANSPORT_EQUALITY",
+    "B1S2-03": "PRESERVED_TOKEN_CAPABILITY_EQUALITY",
+    "B1S2-04": "PRESERVED_RECORDED_ACTOR_EQUALITY",
+    "B1S2-05": "PRESERVED_QUALIFYING_RECENCY_SET"
+  },
+  "review_v3_required_change_closure": {
+    "B1S3-01": "ADDRESSED_ACTOR_RULE_STOP_AND_D1_READ_ONLY_REPRESENTABILITY_OBSERVATION",
+    "B1S3-02": "ADDRESSED_API_TO_UI_COLLABORATOR_FALLBACK_STOP_PENDING_INVITATION_NOT_SATISFIED_AND_D2_IMMEDIATE_RECHECK",
+    "B1S3-03": "ADDRESSED_PR_NEGATIVE_HEAD_DIRECTORY_ENUMERATION_AT_CREATION_AND_INTERPRETATION",
+    "B1S3-04": "ADDRESSED_D3_STORED_FIELD_BY_FIELD_FINAL_SETTINGS_EVIDENCE",
+    "B1S3-05": "ADDRESSED_D3_D1_COMPLETE_D2_NEVER_GRANTED_CLEANUP_VARIANT",
+    "B1S3-06": "ADDRESSED_PASS_CLAIM_SPLIT_BY_EVENT_CLASS_AND_EVIDENTIAL_BASIS",
+    "B1N3-05": "ADDRESSED_IDENTICAL_METHOD_AND_ENDPOINT_TRANSPORT_EQUALITY",
+    "B1N3-01": "CARRIED_OPEN_RECOMMENDATION_NOT_REQUIRED_BY_THIS_MINIMAL_REVISION",
+    "B1N3-02": "CARRIED_OPEN_RECOMMENDATION_NOT_REQUIRED_BY_THIS_MINIMAL_REVISION",
+    "B1N3-03": "CARRIED_OPEN_RECOMMENDATION_NOT_REQUIRED_BY_THIS_MINIMAL_REVISION",
+    "B1N3-04": "CARRIED_OPEN_RECOMMENDATION_NOT_REQUIRED_BY_THIS_MINIMAL_REVISION",
+    "B1N3-06": "CARRIED_OPEN_RECOMMENDATION_NOT_REQUIRED_BY_THIS_MINIMAL_REVISION",
+    "B1N3-07": "CARRIED_AS_FAIL_CLOSED_ASSESSMENT",
+    "B1N3-08": "CARRIED_AS_HANDLED_FAIL_CLOSED_ASSESSMENT",
+    "B1N3-09": "CARRIED_B2_DEFERRED",
+    "B1N3-10": "CARRIED_AS_HARD_D1_AVAILABILITY_PRECONDITION"
+  }
+}
