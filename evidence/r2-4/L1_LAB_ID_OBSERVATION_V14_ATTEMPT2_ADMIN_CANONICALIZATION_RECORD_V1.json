@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "artifact_type": "r2-4-stage-b-v14-v2-attempt2-administrative-canonicalization-record",
+  "status": "PROPOSED_NOT_CANONICAL_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-20T20:55:19Z",
+  "canonicalization_basis": "EXPLICIT_CURRENT_HUMAN_EXCEPTION",
+  "basis_artifact": {
+    "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_HUMAN_DOCUMENTARY_EXCEPTION_D_V1.json",
+    "sha256": "b6dd5844481048edb181f48f799f7b796d60e0f484a69be3e53c2ac4536483c0",
+    "bytes": 5432
+  },
+  "canonical_truth_to_record": {
+    "TECHNICAL_EVIDENCE": "PASS",
+    "ORIGINAL_HUMAN_GATE_PROVENANCE": "NOT_INDEPENDENTLY_EVIDENCED",
+    "DOCUMENTARY_FINDINGS_D01_D02": "WAIVED_NOT_CLOSED",
+    "CANONICALIZATION_BASIS": "EXPLICIT_CURRENT_HUMAN_EXCEPTION",
+    "EVIDENCE_PASS_CANONICALIZATION_ELIGIBLE": "MUST_NOT_BE_CLAIMED"
+  },
+  "exact_source_objects": [
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz",
+      "sha256": "742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3",
+      "bytes": 218408
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json",
+      "sha256": "3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e",
+      "bytes": 2101
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json",
+      "sha256": "b84b42e65d63ec6166cca75b75ff51d124c59c57648e6762b0d845b3661b4997",
+      "bytes": 32561
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json",
+      "sha256": "cc32e103f14e3f7ecdbd0bb6fed5a98d2d2eb47f4f765d3ffcbb7b1f9a8f8787",
+      "bytes": 36558
+    }
+  ],
+  "review_reconciliation": {
+    "post_execution_review_v2": {
+      "disposition": "CHANGES_REQUIRED_BEFORE_CANONICALIZATION",
+      "blocking_finding": "B-01",
+      "technical_findings": "PASS_CARRIED_FORWARD_ON_THEIR_OWN_TERMS",
+      "canonicalization_eligibility_from_review_alone": false
+    },
+    "documentary_review_v1": {
+      "disposition": "CHANGES_REQUIRED_DOCUMENTARY_GAP_REMAINS",
+      "blocking_findings": [
+        "D-01",
+        "D-02"
+      ],
+      "canonicalization_eligibility_from_review_alone": false
+    },
+    "current_human_exception": {
+      "effect": "WAIVES_D01_D02_FOR_FUTURE_CANONICALIZATION_RECORD; DOES_NOT_CLOSE_BY_EVIDENCE",
+      "remote_canonicalization_authorized_now": false
+    }
+  },
+  "exact_experimental_observation": {
+    "repository": "SrHector199/r2-stage-b-platform-semantics-lab-v13-e8a44c52",
+    "case_id": "LAB-ID-OBSERVATION",
+    "attempt": 2,
+    "PR_number": 2,
+    "target": "lab/id-observation-r2",
+    "target_sha": "3f5d292c9f76c1347ca2b6d13e63e816cf214159",
+    "source": "lab-src/id-observation-r2",
+    "PR_HEAD": "81bf9c0ec3e45bb05b0207cbb17068568f01970e",
+    "TEST_MERGE": "66ecbcfd658cc15887c7317ace31bb7fd77591d2",
+    "native_binding": "BINDING_PR_HEAD",
+    "native_app_id": 15368,
+    "native_check_run_id": 96206136617,
+    "native_check_suite_id": 87552342707,
+    "expected_app_id": 4641302,
+    "expected_app_installation_id": 154781449,
+    "expected_app_check_run_id": 96206259472,
+    "wrong_app_id": 4641692,
+    "wrong_app_installation_id": 154784106,
+    "wrong_app_check_run_id": 96206266309,
+    "terminal_state": "CLOSED_UNMERGED",
+    "scope_limit": "OBSERVED_ONLY_FOR_THIS_EXACT_REPOSITORY_WORKFLOW_TRIGGER_PR_BASE_HEAD_TEST_MERGE_TIME_AND_CONFIGURATION; NOT A UNIVERSAL GITHUB CLAIM"
+  },
+  "result_reconciliation": {
+    "status": "PASS",
+    "case_outcome": "OBSERVATION_COMPLETE",
+    "attempts_executed_in_this_runner": 1,
+    "failures": [],
+    "production_main_unchanged": true,
+    "PR6_unchanged": true,
+    "lab_main_unchanged": true,
+    "all_case_PRs_closed_unmerged": true,
+    "L2_started": false,
+    "rulesets_created": false,
+    "merge_performed": false,
+    "cleanup_performed": false,
+    "LAB_FALSE_GREENS": 0,
+    "production_FALSE_GREENS": 8
+  },
+  "limitations_to_record": [
+    "D-01 and D-02 are waived by current human exception, not closed by independent evidence.",
+    "Load-bearing evidence-format limitation NB-01 from post-execution review V2 remains recorded.",
+    "Classic branch protection was NOT_REOBSERVED live by the independent reviewer; package evidence carries the three HTTP 404 observations.",
+    "Three hash-pinned environment artifacts identified by NB-09 were declared but not supplied in the post-execution evidence bundle.",
+    "The native binding result is bounded to the exact experimental object and must not be generalized."
+  ],
+  "current_read_only_baseline_observed_before_package_creation": {
+    "production_repository": "SrHector199/desarrollo-gobernado-r2",
+    "production_main_sha": "5a5b4b1bd95f50824180e2146f9d76fbe861db7c",
+    "R2_STATE_blob_oid": "d8e5c7796322c6ac60761dba3485f69d15debe6b",
+    "production_PR6": {
+      "state": "OPEN",
+      "merged": false,
+      "head_sha": "4d0b627e28fd863aff7169529f99cd5d5ae5805c"
+    },
+    "lab_main_sha": "ec5eae95c6eec166713259d0a76dc13261e22c68",
+    "lab_PR2": {
+      "state": "CLOSED",
+      "merged": false,
+      "base_sha": "3f5d292c9f76c1347ca2b6d13e63e816cf214159",
+      "head_sha": "81bf9c0ec3e45bb05b0207cbb17068568f01970e"
+    },
+    "fresh_reobservation_required_before_remote_gate": true
+  },
+  "proposed_repository_paths": {
+    "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz",
+    "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json",
+    "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json",
+    "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json",
+    "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_HUMAN_DOCUMENTARY_EXCEPTION_D_V1.json": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_HUMAN_DOCUMENTARY_EXCEPTION_D_V1.json",
+    "canonicalization_record": "evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_ADMIN_CANONICALIZATION_RECORD_V1.json"
+  },
+  "future_remote_canonicalization_constraints": {
+    "risk_class": "D",
+    "fresh_pre_step_required": true,
+    "transport": "AUXILIARY_BRANCH_AND_PULL_REQUEST_ONLY",
+    "direct_commit_to_main": "FORBIDDEN",
+    "opaque_base64_blob_injection": "FORBIDDEN",
+    "automated_checks_may_run_but_no_green_reinterpretation": true,
+    "merge_authorized_by_this_package": false,
+    "PR6_must_remain_unchanged": true,
+    "no_execution_or_cleanup": true
+  },
+  "authority_boundary": {
+    "this_record_authorizes": "NOTHING",
+    "remote_canonicalization": false,
+    "attempt_2_reexecution": false,
+    "attempt_3": false,
+    "L2": false,
+    "D1": false,
+    "D2": false,
+    "D3": false,
+    "R2_4_exit": false,
+    "R2_5": false
+  }
+}

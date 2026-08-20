@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "artifact_type": "r2-4-stage-b-v14-v2-attempt2-documentary-closure-independent-review-result",
+  "revision": 1,
+  "review_completed_at_utc": "2026-08-20T20:12:00Z",
+  "authority_source": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_REQUEST_V1.json (sha256 77c8f2274896a4261a5ec56d083c356848054597d31a1752d6f3b1c8de8fdb8f, 4700 bytes, recomputed from bytes)",
+  "review_scope_statement": "Documentary only. The technical findings of post-execution review revision 2 were not re-adjudicated and are carried forward as PASS on their own terms. One direct contradiction was found and is reported; it is documentary, not technical.",
+
+  "integrity_gate": {
+    "status": "PASS",
+    "bundle": {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_REVIEW_BUNDLE.zip",
+      "declared_sha256": "c62796185f7d3ef5d55d3399907114080ad56e00023a3abd112c7f98afa29220",
+      "recomputed_sha256": "c62796185f7d3ef5d55d3399907114080ad56e00023a3abd112c7f98afa29220",
+      "declared_bytes": 21176,
+      "recomputed_bytes": 21176,
+      "match": true,
+      "entries": 7,
+      "unsafe_entries": 0,
+      "absolute_paths": 0,
+      "dotdot_entries": 0,
+      "symlinks": 0
+    },
+    "SHA256SUMS_verification": {
+      "lines": 6,
+      "ok": 6,
+      "failed": 0,
+      "missing": [],
+      "unlisted": ["SHA256SUMS.txt (self)"]
+    },
+    "recomputed_members": [
+      { "file": "HUMAN_GATE_SCOPE.json", "sha256": "619b3a773799da329ac9e49555daf0c56eef0e8abf3660208211d7a549f9f51f", "bytes": 1254, "manifest_match": true, "request_declared_match": true, "json_parse": "OK" },
+      { "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_AUTHORIZATION_RECONCILIATION_V1.json", "sha256": "85a7fa3806f85183521d8e358a3c21432dfbdefd8621d36411aba22784788cf2", "bytes": 3659, "manifest_match": true, "request_declared_match": true, "json_parse": "OK" },
+      { "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_REQUEST_V1.json", "sha256": "77c8f2274896a4261a5ec56d083c356848054597d31a1752d6f3b1c8de8fdb8f", "bytes": 4700, "manifest_match": true, "request_declared_match": "self", "json_parse": "OK" },
+      { "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_HUMAN_GATE_D_AUTHORIZATION_V1.json", "sha256": "606f9fb08c09b7e4ef973c815865c0151741ce77ff25018dba06a5edc62c695c", "bytes": 6687, "manifest_match": true, "request_declared_match": true, "json_parse": "OK" },
+      { "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json", "sha256": "b84b42e65d63ec6166cca75b75ff51d124c59c57648e6762b0d845b3661b4997", "bytes": 32561, "manifest_match": true, "request_declared_match": true, "json_parse": "OK" },
+      { "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json", "sha256": "3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e", "bytes": 2101, "manifest_match": true, "request_declared_match": true, "json_parse": "OK" }
+    ],
+    "declared_hashes_trusted_without_recomputation": false,
+    "verbatim_authorization_text_hash_check": {
+      "claimed_sha256": "fb0670e3079131e9c373890a869dd4efa091fda79bbed8502d84d88b5096939d",
+      "recomputed_utf8_nfc_sha256": "fb0670e3079131e9c373890a869dd4efa091fda79bbed8502d84d88b5096939d",
+      "match": true,
+      "probative_value": "NONE_FOR_PROVENANCE — the digest is computed over text stored in the same file that asserts the digest. It demonstrates internal self-consistency only and corroborates neither the existence nor the timing of the asserted authorization event."
+    },
+    "note": "Integrity of the supplied bundle is complete and recomputed from bytes at every level. Integrity is not authorization."
+  },
+
+  "independence_satisfied": {
+    "value": true,
+    "basis": "Fresh context. This reviewer authored none of the runner, the execution, the evidence package, the authorization record, the reconciliation note, the scope file, the prior reviews or the review request. Every hash, byte count and parse was recomputed locally from the supplied bytes. Declared hashes, declared dispositions and narrative assertions were treated as untrusted claims requiring verification. No network access, no GitHub access and no execution of any kind was performed."
+  },
+
+  "documentary_disposition": "CHANGES_REQUIRED_DOCUMENTARY_GAP_REMAINS",
+
+  "documentary_disposition_reason": "Two of the three items B-01 required were genuinely supplied and verify: HUMAN_GATE_SCOPE.json in full at the exact 1254 bytes and hash previously described but absent, and a reconciliation note whose temporal argument is internally sound. The third and decisive item was not supplied. B-01 required the Human Gate D authorization artifact that authorized attempt 2, hash- and byte-identified and dated between the runner-candidate review and execution start. What arrived instead is a record created at 2026-08-20T19:55:47Z, after execution and after revision 2 raised the finding, which by its own status field is a retrospective narration of an asserted event, whose only integrity anchor is a digest of its own text. Separately and independently, the scope binding fails: the verbatim human sentence does not state the mutation scope but delegates it to 'EL GATE ANTERIOR', a referent identified by no hash and no byte count, and the only prior gate supplied lists as NOT AUTHORIZED precisely the mutations that were performed. The gap is unchanged in kind from B-01 and remains closable without re-execution.",
+
+  "B_01_disposition": {
+    "status": "REMAINS_OPEN",
+    "closed": false,
+    "closable_without_re_execution": true,
+    "required_items_assessment": [
+      {
+        "item": "Human Gate D authorization artifact for attempt 2, hash- and byte-identified, dated between runner-candidate review (2026-08-19T00:00:00Z) and execution start (2026-08-19T19:54:25Z)",
+        "supplied": false,
+        "assessment": "NOT_SATISFIED. The file supplied is dated 2026-08-20T19:55:47Z, outside the required window, and self-declares as RETROSPECTIVE_DOCUMENTARY_RECORD. It is a later assertion about an artifact, not the artifact."
+      },
+      {
+        "item": "Artifact naming the exact lab repository, PR #2, the two App check-run surfaces and the two installation-token mints",
+        "supplied": "PARTIALLY",
+        "assessment": "NOT_SATISFIED_AS_AUTHORIZATION. Those exact objects are named, and they match observed reality without divergence, but they are named only inside the post-execution record's authorized_scope block, not inside any human-authored text and not inside the gate the human sentence actually incorporates."
+      },
+      {
+        "item": "HUMAN_GATE_SCOPE.json in full",
+        "supplied": true,
+        "assessment": "SATISFIED. Present, 1254 bytes, sha256 619b3a77..., matching the byte count revision 2 attributed to it while recording it as absent."
+      },
+      {
+        "item": "Reconciliation note explaining the relationship between the gate and the read-only 'Authorized next step' line at production main 5a5b4b1b",
+        "supplied": true,
+        "assessment": "SATISFIED_IN_FORM. The note is present and its temporal argument is coherent. Its soundness as reconciliation depends on the asserted authorization event, which is not independently evidenced."
+      }
+    ],
+    "what_would_close_it": "Contemporaneous provenance for the 2026-08-19T19:45:10Z decision that does not originate from the asserting party after the fact, plus exact identification of the incorporated scope. Any one of the first group, combined with the second, would convert this to PASS on documentary review alone and without re-execution."
+  },
+
+  "authorization_event_assessment": {
+    "asserted_timestamp_utc": "2026-08-19T19:45:10Z",
+    "timestamp_confirmed_as_asserted": true,
+    "timestamp_confirmed_as_occurred": false,
+    "confirmation_basis": "The value 2026-08-19T19:45:10Z appears in the authorization record and is consistent everywhere it recurs across the bundle. No artifact independent of the asserting party corroborates it.",
+    "source_type_declared": "USER_MESSAGE_IN_PROJECT_CONVERSATION",
+    "provenance_artifacts_supplied": {
+      "conversation_export_or_transcript": "ABSENT",
+      "message_identifier_or_permalink": "ABSENT",
+      "transcript_hash_pinned_at_or_before_execution": "ABSENT",
+      "signature_or_external_timestamp_authority": "ABSENT",
+      "runner_invocation_record": "ABSENT",
+      "environment_attestation_of_R2_V14_V2_ATTEMPT2_HUMAN_GATE_D": "ABSENT"
+    },
+    "provenance_gap_note": "Revision 2 named exactly these as missing: no invocation record, no environment attestation, no signed or hashed authorization artifact, no dated decision naming attempt 2. Every one of them is still missing. The bundle adds narration where attestation was required.",
+    "temporal_ordering": {
+      "runner_candidate_review_completed_at_utc": "2026-08-19T00:00:00Z",
+      "authorization_event_at_utc": "2026-08-19T19:45:10Z",
+      "execution_start_at_utc": "2026-08-19T19:54:25Z",
+      "review_precedes_authorization": true,
+      "authorization_precedes_execution": true,
+      "authorization_to_execution_gap_seconds": 555,
+      "ordering_verdict_as_recorded": "CONSISTENT_REVIEW_THEN_AUTHORIZATION_THEN_EXECUTION",
+      "ordering_verdict_as_proven": "UNPROVEN_BECAUSE_THE_AUTHORIZATION_TIMESTAMP_IS_SELF_ASSERTED",
+      "precision_caveat": "The review completion bound is 2026-08-19T00:00:00Z, exact midnight, which is date granularity rather than an observed instant. Adopted here without objection only because B-01 itself adopted the same bound."
+    },
+    "record_creation_vs_execution": {
+      "record_created_at_utc": "2026-08-20T19:55:47Z",
+      "created_after_execution": true,
+      "created_after_revision_2_completed": true,
+      "revision_2_completed_at_utc": "2026-08-20T19:52:00Z",
+      "interval_after_finding_raised_seconds": 227,
+      "note": "The authorization record, the reconciliation note and the review request all carry the identical creation instant 2026-08-20T19:55:47Z, three minutes and forty-seven seconds after revision 2 recorded B-01. This is not itself misconduct and is consistent with an honest attempt to document an omitted decision, but it means the entire closure package was composed in response to the finding rather than retrieved from a record predating it."
+    },
+    "exact_object_binding": {
+      "runner_sha256_in_verbatim_text": "dde9d52e37daae9dd937ce435bdb1b1085153b7ce14f839583cc9450a128ec9f",
+      "runner_binding_confirmed": true,
+      "review_sha256_in_verbatim_text": "d4f0ca894db8b782773ef8e88a946f80954dfbb3b4f85c3b6bbb978dd1eb54b1",
+      "review_binding_confirmed": true,
+      "both_match_request_and_revision_2_verified_exact_objects": true,
+      "single_execution_stated_verbatim": true,
+      "attempt_2_stated_verbatim": true,
+      "verdict": "CONFIRMED — the verbatim sentence does bind the exact runner and the exact independent review by full hash, and does state one single execution for attempt 2. This element of mandatory check 3 is satisfied on the face of the text."
+    },
+    "verdict": "ASSERTED_AND_INTERNALLY_CONSISTENT_BUT_NOT_INDEPENDENTLY_EVIDENCED"
+  },
+
+  "scope_binding_assessment": {
+    "verdict": "NOT_CONFIRMED",
+    "mechanism": "INCORPORATION_BY_REFERENCE",
+    "verbatim_scope_clause_effect": "The authorizing sentence states the scope, STOP and prohibitions are those defined in 'EL GATE ANTERIOR'. It enumerates no repository, no branch, no SHA, no pull request number, no token mint, no check-run surface and no evidence directory.",
+    "referent_identification": {
+      "identified_by_hash": false,
+      "identified_by_bytes": false,
+      "identified_by_filename": false,
+      "referent_status": "AMBIGUOUS_AND_UNRESOLVED"
+    },
+    "candidate_referents": [
+      {
+        "candidate": "HUMAN_GATE_SCOPE.json (the only prior gate supplied in this bundle)",
+        "outcome": "DIRECT_CONTRADICTION",
+        "detail": "Its candidate_execution_authority is NONE and its not_authorized list contains 'execute candidate main', 'network or GitHub mutation', 'open PR #2', 'installation token or PEM use' and 'branch/check/status/ruleset/protection mutation'. Those are precisely the acts performed under the authorization that incorporates it. A gate that adopts this scope cannot authorize opening PR #2 or minting installation tokens."
+      },
+      {
+        "candidate": "An earlier unsupplied gate, for example one governing the historical V13 attempt 1 and lab PR #1",
+        "outcome": "UNVERIFIABLE",
+        "detail": "Plausible, since attempt 1 and PR #1 exist historically, but no such document is present in the bundle, pinned by hash, or named anywhere in the supplied material. Its content cannot be assessed."
+      }
+    ],
+    "required_scope_items_check": [
+      { "item": "one single execution", "present_in_verbatim_human_text": true, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": false, "status": "CONFIRMED_IN_HUMAN_TEXT" },
+      { "item": "exact laboratory repository SrHector199/r2-stage-b-platform-semantics-lab-v13-e8a44c52", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": true, "status": "NOT_CONFIRMED" },
+      { "item": "attempt 2", "present_in_verbatim_human_text": true, "present_in_HUMAN_GATE_SCOPE_json": "partial — 'only pre-registered attempt 2 exists'", "present_only_in_retrospective_record": false, "status": "CONFIRMED_IN_HUMAN_TEXT" },
+      { "item": "exact target lab/id-observation-r2 @ 3f5d292c9f76c1347ca2b6d13e63e816cf214159 and source lab-src/id-observation-r2 @ 81bf9c0ec3e45bb05b0207cbb17068568f01970e", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": true, "status": "NOT_CONFIRMED" },
+      { "item": "PR #2", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": "present as an explicit PROHIBITION", "present_only_in_retrospective_record": true, "status": "NOT_CONFIRMED_AND_CONTRADICTED" },
+      { "item": "two exact installation-token mints (installations 154781449 and 154784106)", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": "present as an explicit PROHIBITION on installation token or PEM use", "present_only_in_retrospective_record": true, "status": "NOT_CONFIRMED_AND_CONTRADICTED" },
+      { "item": "two exact App check-runs on PR_HEAD (apps 4641302 and 4641692, context r2-lab-pin-v12, head 81bf9c0e, allowed_count 1 each)", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": true, "status": "NOT_CONFIRMED" },
+      { "item": "close PR without merge", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": "only as 'observation-only; no merge route'", "present_only_in_retrospective_record": true, "status": "PARTIALLY_CONFIRMED_NO_MERGE_ONLY" },
+      { "item": "evidence confined to evidence root L1_LAB_ID_OBSERVATION_V14_ATTEMPT2", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": "only as 'new evidence root; no overwrite of historical evidence'", "present_only_in_retrospective_record": true, "status": "PARTIALLY_CONFIRMED_GENERIC_ONLY" },
+      { "item": "STOP on absence, contradiction, timeout or unclassifiable state", "present_in_verbatim_human_text": "by reference only", "present_in_HUMAN_GATE_SCOPE_json": "partial — poll cap routes to UNINFORMATIVE_UNCERTAIN, CLOSED_UNMERGED, EVIDENCE_FROZEN, STOP_ALL", "present_only_in_retrospective_record": false, "status": "PRESENT_IN_RECORD_STOP_RULE" },
+      { "item": "prohibition of re-execution", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": true, "status": "PRESENT_IN_RECORD_ONLY" },
+      { "item": "prohibition of L2", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": true, "present_only_in_retrospective_record": false, "status": "CONFIRMED_IN_BOTH_GATES" },
+      { "item": "prohibition of D1/D2/D3", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": true, "present_only_in_retrospective_record": false, "status": "CONFIRMED_IN_BOTH_GATES" },
+      { "item": "prohibition of production, PR #6, merge, cleanup and R2-5", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": true, "present_only_in_retrospective_record": false, "status": "CONFIRMED_IN_BOTH_GATES" },
+      { "item": "PASS recognized only via the structured JSON result, with no banner or exit-code authority", "present_in_verbatim_human_text": false, "present_in_HUMAN_GATE_SCOPE_json": false, "present_only_in_retrospective_record": true, "status": "PRESENT_IN_RECORD_ONLY" }
+    ],
+    "mandatory_check_4_verdict": "FAILED — the incorporated scope cannot be confirmed to limit the authorization to the nine enumerated items. Under the only supplied candidate referent it forbids several of them.",
+    "mandatory_check_5_verdict": "SATISFIED_AS_RECORD_CONTENT — the retrospective record does contain the STOP rule, the re-execution prohibition, the L2 prohibition, the D1/D2/D3 prohibition, the production/PR #6/merge/cleanup/R2-5 prohibitions and the structured-result-only PASS rule. These are content of the post-execution record, not of any verified human utterance.",
+    "post_hoc_composition_evidence": {
+      "finding": "The authorized_scope block embeds observed_check_run_id 96206259472 and 96206266309.",
+      "significance": "Check-run identifiers are assigned by GitHub at creation time during execution. A scope composed at or before authorization could not contain them. Their presence inside a block labelled authorized_scope demonstrates that this block is a post-execution reconstruction rather than a transcription of a pre-existing scope.",
+      "severity": "STRUCTURAL — it does not prove the authorization was absent, but it removes the block's capacity to serve as evidence that a scope existed beforehand."
+    },
+    "declared_scope_versus_observed_mutations": {
+      "cross_check_performed": true,
+      "laboratory_repository": "MATCH",
+      "target_sha_3f5d292c": "MATCH",
+      "source_head_sha_81bf9c0e": "MATCH (equals PR_HEAD, correct for source-to-target PR direction)",
+      "pull_request_number_2": "MATCH",
+      "app_4641302_installation_154781449_check_run_96206259472": "MATCH",
+      "app_4641692_installation_154784106_check_run_96206266309": "MATCH",
+      "token_mints_count_2": "MATCH",
+      "app_check_runs_on_PR_HEAD_count_2": "MATCH (plus one native GitHub Actions check-run, giving the 3/0 PR_HEAD to TEST_MERGE split revision 2 verified live)",
+      "terminal_state_closed_without_merge": "MATCH",
+      "evidence_root": "MATCH",
+      "divergence_found": "NONE",
+      "evidential_weight": "FAVORABLE_BUT_NON_PROBATIVE — the correspondence is exact and is credited, but a scope written after execution matches execution necessarily. Perfect agreement is what both an accurate contemporaneous scope and a post-hoc transcription would produce, so it does not discriminate between them."
+    }
+  },
+
+  "R2_STATE_reconciliation_assessment": {
+    "verdict": "ARGUMENT_SOUND_PREMISE_UNPROVEN",
+    "artifact_present_in_bundle": false,
+    "assessable_only_via_quotation": true,
+    "quotation_sources": [
+      "Revision 2 B-01 evidence, quoting preflight_state.json which decodes to R2_STATE.md (70548 bytes, git blob sha1 d8e5c7796322c6ac60761dba3485f69d15debe6b, production main 5a5b4b1bd95f50824180e2146f9d76fbe861db7c, last updated 2026-08-16T13:44:26Z)",
+      "The reconciliation note's canonical_state_anchor, which reproduces the same blob oid, main sha and timestamp"
+    ],
+    "quotations_mutually_consistent": true,
+    "blob_oid_recomputation_possible": false,
+    "blob_oid_recomputation_note": "R2_STATE.md is not in this bundle, so blob d8e5c779... cannot be recomputed here. The two independent quotations agree, which is corroborating but not equivalent to verification from bytes.",
+    "sub_assessments": [
+      { "claim": "R2_STATE.md did not grant execution", "verdict": "CONFIRMED_VIA_CONSISTENT_QUOTATION", "detail": "Its Authorized next step authorizes read-only preparation only and excludes branches, PRs, required checks, branch protection, rulesets, merge and settings." },
+      { "claim": "R2_STATE.md required a new Human Gate D rather than permanently forbidding one", "verdict": "CONFIRMED_VIA_CONSISTENT_QUOTATION", "detail": "The line states that any later execution or D mutation requires a new Human Gate D. This is a condition, not a prohibition, so a later gate is the contemplated path and not a violation. This element of the reconciliation is correct." },
+      { "claim": "The 19 August gate is that later gate", "verdict": "UNPROVEN", "detail": "Depends entirely on the asserted authorization event, for which no independent provenance is supplied. The condition R2_STATE.md set is satisfiable, and may in fact have been satisfied, but the bundle does not demonstrate it." },
+      { "claim": "No retroactive authority is being created", "verdict": "PARTIALLY_CONFIRMED", "detail": "The intent is explicit and repeated, the authority_boundary statements are correctly restrictive, and no artifact purports to grant execution now. But because the authorizing scope exists only in a document composed after execution, the distinction between recording a prior authorization and constructing one after the fact is asserted rather than demonstrated. That distinction is precisely what B-01 exists to test." },
+      { "claim": "Phase, blockers and controls remain intact", "verdict": "CONFIRMED", "detail": "R2-4 exit NOT_EXECUTED, next phase NO, R2-5 NOT_AUTHORIZED, L2 not authorized and not started, D1/D2/D3 not authorized, cleanup not authorized, canonicalization not yet authorized, ENFORCED false, FALSE_GREENS 8. Nothing in this bundle alters any of these, and no artifact attempts to." }
+    ],
+    "contradiction_with_R2_STATE_found": false,
+    "note": "Applying temporal ordering does dissolve the apparent conflict with R2_STATE.md as a matter of logic. What it cannot do is supply the missing proof that the event it relies on occurred."
+  },
+
+  "HUMAN_GATE_SCOPE_reconciliation_assessment": {
+    "verdict": "CONFIRMED",
+    "file_supplied_in_full": true,
+    "sha256": "619b3a773799da329ac9e49555daf0c56eef0e8abf3660208211d7a549f9f51f",
+    "bytes": 1254,
+    "matches_byte_count_attributed_by_revision_2": true,
+    "is_pre_review_construction_scope": true,
+    "basis": "artifact_type is r2-4-stage-b-v14-v2-runner-candidate-human-gate-scope. Its authorized list covers only constructing one local runner candidate, static and simulated validation, and preparing one independent-review request.",
+    "correctly_withheld_execution": true,
+    "withholding_basis": "candidate_execution_authority is NONE, and not_authorized includes execute candidate main, network or GitHub mutation, open PR #2, branch/check/status/ruleset/protection mutation, installation token or PEM use, production or PR #6 mutation, reopen PR #1, and L2/canonicalization/cleanup/D1/D2/D3/phase change/R2-5.",
+    "anticipated_a_later_gate": true,
+    "anticipation_basis": "Its bindings state that candidate execution additionally requires exact independent runner PASS and a later Human Gate D. The withholding is therefore conditional and forward-looking, not absolute.",
+    "supersession_of_execution_prohibition": {
+      "coherent_in_principle": true,
+      "detail": "Because HUMAN_GATE_SCOPE.json itself names the later Human Gate D as the unlocking condition, a genuine later gate would supersede its execution prohibition without contradiction. Mandatory check 6 is satisfied.",
+      "limitation": "Supersession removes a prohibition. It does not supply an affirmative mutation scope. The repository, SHAs, PR number, token mints, check-run surfaces and evidence root had to come from somewhere, and this file is not that source.",
+      "circularity_note": "The verbatim gate takes its scope from 'el gate anterior'; the reconciliation says the later gate superseded the earlier scope; the only statement of the superseding scope is the retrospective record itself. The chain closes on the asserting party with no external anchor."
+    }
+  },
+
+  "blocking_findings": [
+    {
+      "id": "D-01",
+      "severity": "BLOCKING_FOR_CANONICALIZATION_ELIGIBILITY_ONLY",
+      "title": "The supplied authorization artifact is a post-dated self-attestation, not the artifact B-01 required",
+      "evidence": [
+        "record_created_at_utc is 2026-08-20T19:55:47Z, which is after execution start 2026-08-19T19:54:25Z and after revision 2 completed at 2026-08-20T19:52:00Z. B-01 required an artifact dated between 2026-08-19T00:00:00Z and 2026-08-19T19:54:25Z.",
+        "The file's own status field reads RETROSPECTIVE_DOCUMENTARY_RECORD_OF_PREEXISTING_AUTHORIZATION_NOT_NEW_AUTHORITY.",
+        "verbatim_text_sha256 recomputes correctly under UTF-8/NFC, but hashes text held in the same file, so it evidences no provenance.",
+        "The four provenance classes revision 2 named as missing remain missing: invocation record, environment attestation of R2_V14_V2_ATTEMPT2_HUMAN_GATE_D, signed or externally timestamped artifact, and a dated decision document naming attempt 2.",
+        "The authorization record, reconciliation note and review request share the identical creation instant, 227 seconds after the finding was raised."
+      ],
+      "why_this_blocks": "Canonicalization writes into the canonical governance record. Admitting an authorization on the strength of the asserting party's later account of it is the precise failure mode this gate exists to prevent, and matches the FALSE_GREEN_7 class already recorded eight times in this project's history.",
+      "why_this_is_not_BLOCKED_AUTHORIZATION_NOT_PROVEN_as_final_disposition": "Nothing here refutes the authorization or shows the mutation exceeded any boundary. Revision 2 verified the technical surface as exact with no excursion, no false green, no merge, no production or PR #6 drift and a safe CLOSED_UNMERGED terminal state. The deficiency is evidentiary and remediable, so the proportionate disposition is CHANGES_REQUIRED rather than BLOCKED.",
+      "closable_without_re_execution": true,
+      "required_change": "Supply provenance for the 2026-08-19T19:45:10Z decision that does not originate from the asserting party after the fact. Any one suffices: a conversation export or transcript containing the message with its surrounding context and an identifier; a transcript or artifact hash that was pinned at or before execution; a runner invocation record or environment attestation captured during the execution window showing the R2_V14_V2_ATTEMPT2_HUMAN_GATE_D value actually presented; or an external signature or timestamp over the decision."
+    },
+    {
+      "id": "D-02",
+      "severity": "BLOCKING_FOR_CANONICALIZATION_ELIGIBILITY_ONLY",
+      "title": "The verbatim authorization incorporates its scope from an unidentified prior gate, and the only supplied candidate forbids the mutations that were performed",
+      "evidence": [
+        "The verbatim sentence delegates scope with 'CON EL ALCANCE, STOP Y PROHIBICIONES DEFINIDOS EN EL GATE ANTERIOR' and enumerates no repository, branch, SHA, PR number, token mint, check-run surface or evidence directory.",
+        "'EL GATE ANTERIOR' is identified by no filename, no sha256 and no byte count anywhere in the bundle.",
+        "The only prior gate supplied, HUMAN_GATE_SCOPE.json, lists under not_authorized: 'open PR #2', 'installation token or PEM use', 'network or GitHub mutation' and 'branch/check/status/ruleset/protection mutation', and sets candidate_execution_authority to NONE.",
+        "Executed under this authorization: PR #2 opened and closed, two installation tokens minted, two App check-runs created. Those are the acts the incorporated scope prohibits.",
+        "Keyword scan of HUMAN_GATE_SCOPE.json finds the lab repository name, both target and source SHAs, both app IDs, both installation IDs, the evidence root and the term check-run all absent.",
+        "All nine scope limits required by mandatory check 4 appear together only in the authorized_scope block of the post-execution record, which itself embeds post-execution check-run IDs 96206259472 and 96206266309 and therefore cannot predate execution."
+      ],
+      "why_this_blocks": "This is the direct contradiction the review instruction reserved as grounds for looking past the documentary layer. Read literally, the authorizing sentence adopts a scope that forbids the acts it is said to authorize. Either the referent is HUMAN_GATE_SCOPE.json, in which case the authorization contradicts itself on the mutation surface, or it is a different document, in which case that document is absent and its content unverifiable. Neither reading permits confirming mandatory check 4.",
+      "closable_without_re_execution": true,
+      "required_change": "Identify 'EL GATE ANTERIOR' by exact sha256 and byte count. If it is not HUMAN_GATE_SCOPE.json, supply it in full and demonstrate that its scope covers the lab repository, PR #2, both target and source SHAs, both installation-token mints, both App check-run surfaces, close-without-merge and the evidence root. If it is HUMAN_GATE_SCOPE.json, the contradiction must be addressed directly rather than by supersession, since supersession lifts a prohibition but supplies no affirmative scope."
+    }
+  ],
+
+  "nonblocking_findings": [
+    {
+      "id": "DN-01",
+      "severity": "LOW",
+      "title": "Runner-review completion bound is date granularity",
+      "detail": "2026-08-19T00:00:00Z is exact midnight, a normalized date rather than an observed instant, so 'review precedes authorization' holds with a nominal rather than measured margin. Not pressed, because B-01 adopted the same bound when specifying the required window."
+    },
+    {
+      "id": "DN-02",
+      "severity": "MEDIUM",
+      "title": "R2_STATE.md is absent from this bundle",
+      "detail": "Mandatory check 7 could be assessed only against two mutually consistent quotations of a 70548-byte document at blob d8e5c779..., not against its bytes. Supplying it, or the preflight_state.json that decodes to it, would let a future reviewer recompute the blob oid rather than trust agreement between two quotations."
+    },
+    {
+      "id": "DN-03",
+      "severity": "INFORMATIONAL",
+      "title": "Declared scope agrees with observed mutations without a single divergence",
+      "detail": "Every object in authorized_scope matches revision 2's independently verified observations exactly: repository, both SHAs, PR #2, both app and installation IDs, both check-run IDs, both mint counts, the terminal state and the evidence root. Credited as favorable. Non-probative of prior authorization, since a post-hoc scope reproduces execution by construction."
+    },
+    {
+      "id": "DN-04",
+      "severity": "INFORMATIONAL",
+      "title": "pass_recognition_rule fully satisfied by the structured result",
+      "detail": "All fourteen required fields in the record's pass_recognition_rule match L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json exactly, including status PASS, OBSERVATION_COMPLETE, failures empty, one attempt, L2_started false, merge false, cleanup false, production and PR #6 and lab main unchanged, all case PRs closed unmerged, LAB_FALSE_GREENS 0 and production_FALSE_GREENS 8. Banner and exit-code authority is correctly NONE."
+    },
+    {
+      "id": "DN-05",
+      "severity": "INFORMATIONAL",
+      "title": "Gate consumption is correctly recorded and grants nothing further",
+      "detail": "Mandatory check 8 is satisfied on the face of the record: consumed true, re_execution_authorized false, result hash and bytes matching the verified structured result, and an explicitly_not_authorized list covering re-execution, attempt 3, merge, rulesets, production and PR #6, cleanup, L2, D1/D2/D3, canonicalization, R2-4 exit and R2-5. The authority_boundary statements throughout the bundle are correctly restrictive and no artifact overreaches."
+    },
+    {
+      "id": "DN-06",
+      "severity": "CARRIED_FORWARD",
+      "title": "Revision 2 nonblocking findings NB-01 through NB-09 are unchanged",
+      "detail": "Not re-adjudicated in this documentary review and not closed by it. They remain conditions to record at any later canonicalization gate, as revision 2 specified."
+    }
+  ],
+
+  "canonicalization_eligibility": {
+    "eligible": false,
+    "sole_obstacle": "B-01, unchanged in kind, now expressed as D-01 and D-02",
+    "converts_to_eligible_when": "Contemporaneous provenance for the 2026-08-19T19:45:10Z decision is supplied from a source other than the asserting party's later account, and 'EL GATE ANTERIOR' is identified by exact hash and bytes with a scope that actually covers the executed mutation surface. No re-execution and no further evidence collection is required for either.",
+    "scope_that_would_become_eligible": "The exact attempt-2 evidence set identified by tar.gz sha256 742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3 and result sha256 3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e, and nothing else.",
+    "technical_findings_status": "Carried forward as PASS on their own terms. Revision 2's technical conclusions were not reopened, not weakened and not re-derived, and closing the documentary gap will not require redoing them.",
+    "canonicalization_performed_by_this_review": false
+  },
+
+  "false_green_increment": {
+    "new_lab_false_greens": 0,
+    "new_production_false_greens": 0,
+    "production_false_greens_after": 8,
+    "unchanged": true,
+    "basis": "This review performed no execution, no mutation and no network access. It read supplied bytes, recomputed hashes and parsed JSON. No control, phase gate or execution gate is closed by it, and no green state is declared anywhere.",
+    "avoided_false_green": "Issuing DOCUMENTARY_CLOSURE_PASS here would have risked a ninth false green of the FALSE_GREEN_7 class revision 2 identified: a validator declaring PASS on the strength of an authorization that is asserted rather than evidenced. Withholding the PASS is the specific function this gate performs."
+  },
+
+  "next_gate_eligibility": {
+    "R2_4_exit": "NOT_AUTHORIZED_BY_THIS_REVIEW",
+    "R2_5": "NOT_AUTHORIZED",
+    "L2": "NOT_AUTHORIZED_AND_NOT_STARTED",
+    "D1": "NOT_AUTHORIZED",
+    "D2": "NOT_AUTHORIZED",
+    "D3": "NOT_AUTHORIZED",
+    "merge": "NOT_AUTHORIZED",
+    "cleanup": "NOT_AUTHORIZED",
+    "rulesets_branch_protection_required_checks": "NOT_AUTHORIZED",
+    "production_change": "NOT_AUTHORIZED",
+    "re_execution_of_attempt_2": "NOT_AUTHORIZED_AND_NOT_REQUIRED",
+    "attempt_3": "NOT_AUTHORIZED",
+    "canonicalization": "NOT_ELIGIBLE",
+    "administrative_canonicalization_gate": "NOT_REACHED",
+    "new_human_gate_required_before_any_further_execution": true,
+    "phase_state_unchanged": true
+  },
+
+  "authority_confirmation": {
+    "role": "INDEPENDENT_READ_ONLY_DOCUMENTARY_AUDITOR_R2_4_STAGE_B_V14_V2_ATTEMPT_2",
+    "runner_executed": false,
+    "laboratory_re_executed": false,
+    "package_scripts_executed": false,
+    "network_access_performed": false,
+    "github_reads_performed": false,
+    "github_modified": false,
+    "pull_requests_opened_closed_or_modified": false,
+    "merge_performed": false,
+    "cleanup_performed": false,
+    "PEM_used": false,
+    "tokens_generated": false,
+    "canonicalization_performed": false,
+    "L2_executed": false,
+    "D1_D2_D3_executed": false,
+    "left_R2_4": false,
+    "R2_5_authorized": false,
+    "technical_audit_repeated": false,
+    "technical_findings_weakened": false,
+    "actions_actually_taken": "Recomputed SHA-256 and byte counts for the bundle and all six members, verified SHA256SUMS.txt, parsed every JSON, recomputed the verbatim authorization text digest under seven encodings, and cross-checked declared scope against revision 2's recorded observations. All work was local and read-only.",
+    "this_artifact_grants": "NOTHING. It is a read-only documentary review. It withholds canonicalization eligibility, closes no finding, authorizes no execution, mutation, cleanup, phase transition, canonicalization or subsequent gate, and creates no authority of any kind."
+  }
+}

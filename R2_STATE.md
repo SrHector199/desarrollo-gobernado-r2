@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Preparar únicamente una decisión read-only sobre si BP-B-03 aporta información material tras BP-B-02 y fijar, sin mutar GitHub, el mecanismo candidato de Stage B (classic branch protection vs ruleset), incluyendo la resolución de STAGE_B_RECENCY_CONTAMINATION. Esta autorización es solo preparación/read-only: no autoriza BP-B-03, ramas/PRs, required checks, branch protection, rulesets, merge ni settings. Toda ejecución o mutación D posterior requiere un nuevo Human Gate D.
-- Last updated: 2026-08-16T13:44:26Z
+- Authorized next step: Read-only integration of this exact L1 observation into the Stage B mechanism/BP-B-03/recency decision. No L2, experiment, GitHub mutation, cleanup, D1/D2/D3, phase exit or R2-5 entry without a fresh, separate Human Gate D.
+- Last updated: 2026-08-20T21:16:42Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -867,6 +867,33 @@
 - Current phase remains R2-4; R2-4 exit gate remains NOT_EXECUTED; R2-5 remains NOT_AUTHORIZED.
 - Probe-branch deletion is an external post-canonicalization action in this Human Gate: the canonical commit does NOT preclaim deletion; external cleanup evidence must verify the exact deletion after these evidence bytes are live on `main`.
 - 2026-08-16T13:44:26Z: Human Gate D authorized this three-path administrative canonicalization and, only after live verification, deletion of remote branch `r2-4/bp-b02-check-name-collision`. No other branch deletion or GitHub-settings mutation is authorized.
+
+## Stage B LAB-ID-OBSERVATION V14-v2 attempt 2
+
+- TECHNICAL_EVIDENCE: PASS for the exact observed case.
+- Evidence bundle: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz`; SHA-256 `742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3`; bytes `218408`.
+- Structured result: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json`; SHA-256 `3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e`; bytes `2101`; `status=PASS`; `case_outcome=OBSERVATION_COMPLETE`; `failures=[]`.
+- Post-execution independent review V2: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json`; SHA-256 `b84b42e65d63ec6166cca75b75ff51d124c59c57648e6762b0d845b3661b4997`; bytes `32561`; disposition `CHANGES_REQUIRED_BEFORE_CANONICALIZATION`; technical findings remain PASS on their own terms; documentary finding `B-01`.
+- Documentary review V1: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json`; SHA-256 `cc32e103f14e3f7ecdbd0bb6fed5a98d2d2eb47f4f765d3ffcbb7b1f9a8f8787`; bytes `36558`; disposition `CHANGES_REQUIRED_DOCUMENTARY_GAP_REMAINS`; findings `D-01`, `D-02`.
+- Current human documentary exception: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_HUMAN_DOCUMENTARY_EXCEPTION_D_V1.json`; SHA-256 `b6dd5844481048edb181f48f799f7b796d60e0f484a69be3e53c2ac4536483c0`; bytes `5432`.
+- Administrative canonicalization record: `evidence/r2-4/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_ADMIN_CANONICALIZATION_RECORD_V1.json`; SHA-256 `1f5389ea4146ea84ebb153e09319592db314d0ec381b996501806f10db80840f`; bytes `7016`.
+- ORIGINAL_HUMAN_GATE_PROVENANCE: NOT_INDEPENDENTLY_EVIDENCED.
+- DOCUMENTARY_FINDINGS_D01_D02: WAIVED_NOT_CLOSED.
+- CANONICALIZATION_BASIS: EXPLICIT_CURRENT_HUMAN_EXCEPTION.
+- FORBIDDEN CLAIM: do not record `EVIDENCE_PASS_CANONICALIZATION_ELIGIBLE` as if either documentary review had passed.
+- Exact experimental result: native GitHub Actions check binding was `BINDING_PR_HEAD` for repository `SrHector199/r2-stage-b-platform-semantics-lab-v13-e8a44c52`, PR #2, BASE `3f5d292c9f76c1347ca2b6d13e63e816cf214159`, PR_HEAD `81bf9c0ec3e45bb05b0207cbb17068568f01970e`, TEST_MERGE `66ecbcfd658cc15887c7317ace31bb7fd77591d2`, workflow `.github/workflows/id-observation-r2.yml`, trigger `pull_request`, during the recorded experiment window.
+- Scope limit: the binding result is not a universal claim about GitHub.
+- Terminal state: PR #2 CLOSED_UNMERGED; PR #1 unchanged CLOSED_UNMERGED; production main unchanged; PR #6 unchanged; lab main unchanged; no merge; no cleanup; no ruleset creation; `L2_started=false`.
+- Evidence limitations preserved: post-execution review NB-01; classic branch protection `NOT_REOBSERVED` live; three hash-pinned environment artifacts from NB-09 were declared but not supplied.
+- FALSE_GREEN_INCREMENT: 0.
+- FALSE_GREENS: 8 total.
+- ENFORCED: False.
+- Human Gate D attempt 2: CONSUMED; re-execution NOT_AUTHORIZED.
+- Attempt 3: NOT_AUTHORIZED.
+- L2: NOT_AUTHORIZED.
+- D1/D2/D3: NOT_AUTHORIZED.
+- R2-4 exit: NOT_AUTHORIZED.
+- R2-5: NOT_AUTHORIZED.
 
 ## Blockers
 - Branch-protection candidate V1 independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; static_review=FAIL; candidate_disposition=BLOCKED.
