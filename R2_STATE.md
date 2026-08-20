@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: Read-only integration of this exact L1 observation into the Stage B mechanism/BP-B-03/recency decision. No L2, experiment, GitHub mutation, cleanup, D1/D2/D3, phase exit or R2-5 entry without a fresh, separate Human Gate D.
-- Last updated: 2026-08-20T21:16:42Z
+- Authorized next step: D1 is ELIGIBLE_FOR_CONSIDERATION only through a separate Human Gate D after the independently reviewed B1 WEP V4 artifacts are canonical on main and a fresh D1 pre-step succeeds. L1 remains canonical; BP-B-03 remains BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH and is not resolved. D1, D2, D3, BP-B-03 execution, WEP, rulesets, branch protection, required checks, cleanup, R2-4 exit and R2-5 remain NOT_AUTHORIZED.
+- Last updated: 2026-08-20T21:52:18Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -868,6 +868,22 @@
 - Probe-branch deletion is an external post-canonicalization action in this Human Gate: the canonical commit does NOT preclaim deletion; external cleanup evidence must verify the exact deletion after these evidence bytes are live on `main`.
 - 2026-08-16T13:44:26Z: Human Gate D authorized this three-path administrative canonicalization and, only after live verification, deletion of remote branch `r2-4/bp-b02-check-name-collision`. No other branch deletion or GitHub-settings mutation is authorized.
 
+## B1 WEP V4 independent review
+- Probe design V4: `evidence/r2-4/r2_4_b1_wep_probe_design_v4.json`; SHA-256 `8b2db6b473d89f2cd22d9d04c2809134cded6f38b93595eb761020c649f7bcc4`; bytes `30073`.
+- Exact WEP treatment spec V2: `evidence/r2-4/r2_4_b1_wep_exact_treatment_spec_v2.json`; SHA-256 `0238f0aafbf549b736c65d056e60bf255b8a193806e9f8ad7b95bc06f91971dc`; bytes `6975`.
+- Independent review request V4: `evidence/r2-4/r2_4_b1_wep_probe_independent_review_request_v4.json`; SHA-256 `af7a49803bd75713ada7870fee0b3a1e4fd01007b9c8ccbed317f8ee10a82cc7`; bytes `10061`.
+- Independent review result V4: `evidence/r2-4/r2_4_b1_wep_probe_independent_review_result_v4.json`; SHA-256 `e7798b4c3595732117440f54a1bdf51e309354eac6c27693c4ef80fc4545e04a`; bytes `81061`.
+- Independent disposition: `PROBE_DESIGN_V4_PASS_NO_BLOCKING_FINDINGS_D1_HUMAN_GATE_D_ELIGIBLE_FOR_CONSIDERATION_ONLY`; `blocking_findings=[]`; `sequencing_findings=[]`.
+- D1: ELIGIBLE_FOR_CONSIDERATION_ONLY through a later Human Gate D; NOT_AUTHORIZED.
+- D2: NOT_ELIGIBLE and NOT_AUTHORIZED. D3: NOT_ELIGIBLE and NOT_AUTHORIZED.
+- BP-B-02 remains a confirmed producer-collision finding addressed by WEP design PENDING_PROOF; this review does not prove WEP enforcement.
+- BP-B-03 remains `BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH`; NOT_RESOLVED and NOT_AUTHORIZED for execution.
+- STAGE_B_RECENCY_CONTAMINATION remains ACTIVE. A later authorized D1 positive control would create a new qualifying recency anchor and restart the seven-day window.
+- FALSE_GREEN_INCREMENT=0; FALSE_GREENS=8; ENFORCED=False; AISLADA not claimed.
+- DC-006 OPEN; EXP-01 OPEN; IR2-002 BLOCKING_BEFORE_FIRST_FUNCTIONAL_TASK; MINOR-5 ACTIVE_R2-4_NOT_EXECUTED.
+- R2-4 remains active; R2-4 exit NOT_EXECUTED; R2-5 NOT_AUTHORIZED.
+- This administrative canonicalization grants no D1/D2/D3 execution authority and no WEP/ruleset/branch-protection/required-check/cleanup authority.
+
 ## Stage B LAB-ID-OBSERVATION V14-v2 attempt 2
 
 - TECHNICAL_EVIDENCE: PASS for the exact observed case.
@@ -939,7 +955,7 @@
 - Historical review dispositions remain historical and are not relabeled by this repair.
 - Current phase remains R2-4.
 - Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
-- Authorized next step remains read-only preparation only: decide whether BP-B-03 adds material evidence after BP-B-02, fix the candidate Stage B enforcement mechanism, and resolve STAGE_B_RECENCY_CONTAMINATION. No BP-B-03 execution or GitHub settings mutation is authorized; a new Human Gate D is required for any D execution/mutation.
+- Authorized next step after B1 WEP V4 canonicalization: D1 may be considered only through a separate Human Gate D after a fresh D1 pre-step. BP-B-03 remains BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH and not resolved. D1/D2/D3, BP-B-03 execution, WEP, rulesets, branch protection, required checks, cleanup, R2-4 exit and R2-5 remain NOT_AUTHORIZED.
 
 ## Gate de fase
 - R2-0 gate: PASS

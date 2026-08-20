@@ -1,0 +1,137 @@
+{
+  "schema_version": 2,
+  "artifact_type": "r2-4-b1-exact-wep-treatment-spec",
+  "status": "READ_ONLY_CONFIGURATION_SPEC_NOT_EXECUTION_AUTHORITY",
+  "created_at_utc": "2026-08-17T06:13:00Z",
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "supersedes": {
+    "file": "r2_4_b1_wep_exact_treatment_spec_v1.json",
+    "sha256": "0845961a466c924ea5fd7c31679582271f7b15100499e53c33a7ce8293cc728e",
+    "bytes": 3873
+  },
+  "revision_basis": {
+    "independent_review": {
+      "file": "r2_4_b1_wep_probe_independent_review_result_v3.json",
+      "sha256": "709bc6d589caf69f373553f5fb499518c832b9309f91db2d0cd8acd7799d05fd",
+      "bytes": 78755
+    },
+    "required_changes_applied_here": [
+      "B1S3-01",
+      "B1S3-02"
+    ],
+    "nonblocking_recommendations_not_silently_closed": [
+      "B1N3-01",
+      "B1N3-02",
+      "B1N3-03",
+      "B1N3-04",
+      "B1N3-06"
+    ]
+  },
+  "purpose": "Exact independent variable for B1 D2: repository-level Workflow Execution Protection applied between positive controls and negative probes.",
+  "authority": {
+    "risk_class_if_applied": "D",
+    "mutation_authority_now": "NONE",
+    "future_Human_Gate_D_required": true,
+    "public_preview_reverification_required_immediately_before_mutation": true
+  },
+  "exact_treatment": {
+    "policy_type": "workflow_execution_protection",
+    "configuration_surface": "Repository Settings > Actions > Policies",
+    "level": "repository",
+    "repository_scope": [
+      "SrHector199/desarrollo-gobernado-r2"
+    ],
+    "policy_name_exact": "R2 B1 WEP Producer Boundary",
+    "enforcement_exact": "active",
+    "evaluate_is_not_acceptable": true,
+    "disabled_is_not_acceptable": true,
+    "event_rule": {
+      "model": "ALLOW_LIST",
+      "permitted_events_exact": [
+        "pull_request_target"
+      ],
+      "explicitly_not_permitted_for_this_experiment": [
+        "pull_request",
+        "push"
+      ],
+      "required_ui_semantic": "Saved event rule visibly permits pull_request_target and does not permit pull_request or push.",
+      "unlisted_event_semantics": "GitHub documents an allow list but only examples of event names. Select only pull_request_target. B1 evidence is claimed only for pull_request and push, the event classes actually probed.",
+      "if_UI_cannot_express_exact_state": "STOP_AND_REDESIGN; do not approximate."
+    },
+    "actor_rule": {
+      "configured_actor_rules_exact": [],
+      "meaning": "No actor restriction is added; default write-capable trigger permission remains. Accepted only while the single-operator premise is positively re-proven.",
+      "if_UI_cannot_express_exact_state": "STOP_AND_REDESIGN; do not add an actor rule as an approximation and do not proceed to D2.",
+      "D1_read_only_representability_observation": {
+        "required": true,
+        "observation": "Open the repository Actions Policies configuration surface without saving any change. Record whether the intended event-rule state can carry zero actor rules and whether the UI's save action is visibly available/enabled for that exact draft state. Do not activate the save action.",
+        "satisfied_only_if": "The exact draft state visibly carries zero actor rules and the save action is available/enabled without requiring an actor rule.",
+        "if_not_demonstrable_read_only": "NOT_SATISFIED_AND_STOP_BEFORE_D2"
+      },
+      "single_operator_evidence": {
+        "accepted_collaborators": {
+          "primary": "Enumerate current repository collaborators through the GitHub API and record effective permission/capability sufficient to identify every write-capable identity.",
+          "fallback": "If the API cannot prove the complete accepted-collaborator set, use the repository Collaborators UI as the fallback evidence surface.",
+          "if_neither_available": "STOP",
+          "additional_write_capable_identity": "STOP_AND_REOPEN_ACTOR_RULE_DESIGN"
+        },
+        "pending_invitations": {
+          "require_observation": true,
+          "if_surface_unobservable": "NOT_SATISFIED_AND_STOP",
+          "accepted_result": "No pending invitation capable of becoming an additional write-capable identity during the experiment."
+        },
+        "D2_immediate_recheck": "Immediately before the D2 WEP mutation, repeat both accepted-collaborator enumeration and pending-invitation observation. Any failure, unobservability, drift or additional write-capable identity => STOP."
+      },
+      "collaborator_change_rule": "Any additional write-capable identity, or inability to prove the single-operator premise, reopens this design before mutation."
+    },
+    "bypass": {
+      "documentation_status": "WEP_DOCS_DO_NOT_SPECIFY_BYPASS_FIELD",
+      "desired_authority_semantic": "NO_BYPASS_GRANTED_BY_THIS_EXPERIMENT",
+      "if_UI_or_machine_surface_exposes_bypass": "present-and-empty required; non-empty => STOP",
+      "if_no_bypass_surface_exists": "record INAPPLICABLE_NOT_SATISFIED; do not infer universal no-bypass"
+    },
+    "target_encoding": {
+      "human_semantic": "THIS_REPOSITORY_ONLY",
+      "machine_encoding": "UNDOCUMENTED_FOR_WEP_PREVIEW_DO_NOT_INVENT",
+      "rule": "Use repository-level Actions Policies UI; do not substitute organization/custom-property targeting."
+    }
+  },
+  "field_by_field_D2_acceptance": [
+    "policy name exact",
+    "repository scope exact",
+    "enforcement ACTIVE",
+    "pull_request_target permitted",
+    "pull_request not permitted",
+    "push not permitted",
+    "actor rule set empty",
+    "D1 empty-actor-rule representability observation SATISFIED",
+    "single-operator collaborator/invitation recheck SATISFIED immediately before mutation",
+    "bypass present-and-empty if exposed otherwise INAPPLICABLE_NOT_SATISFIED",
+    "no extra WEP policy/rule introduced",
+    "any divergence => INVALID_EXPERIMENT"
+  ],
+  "prestate_and_conditional_restore": {
+    "capture_before_mutation": [
+      "Actions Policies availability/current state",
+      "enforcement/event/actor/bypass state if any",
+      "documented rulesets REST attempts",
+      "repo visibility/default branch/Actions enabled state",
+      "accepted-collaborator enumeration surface, raw result and interpreted write-capable identities",
+      "pending-invitation surface observability and raw result",
+      "empty-actor-rule representability observation"
+    ],
+    "future_D2_restore_candidate": "Pre-authorize only exact restoration of captured WEP prestate for exact D2 treatment object after verified evidence export.",
+    "if_export_incomplete": "DO_NOT_RESTORE; STOP with state in place."
+  },
+  "claims_forbidden": [
+    "WEP already configured",
+    "all unlisted event classes proven blocked",
+    "machine-readable WEP API exists",
+    "universal no-bypass",
+    "actor_rules=[] representability proven before D1 observation",
+    "single-operator premise proven when collaborator or invitation enumeration is unavailable",
+    "B1 execution authorized",
+    "ENFORCED",
+    "AISLADA"
+  ]
+}
