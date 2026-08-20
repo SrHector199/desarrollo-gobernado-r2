@@ -1,0 +1,50 @@
+{
+  "artifact_type": "r2-4-b1-wep-d1-evidence-audit-result",
+  "authority": {
+    "bp_b03_execution": "NOT_AUTHORIZED",
+    "cleanup": "NOT_AUTHORIZED",
+    "d1": "EXECUTED_PASS",
+    "d2": "ELIGIBLE_FOR_CONSIDERATION_ONLY_NOT_AUTHORIZED",
+    "d3": "NOT_AUTHORIZED",
+    "merge": "NOT_AUTHORIZED",
+    "r2_4_exit": "NOT_AUTHORIZED",
+    "r2_5": "NOT_AUTHORIZED",
+    "wep_mutation": "NOT_AUTHORIZED_BY_THIS_CANONICALIZATION"
+  },
+  "basis": "DETERMINISTIC_REAUDIT_OF_EXACT_D1_EVIDENCE_DIRECTORY",
+  "bundle": {
+    "bytes": 51972,
+    "repository_path": "evidence/r2-4/B1_WEP_D1_PRESTATE_AND_POSITIVE_CONTROL_EVIDENCE_BUNDLE.tar.gz",
+    "sha256": "076db7b338169d57eda2337233ef3e9e9c10c5fa0535059abe603b5240e3eeab"
+  },
+  "checks": {
+    "credential_material_scan": "PASS",
+    "d1_prestate": "PASS",
+    "historical_anchor": "PASS",
+    "human_gate_provenance": "PASS",
+    "json_integrity": "PASS",
+    "no_d1_pr": "PASS",
+    "no_ruleset_mutation": "PASS",
+    "positive_run_and_check_binding": "PASS",
+    "recency_anchor": "PASS",
+    "required_evidence_files": "PASS",
+    "single_commit_exact_scope": "PASS",
+    "workflow_readback_byte_identity": "PASS",
+    "workflow_sha256_bytes_git_blob": "PASS"
+  },
+  "forbidden_claims": [
+    "WEP_ENFORCEMENT_PROVEN",
+    "D2_AUTHORIZED",
+    "D3_AUTHORIZED",
+    "BP_B03_RESOLVED_BY_D1",
+    "ENFORCED",
+    "AISLADA"
+  ],
+  "result_artifact": {
+    "bytes": 8178,
+    "repository_path": "evidence/r2-4/B1_WEP_D1_PRESTATE_AND_POSITIVE_CONTROL_RESULT.json",
+    "sha256": "5d46a802e6ef1154d5e1b903b7b3a180e391bd14aad606b1ab74143e1774e5d4"
+  },
+  "schema_version": 1,
+  "status": "PASS"
+}
