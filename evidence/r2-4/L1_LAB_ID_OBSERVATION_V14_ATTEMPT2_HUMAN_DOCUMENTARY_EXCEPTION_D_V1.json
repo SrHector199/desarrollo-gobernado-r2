@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "artifact_type": "r2-4-stage-b-v14-v2-attempt2-human-documentary-exception-d",
+  "status": "CURRENT_HUMAN_EXCEPTION_PACKAGE_PREPARATION_ONLY_NOT_REMOTE_AUTHORITY",
+  "record_created_at_utc": "2026-08-20T20:55:19Z",
+  "authority_source": {
+    "type": "CURRENT_USER_MESSAGE_IN_ACTIVE_CONVERSATION",
+    "platform_message_id": "NOT_AVAILABLE_IN_RUNTIME",
+    "platform_message_timestamp": "NOT_EXPORTED",
+    "provenance_characterization": "CURRENT_DIRECT_HUMAN_INSTRUCTION_FOR_PACKAGE_PREPARATION; NOT EVIDENCE OF THE HISTORICAL EXECUTION GATE"
+  },
+  "authorization_text_verbatim": "AUTORIZO UNA EXCEPCIÓN HUMANA DOCUMENTAL D PARA EL RESULTADO DEL\nLAB-ID-OBSERVATION V14-V2 INTENTO 2.\n\nRECONOZCO COMO OBJETOS EXACTOS:\n\nPAQUETE DE EVIDENCIA:\nL1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz\nSHA-256:\n742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3\nBYTES:\n218408\n\nRESULTADO ESTRUCTURADO:\nL1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json\nSHA-256:\n3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e\nBYTES:\n2101\n\nREVISIÓN POST-EJECUCIÓN V2:\nL1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json\nSHA-256:\nb84b42e65d63ec6166cca75b75ff51d124c59c57648e6762b0d845b3661b4997\nBYTES:\n32561\n\nREVISIÓN DOCUMENTAL:\nL1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json\nSHA-256:\ncc32e103f14e3f7ecdbd0bb6fed5a98d2d2eb47f4f765d3ffcbb7b1f9a8f8787\nBYTES:\n36558\n\nACEPTO EXPRESAMENTE QUE:\n\n1. LA EVIDENCIA TÉCNICA DEL INTENTO 2 ES PASS PARA EL CASO EXACTO\n   OBSERVADO.\n\n2. LOS FINDINGS DOCUMENTALES D-01 Y D-02 NO HAN SIDO RESUELTOS MEDIANTE\n   PROCEDENCIA INDEPENDIENTE DEL MENSAJE ORIGINAL.\n\n3. ESTA DECISIÓN NO PRETENDE PROBAR RETROACTIVAMENTE QUE LA AUTORIZACIÓN\n   ORIGINAL EXISTIERA CON EL ALCANCE DOCUMENTADO.\n\n4. D-01 Y D-02 QUEDAN:\n   WAIVED_BY_EXPLICIT_HUMAN_DOCUMENTARY_EXCEPTION\n   Y NO:\n   CLOSED_BY_EVIDENCE.\n\n5. EL REGISTRO CANÓNICO DEBERÁ DISTINGUIR EXPRESAMENTE:\n\n   TECHNICAL_EVIDENCE=PASS\n\n   ORIGINAL_HUMAN_GATE_PROVENANCE=\n   NOT_INDEPENDENTLY_EVIDENCED\n\n   DOCUMENTARY_FINDINGS_D01_D02=\n   WAIVED_NOT_CLOSED\n\n   CANONICALIZATION_BASIS=\n   EXPLICIT_CURRENT_HUMAN_EXCEPTION\n\n6. NO DEBE REGISTRARSE:\n   EVIDENCE_PASS_CANONICALIZATION_ELIGIBLE\n   COMO SI LA REVISIÓN DOCUMENTAL HUBIERA PASADO.\n\n7. ESTA EXCEPCIÓN NO CREA AUTORIDAD RETROACTIVA, NO CAMBIA LOS HECHOS\n   OBSERVADOS Y NO AUTORIZA REEJECUTAR EL INTENTO 2.\n\n8. ESTA EXCEPCIÓN NO AUTORIZA:\n\n   - intento 3;\n   - L2;\n   - D1, D2 o D3;\n   - merge;\n   - cleanup;\n   - rulesets;\n   - branch protection;\n   - required checks;\n   - cambios de producción;\n   - cambios o cierre de PR #6;\n   - salida de R2-4;\n   - entrada en R2-5.\n\n9. FALSE_GREENS PERMANECE EN 8, PORQUE EL REGISTRO NO DECLARARÁ UN PASS\n   DOCUMENTAL INEXISTENTE; REGISTRARÁ LA EXCEPCIÓN DE FORMA EXPLÍCITA.\n\nAUTORIZO ÚNICAMENTE PREPARAR EL PAQUETE ADMINISTRATIVO DE\nCANONICALIZACIÓN BAJO ESTAS CONDICIONES.\n\nCUALQUIER CANONICALIZACIÓN REMOTA, COMMIT, PUSH, PR O MERGE REQUERIRÁ\nEL GATE OPERATIVO QUE CORRESPONDA.",
+  "authorization_text_utf8_sha256": "96c53abc8de79095384a50e8e5c38ae4e87a327860fa5d5de7a4f6d08fb0b45c",
+  "authorization_text_utf8_bytes": 2470,
+  "recognized_exact_objects": [
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_EVIDENCE_BUNDLE.tar.gz",
+      "sha256": "742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3",
+      "bytes": 218408
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_RESULT.json",
+      "sha256": "3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e",
+      "bytes": 2101
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_RESULT_V2.json",
+      "sha256": "b84b42e65d63ec6166cca75b75ff51d124c59c57648e6762b0d845b3661b4997",
+      "bytes": 32561
+    },
+    {
+      "file": "L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_DOCUMENTARY_CLOSURE_INDEPENDENT_REVIEW_RESULT_V1.json",
+      "sha256": "cc32e103f14e3f7ecdbd0bb6fed5a98d2d2eb47f4f765d3ffcbb7b1f9a8f8787",
+      "bytes": 36558
+    }
+  ],
+  "accepted_documentary_state": {
+    "TECHNICAL_EVIDENCE": "PASS",
+    "ORIGINAL_HUMAN_GATE_PROVENANCE": "NOT_INDEPENDENTLY_EVIDENCED",
+    "DOCUMENTARY_FINDINGS_D01_D02": "WAIVED_NOT_CLOSED",
+    "CANONICALIZATION_BASIS": "EXPLICIT_CURRENT_HUMAN_EXCEPTION",
+    "forbidden_claim": "EVIDENCE_PASS_CANONICALIZATION_ELIGIBLE",
+    "retroactive_authority_created": false
+  },
+  "authority_now": {
+    "authorized": [
+      "prepare one local administrative canonicalization package containing the exact recognized objects and transparent waiver record"
+    ],
+    "not_authorized": [
+      "remote canonicalization",
+      "staging",
+      "commit",
+      "push",
+      "pull request creation or modification",
+      "merge",
+      "attempt 2 re-execution",
+      "attempt 3",
+      "L2",
+      "D1",
+      "D2",
+      "D3",
+      "cleanup",
+      "ruleset mutation",
+      "branch protection mutation",
+      "required-check configuration",
+      "production mutation",
+      "PR #6 mutation or closure",
+      "R2-4 exit",
+      "R2-5 entry"
+    ],
+    "future_operational_gate_required": true
+  },
+  "preserved_state": {
+    "FALSE_GREENS": 8,
+    "ENFORCED": false,
+    "phase": "R2-4",
+    "R2_4_exit": "NOT_AUTHORIZED",
+    "R2_5": "NOT_AUTHORIZED"
+  }
+}

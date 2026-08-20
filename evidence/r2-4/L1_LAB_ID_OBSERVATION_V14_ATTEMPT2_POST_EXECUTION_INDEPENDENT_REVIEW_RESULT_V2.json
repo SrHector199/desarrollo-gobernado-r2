@@ -1,0 +1,427 @@
+{
+  "artifact_type": "r2-4-stage-b-v14-v2-attempt2-post-execution-independent-review-result",
+  "schema_version": 1,
+  "revision": 2,
+  "revision_status": "FINAL_SUPERSEDES_REVISION_1_ISSUED_EARLIER_IN_THIS_SESSION",
+  "review_completed_at_utc": "2026-08-20T19:52:00Z",
+
+  "supersession_notice": {
+    "revision_1_disposition": "EVIDENCE_PASS_CANONICALIZATION_ELIGIBLE",
+    "revision_2_disposition": "CHANGES_REQUIRED_BEFORE_CANONICALIZATION",
+    "reason_for_change": "Revision 1 explicitly recorded (NB-08) that preflight_state.json had not been examined in depth and was assumed to carry no load-bearing claim. That assumption was wrong. On completing the deferred depth pass, preflight_state.json was found to be the canonical production governance document R2_STATE.md, whose ## Estado section states that the authorized next step is read-only preparation only and explicitly does not authorize ramas/PRs, and that any later execution or D mutation requires a new Human Gate D. The package contains no artifact evidencing that such a Human Gate D was granted for attempt 2, while every governance artifact it does contain declares execution NOT authorized. This is an authorization-chain evidence gap that a PASS would have carried into the canonical record.",
+    "what_did_not_change": "No technical finding from revision 1 was withdrawn. All integrity, capture, binding, mutation-surface, terminal-state and live-reobservation results stand unchanged and are restated below.",
+    "self_criticism": "Deferring a 98KB evidence object on the assumption that it was a secondary aggregate snapshot, and issuing a disposition before resolving it, was an error of audit sequencing on the reviewer's part. Load-bearing status must be established by reading the object, not by inferring it from filename and size."
+  },
+
+  "reviewer": {
+    "system": "Anthropic Claude (claude.ai chat interface)",
+    "model": "Claude Opus 5",
+    "role": "POST_EXECUTION_INDEPENDENT_AUDITOR_READ_ONLY",
+    "authored_runner": false,
+    "authored_execution": false,
+    "authored_evidence": false,
+    "authored_review_request": false,
+    "runner_executed": false,
+    "package_scripts_executed": false,
+    "PEM_used": false,
+    "tokens_generated": false,
+    "github_mutation_performed": false,
+    "github_access_mode": "READ_ONLY_UNAUTHENTICATED_GIT_LS_REMOTE_AND_PUBLIC_REST"
+  },
+  "authority_source": "review_control/L1_LAB_ID_OBSERVATION_V14_ATTEMPT2_POST_EXECUTION_INDEPENDENT_REVIEW_REQUEST_V1.json (sha256 45294390c4d528c787e05a9e938cebccb659f3389a35220b45372359b5bab5d0, 7353 bytes)",
+
+  "integrity_gate": {
+    "status": "PASS",
+    "zip": {
+      "sha256": "dfc66d0be9ed7abe3afc072aeff07dfc6e20cc78bcac779d2b798915bc83558a",
+      "bytes": 522045,
+      "expected_match": true,
+      "entries": 159,
+      "unsafe_entries": 0
+    },
+    "review_control_SHA256SUMS": {"lines": 158, "ok": 158, "failed": 0},
+    "original_tar_gz": {
+      "sha256": "742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3",
+      "bytes": 218408,
+      "expected_match": true,
+      "gzip_test": "PASS",
+      "members": 157,
+      "regular_files": 155,
+      "directories": 2,
+      "symlinks": 0,
+      "hardlinks": 0,
+      "devices": 0,
+      "fifos": 0,
+      "absolute_paths": 0,
+      "dotdot": 0,
+      "duplicates": 0,
+      "prescanned_before_extraction": true
+    },
+    "tar_payload_vs_zip_payload": "BYTE_IDENTICAL",
+    "export_manifest": {"lines": 154, "ok": 154, "failed": 0, "unlisted": ["self"], "missing": []},
+    "inner_sha256sums": {"lines": 151, "ok": 151, "failed": 0, "unlisted": ["self"], "missing": []},
+    "exact_objects": {
+      "result": {"sha256": "3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e", "bytes": 2101, "match": true},
+      "runner": {"sha256": "dde9d52e37daae9dd937ce435bdb1b1085153b7ce14f839583cc9450a128ec9f", "bytes": 85779, "match": true},
+      "runner_review": {"sha256": "d4f0ca894db8b782773ef8e88a946f80954dfbb3b4f85c3b6bbb978dd1eb54b1", "bytes": 50620, "match": true},
+      "package_verification": {"sha256": "f1c5e39fd7fcfede80751b599760e0ae4da831b6b750fde6b4a631d5bbaeaf6b", "bytes": 4073, "match": true}
+    },
+    "package_verification_reconciliation": {
+      "status": "EVERY_CLAIM_INDEPENDENTLY_REPRODUCED",
+      "members_157_files_155_dirs_2": "CONFIRMED",
+      "mtime_uid_gid_all_zero": "CONFIRMED",
+      "pax_format_with_atime_ctime_headers": "CONFIRMED (tarfile format 2 = PAX; PAX headers atime/ctime present; PKG-NB-01 accurate, archive is content-complete and manifest-verified but not byte-reproducible from payload)",
+      "json_named_124_parseable_121": "CONFIRMED",
+      "nonparseable_set_is_exactly_the_three_protection_bodies": "CONFIRMED",
+      "capture_records_21_zero_failures": "CONFIRMED",
+      "credential_scan_zero_hits": "CONFIRMED",
+      "verdict": "The local verification was non-authoritative by construction but is accurate in every checkable claim; it did not overstate."
+    },
+    "secret_scan": {
+      "PEM": "NOT_FOUND",
+      "gh_token_patterns": "NOT_FOUND",
+      "jwt": "NOT_FOUND",
+      "token_field_in_evidence": "NOT_FOUND",
+      "gh_auth_status_txt": "TOKEN_MASKED_BY_GH"
+    }
+  },
+
+  "independence_satisfied": {
+    "value": true,
+    "basis": "Fresh context; reviewer authored none of the runner, execution, evidence, package or request; every conclusion recomputed from bytes; declared PASS, local verification, manifests and runner assertions treated as untrusted; independent live read-only reobservation performed against GitHub; and the reviewer revised its own prior disposition on new evidence rather than defending it."
+  },
+
+  "raw_capture_validation": {
+    "capture_envelopes": 21,
+    "validated": 21,
+    "failures": 0,
+    "dimensions_checked": [
+      "stdout_sha256",
+      "stdout_bytes",
+      "stderr_sha256",
+      "stderr_bytes",
+      "return_code",
+      "method",
+      "endpoint",
+      "requested_api_version",
+      "capture_started_at_utc",
+      "capture_finished_at_utc",
+      "raw_vs_derived_semantic_equality"
+    ],
+    "return_codes_all_zero": true,
+    "api_version_uniform": "2026-03-10 on all gh api captures; git ls-remote captures carry exact argv",
+    "temporal_order": "MONOTONIC_NON_DECREASING 2026-08-19T19:54:25Z .. 19:55:21Z",
+    "raw_vs_derived": {"pairs": 17, "identical": 17, "derived_without_raw": 0, "raw_without_derived": 0},
+    "coverage_gap": {
+      "severity": "NONBLOCKING_BUT_MATERIAL",
+      "objects_without_raw_envelope": [
+        "native run/job/check selections and polls",
+        "final PR_HEAD and TEST_MERGE check-run and status surfaces",
+        "App check-run creation responses",
+        "installation token metadata and repository enumerations",
+        "ruleset/layered/protection bodies",
+        "prod and lab main bodies",
+        "preflight_state / preflight_heads / lab run inventories"
+      ],
+      "mitigation_in_this_audit": "Every load-bearing claim carried by these objects was independently reobserved live against GitHub and matched exactly; no conclusion rests on a runner-serialized body alone.",
+      "recommended_correction": "Route all load-bearing reads through the raw-capture envelope in any future runner revision."
+    },
+    "classic_protection_empty_body_treatment": {
+      "files": [
+        "attempt2_rules_preflight_classic_protection.json",
+        "attempt_2/immediate_rules_preflight_classic_protection.json",
+        "attempt_2/final_rules_readback_classic_protection.json"
+      ],
+      "body_bytes_each": 0,
+      "interpreted_as_valid_json": false,
+      "interpreted_as_empty_object": false,
+      "paired_stderr_bytes_each": 36,
+      "paired_stderr_sha256_each": "256bf323d488b96ed59be6a50a192e2badd6b722792fcc4b8856f97aa3a3d23a",
+      "paired_stderr_literal_exact": "gh: Branch not protected (HTTP 404)\\n",
+      "byte_exact_match_to_required_literal": true,
+      "runner_coherence": "COHERENT — verify_ruleset_free() requires rc != 0 and a 404 / 'Branch not protected' / 'Not Found' stderr; an rc == 0 protection read raises StopBeforeMutation, so an isolated empty body could not have produced PASS",
+      "verdict": "ACCEPTED_AS_HTTP_404_TRANSPORT_BODY_ONLY"
+    }
+  },
+
+  "result_claim_reconciliation": {
+    "method": "Every claim in the RESULT re-derived from lower-level objects and, where reobservable, from live GitHub; runner assertions not accepted as evidence.",
+    "technical_claims_supported": [
+      "PR #2 opened exactly once, BASE lab/id-observation-r2 @ 3f5d292c9f76c1347ca2b6d13e63e816cf214159, HEAD lab-src/id-observation-r2 @ 81bf9c0ec3e45bb05b0207cbb17068568f01970e, stable across open, three polls, three post-acquisition reads, pre-close, close and post-close, and live",
+      "TEST_MERGE 66ecbcfd658cc15887c7317ace31bb7fd77591d2 acquired by exact refs/pull/2/merge ls-remote three times with identical stdout bytes; commit parents ordered exactly [BASE, HEAD]; three git/commits raw bodies byte-identical",
+      "Native signal: event pull_request, path .github/workflows/id-observation-r2.yml, run 32295627101 attempt 1 conclusion success, app_id 15368, check_run_id 96206136617, check_suite_id 87552342707 — all live-confirmed",
+      "LAB_EXPECTED_APP 4641302 check-run 96206259472 / suite 87552451757 and LAB_WRONG_APP 4641692 check-run 96206266309 / suite 87552457934, both on PR_HEAD, both live-confirmed",
+      "ruleset_count=0 and rulesets_created=false at preflight, immediate, final readback and live; layered rules [] throughout and live",
+      "Commit statuses absent on both surfaces in evidence and live; absence reported as total_count 0 / state pending, never reinterpreted favorably",
+      "Installation tokens: repository_selection selected, exactly one repository (the lab), permissions checks:write + metadata:read, token popped before serialization, no token material anywhere in the 159 members",
+      "PR #2 terminal CLOSED_UNMERGED; PR #1 unchanged CLOSED_UNMERGED and not reclassified; open lab PR count 0 — all live-confirmed",
+      "production main, PR #6 and lab main byte-identical pre/post and live-confirmed; all 61 lab branch heads and the empty tag set identical preflight vs live",
+      "merge_performed=false, cleanup_performed=false, failures=[] — no merge call site exists in the runner, no deletion call site, no drift-freeze or stop artifacts present",
+      "Lab workflow-run inventory grew by exactly one run — the expected native run — with none vanished"
+    ],
+    "claims_now_corroborated_that_revision_1_had_flagged_as_asserted_only": {
+      "production_FALSE_GREENS_8": {
+        "revision_1_status": "CARRIED_FORWARD_CONSTANT_NOT_RECOMPUTED",
+        "revision_2_status": "CORROBORATED_AGAINST_PREFLIGHT_PRODUCTION_STATE",
+        "detail": "preflight_state.json decodes to R2_STATE.md, 70548 bytes, git blob sha1 d8e5c7796322c6ac60761dba3485f69d15debe6b matching the declared blob id, served from production main 5a5b4b1bd95f50824180e2146f9d76fbe861db7c. Its ## Metricas section records 'Falsos verdes: 8 detectados' and the body enumerates FALSE_GREEN_6, _7 and _8 with causes and the running totals 5->6->7->8. The literal 8 in the runner therefore reconciles with the canonical production count at preflight."
+      },
+      "installation_permission_nuance": {
+        "detail": "The lab installation for the expected App carries permissions checks:write, metadata:read AND statuses:write at installation level. The token actually minted carried only checks:write and metadata:read, so it could not write commit statuses. The claim as stated in the review request is satisfied at the token level, which is the level that matters; the wider installation grant is noted as a hardening opportunity, not a violation.",
+        "verdict": "CLAIM_SUPPORTED_WITH_NUANCE"
+      }
+    },
+    "unsupported_claims": [],
+    "claims_outside_this_bundle_entirely": [
+      "that attempt 2 was authorized to execute at all — see blocking finding B-01"
+    ]
+  },
+
+  "native_binding_assessment": {
+    "determination": "BINDING_PR_HEAD",
+    "determined_from": "lower-level objects, not the result file",
+    "PR_HEAD_surface": {"sha": "81bf9c0ec3e45bb05b0207cbb17068568f01970e", "check_runs_total": 3, "native_present": true},
+    "TEST_MERGE_surface": {"sha": "66ecbcfd658cc15887c7317ace31bb7fd77591d2", "check_runs_total": 0, "native_present": false},
+    "corroborating_objects": [
+      "workflow run head_sha == PR_HEAD, check_suite_id 87552342707, event pull_request, run_attempt 1",
+      "job 96206136617 head_sha == PR_HEAD, run_id 32295627101, in_progress then completed/success across two polls",
+      "check-run body pull_requests[] = [#2 head 81bf9c0e base 3f5d292c]",
+      "both pre-check surfaces empty before the experiment, so all three check-runs were produced inside the experiment window",
+      "live reobservation reproduces the 3 / 0 split exactly"
+    ],
+    "classifier_discipline": "Exclusive and non-favorable: TEST_MERGE / PR_HEAD / OTHER_SHA, with absent-or-pending after 600s routed to RECOVERY. No ambiguity path resolves to a binding claim.",
+    "ambiguity_or_dual_binding": "NONE_OBSERVED",
+    "scope_limit_respected": true,
+    "scope_limit_statement": "Holds only for repository SrHector199/r2-stage-b-platform-semantics-lab-v13-e8a44c52, workflow .github/workflows/id-observation-r2.yml, trigger pull_request (opened/synchronize/reopened), PR #2, BASE 3f5d292c9f76c1347ca2b6d13e63e816cf214159, HEAD 81bf9c0ec3e45bb05b0207cbb17068568f01970e, TEST_MERGE 66ecbcfd658cc15887c7317ace31bb7fd77591d2, at 2026-08-19T19:54-19:55Z, under the configuration then in force. Not generalized to other workflows, events, repositories, moments or GitHub behaviours."
+  },
+
+  "mutation_scope_assessment": {
+    "technical_surface_verdict": "EXACT_SURFACE_NO_EXCURSION_DETECTED",
+    "authorization_verdict": "NOT_EVIDENCED_IN_PACKAGE",
+    "mutations_observed": [
+      {"kind": "PR_OPEN", "object": "lab PR #2", "count": 1, "raw_captured": true},
+      {"kind": "CHECK_RUN_CREATE", "object": "96206259472 by app 4641302 on PR_HEAD", "count": 1, "raw_captured": false},
+      {"kind": "CHECK_RUN_CREATE", "object": "96206266309 by app 4641692 on PR_HEAD", "count": 1, "raw_captured": false},
+      {"kind": "INSTALLATION_TOKEN_MINT", "object": "installation 154781449", "count": 1, "raw_captured": false},
+      {"kind": "INSTALLATION_TOKEN_MINT", "object": "installation 154784106", "count": 1, "raw_captured": false},
+      {"kind": "PR_CLOSE", "object": "lab PR #2 state=closed", "count": 1, "raw_captured": true}
+    ],
+    "static_call_site_census": "Exactly four mutating call sites exist in the 85779 runner bytes: POST /app/installations/{id}/access_tokens, POST /repos/{lab}/check-runs, POST /repos/{lab}/pulls, PATCH /repos/{lab}/pulls/2. No PUT, no DELETE, no ruleset, protection, required-check, settings, workflow-dispatch or merge endpoint anywhere.",
+    "checked_for_and_not_found": {
+      "other_pull_request_touched": "NOT_FOUND",
+      "branch_created_deleted_or_moved": "NOT_FOUND (61 heads identical preflight vs live)",
+      "push_or_commit": "NOT_FOUND",
+      "merge": "NOT_FOUND",
+      "commit_status_write": "NOT_FOUND (all four surfaces total_count 0, live included; minted tokens lacked statuses:write)",
+      "ruleset_or_branch_protection_write": "NOT_FOUND",
+      "tag_create": "NOT_FOUND",
+      "production_or_PR6_mutation": "NOT_FOUND",
+      "cleanup": "NOT_FOUND",
+      "L2_start": "NOT_FOUND",
+      "workflow_dispatch_or_rerun": "NOT_FOUND (run_attempt 1 only)",
+      "extra_workflow_runs": "NOT_FOUND (inventory +1, exactly the expected native run)"
+    },
+    "token_hygiene": {
+      "repository_selection": "selected",
+      "scoped_to": ["SrHector199/r2-stage-b-platform-semantics-lab-v13-e8a44c52"],
+      "minted_permissions": {"checks": "write", "metadata": "read"},
+      "installation_level_permissions_expected_app": {"checks": "write", "metadata": "read", "statuses": "write"},
+      "runtime_scope_reverified_by_runner": "yes, via GET /installation/repositories with the minted token, rejecting any non-exact lab-only scope",
+      "production_installation_mapping": "HTTP 404 for both Apps, pre and post identical — neither App is installed on production",
+      "token_material_persisted": false,
+      "token_material_present_in_package": false,
+      "expiry_recorded": ["2026-08-19T20:55:08Z", "2026-08-19T20:55:10Z"]
+    }
+  },
+
+  "terminal_state_assessment": {
+    "lab_PR2": {"state": "CLOSED", "merged": false, "merged_at": null, "closed_at": "2026-08-19T19:55:18Z", "verdict": "SAFE_TERMINAL"},
+    "lab_PR1": {"state": "CLOSED", "merged": false, "reclassified": false, "verdict": "UNCHANGED_HISTORICAL"},
+    "open_lab_PRs": 0,
+    "production": "UNCHANGED",
+    "PR6": "OPEN_UNMERGED_UNCHANGED",
+    "lab_main": "UNCHANGED",
+    "L2": "NOT_STARTED",
+    "cleanup": "NOT_PERFORMED",
+    "overall": "SAFE_TERMINAL"
+  },
+
+  "live_reobservation": {
+    "mode": "READ_ONLY (unauthenticated git ls-remote and unauthenticated public REST GET only)",
+    "window_utc": "2026-08-20T19:26Z .. 19:39Z",
+    "matches": {
+      "production_main": "5a5b4b1bd95f50824180e2146f9d76fbe861db7c — MATCH",
+      "production_PR6": "open, merged=false, head 4d0b627e28fd863aff7169529f99cd5d5ae5805c — MATCH",
+      "lab_main": "ec5eae95c6eec166713259d0a76dc13261e22c68 — MATCH",
+      "lab_PR1": "closed, merged=false, base 7a7fe9b9..., head fa4a43c1..., closed_at 2026-08-18T23:48:04Z — MATCH",
+      "lab_PR2": "closed, merged=false, base 3f5d292c..., head 81bf9c0e..., closed_at 2026-08-19T19:55:18Z — MATCH",
+      "native_workflow_run": "32295627101, pull_request, success, attempt 1 — MATCH",
+      "native_job": "96206136617, r2-lab-pin-v12, success — MATCH",
+      "PR_HEAD_check_runs": "3 (apps 15368, 4641302, 4641692) — MATCH",
+      "TEST_MERGE_check_runs": "0 — MATCH",
+      "both_commit_status_surfaces": "state pending, total_count 0 — MATCH",
+      "lab_rulesets_and_layered_rules": "[] and [] — MATCH",
+      "lab_open_pull_requests": "[] — MATCH",
+      "lab_branch_inventory": "61 heads, zero new, zero removed, zero sha drift — MATCH",
+      "lab_tags": "zero — MATCH"
+    },
+    "not_reobserved": [
+      {
+        "object": "lab classic branch protection",
+        "reason": "GET branches/lab%2Fid-observation-r2/protection returns HTTP 401 Requires authentication; the audit deliberately did not authenticate",
+        "status": "NOT_REOBSERVED",
+        "in_bundle_support": "three byte-exact HTTP 404 stderr artifacts at preflight, immediate and final readback, plus live emptiness of rulesets and layered rules"
+      }
+    ],
+    "invented_values": "NONE",
+    "note": "Live PR #2 now exposes merge_commit_sha equal to the TEST_MERGE SHA whereas every in-bundle PR body recorded null. Consistent, not contradictory: the runner never depended on that field and acquired refs/pull/2/merge exactly; the later population corroborates the acquired identity. refs/pull/2/merge is now absent from the remote, which is expected for a closed PR and is not a finding."
+  },
+
+  "false_green_increment": {
+    "new_lab_false_greens": 0,
+    "new_production_false_greens": 0,
+    "production_false_greens_after": 8,
+    "corroborated_against": "R2_STATE.md ## Metricas at production main (blob d8e5c7796322c6ac60761dba3485f69d15debe6b), which records 8 detected false greens and enumerates FALSE_GREEN_6/_7/_8",
+    "basis": "No required check, ruleset, layered rule or branch protection existed on the lab base branch at any point and none exists live, so the three green check-runs were load-bearing on no gate; both commit-status surfaces are empty in evidence and live; production and PR #6 are byte-identical pre/post and unchanged live.",
+    "reviewer_note": "Granting EVIDENCE_PASS on this package would itself have risked a ninth false green of exactly the FALSE_GREEN_7 class already recorded in their history — a validator declaring PASS without verifying that the governing authorization was present in the current canonical scope."
+  },
+
+  "blocking_findings": [
+    {
+      "id": "B-01",
+      "severity": "BLOCKING_FOR_CANONICALIZATION_ELIGIBILITY_ONLY",
+      "title": "No Human Gate D authorization artifact for attempt 2 exists anywhere in the package, while every governance artifact the package does contain declares execution NOT authorized",
+      "evidence": [
+        "preflight_state.json decodes to canonical production R2_STATE.md (70548 bytes, git blob sha1 d8e5c7796322c6ac60761dba3485f69d15debe6b, served from production main 5a5b4b1b..., last updated 2026-08-16T13:44:26Z). Its ## Estado 'Authorized next step' authorizes only read-only preparation and states verbatim that it does not authorize ramas/PRs, required checks, branch protection, rulesets, merge or settings, and that any later execution or D mutation requires a new Human Gate D.",
+        "The same document's ## Gate de fase records 'Gate de salida de R2-4: NOT_EXECUTED' and 'Siguiente fase permitida: NO'.",
+        "The in-package runner-candidate independent review declares candidate_execution_authorized=false, execution_authority=NONE, required_changes_before_execution_Human_Gate_D=[] and new_Human_Gate_D_required_before_any_execution=true.",
+        "That same review summarises HUMAN_GATE_SCOPE.json (1254 bytes) as declaring candidate_execution_authority NONE and listing candidate execution, network use, GitHub mutation, opening PR #2, token or PEM use, production or PR #6 mutation, reopening PR #1 and L2 as not authorized. HUMAN_GATE_SCOPE.json itself is not present in this package.",
+        "The runner does implement a technical gate — exact argv with self SHA and runner-review SHA, plus environment variable R2_V14_V2_ATTEMPT2_HUMAN_GATE_D set to a fixed value — and execution demonstrably satisfied it. But the package contains no invocation record, no environment attestation, no signed or hashed authorization artifact, and no dated Human Gate D decision naming attempt 2.",
+        "R2_STATE.md mentions the laboratory repository, the V13/V14 lab series, LAB-ID-OBSERVATION and id-observation zero times, so the canonical record neither authorizes the lab work nor acknowledges it."
+      ],
+      "why_this_blocks": "The review request's PASS rule requires that mutation scope be exact and that no absent or ambiguous observation be promoted to PASS. Whether the observed mutation was inside an approved scope cannot be answered from the package bytes: the approval artifact is absent, and the only governance text present points the other way. Canonicalization writes into that same canonical record, so admitting an unevidenced authorization at this gate is the specific failure mode the apparatus exists to prevent.",
+      "why_this_is_not_BLOCKED_INVALID": "There is no unsafe completed mutation, no false green, no merge, no production or PR #6 drift, no cleanup, no L2 start, no credential exposure and no unclassifiable terminal state. The mutation was confined to a disposable laboratory repository and terminated CLOSED_UNMERGED. The gap is documentary, not operational.",
+      "closable_without_re_execution": true,
+      "required_change": "Supply the Human Gate D authorization artifact that authorized attempt 2 — hash- and byte-identified, naming the exact lab repository, PR #2, the two App check-run surfaces and the two installation-token mints, and dated between the runner-candidate review (2026-08-19T00:00:00Z) and execution start (2026-08-19T19:54:25Z) — together with HUMAN_GATE_SCOPE.json in full, and a reconciliation note explaining the relationship between that gate and the read-only 'Authorized next step' line standing in R2_STATE.md at production main 5a5b4b1b.... If such an artifact exists and reconciles, every other criterion for EVIDENCE_PASS is already met and this review converts to PASS on documentary review alone."
+    }
+  ],
+
+  "nonblocking_findings": [
+    {
+      "id": "NB-01",
+      "severity": "MEDIUM",
+      "title": "Load-bearing surfaces persisted as re-serialized JSON without a raw-capture envelope",
+      "detail": "Only 21 objects carry raw transport bytes plus rc/hash/endpoint/timestamps. Binding-critical surfaces, App check-run creations, token metadata, ruleset/protection bodies and prod/lab main bodies do not. Closed here by live reobservation; a re-audit after these objects age out of GitHub would have no such recourse."
+    },
+    {
+      "id": "NB-02",
+      "severity": "RESOLVED_IN_REVISION_2",
+      "title": "production_FALSE_GREENS=8 provenance",
+      "detail": "Raised in revision 1 as a hardcoded constant. Now corroborated against the verified preflight production state document. Retained only as a note that the runner emits it as a literal rather than deriving it."
+    },
+    {
+      "id": "NB-03",
+      "severity": "LOW",
+      "title": "Classic branch protection absence is not independently reobservable read-only",
+      "detail": "Unauthenticated protection reads return 401. Absence rests on three byte-exact HTTP 404 stderr artifacts plus live emptiness of rulesets and layered rules. Marked NOT_REOBSERVED rather than PASS."
+    },
+    {
+      "id": "NB-04",
+      "severity": "LOW",
+      "title": "Token non-persistence provable only as absence-from-package",
+      "detail": "The package proves the token field was popped before serialization and that no token, PEM or JWT is present in any of the 159 members. Non-persistence outside the runner process rests on the audited source path."
+    },
+    {
+      "id": "NB-05",
+      "severity": "LOW",
+      "title": "Installation grants statuses:write although the minted token did not carry it",
+      "detail": "The expected-App lab installation holds checks:write, metadata:read and statuses:write. The minted token requested only checks:write, so no commit status could be written, consistent with the four empty status surfaces. Narrowing the installation grant itself would remove the residual capability."
+    },
+    {
+      "id": "NB-06",
+      "severity": "LOW",
+      "title": "Actor CLI token scopes broad relative to the experiment",
+      "detail": "gh_auth_status.txt discloses gist, read:org, repo, workflow on the human actor token, value correctly masked. Not a leak; wider than the observation required."
+    },
+    {
+      "id": "NB-07",
+      "severity": "INFORMATIONAL",
+      "title": "Native check-run id equals job id",
+      "detail": "96206136617 on both endpoints — expected GitHub Actions behaviour, verified live, not an evidence collision."
+    },
+    {
+      "id": "NB-08",
+      "severity": "INFORMATIONAL",
+      "title": "In-bundle PR bodies show merge_commit_sha=null throughout",
+      "detail": "The field populated only after the observation window; the runner correctly never depended on it, using exact refs/pull/2/merge acquisition instead."
+    },
+    {
+      "id": "NB-09",
+      "severity": "INFORMATIONAL",
+      "title": "Three artifacts pinned by hash are declared but not supplied",
+      "detail": "The runner-candidate review records r2_4_stage_b_platform_semantics_lab_independent_review_v5.json (223bc7ff..., 50914 bytes), L1_WRONG_APP_INSTALL_RESULT.json (f2098e65..., 1437 bytes) and L1_LAB_ID_OBSERVATION/OBSERVATION_INVALID_STOP.json (b7e0d8b2..., 303 bytes) as pinned but absent from the bundle. The runner enforces those pins at runtime, so they were present at execution; they are simply not reconfirmable from these bytes."
+    }
+  ],
+
+  "promoted_unknowns_check": {
+    "absent_observations_promoted_to_PASS": "ONE_FOUND — the Human Gate D authorization, absent from the package, was implicitly treated as satisfied by the runner's pre-gate assertions and by the review request's framing of the surface as 'approved'. Recorded as B-01 rather than accepted.",
+    "contradictory_observations_promoted_to_PASS": "NONE_FOUND",
+    "pending_observations_promoted_to_PASS": "NONE_FOUND",
+    "malformed_observations_promoted_to_PASS": "NONE_FOUND",
+    "unclassifiable_observations_promoted_to_PASS": "NONE_FOUND",
+    "empty_bodies_promoted_to_PASS": "NONE_FOUND",
+    "absences_reinterpreted_favorably": "NONE_FOUND — empty status surfaces are reported as total_count 0 / state pending and corroborated live; the zero TEST_MERGE check-run surface is a genuine observed negative, not an inference from missing data"
+  },
+
+  "evidence_disposition": "CHANGES_REQUIRED_BEFORE_CANONICALIZATION",
+
+  "evidence_disposition_reason": "Package integrity is complete and recomputed from bytes at every level, all 21 raw captures validate on every dimension, and every technical claim in the RESULT was re-derived from lower-level evidence and independently reobserved live with exact matches: single PR open with exact BASE and HEAD, exact refs/pull/2/merge acquisition with parents ordered [BASE, HEAD], native binding to PR_HEAD with three check-runs there and zero on TEST_MERGE, empty commit-status surfaces, lab-scoped minimal tokens with no credential material in the package, zero rulesets before during after and now, CLOSED_UNMERGED terminal state, PR #1 untouched, and production main, PR #6, lab main, all 61 lab heads and the tag set unchanged. Nothing technical is missing and no false green was created. What is missing is documentary: the package contains no artifact evidencing the Human Gate D that authorized attempt 2 to mutate anything, while the canonical production state it carries authorizes only read-only preparation and explicitly excludes branches and PRs, and the in-package runner review declares execution not authorized and a new Human Gate D required. Canonicalization writes into that canonical record, so the authorization must be evidenced before the record is written. This is a single, closable documentary gap requiring no re-execution.",
+
+  "canonicalization_eligibility": {
+    "eligible": false,
+    "sole_obstacle": "B-01",
+    "converts_to_eligible_when": "The Human Gate D authorization artifact for attempt 2 and HUMAN_GATE_SCOPE.json are supplied and reconcile with the canonical 'Authorized next step' line, with no re-execution and no further evidence collection required.",
+    "scope_that_would_become_eligible": "The exact attempt-2 evidence set identified by tar.gz sha256 742fef6fcaaf94fa2b2097507fb65ec7e006ae087b673dec4348aa2c6ad2d0e3 and result sha256 3de7ecfe622b7dc3a65c6cae662d10050d32b874c3bc48fa2d2a6f42d7f2580e",
+    "conditions_to_record_at_that_later_gate": [
+      "NB-01 accepted as an evidence-format limitation, or the affected surfaces re-captured through the raw envelope in the next runner revision",
+      "Lab classic branch protection recorded as NOT_REOBSERVED live (NB-03)",
+      "NB-09 recorded: three hash-pinned artifacts declared but not supplied in this bundle",
+      "The binding scope limit carried verbatim into any canonical text",
+      "The technical findings of this review recorded as PASS on their own terms, so that closing B-01 does not require re-doing them"
+    ],
+    "canonicalization_performed_by_this_review": false
+  },
+
+  "next_gate_eligibility": {
+    "R2_4_exit": "NOT_AUTHORIZED_BY_THIS_REVIEW",
+    "R2_5": "NOT_AUTHORIZED",
+    "L2": "NOT_AUTHORIZED_AND_NOT_STARTED",
+    "D1": "NOT_AUTHORIZED",
+    "D2": "NOT_AUTHORIZED",
+    "D3": "NOT_AUTHORIZED",
+    "merge": "NOT_AUTHORIZED",
+    "cleanup": "NOT_AUTHORIZED",
+    "rulesets_branch_protection_required_checks": "NOT_AUTHORIZED",
+    "production_change": "NOT_AUTHORIZED",
+    "re_execution_of_attempt_2": "NOT_AUTHORIZED_AND_NOT_REQUIRED",
+    "new_human_gate_required_before_any_further_execution": true
+  },
+
+  "authority_confirmation": {
+    "role": "POST_EXECUTION_INDEPENDENT_AUDITOR_READ_ONLY",
+    "runner_executed": false,
+    "package_scripts_executed": false,
+    "PEM_used": false,
+    "tokens_generated": false,
+    "pull_requests_opened_closed_or_modified": false,
+    "merge_performed": false,
+    "cleanup_performed": false,
+    "github_modified": false,
+    "github_reads_performed": "unauthenticated git ls-remote on two repositories and unauthenticated public REST GETs only",
+    "canonicalization_performed": false,
+    "L2_executed": false,
+    "D1_D2_D3_executed": false,
+    "left_R2_4": false,
+    "R2_5_authorized": false,
+    "this_artifact_grants": "NOTHING. It is a read-only post-execution evidence review. It withholds canonicalization eligibility pending one documentary artifact and authorizes no execution, mutation, cleanup, phase transition or canonicalization of any kind."
+  }
+}
