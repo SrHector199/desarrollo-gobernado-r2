@@ -1,0 +1,20 @@
+name: R2 BP-B-02 Collision Probe
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  collision:
+    name: r2-governed-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Emit controlled success collision
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' 'BP-B-02 controlled collision success'
