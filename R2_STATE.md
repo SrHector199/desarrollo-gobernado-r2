@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: D3 is ELIGIBLE_FOR_CONSIDERATION_ONLY_NOT_AUTHORIZED after canonical D2=EXECUTED_PASS_BOUNDED, verified D2 evidence export and recorded final tested WEP state ACTIVE_AS_TESTED. D3 requires its own separate Human Gate D and is refs-only; WEP mutation remains false. BP-B-03 remains BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH and unresolved. D3 execution, BP-B-03 execution, further WEP mutation, rulesets, branch protection, required checks, cleanup, R2-4 exit and R2-5 remain NOT_AUTHORIZED by this canonicalization.
-- Last updated: 2026-08-21T09:21:14Z
+- Authorized next step: NONE_BY_THIS_D3_CANONICALIZATION. D3 is recorded EXECUTED_PASS, but this canonicalization deliberately does not select or preauthorize the next R2-4 action. BP-B-03 remains BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH and unresolved. Any further R2-4 action requires a fresh pre-step against live state plus separate authorization proportional to its risk. BP-B-03 execution, further cleanup/ref deletion, WEP mutation, rulesets, branch protection, required checks, R2-4 exit and R2-5 remain NOT_AUTHORIZED by this canonicalization.
+- Last updated: 2026-08-21T23:02:50Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -936,6 +936,32 @@
 - BP-B-03 execution: NOT_AUTHORIZED; deferment remains not resolution.
 - R2-4 remains active; R2-4 exit NOT_EXECUTED; R2-5 NOT_AUTHORIZED.
 
+## B1 WEP D3 ref cleanup and final state evidence
+
+- D3: EXECUTED_PASS.
+- Route: `AFTER_D2`.
+- D3 execution baseline `main`: `a512f812423ca2dda45e65c43ad4da60756b1e7f`; D3 execution did not modify `main`.
+- Human Gate D3: CONSUMED. Administrative-canonicalization Human Gate: CONSUMED_FOR_PR_PREPARATION_ONLY; it does not authorize merge.
+- Final evidence bundle: `evidence/r2-4/B1_WEP_D3_REF_CLEANUP_AND_FINAL_STATE_EVIDENCE_BUNDLE.tar.gz`; SHA-256 `3eedc64760dd8b6f54b9f8d04fab1feabc0b21bb0f506efd2044fa467efa4853`; bytes `5119779`; internal `FINAL_SHA256SUMS.txt` SHA-256 `c7b454afb55c33c7d8553e723b0ac834055601b05ce50fe786e0a1d16a381091`.
+- Structured result: `evidence/r2-4/B1_WEP_D3_REF_CLEANUP_AND_FINAL_STATE_RESULT.json`; SHA-256 `92920087b11e4b063843b2bed17f842566375e4a09ac127e3a8e2ecd852769f6`; bytes `2299`; `status=PASS`.
+- Deterministic evidence audit: `evidence/r2-4/B1_WEP_D3_EVIDENCE_AUDIT_RESULT.json`; SHA-256 `bdff6ef60bfd16db0e1678b909bf0d15a19d61fe9ed7779956f84075fabc94a3`; bytes `1643`; `status=PASS`.
+- Administrative-canonicalization Human Gate text SHA-256 `e618d5eca4934d45a3e1f2437f99f7151cf721aae5dd054a120eead7e6986923`; this hash records provenance only and grants no merge authority.
+- Exact deleted ref 1: `refs/heads/r2-4/b1-wep-push-collision`; pre-delete SHA `5570a023ba008d9726254842f292c522c3ee0552`; final `ABSENT_404`.
+- Exact deleted ref 2: `refs/heads/r2-4/b1-wep-pull-request-collision`; pre-delete SHA `070bf7a5bb26b9dea14efd53dab8867ab1268a6c`; final `ABSENT_404`.
+- Ref invariance: pre-delete all-head count `12`; post-delete all-head count `10`; exactly `10` non-probe refs; baseline/final SHA-256 `e9e0a0c15778fea2f120ee044546d3728e4a359433d338d1b0ba8f30ce25742d`; byte-for-byte equality PASS.
+- WEP final-state comparison: policy id `3258`, name `R2 B1 WEP Producer Boundary`; `ACTIVE_AS_TESTED` before D3 and `ACTIVE_AS_TESTED` after D3; exact visible-field comparison `PASS_EXACT_FIELD_EQUALITY`; `WEP_MUTATION=false`.
+- WEP visible fields remained: `Restrict actors=OFF`, actor rules empty; `Restrict events=ON`; only `pull_request_target` selected; `push` and `pull_request` not permitted; `Require lockfile=OFF`; no extra rules observed.
+- Bypass surface remained not present in the observed UI and is recorded `INAPPLICABLE_NOT_SATISFIED`; no universal no-bypass claim is made.
+- PR #11 remains MERGED; PR #10 remains CLOSED_UNMERGED; PR #6 remains OPEN and unchanged.
+- FALSE_GREEN_INCREMENT: `0`; FALSE_GREENS remain `8`.
+- ENFORCED: False.
+- AISLADA: not claimed.
+- BP-B-03: NOT_EXECUTED / NOT_AUTHORIZED / UNRESOLVED. D3 does not resolve it.
+- Further cleanup/ref deletion: NOT_AUTHORIZED by D3 or this canonicalization.
+- R2-4 remains ACTIVE; R2-4 exit NOT_AUTHORIZED.
+- R2-5 remains NOT_AUTHORIZED.
+- This D3 canonicalization deliberately selects no next R2-4 action. A later action must start from a fresh pre-step over the then-live repository and deferred controls.
+
 ## Stage B LAB-ID-OBSERVATION V14-v2 attempt 2
 
 - TECHNICAL_EVIDENCE: PASS for the exact observed case.
@@ -1007,7 +1033,7 @@
 - Historical review dispositions remain historical and are not relabeled by this repair.
 - Current phase remains R2-4.
 - Current functional accepted SHA remains 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a.
-- Authorized next step after D2 canonicalization: D3 is ELIGIBLE_FOR_CONSIDERATION_ONLY_NOT_AUTHORIZED only through a separate Human Gate D on the reviewed AFTER_D2 path. D3 is limited to deletion of the exact two disposable B1 refs plus verification of their absence and invariance of non-probe refs; WEP mutation is not part of D3. BP-B-03 execution, further WEP mutation, rulesets, branch protection, required checks, cleanup beyond an authorized D3, R2-4 exit and R2-5 remain NOT_AUTHORIZED by this canonicalization.
+- Authorized next step after D3 canonicalization: NONE_BY_THIS_CANONICALIZATION. The D3 execution result closes only the reviewed B1 ref-cleanup/final-settings-evidence gate; it does not choose the next R2-4 work item. A fresh pre-step must determine the live blockers and applicable authority before any new action. BP-B-03 execution, any further cleanup/ref deletion, WEP mutation, rulesets, branch protection, required checks, R2-4 exit and R2-5 remain NOT_AUTHORIZED.
 
 ## Gate de fase
 - R2-0 gate: PASS
