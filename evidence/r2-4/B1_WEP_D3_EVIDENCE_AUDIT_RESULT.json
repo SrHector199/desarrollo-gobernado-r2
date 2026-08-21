@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "artifact_type": "r2-4-b1-wep-d3-final-evidence-audit-result",
+  "status": "PASS",
+  "basis": "DETERMINISTIC_REVERIFY_OF_FINAL_D3_ARCHIVE_AND_LIVE_POSTDELETE_STATE",
+  "bundle": {
+    "local_path": "/home/hector/r2-d3-final-evidence-20260821T225558Z.tar.gz",
+    "sha256": "3eedc64760dd8b6f54b9f8d04fab1feabc0b21bb0f506efd2044fa467efa4853",
+    "bytes": 5119779
+  },
+  "result": {
+    "local_path": "/home/hector/r2-d3-final-result-20260821T225558Z.json",
+    "sha256": "92920087b11e4b063843b2bed17f842566375e4a09ac127e3a8e2ecd852769f6",
+    "bytes": 2299
+  },
+  "checks": {
+    "source_prestep_manifest": "PASS",
+    "source_cleanup_manifest": "PASS",
+    "human_gate_d3_hash": "PASS",
+    "exact_two_ref_deletions": "PASS",
+    "both_deleted_refs_absent_404": "PASS",
+    "non_probe_ref_invariance": "PASS_BYTE_FOR_BYTE",
+    "main_invariance": "PASS",
+    "pr11_invariance": "PASS_MERGED",
+    "pr10_invariance": "PASS_CLOSED_UNMERGED",
+    "pr6_invariance": "PASS_OPEN",
+    "predelete_ui_integrity": "PASS",
+    "postdelete_ui_integrity": "PASS",
+    "wep_field_by_field_comparison": "PASS_EXACT_EQUALITY",
+    "wep_mutation": "PASS_FALSE",
+    "final_archive_manifest": "PASS",
+    "final_archive_reextract_reverify": "PASS"
+  },
+  "authority": {
+    "d3_execution": "EXECUTED_PASS",
+    "d3_administrative_canonicalization": "NOT_AUTHORIZED",
+    "bp_b03": "NOT_AUTHORIZED_UNRESOLVED",
+    "r2_4_exit": "NOT_AUTHORIZED",
+    "r2_5": "NOT_AUTHORIZED"
+  },
+  "forbidden_claims": [
+    "BP_B03_RESOLVED",
+    "ENFORCED",
+    "AISLADA",
+    "D3_CANONICAL",
+    "R2_4_EXIT_AUTHORIZED",
+    "R2_5_AUTHORIZED"
+  ]
+}

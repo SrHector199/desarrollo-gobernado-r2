@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "artifact_type": "r2-4-b1-wep-d3-ref-cleanup-and-final-state-result",
+  "status": "PASS",
+  "execution_state": "EXECUTED_PASS_PENDING_ADMINISTRATIVE_CANONICALIZATION",
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "main": "a512f812423ca2dda45e65c43ad4da60756b1e7f",
+  "route": "AFTER_D2",
+  "human_gate_d3": {
+    "status": "CONSUMED",
+    "sha256_utf8": "3b4f29e96685d57814ae1cf87b7e97eeaa80129ee2df627f4852414ce976d2cb"
+  },
+  "evidence_bundle": {
+    "local_path": "/home/hector/r2-d3-final-evidence-20260821T225558Z.tar.gz",
+    "sha256": "3eedc64760dd8b6f54b9f8d04fab1feabc0b21bb0f506efd2044fa467efa4853",
+    "bytes": 5119779,
+    "final_manifest_sha256": "c7b454afb55c33c7d8553e723b0ac834055601b05ce50fe786e0a1d16a381091"
+  },
+  "internal_artifacts": {
+    "execution_summary_sha256": "9b83409663fb95d41b3707f9760a739cc71b05f37fb8eca0fe2a00dac7293174",
+    "final_wep_field_comparison_sha256": "6cc34f1cfef92ab34de1bb99807826d9063970c93d86dbd0b4bc9cd23d3b1dc3"
+  },
+  "deleted_refs": [
+    {
+      "ref": "refs/heads/r2-4/b1-wep-push-collision",
+      "sha_before": "5570a023ba008d9726254842f292c522c3ee0552",
+      "final": "ABSENT_404"
+    },
+    {
+      "ref": "refs/heads/r2-4/b1-wep-pull-request-collision",
+      "sha_before": "070bf7a5bb26b9dea14efd53dab8867ab1268a6c",
+      "final": "ABSENT_404"
+    }
+  ],
+  "non_probe_refs": {
+    "count": 10,
+    "baseline_sha256": "e9e0a0c15778fea2f120ee044546d3728e4a359433d338d1b0ba8f30ce25742d",
+    "final_sha256": "e9e0a0c15778fea2f120ee044546d3728e4a359433d338d1b0ba8f30ce25742d",
+    "byte_for_byte_equal": true
+  },
+  "wep": {
+    "policy_id": 3258,
+    "policy_name": "R2 B1 WEP Producer Boundary",
+    "before": "ACTIVE_AS_TESTED",
+    "after": "ACTIVE_AS_TESTED",
+    "field_by_field_comparison": "PASS_EXACT_FIELD_EQUALITY",
+    "mutation_performed": false,
+    "bypass_surface": "NOT_PRESENT_IN_OBSERVED_FORM",
+    "bypass_interpretation": "INAPPLICABLE_NOT_SATISFIED"
+  },
+  "boundaries": {
+    "post_d3_canonicalization": "NOT_AUTHORIZED",
+    "bp_b03": "NOT_EXECUTED_NOT_AUTHORIZED_UNRESOLVED",
+    "enforced": false,
+    "aislada_claimed": false,
+    "r2_4": "ACTIVE",
+    "r2_5": "NOT_AUTHORIZED"
+  },
+  "next_required": "SEPARATE_HUMAN_GATE_FOR_D3_ADMINISTRATIVE_CANONICALIZATION_ONLY"
+}
