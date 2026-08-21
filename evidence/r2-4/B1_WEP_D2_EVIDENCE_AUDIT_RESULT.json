@@ -1,0 +1,59 @@
+{
+  "artifact_type": "r2-4-b1-wep-d2-evidence-audit-result",
+  "authority": {
+    "bp_b03_execution": "NOT_AUTHORIZED_UNRESOLVED",
+    "cleanup": "NOT_AUTHORIZED",
+    "d2": "EXECUTED_PASS_BOUNDED",
+    "d3": "ELIGIBLE_FOR_CONSIDERATION_ONLY_NOT_AUTHORIZED",
+    "merge": "NOT_AUTHORIZED",
+    "r2_4_exit": "NOT_AUTHORIZED",
+    "r2_5": "NOT_AUTHORIZED",
+    "wep_mutation": "NOT_AUTHORIZED_BY_THIS_CANONICALIZATION"
+  },
+  "basis": "DETERMINISTIC_REAUDIT_OF_EXACT_D2_FINAL_EVIDENCE_ARCHIVE",
+  "bundle": {
+    "bytes": 1423156,
+    "final_manifest_sha256": "8fbeacdc17e118ad01012dd8d47c0575d5ef8b8959aa12359ace99328d85554c",
+    "repository_path": "evidence/r2-4/B1_WEP_D2_MUTATION_AND_NEGATIVES_EVIDENCE_BUNDLE.tar.gz",
+    "sha256": "57cb4f2ec2ab69f0f300cdfff5c8d11aea8839878157ec9eafdc5062c7f39c70"
+  },
+  "checks": {
+    "canonical_d1_and_review_inputs": "PASS",
+    "canonicalization_human_gate_provenance": "PASS_EMBEDDED_TEXT_AND_HASH",
+    "credential_material_scan": "PASS",
+    "d2_execution_human_gate_provenance": "PASS",
+    "final_archive_sha256_and_bytes": "PASS",
+    "final_archive_tar_path_safety": "PASS",
+    "final_export_manifest_and_fileset": "PASS",
+    "final_summary_semantics": "PASS",
+    "legacy_manifest_defect_reconciliation": "PASS_KNOWN_ACTIVE_LOG_ONLY",
+    "main_unchanged": "PASS",
+    "pr10_closed_unmerged": "PASS",
+    "pr6_unchanged": "PASS",
+    "pull_request_negative_zero_jobs": "PASS_BOUNDED",
+    "push_negative_zero_jobs": "PASS_BOUNDED",
+    "refs_preserved": "PASS",
+    "sentinel_exactness": "PASS",
+    "trusted_post_wep_liveness": "PASS",
+    "wep_ui_prestate_and_persisted_readback": "PASS_UI_EVIDENCE",
+    "workflow_blob_invariance": "PASS"
+  },
+  "forbidden_claims": [
+    "STARTUP_FAILURE_IS_DOCUMENTED_AS_WEP_SPECIFIC",
+    "EXHAUSTIVE_EVENT_UNIVERSE_DENIAL",
+    "UNIVERSAL_NO_BYPASS",
+    "D3_AUTHORIZED",
+    "BP_B03_RESOLVED_BY_D2",
+    "ENFORCED",
+    "AISLADA",
+    "MERGE_AUTHORIZED",
+    "CLEANUP_AUTHORIZED"
+  ],
+  "result_artifact": {
+    "bytes": 6477,
+    "repository_path": "evidence/r2-4/B1_WEP_D2_MUTATION_AND_NEGATIVES_RESULT.json",
+    "sha256": "311d8b22e11e4d3ca567982e32eeb84885f48017f65cbb64a4d3195643a21ca7"
+  },
+  "schema_version": 1,
+  "status": "PASS"
+}
