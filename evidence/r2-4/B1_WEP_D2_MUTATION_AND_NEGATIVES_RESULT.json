@@ -1,0 +1,137 @@
+{
+  "artifact_type": "r2-4-b1-wep-d2-mutation-and-negatives-result",
+  "baseline_main": "e8572363843218b001596d3935be469a0dc8fe71",
+  "bundle": {
+    "bytes": 1423156,
+    "repository_path": "evidence/r2-4/B1_WEP_D2_MUTATION_AND_NEGATIVES_EVIDENCE_BUNDLE.tar.gz",
+    "sha256": "57cb4f2ec2ab69f0f300cdfff5c8d11aea8839878157ec9eafdc5062c7f39c70"
+  },
+  "canonical_state_effect": {
+    "bp_b03_execution": "NOT_AUTHORIZED_UNRESOLVED_DEFERRED",
+    "d2": "EXECUTED_PASS_BOUNDED",
+    "d3": "ELIGIBLE_FOR_CONSIDERATION_ONLY_NOT_AUTHORIZED",
+    "enforced": false,
+    "false_greens": 8,
+    "phase": "R2-4",
+    "r2_5": "NOT_AUTHORIZED",
+    "wep_final_tested_state": "ACTIVE_AS_TESTED"
+  },
+  "canonicalization_human_gate": {
+    "merge_authority": false,
+    "sha256_utf8": "0f7ae1a78f5c7f52ea963f957a0a0a7406dfa49cbdc4da9ce829e5979f177481",
+    "status": "CONSUMED_FOR_ADMINISTRATIVE_CANONICALIZATION_ONLY",
+    "text_utf8": "AUTORIZO HUMAN GATE PARA LA CANONICALIZACIÓN ADMINISTRATIVA DE D2 ÚNICAMENTE.\n\nAUTORIZO REGISTRAR EN EL REPOSITORIO LA EVIDENCIA Y EL RESULTADO FINAL DE D2=EXECUTED_PASS_BOUNDED, ACTUALIZAR R2_STATE.md DE FORMA CONSISTENTE CON LA EVIDENCIA VERIFICADA Y PREPARAR EL PR ADMINISTRATIVO NECESARIO.\n\nNO AUTORIZO D3, BP-B-03, CAMBIOS ADICIONALES EN WEP, RULESETS, BRANCH PROTECTION, REQUIRED CHECKS, CLEANUP, BORRADO DE RAMAS, MODIFICAR O CERRAR PR #6, MODIFICAR CÓDIGO FUNCIONAL, SALIR DE R2-4 NI ENTRAR EN R2-5.\n\nLA CANONICALIZACIÓN NO AUTORIZA POR SÍ MISMA EL MERGE DEL PR QUE SE CREE.\n"
+  },
+  "d2": {
+    "closed_at": "2026-08-21T09:09:58Z",
+    "credential_fingerprint": "80f886b9891e1f6991f7236c8ab0f39244a56ccca2ab04736702bdcd04b44093",
+    "event_class_non_equivalence": {
+      "pull_request": "exact historical reviewed producer plus directory/surface exclusions and trusted post-WEP liveness; no same-window pre-WEP positive of that event producer",
+      "push": "same reviewed workflow has D1 pre-WEP dynamic success then D2 post-WEP zero-job startup_failure",
+      "rule": "PUSH_AND_PULL_REQUEST_NEGATIVES_MUST_NOT_BE_TREATED_AS_EQUAL_STRENGTH"
+    },
+    "execution_human_gate_sha256": "96ceefeb02bf51d13aae2386f341e5374ebfa3b985487b32a2e20539331596a7",
+    "execution_human_gate_status": "CONSUMED",
+    "pull_request_negative": {
+      "branch": "r2-4/b1-wep-pull-request-collision",
+      "claim": "PASS_BOUNDED_NO_JOB_EXECUTION",
+      "conclusion": "startup_failure",
+      "evidential_strength": "BOUNDED_HISTORICAL_ANCHOR_PLUS_STRUCTURAL_EXCLUSIONS",
+      "head": "070bf7a5bb26b9dea14efd53dab8867ab1268a6c",
+      "job_count": 0,
+      "pr_final_state": "CLOSED_UNMERGED",
+      "pr_number": 10,
+      "run_id": 32463664644,
+      "test_merge_observation": "INAPPLICABLE_WITH_LIVE_MERGEABLE_STATE_AT_NEGATIVE_INTERPRETATION",
+      "workflow_bytes": 423,
+      "workflow_git_blob": "02ddd98fe81cbda3ed5b08c538317f37caf7c26e",
+      "workflow_path": ".github/workflows/r2-b02-collision-success.yml",
+      "workflow_sha256": "f401a5ccf78b070a0b63631e52ea0ab1f3761f964cb1781be96948d3e5221af3"
+    },
+    "push_negative": {
+      "branch": "r2-4/b1-wep-push-collision",
+      "claim": "PASS_BOUNDED_NO_JOB_EXECUTION",
+      "conclusion": "startup_failure",
+      "evidential_strength": "STRONGER_SAME_WORKFLOW_PRE_WEP_POSITIVE_AND_POST_WEP_NEGATIVE",
+      "job_count": 0,
+      "post_wep_head": "5570a023ba008d9726254842f292c522c3ee0552",
+      "pre_wep_head": "6bf21da43851882ac966669f1f39ea887d6d9a23",
+      "run_id": 32465554357,
+      "sentinel_bytes": 36,
+      "sentinel_git_blob": "6060e43217d0f93fd9a35e70796dcc46ff15c6ae",
+      "sentinel_path": "tests/r2_b1_wep_push_negative_sentinel.txt",
+      "sentinel_sha256": "ac8da825d330858040c7c1f1b9a4441e2a192c89ba15f76e7d9ec061c40574c8",
+      "workflow_bytes": 369,
+      "workflow_git_blob": "73564b9689b0b6d65c7f66d0d1789d128edafc7c",
+      "workflow_path": ".github/workflows/r2-b1-push-collision.yml",
+      "workflow_sha256": "8df295edebdec488db279ebe1da96fa647d64f98842ce9696a532f09a764b311"
+    },
+    "status": "EXECUTED_PASS_BOUNDED",
+    "trusted_liveness": {
+      "conclusion": "failure",
+      "event": "pull_request_target",
+      "failure_reason": "RISK_FLOOR_EXCEEDS_AUTHORIZED_CLASS",
+      "job_id": 96715626885,
+      "job_name": "r2-governed-validation",
+      "run_id": 32463664220,
+      "status": "PASS_AS_LIVENESS_CONTROL"
+    }
+  },
+  "evidence_integrity": {
+    "final_export_file_count_including_manifest": 310,
+    "final_export_manifest_sha256": "8fbeacdc17e118ad01012dd8d47c0575d5ef8b8959aa12359ace99328d85554c",
+    "legacy_helper_manifest_defect": {
+      "classification": "KNOWN_ACTIVE_LOG_ONLY",
+      "export_manifests_regenerated_and_verified": true,
+      "source_evidence_rewritten": false
+    },
+    "pre_close_archive": {
+      "bytes": 1408545,
+      "sha256": "954029be21057688b2c298c3d12f416e31442157084021bc1787e06533b3c3f4",
+      "verified_before_pr_close": true
+    }
+  },
+  "nonclaims": [
+    "startup_failure is not claimed to be a GitHub-documented WEP-specific code",
+    "no exhaustive denial claim is made for untested event classes",
+    "absence of a bypass UI surface is not relabeled as proof of universal no-bypass",
+    "D2 does not establish overall ENFORCED",
+    "AISLADA is not claimed",
+    "BP-B-03 is not resolved by D2",
+    "D3 is not authorized",
+    "merge of this canonicalization PR is not authorized"
+  ],
+  "observed_non_mutations": {
+    "branch_protection_mutation_performed": false,
+    "cleanup_performed": false,
+    "d3_performed": false,
+    "main_modified": false,
+    "pr6_modified": false,
+    "refs_deleted": false,
+    "required_check_mutation_performed": false,
+    "ruleset_mutation_performed": false
+  },
+  "repository": "SrHector199/desarrollo-gobernado-r2",
+  "schema_version": 1,
+  "status": "PASS_BOUNDED",
+  "wep": {
+    "actor_rules": [],
+    "allowed_events": [
+      "pull_request_target"
+    ],
+    "bypass_interpretation": "INAPPLICABLE_NOT_SATISFIED",
+    "bypass_surface": "NOT_PRESENT_IN_OBSERVED_FORM",
+    "conditional_restore": "NOT_REQUIRED_BY_PASS_OUTCOME_NOT_PERFORMED",
+    "enforcement": "Active",
+    "extra_rules": [],
+    "policy_id": 3258,
+    "policy_name": "R2 B1 WEP Producer Boundary",
+    "post_create_persisted_readback": "PASS_UI_EVIDENCE",
+    "prestate_existing_policy_count": 0,
+    "pull_request_permitted": false,
+    "push_permitted": false,
+    "require_lockfile": false,
+    "restrict_actors": false,
+    "restrict_events": true
+  }
+}
