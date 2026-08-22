@@ -8,8 +8,8 @@
 - Independent review round 1: EXECUTED_BLOCKED
 - Independent review round 2: EXECUTED_PASS
 - Independent review round 3: NOT_SATISFIED; WAIVED_BY_HUMAN_EXCEPTION_NO_ALTERNATIVE_REVIEWER
-- Authorized next step: NONE_BY_THIS_D3_CANONICALIZATION. D3 is recorded EXECUTED_PASS, but this canonicalization deliberately does not select or preauthorize the next R2-4 action. BP-B-03 remains BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH and unresolved. Any further R2-4 action requires a fresh pre-step against live state plus separate authorization proportional to its risk. BP-B-03 execution, further cleanup/ref deletion, WEP mutation, rulesets, branch protection, required checks, R2-4 exit and R2-5 remain NOT_AUTHORIZED by this canonicalization.
-- Last updated: 2026-08-21T23:02:50Z
+- Authorized next step: NONE_BY_THIS_BP_B03_CANONICALIZATION. BP-B-03 is recorded RESOLVED_SCOPED_DOCUMENTARY_CURRENT_OBJECT only for the exact reviewed github.com main/workflow/visible-WEP object; the dedicated skipped/neutral empirical probe remains NOT_EXECUTED and is not relabeled PASS. BP-B-01, BP-B-04 and STAGE_B_RECENCY_CONTAMINATION remain blocking; DC-006 and EXP-01 remain OPEN; MINOR-5 remains ACTIVE_R2-4_NOT_EXECUTED; branch protection, required checks, WEP/default-branch mutation, further cleanup, R2-4 exit and R2-5 remain NOT_AUTHORIZED.
+- Last updated: 2026-08-22T17:01:07Z
 
 ## Feature Brief activo
 - Nombre: Repartidor exacto de gastos.
@@ -989,12 +989,73 @@
 - R2-4 exit: NOT_AUTHORIZED.
 - R2-5: NOT_AUTHORIZED.
 
+## BP-B-03 scoped documentary closure
+
+- BP-B-03: `RESOLVED_SCOPED_DOCUMENTARY_CURRENT_OBJECT`.
+- Dedicated skipped/neutral empirical probe: `NOT_EXECUTED`; it is not relabeled executed or PASS.
+- Probe execution became unnecessary only for this bounded documentary closure of the exact current object.
+- Reviewed main: `1d9894f29e2a52e4cfb23ed64883a4746128e4be`.
+- Reviewed main tree: `70c93ba6d91edd91978ad64b9f03e95b4030fd39`.
+- Documentary evidence package: `evidence/r2-4/r2_bp_b03_documentary_closure_package_v1.zip`; SHA-256 `62f61a7ec232d847a80c7f76e72f4d016d765239b4869324dde5488391e4f669`; bytes `338678`.
+- Internal assessment: `DOCUMENTARY_CLOSURE_ASSESSMENT.json`; SHA-256 `d78d87792d5f5e4e020df0360fc35ebd05720c57e62b91f0f7af14fda68582f5`; bytes `7436`.
+- Independent review: `evidence/r2-4/r2_bp_b03_documentary_closure_independent_review_result_v1.json`; SHA-256 `3c8d3b1e8438be48158ee4e55275f22bdc9cc7e6330aba700c1d0538a5ccd0e9`; bytes `37304`; decision `PASS_SCOPED_DOCUMENTARY_CLOSURE_ELIGIBLE_FOR_SEPARATE_ADMIN_CANONICALIZATION_GATE`; checks `15/15 PASS`; findings `39`.
+- Trusted workflow: `.github/workflows/r2-ci.yml`; Git blob `48a63b864c5e8f5506961194b41934c4e8088624`; SHA-256 `76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830`; bytes `2085`.
+- Trusted event: `pull_request_target`.
+- Trusted job: `r2-governed-validation`.
+- The exact trusted job has no job-level `if`, `needs`, matrix, path filters, `continue-on-error`, or second homonymous producer.
+- GitHub's documented semantics establish that a job skipped by a condition can report `Success` and not block merging even when required.
+- `success`, `skipped`, and `neutral` are satisfactory conclusions.
+- A workflow skipped by branch/path/commit-message filtering leaves its required check `Pending` and blocks merging.
+- Therefore a satisfactory required-check conclusion does not, by itself, prove that validation executed.
+- D2 `pull_request` negative: run `32463664644`; `startup_failure`; jobs `0`.
+- D2 `push` negative: run `32465554357`; `startup_failure`; jobs `0`.
+- Trusted `pull_request_target` liveness: run `32463664220`; job `96715626885`.
+- The `push` and `pull_request` negatives are not recorded as evidence of equal strength.
+- WEP policy id `3258`; name `R2 B1 WEP Producer Boundary`.
+- Visible WEP readback: `Active`; `Restrict actors=OFF`; actor rules empty; `Restrict events=ON`; only `pull_request_target` allowed; `push` not permitted; `pull_request` not permitted; `Require lockfile=OFF`.
+- The WEP readback is authenticated executor UI evidence for visible fields, not an independent API readback.
+- The supplied WEP images do not visibly contain a commit SHA or timestamp.
+- Structural targeting and conditions were not visible in the supplied images.
+- `bypass_surface=NOT_PRESENT_IN_OBSERVED_FORM`; `bypass=INAPPLICABLE_NOT_SATISFIED`.
+- `WEP_MUTATION=false`.
+- Producers outside GitHub Actions, including Checks API and Statuses API producers, are `OUT_OF_SCOPE`.
+- No global producer exclusivity is claimed.
+- It is not claimed that `skipped` or `neutral` are impossible.
+- No global resolution is claimed for future workflow, WEP, default-branch, or GitHub semantic versions.
+- Documentary canonicalization UTC: `2026-08-22T17:01:07Z`. The claim is limited to github.com, the observed WEP public-preview state, and the exact reviewed main/workflow/visible-WEP object; it is not permanent.
+- `FALSE_GREEN_INCREMENT=0`; `FALSE_GREENS` remains `8`.
+- `ENFORCED=false`.
+- `AISLADA` is not claimed.
+- `REQUIRED_CHECK=NOT_CONFIGURED`.
+- `BRANCH_PROTECTION/NO-BYPASS=NOT_CONFIGURED`.
+- `main` remains unprotected.
+- `DC-006=OPEN`.
+- `EXP-01=OPEN`.
+- `MINOR-5=ACTIVE_R2-4_NOT_EXECUTED`.
+- `IR2-002` and every unrelated control remain unchanged.
+- `BP-B-01=BLOCKING`.
+- `BP-B-04=BLOCKING`.
+- `STAGE_B_RECENCY_CONTAMINATION=ACTIVE` unless a fresh read proves both that the window ended and that no later qualifying successful homonymous check exists.
+- Recency anchor: `CHECK_RUN_ID=96604026342`; `PRE_WEP_HEAD=6bf21da43851882ac966669f1f39ea887d6d9a23`; `completed_at=2026-08-20T22:31:59Z`.
+- Nominal seven-day endpoint: `2026-08-27T22:31:59Z`.
+- This closure does not state that the branch-protection configuration gate is clear.
+- R2-4 remains `ACTIVE`; R2-4 exit remains `NOT_AUTHORIZED`.
+- R2-5 remains `NOT_AUTHORIZED`.
+- `NEXT_R2_4_ACTION=NONE_BY_THIS_BP_B03_CANONICALIZATION`.
+
+### BP-B-03 reopening rules
+
+- C-1: reopen BP-B-03 if the trusted workflow, job-level `if`, `needs`, matrix, `paths`/`paths-ignore`, `concurrency`, `continue-on-error`, a homonymous job/producer, WEP policy 3258, WEP enforcement, allowed-event policy, `default_branch`, GitHub skipped/neutral semantics, or WEP public-preview semantics change.
+- C-2: any future WEP readback used as evidence must include a visible temporal anchor; a visible main/SHA anchor or deterministic association; structural targeting; conditions; enforcement; and allowed events and actors.
+- C-3: every claim remains explicitly limited to github.com, the observed public-preview state, the exact reviewed main/workflow/WEP object, and the recorded UTC observation; it cannot become a permanent property.
+- C-4: preserve explicitly that the `push` and `pull_request` negatives do not have equal evidential strength.
+
 ## Blockers
 - Branch-protection candidate V1 independent review: EXECUTED_BLOCKED; independence_satisfied=PASS; static_review=FAIL; candidate_disposition=BLOCKED.
 - Branch-protection candidate V1 SHA-256: 7868cd6aaa726f116dc53e7411571b63eb1a33a6e1b6f89e79de490cf5bc96e9; review evidence: evidence/r2-4/branch_protection_candidate_independent_review_12.json SHA-256 f95dffd3804af024318aa2efe7adbc628ef8b83c25ef8f80911ea6deabf59f86.
 - BP-B-01 BLOCKING: `required_approving_review_count=0` elimina el gate humano compensatorio mientras DC-006 permanece OPEN; el revisor exige count=1 para el siguiente candidato, condicionado a controles de aprobación posteriores al último push.
 - BP-B-02 CONFIRMED_BLOCKING_FINDING: SAME_NAME_SAME_APP_SAME_PR_HEAD_COLLISION=OBSERVED_TRUE; PRODUCER_EXCLUSIVITY=FALSIFIED; BYPASS_NOT_DEMONSTRATED; REQUIRED_CHECK_SATISFACTION_NOT_TESTED.
-- BP-B-03 BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH: dedicated skipped/neutral probe remains NOT_EXECUTED and NOT_AUTHORIZED; D2 completion does not resolve it, and D3 refs-only cleanup consideration grants no BP-B-03 authority; deferment is not resolution.
+- BP-B-03 RESOLVED_SCOPED_DOCUMENTARY_CURRENT_OBJECT: the dedicated skipped/neutral empirical probe remains NOT_EXECUTED and is not relabeled PASS; its execution is no longer required only for the exact current github.com main/workflow/visible-WEP object under the bounded documentary claim below. Reopen conditions C-1..C-4 apply. This does not clear BP-B-01, BP-B-04 or STAGE_B_RECENCY_CONTAMINATION and grants no settings, protection, required-check, phase-exit or R2-5 authority.
 - BP-B-04 BLOCKING: count=1 con `dismiss_stale_reviews=false` y `require_last_push_approval=false` no cierra BP-B-01; el siguiente candidato debe reconsiderar ambos flags junto al count.
 - STAGE_B_RECENCY_CONTAMINATION ACTIVE: newest qualifying successful homonymous check is D1 CHECK_RUN_ID 96604026342 on PRE_WEP_HEAD 6bf21da43851882ac966669f1f39ea887d6d9a23 completed at 2026-08-20T22:31:59Z; seven-day quiescence is measured from this anchor unless an independently reviewed alternative with live readback is used.
 - BP-B-02 branch cleanup: external post-canonicalization action only; verify PR #5 CLOSED_UNMERGED and exact head 915edd738abe94bd0dea3ccf1e59e854f2d64af6 before deleting only `r2-4/bp-b02-check-name-collision`; deletion result remains external evidence and is not preclaimed by this commit.
