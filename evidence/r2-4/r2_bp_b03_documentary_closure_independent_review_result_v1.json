@@ -1,0 +1,347 @@
+{
+  "artifact_type": "r2-4-bp-b03-documentary-scoped-closure-independent-review-result",
+  "schema_version": 1,
+  "reviewed_repository": "SrHector199/desarrollo-gobernado-r2",
+  "reviewed_main": "1d9894f29e2a52e4cfb23ed64883a4746128e4be",
+  "reviewed_package_sha256": "62f61a7ec232d847a80c7f76e72f4d016d765239b4869324dde5488391e4f669",
+  "reviewed_assessment_sha256": "d78d87792d5f5e4e020df0360fc35ebd05720c57e62b91f0f7af14fda68582f5",
+  "checks": {
+    "package_integrity": "PASS",
+    "main_and_state_binding": "PASS",
+    "current_wep_ui_evidence_integrity": "PASS",
+    "current_wep_scope_claim_is_bounded": "PASS",
+    "d2_event_negatives": "PASS",
+    "pull_request_target_liveness": "PASS",
+    "trusted_workflow_unconditional_job": "PASS",
+    "official_skipped_job_semantics": "PASS",
+    "official_required_check_satisfactory_states": "PASS",
+    "empirical_probe_decision_value": "PASS",
+    "minimum_authority_principle": "PASS",
+    "non_actions_producer_scope_limit": "PASS",
+    "future_change_reopen_rule": "PASS",
+    "no_overclaim": "PASS",
+    "no_execution_authority": "PASS"
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "INFO",
+      "check": "package_integrity",
+      "statement": "Integridad del paquete CONFIRMADA por recomputo propio: r2_bp_b03_documentary_closure_package_v1.zip = 338678 bytes, SHA-256 62f61a7ec232d847a80c7f76e72f4d016d765239b4869324dde5488391e4f669; DOCUMENTARY_CLOSURE_ASSESSMENT.json = 7436 bytes, SHA-256 d78d87792d5f5e4e020df0360fc35ebd05720c57e62b91f0f7af14fda68582f5. Ambos coinciden exactamente con los valores esperados.",
+      "verification": "sha256sum y stat sobre el ZIP adjunto y sobre el miembro extraido; unzip -l para el inventario.",
+      "impact": "La revision queda ligada a esos bytes exactos y a ningun otro objeto."
+    },
+    {
+      "id": "F-02",
+      "severity": "INFO",
+      "check": "package_integrity",
+      "statement": "Los 6 miembros declarados en MANIFEST.json fueron recomputados individualmente y todos coinciden en bytes y SHA-256: 01_wep_current_upper.png (183556 / 83dfcbb9...501b), 02_wep_current_lower.png (155692 / c3daef1d...31fc), CURRENT_WEP_UI_OBSERVATION.json (1187 / 6541bc39...11b1), DOCUMENTARY_CLOSURE_ASSESSMENT.json (7436 / d78d8779...82f5), r2_bp_b03_post_wep_independent_review_result_v1.json (17292 / 2f7ae83e...0365) y r2_bp_b03_wep_compatible_probe_design_independent_review_result_v1.json (24129 / 1201fc9e...02eb). Los dos hashes de reviews previas citados por el assessment coinciden con los ficheros aportados.",
+      "verification": "sha256sum y stat -c sobre cada fichero extraido, contrastados con MANIFEST.json y con source_reviews del assessment.",
+      "impact": "El defecto de F-R10 de la revision anterior queda subsanado: las reviews previas ya no estan solo AFIRMADAS, estan APORTADAS y ligadas por hash."
+    },
+    {
+      "id": "F-03",
+      "severity": "MINOR",
+      "check": "package_integrity",
+      "statement": "MANIFEST.json no se auto-referencia y el prompt solo fija valores esperados para el ZIP y para el assessment. La integridad de los otros cinco miembros es por tanto interna al paquete: si el manifiesto y los ficheros se alteraran de forma coherente, el recomputo seguiria coincidiendo. El ancla externa real es el SHA-256 del ZIP completo, que si esta fijado fuera del paquete y si coincide.",
+      "verification": "Lectura de MANIFEST.json y comparacion con los valores esperados del prompt.",
+      "impact": "No bloqueante: el hash del ZIP cubre transitivamente a todos los miembros. Se registra para que futuros paquetes fijen hashes externos por miembro."
+    },
+    {
+      "id": "F-04",
+      "severity": "INFO",
+      "check": "main_and_state_binding",
+      "statement": "main verificada de forma independiente y READ-ONLY: refs/heads/main = 1d9894f29e2a52e4cfb23ed64883a4746128e4be, tree = 70c93ba6d91edd91978ad64b9f03e95b4030fd39, y el symref remoto HEAD apunta a refs/heads/main, luego default_branch=main sigue siendo cierto ahora. Coincide exactamente con reviewed_main, main y main_tree del assessment.",
+      "verification": "git ls-remote --symref y clon superficial de solo lectura; git rev-parse HEAD y HEAD^{tree}. Ninguna escritura, ningun push, ningun PR, ningun comentario.",
+      "impact": "main_and_state_binding satisfecho en su componente de identidad."
+    },
+    {
+      "id": "F-05",
+      "severity": "INFO",
+      "check": "main_and_state_binding",
+      "statement": "R2_STATE.md en el tree de main corrobora literalmente todos los estados que el assessment declara en current_repo_facts: BP-B-03 BLOCKING_NOT_EXECUTED_DEFERRED_OFF_CURRENT_CRITICAL_PATH y no resuelto; DC-006 OPEN; EXP-01 OPEN; MINOR-5 ACTIVE_R2-4 todavia NOT_EXECUTED; REQUIRED_CHECK NOT_CONFIGURED; BRANCH_PROTECTION/NO-BYPASS NOT_CONFIGURED; ENFORCED False; AISLADA no reclamada; R2-4 exit gate NOT_EXECUTED; R2-5 NOT_AUTHORIZED.",
+      "verification": "Lectura directa de R2_STATE.md (85394 bytes) en 1d9894f2.",
+      "impact": "El assessment no falsea el estado de gobierno vigente."
+    },
+    {
+      "id": "F-06",
+      "severity": "MINOR",
+      "check": "main_and_state_binding",
+      "statement": "R2_STATE.md declara ademas 'Authorized next step: NONE_BY_THIS_D3_CANONICALIZATION' y mantiene 'Current accepted SHA: 5e52d71df1b0ce04dd4ee78818f9ee0c3ab6c11a', que es el baseline funcional y antecesor de main, no main. Ninguna de las dos cosas es contradiccion, pero ambas acotan el efecto de este cierre.",
+      "verification": "Lectura de las secciones Estado y Blockers de R2_STATE.md; git merge-base --is-ancestor.",
+      "impact": "Un PASS documental NO selecciona por si mismo el siguiente paso de R2-4 ni re-ancla el SHA aceptado: ambas cosas exigen un pre-step fresco sobre estado vivo."
+    },
+    {
+      "id": "F-07",
+      "severity": "INFO",
+      "check": "main_and_state_binding",
+      "statement": "Estado no protegido verificado de forma independiente: el payload publico de la vista de ramas renderiza protectedByBranchProtections=false, rulesetsPath=null y mergeQueueEnabled=false, con defaultBranch='main' e isDefault=true para main. El propietario es una cuenta de tipo User, por lo que no hay rulesets ni required workflows de organizacion.",
+      "verification": "Descarga y parseo del HTML publico de /branches; no se uso ninguna credencial ni ninguna mutacion.",
+      "impact": "required_checks_effective=false y main_protected=false quedan corroborados sin depender del sujeto revisado."
+    },
+    {
+      "id": "F-08",
+      "severity": "IMPORTANT",
+      "check": "main_and_state_binding",
+      "statement": "Corroboracion CONDUCTUAL, no solo declarativa, de que hoy no existe poder de bloqueo: la PR #12 (head 56c761d) se mergeo a main produciendo exactamente 1d9894f2, pese a que su unico check confiable, run 32535424304 sobre .github/workflows/r2-ci.yml (evento pull_request_target, job 96935296596, 2026-08-21T23:03:01Z), concluyo Failure.",
+      "verification": "Paginas publicas del run 32535424304 y de la PR #12.",
+      "impact": "Punto decisivo de proporcionalidad: en el objeto actual NINGUN check, verde o rojo, puede bloquear un merge. Un probe clase D no podria observar merge-gating real porque el gating no existe."
+    },
+    {
+      "id": "F-09",
+      "severity": "INFO",
+      "check": "trusted_workflow_unconditional_job",
+      "statement": "El workflow confiable actual es exactamente .github/workflows/r2-ci.yml, blob Git 48a63b864c5e8f5506961194b41934c4e8088624, SHA-256 76baea48e276472e3b6ee4e93c77c110e0575261d52f14694b8e4e2a36aa0830, 2085 bytes. Analisis estructural del YAML: unico trigger on.pull_request_target con branches:[main] y types:[opened,synchronize,reopened]; permissions:{}; un unico job de id y name r2-governed-validation; job-level if ausente; needs ausente; strategy/matrix ausente; continue-on-error ausente; filtros paths/paths-ignore ausentes; concurrency ausente; los cuatro steps tienen if ausente. El primer step rechaza PRs cross-repository FALLANDO (test de igualdad), no saltando.",
+      "verification": "git ls-tree, sha256sum y carga del YAML con yaml.safe_load, inspeccionando job y steps campo a campo.",
+      "impact": "trusted_workflow_unconditional_job PASS: bajo estos bytes exactos el productor confiable no puede concluir skipped por condicion de job ni por dependencia."
+    },
+    {
+      "id": "F-10",
+      "severity": "IMPORTANT",
+      "check": "trusted_workflow_unconditional_job",
+      "statement": "Refuerzo estructural que el assessment no explota: la UNICA superficie de salto que le queda al workflow confiable es el filtro de rama a nivel de workflow (branches:[main]). La documentacion oficial vigente dice que un workflow saltado por filtro de rama, de ruta o por mensaje de commit deja sus checks asociados en estado Pending y BLOQUEA el merge de una PR que los requiera. Es decir, la unica via de salto del objeto confiable actual es fail-closed, no satisfactoria.",
+      "verification": "Comparacion de la estructura verificada en F-09 contra docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/troubleshooting-required-status-checks, seccion 'Handling skipped but required checks'.",
+      "impact": "Para el objeto exacto actual no existe camino documentado por el que el propio workflow confiable emita una conclusion skipped/neutral satisfactoria bajo el nombre r2-governed-validation. Esto es una razon adicional para no exigir el probe."
+    },
+    {
+      "id": "F-11",
+      "severity": "INFO",
+      "check": "trusted_workflow_unconditional_job",
+      "statement": "Exclusividad del directorio de workflows verificada sobre las 11 ramas vivas del remoto: cada una contiene exactamente un fichero bajo .github y en todas es el MISMO blob 48a63b864c5e8f5506961194b41934c4e8088624. workflow_directory_current_count=1 es correcto.",
+      "verification": "git fetch --depth 1 de todas las cabezas remotas y git ls-tree -r por rama.",
+      "impact": "No hay workflows homonimos alternativos alcanzables desde ninguna rama viva."
+    },
+    {
+      "id": "F-12",
+      "severity": "MINOR",
+      "check": "trusted_workflow_unconditional_job",
+      "statement": "Persistencia del material del vector: Actions sigue listando tres definiciones conocidas del repositorio (r2-ci.yml, r2-b02-collision-success.yml y r2-b1-push-collision.yml) y los productores de colision sobreviven fuera de las ramas, en refs/pull/5/head y refs/pull/10/head. No son ejecutables desde ninguna rama viva, pero son re-introducibles por cualquier actor con permiso de push.",
+      "verification": "Listado publico de /actions y ls-remote de refs/pull/*/head.",
+      "impact": "La inalcanzabilidad actual es una propiedad de la politica y del contenido de las ramas, no una eliminacion del vector. Refuerza la regla de reapertura."
+    },
+    {
+      "id": "F-13",
+      "severity": "INFO",
+      "check": "d2_event_negatives",
+      "statement": "Negativo pull_request verificado directamente en GitHub y no aceptado del assessment: run 32463664644, workflow r2-b02-collision-success.yml, cabecera de estado 'Startup failure', fecha 2026-08-21T08:32:40Z, sobre head 070bf7a (PR #10). La pagina no contiene NINGUN enlace /actions/runs/<id>/job/<id>: cero jobs.",
+      "verification": "Descarga del HTML publico del run y extraccion por expresion regular de todos los enlaces de job, del titulo, del workflow y del datetime.",
+      "impact": "Componente pull_request del check d2_event_negatives corroborado."
+    },
+    {
+      "id": "F-14",
+      "severity": "INFO",
+      "check": "d2_event_negatives",
+      "statement": "Negativo push verificado igualmente: run 32465554357, workflow r2-b1-push-collision.yml, 'Startup failure', 2026-08-21T08:57:08Z, sobre head 5570a02, con cero enlaces de job en pagina.",
+      "verification": "Mismo metodo que F-13.",
+      "impact": "Componente push corroborado. d2_event_negatives PASS."
+    },
+    {
+      "id": "F-15",
+      "severity": "INFO",
+      "check": "pull_request_target_liveness",
+      "statement": "Liveness confiable post-WEP verificada: run 32463664220, workflow .github/workflows/r2-ci.yml, nombre 'R2 Governed Validation', evento pull_request_target, 2026-08-21T08:32:40Z, estado Failure Y con job 96715626885 presente en pagina. El WEP no impidio la ejecucion de jobs del productor confiable.",
+      "verification": "Descarga del HTML publico del run; presencia del enlace de job y de la cadena pull_request_target y r2-ci.yml.",
+      "impact": "pull_request_target_liveness PASS. La conclusion Failure es irrelevante para liveness: lo relevante es que hubo job, frente a los cero jobs de F-13 y F-14."
+    },
+    {
+      "id": "F-16",
+      "severity": "IMPORTANT",
+      "check": "pull_request_target_liveness",
+      "statement": "Diferencial simultaneo por clase de evento confirmado de forma independiente: el negativo pull_request (32463664644) y el positivo de liveness pull_request_target (32463664220) llevan el MISMO datetime 2026-08-21T08:32:40Z y el MISMO head 070bf7a. En el mismo instante y sobre el mismo objeto, una clase de evento fue denegada en arranque con cero jobs y la otra ejecuto jobs.",
+      "verification": "Comparacion de los datetime y titulos extraidos de ambas paginas publicas.",
+      "impact": "La denegacion se explica por la clase de evento y no por invalidez del fichero ni por una incidencia transitoria de la plataforma. Es la evidencia dinamica mas fuerte del paquete."
+    },
+    {
+      "id": "F-17",
+      "severity": "IMPORTANT",
+      "check": "d2_event_negatives",
+      "statement": "Limite temporal real de los negativos D2: son post-WEP pero estan anclados a una main ANTERIOR (baseline e8572363843218b001596d3935be469a0dc8fe71, 2026-08-21 ~08:32-08:57Z), no a la main actual 1d9894f2 (mergeada 2026-08-21T23:41:05Z). El puente estructural SI se verifica: git diff --name-only entre e857236 y 1d9894f2 devuelve exclusivamente R2_STATE.md y seis artefactos de evidencia; el diff restringido a .github, scripts, policy y tests esta VACIO, es decir la superficie confiable es identica byte a byte.",
+      "verification": "git fetch --unshallow y git diff --name-status / --name-only entre ambos commits.",
+      "impact": "La dimension WORKFLOW del argumento queda ligada al objeto actual por observacion propia. La dimension WEP no: descansa unicamente en el readback aportado (ver F-19 a F-21)."
+    },
+    {
+      "id": "F-18",
+      "severity": "MINOR",
+      "check": "d2_event_negatives",
+      "statement": "La evidencia canonica D2 en main (evidence/r2-4/B1_WEP_D2_MUTATION_AND_NEGATIVES_RESULT.json, SHA-256 311d8b22...1ca7, coincidente con lo declarado en R2_STATE.md) registra explicitamente la regla PUSH_AND_PULL_REQUEST_NEGATIVES_MUST_NOT_BE_TREATED_AS_EQUAL_STRENGTH: el negativo push tiene positivo dinamico pre-WEP del mismo workflow, el negativo pull_request descansa en el productor historico revisado mas exclusiones estructurales. El assessment presenta ambos negativos de forma simetrica en canonical_dynamic_evidence y aplana esa no equivalencia.",
+      "verification": "Lectura y hash del artefacto canonico D2 en el tree de main.",
+      "impact": "No invalida el cierre, pero la no equivalencia registrada debe viajar con el claim y no perderse en la canonicalizacion."
+    },
+    {
+      "id": "F-19",
+      "severity": "INFO",
+      "check": "current_wep_ui_evidence_integrity",
+      "statement": "Las dos capturas son PNG 1920x1008 integras cuyos hashes coinciden con el manifiesto, y su contenido visible es coherente con CURRENT_WEP_UI_OBSERVATION.json campo a campo: barra de direcciones github.com/SrHector199/desarrollo-gobernado-r2/settings/actions/rules/3258; titulo 'Actions policies / R2 B1 WEP Producer Boundary' con etiqueta Active; Enforcement status = Active; 'Restrict actors' DESMARCADO y sin reglas de actor; 'Restrict events' MARCADO; lista 'Allowed events' con un unico valor, pull_request_target, sobre un total 'Select all (36)'; 'Require lockfile' DESMARCADO; ninguna regla adicional visible; ninguna superficie de bypass presente en la forma observada. El identificador 3258 y el nombre de politica coinciden ademas con los registrados en la evidencia canonica D2/D3 ya presente en main.",
+      "verification": "Inspeccion visual directa de 01_wep_current_upper.png y 02_wep_current_lower.png, verificacion de hashes y contraste con el JSON de observacion y con R2_STATE.md.",
+      "impact": "current_wep_ui_evidence_integrity PASS en el sentido acotado que el propio prompt fija: evidencia primaria del ejecutor autenticado sobre los campos visibles."
+    },
+    {
+      "id": "F-20",
+      "severity": "IMPORTANT",
+      "check": "current_wep_ui_evidence_integrity",
+      "statement": "Limitacion material de las capturas: NO contienen ningun ancla temporal ni de commit visible. No hay reloj, ni fecha, ni SHA, ni identificador de sesion en la imagen. El vinculo con la main actual 1d9894f2 y con el momento 'despues del merge de la PR #12' es una AFIRMACION del JSON de observacion, no una propiedad comprobable de la imagen. Tampoco es visible ninguna seccion de targeting/conditions de ruleset, de modo que el alcance de la politica sigue siendo un campo no observado.",
+      "verification": "Inspeccion visual de ambas capturas a resolucion completa y lectura de los metadatos PNG, que solo contienen srgb, gamma y dpi.",
+      "impact": "El anclaje al objeto exacto no puede elevarse por encima de la palabra del ejecutor. Todo readback WEP futuro debe incluir un ancla temporal visible y la definicion estructural de targeting; ver la condicion C-2 en F-33."
+    },
+    {
+      "id": "F-21",
+      "severity": "MINOR",
+      "check": "current_wep_ui_evidence_integrity",
+      "statement": "Corroboracion independiente debil, registrada como tal: el ultimo run de Actions del repositorio es 32535424304 de 2026-08-21T23:03:01Z y no existe ningun run posterior; ademas la insignia 'Pull requests 1' visible en la captura superior es consistente con que PR #6 siga abierta hoy (refs/pull/6/merge sigue existiendo). No hay ninguna senal observable que contradiga el readback.",
+      "verification": "Listado publico de /actions con extraccion de run ids y datetimes; git ls-remote sobre refs/pull/6/merge.",
+      "impact": "Ausencia de contradiccion no es confirmacion: una desactivacion silenciosa del WEP no seria observable por un revisor anonimo. Se registra sin elevarlo a prueba."
+    },
+    {
+      "id": "F-22",
+      "severity": "INFO",
+      "check": "current_wep_scope_claim_is_bounded",
+      "statement": "El propio JSON de observacion se autolimita correctamente: scope_limit declara que es evidencia de UI de usuario autenticado sobre campos visibles, que NO es un readback de API publica independiente y que NO establece campos de targeting que la UI no expuso; bypass_surface se registra como NOT_PRESENT_IN_OBSERVED_FORM con interpretacion INAPPLICABLE_NOT_SATISFIED, sin reclamar no-bypass universal; y mutation_performed_during_observation=false.",
+      "verification": "Auditoria campo a campo de CURRENT_WEP_UI_OBSERVATION.json.",
+      "impact": "current_wep_scope_claim_is_bounded PASS: la evidencia se presenta exactamente en la clase que el prompt exige y no se disfraza de API independiente ni de prueba de targeting invisible."
+    },
+    {
+      "id": "F-23",
+      "severity": "IMPORTANT",
+      "check": "current_wep_scope_claim_is_bounded",
+      "statement": "El bloqueo F-17/F-23 de la revision post-WEP anterior queda satisfecho EN SUS PROPIOS TERMINOS. Aquella revision exigia, textualmente, una de dos cosas: una lectura de solo lectura del plano de control de la Actions policy 3258 hecha con credenciales por el ejecutor y exportada como evidencia (restrict_events, eventos permitidos, enforcement), anclada al main actual; o, en su defecto, un negativo fresco. El paquete aporta la primera opcion.",
+      "verification": "Lectura literal de F-17 y F-23 en r2_bp_b03_post_wep_independent_review_result_v1.json y contraste con lo aportado.",
+      "impact": "El bloqueante de re-ligadura de frontera deja de ser bloqueante en la forma que la propia revision anterior definio, con la limitacion de F-20."
+    },
+    {
+      "id": "F-24",
+      "severity": "INFO",
+      "check": "official_skipped_job_semantics",
+      "statement": "Verificado en vivo hoy sobre documentacion oficial vigente de GitHub, no citado del assessment: un job saltado por condicional reporta su estado como 'Success' y no impide el merge de una pull request AUNQUE sea un required check. La misma afirmacion aparece de forma concordante en la pagina de referencia de status checks y en la de troubleshooting de required status checks.",
+      "verification": "docs.github.com/en/pull-requests/reference/status-checks (nota destacada y seccion 'Check statuses and conclusions'), docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-jobs-with-conditions y la pagina de troubleshooting de required status checks. Paginas con pie de 2026.",
+      "impact": "official_skipped_job_semantics PASS."
+    },
+    {
+      "id": "F-25",
+      "severity": "INFO",
+      "check": "official_required_check_satisfactory_states",
+      "statement": "Verificado en vivo: los estados de check considerados satisfactorios son success, skipped y neutral. La tabla oficial de conclusiones anade que 'skipped' y 'neutral' se tratan como exito para los checks dependientes en GitHub Actions, y que una conclusion satisfactoria normalmente significa que el check no bloquea el merge. La misma tabla documenta 'startup_failure' como estado de check SUITE por fallo en el arranque, no aplicable a check runs, lo que encaja exactamente con la forma de los negativos D2 de F-13 y F-14.",
+      "verification": "docs.github.com/en/pull-requests/reference/status-checks, tablas de estados y conclusiones; y la seccion 'Required check needs to succeed against the latest commit SHA' de la pagina de troubleshooting.",
+      "impact": "official_required_check_satisfactory_states PASS, con corroboracion adicional no pedida sobre la semantica de startup_failure."
+    },
+    {
+      "id": "F-26",
+      "severity": "INFO",
+      "check": "official_required_check_satisfactory_states",
+      "statement": "Verificado tambien el contraste exigido: si un workflow se salta por filtro de ruta, filtro de rama o mensaje de commit, sus checks asociados permanecen en estado 'Pending' y la PR que los requiera queda BLOQUEADA. Es decir, salto a nivel de workflow es fail-closed y salto a nivel de job por condicional es fail-open. La distincion A del prompt queda establecida documentalmente y en ambos sentidos.",
+      "verification": "Seccion 'Handling skipped but required checks' de la pagina oficial de troubleshooting de required status checks.",
+      "impact": "Sostiene F-10 y delimita con precision cual es la semantica peligrosa y cual no."
+    },
+    {
+      "id": "F-27",
+      "severity": "INFO",
+      "check": "current_wep_scope_claim_is_bounded",
+      "statement": "Verificada la documentacion oficial de Workflow Execution Protections: definen una allow list que controla quien puede disparar workflows y que eventos estan permitidos; tienen dos tipos de regla, event y actor; estan construidas SOBRE el framework de rulesets, de modo que el targeting de rulesets aplica; las reglas de evento cubren push, pull_request, pull_request_target y workflow_dispatch; existen a nivel de organizacion y de repositorio. La captura muestra la seccion Policies con etiqueta 'Preview', consistente con el estado de public preview.",
+      "verification": "docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/actions-policies/about-actions-policies, la pagina de workflow execution protections y el changelog oficial de 2026-06-18.",
+      "impact": "La clase de control y el conjunto de eventos declarados por el readback son coherentes con la documentacion oficial. La condicion de preview obliga a acotar el claim en version y tiempo."
+    },
+    {
+      "id": "F-28",
+      "severity": "IMPORTANT",
+      "check": "empirical_probe_decision_value",
+      "statement": "La propiedad DECISORIA de BP-B-03 es puramente documental y va en direccion CONSERVADORA. BP-B-03 existia para responder si un required check en verde puede tratarse como prueba de validacion ejecutada. La respuesta oficial es NO, porque skipped y neutral son satisfactorios y un job saltado por condicional reporta Success sin bloquear. Un experimento solo podria confirmar esa semantica; no podria refutarla ni convertirla en mas segura. Ademas esta parte del argumento NO depende del WEP: se sostiene sola sobre F-24, F-25 y F-26.",
+      "verification": "Sintesis de F-24, F-25, F-26 con el enunciado original de BP-B-03 en R2_STATE.md y con el finding B-03 de la review de branch protection V1.",
+      "impact": "El eje A del prompt queda establecido sin experimento. Y el claim resultante RESTA garantia en lugar de anadirla, que es la direccion segura del error."
+    },
+    {
+      "id": "F-29",
+      "severity": "IMPORTANT",
+      "check": "empirical_probe_decision_value",
+      "statement": "El valor decisorio marginal de un probe clase D es NULO para el objeto exacto actual, por tres razones concurrentes verificadas por separado: (1) el repositorio no tiene required checks ni proteccion configurados y la PR #12 se mergeo sobre un check en Failure (F-07, F-08), de modo que el probe no podria observar merge-gating real, solo REPRESENTACION de objeto; (2) la revision de diseno aportada ya lo dice en su F-R17 y lo usa para reforzar la desproporcion en F-R05; (3) el objeto confiable actual no tiene ninguna via documentada hacia una conclusion skipped/neutral satisfactoria (F-10).",
+      "verification": "Verificacion propia del estado no protegido, del merge de la PR #12, del YAML confiable, y lectura de F-R05 y F-R17 en la review de diseno aportada.",
+      "impact": "empirical_probe_decision_value PASS: no procede exigir un probe de mera representacion que no cambia ninguna decision de gobierno."
+    },
+    {
+      "id": "F-30",
+      "severity": "IMPORTANT",
+      "check": "minimum_authority_principle",
+      "statement": "El coste de autoridad del probe no es neutro y esta documentado por la propia revision de diseno aportada, que concluyo FAIL_REDESIGN_REQUIRED con siete puntos materiales: F-R04, riesgo de que mover default_branch reubique el ALCANCE EFECTIVO del WEP sin tocar la politica, porque WEP se construye sobre rulesets y su targeting puede ser relativo a la rama por defecto, lo que confunde la variable central de R2-4; F-R05, necesidad y minima autoridad no establecidas por ausencia de analisis de alternativas; F-R06, alcance real REPOSITORY_GLOBAL_EFFECT_DURING_WINDOW y no ONLY_THIS_FIELD; F-R07 y F-R08, causas alternativas no enumeradas (retencion por aprobacion en repositorios publicos e identidad autora bot) que destruirian la atribucion del negativo; F-R09, factibilidad de restauracion declarada pero no demostrada; F-R10, cobertura de findings afirmada y no demostrada. He verificado ademas de forma independiente la premisa de riesgo de F-R06: PR #6 sigue ABIERTA hoy (refs/pull/6/merge existe).",
+      "verification": "Lectura completa de los 18 findings de r2_bp_b03_wep_compatible_probe_design_independent_review_result_v1.json y git ls-remote sobre refs/pull/6/merge.",
+      "impact": "minimum_authority_principle PASS: exigir un experimento clase D de efecto global, con confusion de variable no descartada y restauracion no acreditada, para obtener una representacion sin valor decisorio, seria exactamente lo que el principio de minima autoridad del Plan v2 prohibe."
+    },
+    {
+      "id": "F-31",
+      "severity": "IMPORTANT",
+      "check": "empirical_probe_decision_value",
+      "statement": "Sobre F-24 de la revision anterior, que pedia observar una conclusion skipped/neutral homonima: su contenido residual es representacion, no consecuencia. Registro ademas que los bytes exactos de BP-B-03 (482 bytes, condicional ${{ github.event.pull_request.number < 0 }}) nunca han sido instanciados en ningun ref de este repositorio, y que el negativo pull_request se obtuvo con el productor de BP-B-02 (423 bytes). Como la denegacion ocurre en el arranque del run, aguas arriba de la evaluacion del if de job, reejecutar el probe obsoleto solo reobservaria la denegacion de arranque y JAMAS la semantica skipped pretendida.",
+      "verification": "Contraste de F-08, F-15, F-20 y F-24 de la review post-WEP con los blobs verificados en refs/pull/5/head y refs/pull/10/head y con el punto de corte observado en F-13.",
+      "impact": "Un cierre documental es la disposicion honesta: reconoce que el objeto BP-B-03 exacto nunca se instancio y no pretende que se haya probado."
+    },
+    {
+      "id": "F-32",
+      "severity": "INFO",
+      "check": "non_actions_producer_scope_limit",
+      "statement": "El limite de productores ajenos a Actions esta correctamente declarado por el assessment y esta corroborado por documentacion oficial y por evidencia propia del programa: la documentacion dice que los propietarios de organizacion y los usuarios con acceso de push pueden crear checks y commit statuses mediante la API, y que cualquiera con permisos de escritura puede fijar el estado de cualquier status check del repositorio; y BP-B-02 ya registro PRODUCER_EXCLUSIVITY=FALSIFIED para la identidad context=r2-governed-validation con app_id=15368.",
+      "verification": "docs.github.com/en/pull-requests/reference/status-checks, secciones 'Types of status checks on GitHub' y encabezado; y bp_b02_check_name_collision_observation_14 segun R2_STATE.md.",
+      "impact": "non_actions_producer_scope_limit PASS: los productores via Checks/Statuses API quedan FUERA de alcance y el cierre no puede tocarlos ni por afirmacion ni por negacion."
+    },
+    {
+      "id": "F-33",
+      "severity": "IMPORTANT",
+      "check": "future_change_reopen_rule",
+      "statement": "La lista de reapertura del assessment es correcta pero INCOMPLETA. Este PASS queda condicionado a que la canonicalizacion incorpore, ademas de lo ya listado, estas condiciones: C-1, reabrir BP-B-03 si cambia el workflow confiable (aparicion de if de job, needs, matrix, filtros de paths, concurrency, continue-on-error, o un segundo job homonimo), si cambia la politica WEP 3258 o su enforcement, si cambia la event policy, si cambia default_branch, o si GitHub altera la semantica de preview de WEP o la de skipped/neutral; C-2, todo readback WEP futuro debe incluir ancla temporal visible en la propia captura y la definicion estructural de targeting/conditions, por F-20; C-3, el claim debe llevar acotacion explicita de public preview y marca temporal UTC, por F-R14 de la review de diseno; C-4, debe viajar la no equivalencia de fuerza entre los negativos push y pull_request, por F-18.",
+      "verification": "Derivado de F-10, F-12, F-17, F-18, F-20 y F-27, y de F-R14 de la review de diseno aportada.",
+      "impact": "future_change_reopen_rule PASS condicionado a C-1..C-4. Sin ellas el cierre envejeceria mal y se leeria como permanente."
+    },
+    {
+      "id": "F-34",
+      "severity": "IMPORTANT",
+      "check": "no_overclaim",
+      "statement": "OMISION MATERIAL que debe corregirse antes de canonicalizar: el assessment no menciona que STAGE_B_RECENCY_CONTAMINATION siga ACTIVA. R2_STATE.md fija el ancla vigente en el check homonimo exitoso D1 CHECK_RUN_ID 96604026342 completado el 2026-08-20T22:31:59Z, con quiescencia de siete dias, es decir hasta 2026-08-27T22:31:59Z; hoy es 2026-08-22. Ese bloqueo tiene ademas base oficial: la documentacion de GitHub establece que, para ser exigible, un status check debe haberse completado con exito en el repositorio durante los ultimos siete dias, de modo que el verde homonimo de colision sigue dentro de la ventana de seleccion.",
+      "verification": "Seccion Blockers de R2_STATE.md y nota 'To be required, status checks must have completed successfully... during the past seven days' de la pagina oficial de troubleshooting.",
+      "impact": "La etiqueta ELIGIBLE_FOR_SEPARATE_ADMIN_CANONICALIZATION_GATE no puede leerse como que la puerta de configuracion de proteccion este despejada. NO lo esta."
+    },
+    {
+      "id": "F-35",
+      "severity": "IMPORTANT",
+      "check": "no_overclaim",
+      "statement": "SEGUNDA OMISION MATERIAL: el assessment tampoco recuerda que BP-B-01 y BP-B-04 siguen BLOCKING en R2_STATE.md. BP-B-01 exige required_approving_review_count=1 mientras DC-006 siga OPEN; BP-B-04 exige reconsiderar dismiss_stale_reviews y require_last_push_approval junto al count. Cerrar BP-B-03 no los toca.",
+      "verification": "Seccion Blockers de R2_STATE.md.",
+      "impact": "El cierre de BP-B-03 no es condicion suficiente para configurar proteccion: BP-B-01, BP-B-04 y la contaminacion por recencia siguen vivos y son independientes."
+    },
+    {
+      "id": "F-36",
+      "severity": "INFO",
+      "check": "no_overclaim",
+      "statement": "Fuera de F-34 y F-35, el assessment no sobre-afirma. maximum_claim esta estrictamente acotado al main, workflow y campos WEP observados; declara explicitamente que no es reclamacion de exclusividad global de productores ni de comportamiento futuro; afirma en positivo la direccion conservadora, es decir que un required check verde NO equivale por si solo a validacion ejecutada; mantiene enforced=false, aislada_claimed=false, DC-006 OPEN, EXP-01 OPEN, R2-4 exit y R2-5 fuera; y la lista must_remain_explicitly_unresolved_or_out_of_scope es correcta en lo que enumera.",
+      "verification": "Auditoria campo a campo de proposed_scoped_resolution y de authority en el assessment.",
+      "impact": "no_overclaim PASS para el claim de BP-B-03 en si mismo, condicionado a incorporar F-34 y F-35."
+    },
+    {
+      "id": "F-37",
+      "severity": "INFO",
+      "check": "no_execution_authority",
+      "statement": "El assessment fija a false las ocho autorizaciones de su bloque authority (ejecucion BP-B-03, creacion de rama, mutacion de default_branch, mutacion de WEP, branch protection, required checks, salida de R2-4 y R2-5) y se autodeclara READ_ONLY_CANDIDATE_NOT_CANONICAL_NOT_EXECUTION_AUTHORITY. Esta revision tampoco concede autoridad alguna: no se ha ejecutado ninguna mutacion, ningun push, ninguna rama, ningun PR, ningun comentario, ningun workflow, ningun cambio de settings y ningun probe. Toda la verificacion se hizo con git ls-remote, clon de solo lectura y descarga de HTML publico y documentacion.",
+      "verification": "Autocomprobacion del transcript completo de esta revision y auditoria del bloque authority del assessment.",
+      "impact": "no_execution_authority PASS. Un PASS aqui es una disposicion de suficiencia probatoria, jamas una autorizacion."
+    },
+    {
+      "id": "F-38",
+      "severity": "MINOR",
+      "check": "package_integrity",
+      "statement": "Limitacion metodologica de esta revision, registrada por transparencia: la API REST publica de GitHub devolvio rate limit agotado para esta IP de egreso (core: limit 60, remaining 0), por lo que toda la verificacion remota se hizo con el protocolo Git y con HTML publico renderizado. Ademas, por construccion, no existe superficie publica de lectura para politicas de Actions: ningun revisor anonimo puede leer la politica 3258 de forma independiente.",
+      "verification": "Respuesta de api.github.com/rate_limit y ausencia de endpoint publico para Actions policies.",
+      "impact": "No degrada ninguno de los hallazgos anteriores, que se obtuvieron por otras vias, pero explica por que F-20 no puede resolverse y por que el eje B depende del ejecutor."
+    },
+    {
+      "id": "F-39",
+      "severity": "IMPORTANT",
+      "check": "minimum_authority_principle",
+      "statement": "Sintesis de la pregunta central. El eje A, semantica general de skipped/neutral, queda establecido por documentacion oficial verificada en vivo y no necesita experimento. El eje B, alcanzabilidad de productores no confiables bajo el WEP actual, esta soportado por el readback autenticado mas los negativos D2 mas la invariancia verificada de la superficie confiable, y se declara acotado y no universal, que es exactamente su fuerza real. El eje C, productores fuera de Actions, queda fuera de alcance de forma explicita. El eje D, cambios futuros, se convierte en regla de reapertura. Ninguna de las cuatro piezas mejoraria por ejecutar un probe clase D que altere default_branch o WEP.",
+      "verification": "Sintesis de F-10, F-16, F-17, F-19 a F-32.",
+      "impact": "La combinacion 1 a 5 del prompt SI es suficiente para un cierre DOCUMENTAL Y ACOTADO del objeto exacto actual, y la exigencia de un experimento adicional seria una escalada de autoridad sin ganancia decisoria."
+    }
+  ],
+  "decision": "PASS_SCOPED_DOCUMENTARY_CLOSURE_ELIGIBLE_FOR_SEPARATE_ADMIN_CANONICALIZATION_GATE",
+  "bp_b03_execution_authorized": false,
+  "branch_protection_authorized": false,
+  "required_checks_authorized": false,
+  "wep_mutation_authorized": false,
+  "default_branch_mutation_authorized": false,
+  "r2_4_exit_authorized": false,
+  "r2_5_authorized": false
+}
